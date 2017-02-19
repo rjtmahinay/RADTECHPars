@@ -1,18 +1,22 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package com.radtech;
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
-/**
- *
- * @author Aspire
- */
+import java.util.Map;  
+import org.apache.struts2.dispatcher.SessionMap;  
+import org.apache.struts2.interceptor.SessionAware;  
+
 public class Credentials extends ActionSupport{
 
+    private String username;
+    private String password;
+    private String firstName;
+    private String lastName;
+    SessionMap sessionmap;  
+    
     @Override
     public String execute(){
+        setSession(sessionmap);
        return SUCCESS; 
     }
     /**
@@ -70,9 +74,22 @@ public class Credentials extends ActionSupport{
         this.lastName = lastName;
     }
     
-    private String username;
-    private String password;
-    private String firstName;
-    private String lastName;
+    public void setSession(Map map) {  
+        //sessionmap=(SessionMap)map;  
+        sessionmap = (SessionMap) ActionContext.getContext().getSession();
+        System.out.println(sessionmap == null);
+        sessionmap.put("login","true");  
+    }  
+
+    public String logout(){  
+        System.out.println("Logging out...");
+        sessionmap.invalidate();  
+        return "success";  
+    }  
     
+    public void validate(){
+        if(sessionmap != null){
+            System.out.println("Inside validate");
+        }
+    }
 }

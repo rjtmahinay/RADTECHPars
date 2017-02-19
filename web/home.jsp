@@ -3,7 +3,7 @@
     Created on : 01 31, 17, 9:03:37 PM
     Author     : Aspire
 --%>
-
+<%@taglib uri="/struts-tags" prefix="s" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
