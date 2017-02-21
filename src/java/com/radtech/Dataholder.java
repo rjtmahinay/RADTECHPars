@@ -6,6 +6,7 @@ import java.util.Map;
 import org.apache.struts2.dispatcher.SessionMap;
 import org.apache.struts2.interceptor.SessionAware;
 import org.hibernate.HibernateException;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -34,7 +35,7 @@ public class Dataholder implements SessionAware{
         
         tx.commit();
         sessionmap.put("view", records);
-            System.out.println(sessionmap.get("view")==null + " results");
+            System.out.println(sessionmap.get("view")==null + " z       ");
         }
         catch (HibernateException e) {
         if (tx!=null) tx.rollback();
@@ -45,6 +46,34 @@ public class Dataholder implements SessionAware{
         }
     }
     
+    public void searchlist(){
+        System.out.println("Inside searchlist, opening session...");
+        Session session = factory.openSession();
+        System.out.println(sessionmap == null);
+        Transaction tx = null;
+        List records;
+        try{
+            tx = session.beginTransaction();
+            Query query = session.createQuery("FROM Information where :field = :input");
+            query.setParameter("field", "controlNumber");
+            query.setParameter("input", 10000);
+            records = query.list();
+            for(Object s: records){
+            System.out.println(s.toString());
+        }
+        
+        tx.commit();
+        sessionmap.put("search", records);
+            System.out.println(sessionmap.get("search")==null + " results");
+        }
+        catch (HibernateException e) {
+        if (tx!=null) tx.rollback();
+            e.printStackTrace(); 
+        }
+        finally {
+            session.close(); 
+        }
+    }
     public void setSession(Map m){
         sessionmap = (SessionMap) m;
         factory = (SessionFactory)sessionmap.get("factory");
