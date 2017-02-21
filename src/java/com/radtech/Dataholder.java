@@ -26,7 +26,7 @@ public class Dataholder implements SessionAware{
         Transaction tx = null;
         try{
             tx = session.beginTransaction();
-            List records = session.createQuery("FROM MEDICALDB").list();
+            List records = session.createQuery("FROM Information").list();
             for(Object s: records){
             System.out.println(s.toString());
         }
