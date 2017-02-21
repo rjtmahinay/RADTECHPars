@@ -13,13 +13,26 @@ import java.util.List;
  */
 public class Information extends ActionSupport{
 
+    public long getControlNumber() {
+        return controlNumber;
+    }
+
+    public void setControlNumber(long controlNumber) {
+        this.controlNumber = controlNumber;
+    }
+
+    private long controlNumber;
+    private String ownerName;
+    private String address;
+    private int contactNumber;
+    private String patientName;
+    private String breed;
+    private String sex;
+    private int age;
+    private String color;
+    private double weight;
+    
     public Information(){
-        breed = new ArrayList<>();
-         sex = new ArrayList<>();
-         
-         sex.add("Male");
-         sex.add("Female");
-         
     }
      @Override
     public String execute(){
@@ -86,28 +99,28 @@ public class Information extends ActionSupport{
     /**
      * @return the breed
      */
-    public List<String> getBreed() {
+    public String getBreed() {
         return breed;
     }
 
     /**
      * @param breed the breed to set
      */
-    public void setBreed(List<String> breed) {
+    public void setBreed(String breed) {
         this.breed = breed;
     }
 
     /**
      * @return the sex
      */
-    public List<String> getSex() {
+    public String getSex() {
         return sex;
     }
 
     /**
      * @param sex the sex to set
      */
-    public void setSex(List<String> sex) {
+    public void setSex(String sex) {
         this.sex = sex;
     }
 
@@ -153,14 +166,5 @@ public class Information extends ActionSupport{
         this.age = age;
     }
     
-    private long controlNumber;
-    private String ownerName;
-    private String address;
-    private String patientName;
-    private List<String> breed;
-    private List<String> sex;
-    private String color;
-    private int contactNumber;
-    private int age;
-    private double weight;
+    
 }

@@ -2,20 +2,32 @@
 package com.radtech;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Map;  
 import org.apache.struts2.dispatcher.SessionMap;  
 import org.apache.struts2.interceptor.SessionAware;  
+import org.hibernate.HibernateException;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.hibernate.cfg.Configuration;
 
-public class Credentials extends ActionSupport{
+public class Credentials extends ActionSupport implements SessionAware{
 
+    private static SessionFactory factory;
     private String username;
     private String password;
     private String firstName;
     private String lastName;
     SessionMap sessionmap;  
+    private Dataholder dh;
+    
+    public Credentials(){}
     
     @Override
     public String execute(){
+        System.out.println("inside execute, running setsession...");
         setSession(sessionmap);
        return SUCCESS; 
     }
@@ -75,10 +87,17 @@ public class Credentials extends ActionSupport{
     }
     
     public void setSession(Map map) {  
-        //sessionmap=(SessionMap)map;  
-        sessionmap = (SessionMap) ActionContext.getContext().getSession();
+        sessionmap=(SessionMap)map;  
+        //sessionmap = (SessionMap) ActionContext.getContext().getSession();
         System.out.println(sessionmap == null);
-        sessionmap.put("login","true");  
+        sessionmap.put("login","true");
+        System.out.println("login is true, making session...");
+        factory = new Configuration().configure().buildSessionFactory();
+        sessionmap.put("factory", factory);
+        dh = new Dataholder();
+        dh.setSession(sessionmap);
+        dh.viewlist();
+
     }  
 
     public String logout(){  
@@ -92,4 +111,6 @@ public class Credentials extends ActionSupport{
             System.out.println("Inside validate");
         }
     }
+    
+    
 }
