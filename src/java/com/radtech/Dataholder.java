@@ -24,15 +24,17 @@ public class Dataholder implements SessionAware{
         Session session = factory.openSession();
         System.out.println(sessionmap == null);
         Transaction tx = null;
+        List records;
         try{
             tx = session.beginTransaction();
-            List records = session.createQuery("FROM Information").list();
+            records = session.createQuery("FROM Information").list();
             for(Object s: records){
             System.out.println(s.toString());
         }
         
         tx.commit();
-        sessionmap.put(records,"view");
+        sessionmap.put("view", records);
+            System.out.println(sessionmap.get("view")==null + " results");
         }
         catch (HibernateException e) {
         if (tx!=null) tx.rollback();

@@ -30,7 +30,9 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a href="#" class="navbar-brand">RADTECH PARS</a>
+            <a href="#" class="navbar-brand">RADTECH PARS <s:iterator value="view">
+                        <s:property/> Appendix
+                </s:iterator></a>
         </div>
 
         <!-- Menu Items -->
@@ -42,9 +44,15 @@
                 <li><a href="#">Schedule</a></li>
                 <li><a href="#">Archives</a></li>
                 <li><a href="#">Statistics</a></li>
+                    
                
             </ul>
         </div>
+        <h1>some text <s:property value="#session.login"/>
+            <s:iterator value="#session.view" var="record">
+                <s:property value="#record.controlNumber"/>
+            </s:iterator>
+        
         
 
     </div>
