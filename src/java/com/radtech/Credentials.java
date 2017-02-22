@@ -1,16 +1,10 @@
 
 package com.radtech;
-import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
-import java.util.Iterator;
-import java.util.List;
 import java.util.Map;  
 import org.apache.struts2.dispatcher.SessionMap;  
 import org.apache.struts2.interceptor.SessionAware;  
-import org.hibernate.HibernateException;
-import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
 public class Credentials extends ActionSupport implements SessionAware{
@@ -20,7 +14,8 @@ public class Credentials extends ActionSupport implements SessionAware{
     private String password;
     private String firstName;
     private String lastName;
-    SessionMap sessionmap;  
+    SessionMap sessionmap;
+  
     private Dataholder dh;
     
     public Credentials(){}
@@ -92,7 +87,7 @@ public class Credentials extends ActionSupport implements SessionAware{
         System.out.println(sessionmap == null);
         sessionmap.put("login","true");
         System.out.println("login is true, making session...");
-        factory = new Configuration().configure().buildSessionFactory();
+        factory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
         sessionmap.put("factory", factory);
         dh = new Dataholder();
         dh.setSession(sessionmap);
@@ -106,10 +101,22 @@ public class Credentials extends ActionSupport implements SessionAware{
         return "success";  
     }  
     
+    @Override
     public void validate(){
+        String validUsername = new Configuration().getProperty("hibernate.connection.username");
+        String validPassword = new Configuration().getProperty("hibernate.connection.password");
+        
         if(sessionmap != null){
             System.out.println("Inside validate");
         }
+        
+        if(!getUsername().equals(validUsername)){
+            addFieldError("username","Invalid username");
+        }
+//        
+//         if(!password.equals(validPassword)){
+//            addFieldError("password","Invalid Password");
+//        }
     }
     
     
