@@ -1,59 +1,92 @@
-
 package com.radtech;
+
 import com.opensymphony.xwork2.ActionSupport;
-import java.util.Map;  
-import org.apache.struts2.dispatcher.SessionMap;  
-import org.apache.struts2.interceptor.SessionAware;  
+import java.util.Map;
+import org.apache.struts2.dispatcher.SessionMap;
+import org.apache.struts2.interceptor.SessionAware;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
-public class Credentials extends ActionSupport implements SessionAware{
+public class Credentials extends ActionSupport implements SessionAware {
 
     private static SessionFactory factory;
-    private String username;
-    private String password;
+    private String user1;
+    private String pass1;
+    private String user2;
+    private String pass2;
     private String firstName;
     private String lastName;
-    SessionMap sessionmap;
-  
+    private SessionMap sessionmap;
+    private Configuration c;
     private Dataholder dh;
-    
-    public Credentials(){}
-    
+
+    public Credentials() {
+    }
+
     @Override
-    public String execute(){
+    public String execute() {
         System.out.println("inside execute, running setsession...");
         setSession(sessionmap);
-       return SUCCESS; 
-    }
-    /**
-     * @return the username
-     */
-    public String getUsername() {
-        return username;
+        return SUCCESS;
     }
 
     /**
-     * @param username the username to set
+     * @return the user1
      */
-    public void setUsername(String username) {
-        this.username = username;
+    public String getUser1() {
+        return user1;
     }
 
     /**
-     * @return the password
+     * @param user1 the user1 to set
      */
-    public String getPassword() {
-        return password;
+    public void setUser1(String user1) {
+        this.user1 = user1;
     }
 
     /**
-     * @param password the password to set
+     * @return the pass1
      */
-    public void setPassword(String password) {
-        this.password = password;
+    public String getPass1() {
+        return pass1;
     }
-   /**
+
+    /**
+     * @param pass1 the pass1 to set
+     */
+    public void setPass1(String pass1) {
+        this.pass1 = pass1;
+    }
+
+    /**
+     * @return the user2
+     */
+    public String getUser2() {
+        return user2;
+    }
+
+    /**
+     * @param user2 the user2 to set
+     */
+    public void setUser2(String user2) {
+        this.user2 = user2;
+    }
+
+    /**
+     * @return the pass2
+     */
+    public String getPass2() {
+        return pass2;
+    }
+
+    /**
+     * @param pass2 the pass2 to set
+     */
+    public void setPass2(String pass2) {
+        this.pass2 = pass2;
+    }
+
+    /**
      * @return the firstName
      */
     public String getFirstName() {
@@ -80,44 +113,44 @@ public class Credentials extends ActionSupport implements SessionAware{
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
-    
-    public void setSession(Map map) {  
-        sessionmap=(SessionMap)map;  
+
+    public void setSession(Map map) {
+        sessionmap = (SessionMap) map;
         //sessionmap = (SessionMap) ActionContext.getContext().getSession();
         System.out.println(sessionmap == null);
-        sessionmap.put("login","true");
+        sessionmap.put("login", "true");
         System.out.println("login is true, making session...");
-        factory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
+        factory = c.configure("hibernate.cfg.xml").buildSessionFactory();
         sessionmap.put("factory", factory);
         dh = new Dataholder();
         dh.setSession(sessionmap);
         dh.viewlist();
 
-    }  
+    }
 
-    public String logout(){  
+    public String logout() {
         System.out.println("Logging out...");
-        sessionmap.invalidate();  
-        return "success";  
-    }  
-    
+        sessionmap.invalidate();
+        return "success";
+    }
+
+   
     @Override
-    public void validate(){
-        String validUsername = new Configuration().getProperty("hibernate.connection.username");
-        String validPassword = new Configuration().getProperty("hibernate.connection.password");
-        
-        if(sessionmap != null){
+    public void validate() {
+
+        if (sessionmap != null) {
             System.out.println("Inside validate");
         }
-        
-        if(!getUsername().equals(validUsername)){
-            addFieldError("username","Invalid username");
+
+        if (!getUser1().equals("radtech".trim())) {
+            addFieldError("user1", "Invalid username");
         }
-//        
-//         if(!password.equals(validPassword)){
-//            addFieldError("password","Invalid Password");
-//        }
+
+        if (!getPass1().equals("@ics123".trim())) {
+            addFieldError("pass1", "Invalid Password");
+        }
     }
-    
-    
+
+   
+
 }
