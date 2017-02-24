@@ -45,35 +45,6 @@ public class Dataholder implements SessionAware{
             session.close(); 
         }
     }
-    
-    public void searchlist(){
-        System.out.println("Inside searchlist, opening session...");
-        Session session = factory.openSession();
-        System.out.println(sessionmap == null);
-        Transaction tx = null;
-        List records;
-        try{
-            tx = session.beginTransaction();
-            Query query = session.createQuery("FROM Information where :field = :input");
-            query.setParameter("field", "controlNumber");
-            query.setParameter("input", 10000);
-            records = query.list();
-            for(Object s: records){
-            System.out.println(s.toString());
-        }
-        
-        tx.commit();
-        sessionmap.put("search", records);
-            System.out.println(sessionmap.get("search")==null + " results");
-        }
-        catch (HibernateException e) {
-        if (tx!=null) tx.rollback();
-            e.printStackTrace(); 
-        }
-        finally {
-            session.close(); 
-        }
-    }
     public void setSession(Map m){
         sessionmap = (SessionMap) m;
         factory = (SessionFactory)sessionmap.get("factory");

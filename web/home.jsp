@@ -48,10 +48,9 @@
                
             </ul>
         </div>
-        <h1>some text <s:property value="#session.login"/>
-            <s:iterator value="#session.view" var="record">
-                <s:property value="#record.controlNumber"/>
-            </s:iterator>
+        <h1>some text <s:property value="#session.login"/> 
+            
+           
         
         
 

@@ -59,31 +59,34 @@ public class SearchEngine extends ActionSupport implements SessionAware{
         
         System.out.println("I am inside search");
         
-        Session session = ((SessionFactory)sessionmap.get("factory")).openSession();
-        System.out.println(sessionmap == null);
-        Transaction tx = null;
-        List records;
-        try{
-            tx = session.beginTransaction();
-            Query query = session.createQuery("FROM Information where :field = :input");
-            query.setParameter("field", getSearchType());
-            query.setParameter("input", getSearchInput());
-            records = query.list();
-            for(Object s: records){
-            System.out.println(s.toString());
-        }
-        
-        tx.commit();
-        sessionmap.put("search", records);
-            System.out.println(sessionmap.get("search")==null + " results");
-        }
-        catch (HibernateException e) {
-        if (tx!=null) tx.rollback();
-            e.printStackTrace(); 
-        }
-        finally {
-            session.close(); 
-        }
+        addFieldError("searchType", getSearchType());
+        addFieldError("searchInput", getSearchInput());
+        sessionmap.put("trial", getSearchType());
+//        Session session = ((SessionFactory)sessionmap.get("factory")).openSession();
+//        System.out.println(sessionmap == null);
+//        Transaction tx = null;
+//        List records;
+//        try{
+//            tx = session.beginTransaction();
+//            Query query = session.createQuery("FROM Information where :field = :input");
+//            query.setParameter("field", "patientName");
+//            query.setParameter("input", getSearchInput());
+//            records = query.list();
+//            for(Object s: records){
+//            System.out.println(s.toString());
+//        }
+//        
+//        tx.commit();
+//        sessionmap.put("search", records);
+//            System.out.println(sessionmap.get("search")==null + " results");
+//        }
+//        catch (HibernateException e) {
+//        if (tx!=null) tx.rollback();
+//            e.printStackTrace(); 
+//        }
+//        finally {
+//            session.close(); 
+//        }
     
         return SUCCESS;
     }

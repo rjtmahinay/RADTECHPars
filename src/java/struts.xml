@@ -22,6 +22,10 @@
             <result name="input">add.jsp</result>
         </action>
         
+        <action name="searchDatabase" class="com.radtech.SearchEngine">
+            <result> search.jsp</result>
+        </action>
+        
         
     </package>
 </struts>
