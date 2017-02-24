@@ -22,7 +22,8 @@
             <result name="input">add.jsp</result>
         </action>
         
-        <action name="searchDatabase" class="com.radtech.SearchEngine">
+        <action name="searchDatabase" class="com.radtech.SearchEngine" method="searchDatabase">
+            
             <result> search.jsp</result>
         </action>
         

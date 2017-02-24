@@ -19,7 +19,9 @@ public class SearchEngine extends ActionSupport implements SessionAware{
     private String searchType;
     
     
-    public SearchEngine(){}
+    public SearchEngine(){
+        setSession(sessionmap);
+    }
     
     @Override
     public void setSession(Map m){
@@ -42,7 +44,16 @@ public class SearchEngine extends ActionSupport implements SessionAware{
     
     public String getSearchType(){
         switch(searchType){
+            case "CONTROL_NUMBER" : return "controlNumber";
+            case "OWNER_NAME" : return "ownerName";
+            case "ADDRESS" : return "address";
+            case "CONTACT_NUMBER" : return "contactNumber";
             case "PATIENT_NAME" : return "patientName";
+            case "BREED" : return "breed";
+            case "SEX" : return "sex";
+            case "AGE" : return "age";
+            case "COLOR" : return "color";
+            case "WEIGHT" : return "weight";
             default: break;
         }
         
@@ -50,8 +61,8 @@ public class SearchEngine extends ActionSupport implements SessionAware{
     }
     
     public void validate(){
-        if(searchInput == null){
-            addFieldError("pass1", "Field is left blank");
+        if(sessionmap == null){
+            addFieldError("searchInput", "Field is left blank");
         }
     }
     @Action("searchDatabase")
@@ -59,34 +70,36 @@ public class SearchEngine extends ActionSupport implements SessionAware{
         
         System.out.println("I am inside search");
         
-        addFieldError("searchType", getSearchType());
-        addFieldError("searchInput", getSearchInput());
-        sessionmap.put("trial", getSearchType());
-//        Session session = ((SessionFactory)sessionmap.get("factory")).openSession();
-//        System.out.println(sessionmap == null);
-//        Transaction tx = null;
-//        List records;
-//        try{
-//            tx = session.beginTransaction();
-//            Query query = session.createQuery("FROM Information where :field = :input");
-//            query.setParameter("field", "patientName");
-//            query.setParameter("input", getSearchInput());
-//            records = query.list();
-//            for(Object s: records){
-//            System.out.println(s.toString());
-//        }
-//        
-//        tx.commit();
-//        sessionmap.put("search", records);
-//            System.out.println(sessionmap.get("search")==null + " results");
-//        }
-//        catch (HibernateException e) {
-//        if (tx!=null) tx.rollback();
-//            e.printStackTrace(); 
-//        }
-//        finally {
-//            session.close(); 
-//        }
+        if(getSearchType().equals("FAIL")) {
+            addFieldError("searchInput", "Something went wrong...");
+            return "input";
+        }
+        Session session = ((SessionFactory)sessionmap.get("factory")).openSession();
+        System.out.println(sessionmap == null);
+        Transaction tx = null;
+        List records;
+        try{
+            tx = session.beginTransaction();
+            Query query = session.createQuery("FROM Information where " + getSearchType() + " = :input");
+            //query.setParameter("field", getSearchType());
+            query.setParameter("input", getSearchInput());
+            System.out.println(getSearchInput() + " " + getSearchType());
+            records = query.list();
+            for(Object s: records){
+            System.out.println(s.toString());
+        }
+        
+        tx.commit();
+        sessionmap.put("search", records);
+            System.out.println(sessionmap.get("search")==null + " results");
+        }
+        catch (HibernateException e) {
+        if (tx!=null) tx.rollback();
+            e.printStackTrace(); 
+        }
+        finally {
+            session.close(); 
+        }
     
         return SUCCESS;
     }

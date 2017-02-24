@@ -1,9 +1,3 @@
-<%-- 
-    Document   : search
-    Created on : 02 7, 17, 1:41:17 PM
-    Author     : Aspire
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="s" uri="/struts-tags"%>
 <!DOCTYPE html>
@@ -28,10 +22,8 @@
         
         <s:iterator value="#session.search" var="record">
             Inside if
-            <s:property value="controlNumber"/>
+            <s:property value="#record.controlNumber"/>
         </s:iterator>
-            <s:property value="searchInput"/>
-            <s:property value="#session.trial"/>
 
        
     </body>
