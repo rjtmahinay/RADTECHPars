@@ -1,6 +1,9 @@
 package com.radtech;
 
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import org.apache.struts2.dispatcher.SessionMap;
 import org.apache.struts2.interceptor.SessionAware;
@@ -17,10 +20,37 @@ public class Credentials extends ActionSupport implements SessionAware {
     private String firstName;
     private String lastName;
     private SessionMap sessionmap;
+    private Map applicationmap;
     private Configuration c;
     private Dataholder dh;
+    public static List GENDER = null;
+    public static List SEARCHTYPES = null;
+    public static List BREEDS = null;
 
     public Credentials() {
+        if(GENDER==null){
+            GENDER = new ArrayList();
+            GENDER.add("MALE");
+            GENDER.add("FEMALE");
+        }
+        
+        if(SEARCHTYPES == null){
+            SEARCHTYPES = new ArrayList();
+            SEARCHTYPES.add("CONTROL_NUMBER");
+            SEARCHTYPES.add("OWNER_NAME");
+            SEARCHTYPES.add("ADDRESS");
+            SEARCHTYPES.add("CONTACT_NUMBER");
+            SEARCHTYPES.add("PATIENT_NAME");
+            SEARCHTYPES.add("BREED");
+            SEARCHTYPES.add("SEX");
+            SEARCHTYPES.add("AGE");
+            SEARCHTYPES.add("COLOR");
+            SEARCHTYPES.add("WEIGHT");
+        }
+        
+        if(BREEDS == null){
+            BREEDS = new ArrayList();
+        }
     }
 
     @Override
@@ -114,18 +144,26 @@ public class Credentials extends ActionSupport implements SessionAware {
         this.lastName = lastName;
     }
 
+    @Override
     public void setSession(Map map) {
         sessionmap = (SessionMap) map;
+        applicationmap = (Map) ActionContext.getContext().get("application");
         //sessionmap = (SessionMap) ActionContext.getContext().getSession();
         System.out.println(sessionmap == null);
         sessionmap.put("login", "true");
         System.out.println("login is true, making session...");
-        factory = c.configure("hibernate.cfg.xml").buildSessionFactory();
+//        factory = c.configure("hibernate.cfg.xml").buildSessionFactory();
+        c = new Configuration().configure("hibernate.cfg.xml");
+        factory =  c.buildSessionFactory();
         sessionmap.put("factory", factory);
         dh = new Dataholder();
         dh.setSession(sessionmap);
         dh.viewlist();
-
+        
+        //adding lists into application
+        applicationmap.put("breeds", BREEDS);
+        applicationmap.put("gender", GENDER);
+        applicationmap.put("searchlist", SEARCHTYPES);
     }
 
     public String logout() {
@@ -137,11 +175,6 @@ public class Credentials extends ActionSupport implements SessionAware {
    
     @Override
     public void validate() {
-
-        if (sessionmap != null) {
-            System.out.println("Inside validate");
-        }
-
         if (!getUser1().equals("radtech".trim())) {
             addFieldError("user1", "Invalid username");
         }
@@ -149,8 +182,12 @@ public class Credentials extends ActionSupport implements SessionAware {
         if (!getPass1().equals("@ics123".trim())) {
             addFieldError("pass1", "Invalid Password");
         }
+        if (sessionmap != null) {
+            System.out.println("Inside validate");
+        }
     }
-
+    
+    
    
 
 }
