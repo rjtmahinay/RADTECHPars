@@ -46,7 +46,7 @@
 
                             <div class="modal-header">
                                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                <h3 class="modal-title">LOGIN</h3>
+                                <h3 class="modal-title">Login</h3>
                             </div>
 
                             <s:form action="login" theme="bootstrap">
@@ -57,7 +57,7 @@
                                         <s:password name="pass1" placeholder="Password" class="form-control" /></div>
                                     <div class="modal-footer form-group" >
 
-                                        <s:submit cssClass="btn btn-primary btn-block" value="LOGIN" />
+                                        <s:submit cssClass="btn btn-primary btn-block" value="submit" />
                                     </div>
                                 </div>
                             </s:form>
@@ -80,7 +80,7 @@
                             <s:form action="signup" theme="bootstrap" >
                                 <div class="modal-body">
                                     <div class="form-group">
-                                        <s:textfield name="firstname" placeholder="Firstname"/>
+                                        <s:textfield name="firstname" placeholder="Firstname" />
                                     </div>
                                     <div class="form-group">
                                         <s:textfield name="lastname" placeholder="Lastname"/>
@@ -89,7 +89,7 @@
                                         <s:textfield name="user2" placeholder="Username"/>
                                     </div>
                                     <div class="form-group">
-                                        <s:textfield name="pass2" placeholder="Password"/>
+                                        <s:password name="pass2" placeholder="Password"/>
                                     </div>
                                     <div class="modal-footer form-group" >
                                         <s:submit cssClass="btn btn-primary btn-block" value="SIGN UP" />
