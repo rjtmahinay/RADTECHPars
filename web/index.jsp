@@ -23,84 +23,74 @@
     </head>
     <body>
 
-        <div class="container-fluid">
-            <br><br><br><br>
-
-            <center>
-                <h1>Animal Station And Veterinary Clinic</h1>
-
-                <h2>by RadTech</h2>
-                <br/><br/><br/><br/>
-                  
-                <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#popUpWindow">Login</button>
-                <br/><br/>
-                <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#popUpWindow2">Sign up</button>
-                  
-              
-                <!--POP UP WINDOW FOR LOGIN-->
-
-                <div class="modal fade" id="popUpWindow">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-
-
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                <h3 class="modal-title">Login</h3>
-                            </div>
-
-                            <s:form action="login" theme="bootstrap">
-                                <div class="modal-body">
-                                    <div class="form-group">
-                                        <s:textfield name="user1" placeholder="Username" class="form-control" /></div>
-                                    <div class="form-group">  
-                                        <s:password name="pass1" placeholder="Password" class="form-control" /></div>
-                                    <div class="modal-footer form-group" >
-
-                                        <s:submit cssClass="btn btn-primary btn-block" value="submit" />
-                                    </div>
-                                </div>
-                            </s:form>
-                        </div>
-                    </div>
-                </div> 
-
-                <!--POP UP WINDOW FOR SIGN UP-->
-
-                <div class="modal fade" id="popUpWindow2">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-
-
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                <h3 class="modal-title">SIGN UP</h3>
-                            </div>
-
-                            <s:form action="signup" theme="bootstrap" >
-                                <div class="modal-body">
-                                    <div class="form-group">
-                                        <s:textfield name="firstname" placeholder="Firstname" />
-                                    </div>
-                                    <div class="form-group">
-                                        <s:textfield name="lastname" placeholder="Lastname"/>
-                                    </div>
-                                    <div class="form-group">
-                                        <s:textfield name="user2" placeholder="Username"/>
-                                    </div>
-                                    <div class="form-group">
-                                        <s:password name="pass2" placeholder="Password"/>
-                                    </div>
-                                    <div class="modal-footer form-group" >
-                                        <s:submit cssClass="btn btn-primary btn-block" value="SIGN UP" />
-                                    </div>
-                                </div>
-                            </s:form>
-                        </div>
-                    </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-9 col-sm-0">
+                    <br><br><br><br>
+                    <h1>Animal Station And Veterinary Clinic</h1>
+                    <h2>by RadTech</h2>
                 </div>
-            </center>
+                <div class="col-md-3 col-sm-12">
+                    <br><br><br><br>
+                
+                <div class="panel panel-default">
+                    <div class="panel-heading">Select action below</div>
+                    <div class="panel-body">
+                        <div id="actionTabs" class="container">
+                        <ul class="nav nav-pills">    
+                            <li class="active">
+                                <a href="#1b" data-toggle="tab">Login</a>
+                            </li>
+                            <li>
+                                <a href="#2b" data-toggle="tab">Sign up</a>
+                            </li>
+                        </ul>
+                            <div class="tab-content clearfix">
+                                <div class="tab-pane active" id="1b">
+                                    
+                                    <s:form action="login" theme="bootstrap">
+                                        
+                                            <br/>
+                                            <div class="form-group">
+                                                <s:textfield name="user1" placeholder="Username" class="form-control" /></div>
+                                            <div class="form-group">  
+                                                <s:password name="pass1" placeholder="Password" class="form-control" /></div>
 
-        </div>      
+
+                                                <s:submit cssClass="btn btn-primary " value="submit" />
+                                                    
+
+                                    </s:form>
+                                        
+                                </div> <!end of tab 1->
+                                <div class="tab-pane" id="2b">
+                                    <s:form action="signup" theme="bootstrap" >
+                                        
+                                            <br/>
+                                            <div class="form-group">
+                                                <s:textfield name="firstname" placeholder="Firstname" />
+                                            </div>
+                                            <div class="form-group">
+                                                <s:textfield name="lastname" placeholder="Lastname"/>
+                                            </div>
+                                            <div class="form-group">
+                                                <s:textfield name="user2" placeholder="Username"/>
+                                            </div>
+                                            <div class="form-group">
+                                                <s:password name="pass2" placeholder="Password"/>
+                                            </div>
+
+                                                <s:submit cssClass="btn btn-primary btn" value="SIGN UP" />
+                                                
+
+                                    </s:form>
+                                </div>  <!end of tab2->
+                            </div>      <!end of tab content->
+                        </div>          <!end of tab container->
+                    </div>              <!end of panel body->
+                </div>                  <!end of panel->                
+                </div>                  <!end of column-> 
+            </div>                      <!end of row->
+        </div>                          <!end of container->    
     </body>
 </html>
