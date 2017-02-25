@@ -25,6 +25,7 @@
         <action name="searchDatabase" class="com.radtech.SearchEngine" method="searchDatabase">
             
             <result> search.jsp</result>
+            <result name="input"> search.jsp</result>
         </action>
         
         

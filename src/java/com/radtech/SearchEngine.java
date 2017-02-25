@@ -61,15 +61,16 @@ public class SearchEngine extends ActionSupport implements SessionAware{
     }
     
     public void validate(){
-        if(sessionmap == null){
+        if(getSearchType().equals("FAIL")){
             addFieldError("searchInput", "Field is left blank");
+        }
+        if(getSearchInput().trim().equals("")){
+            System.out.println("isnull " + sessionmap.get("view") == null);
+            sessionmap.put("search", sessionmap.get("view"));
         }
     }
     @Action("searchDatabase")
     public String searchDatabase(){
-        
-        System.out.println("I am inside search");
-        
         if(getSearchType().equals("FAIL")) {
             addFieldError("searchInput", "Something went wrong...");
             return "input";
@@ -82,7 +83,14 @@ public class SearchEngine extends ActionSupport implements SessionAware{
             tx = session.beginTransaction();
             Query query = session.createQuery("FROM Information where " + getSearchType() + " = :input");
             //query.setParameter("field", getSearchType());
-            query.setParameter("input", getSearchInput());
+            Object input = getSearchInput();
+            if(getSearchType().equals("controlNumber")) query.setParameter("input", Long.parseLong((String)input));
+            else if(getSearchType().equals("age") | getSearchType().equals("contactNumber")) {
+                input = query.setParameter("input", Integer.parseInt((String)input));
+                System.out.println(input.getClass());
+            }
+            else if(getSearchType().equals("weight")) Double.parseDouble((String)input);
+            else query.setParameter("input", input);
             System.out.println(getSearchInput() + " " + getSearchType());
             records = query.list();
             for(Object s: records){

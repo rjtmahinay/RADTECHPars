@@ -54,7 +54,7 @@
                                     <div class="form-group">
                                         <s:textfield name="user1" placeholder="Username" class="form-control" /></div>
                                     <div class="form-group">  
-                                        <s:textfield name="pass1" placeholder="Password" class="form-control" /></div>
+                                        <s:password name="pass1" placeholder="Password" class="form-control" /></div>
                                     <div class="modal-footer form-group" >
 
                                         <s:submit cssClass="btn btn-primary btn-block" value="LOGIN" />
