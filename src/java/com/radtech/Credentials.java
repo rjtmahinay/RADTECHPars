@@ -23,18 +23,19 @@ public class Credentials extends ActionSupport implements SessionAware {
     private Map applicationmap;
     private Configuration c;
     private Dataholder dh;
-    public static List GENDER = null;
-    public static List SEARCHTYPES = null;
-    public static List BREEDS = null;
+    public static List GENDER;
+    public static List SEARCHTYPES;
+    public static List BREEDS;
 
     public Credentials() {
-        if(GENDER==null){
+
+        if (GENDER == null) {
             GENDER = new ArrayList();
             GENDER.add("MALE");
             GENDER.add("FEMALE");
         }
-        
-        if(SEARCHTYPES == null){
+
+        if (SEARCHTYPES == null) {
             SEARCHTYPES = new ArrayList();
             SEARCHTYPES.add("CONTROL_NUMBER");
             SEARCHTYPES.add("OWNER_NAME");
@@ -47,17 +48,10 @@ public class Credentials extends ActionSupport implements SessionAware {
             SEARCHTYPES.add("COLOR");
             SEARCHTYPES.add("WEIGHT");
         }
-        
-        if(BREEDS == null){
+
+        if (BREEDS == null) {
             BREEDS = new ArrayList();
         }
-    }
-
-    @Override
-    public String execute() {
-        System.out.println("inside execute, running setsession...");
-        setSession(sessionmap);
-        return SUCCESS;
     }
 
     /**
@@ -152,18 +146,24 @@ public class Credentials extends ActionSupport implements SessionAware {
         System.out.println(sessionmap == null);
         sessionmap.put("login", "true");
         System.out.println("login is true, making session...");
-//        factory = c.configure("hibernate.cfg.xml").buildSessionFactory();
-        c = new Configuration().configure("hibernate.cfg.xml");
-        factory =  c.buildSessionFactory();
+        c = new Configuration();
+        factory = c.configure("hibernate.cfg.xml").buildSessionFactory();
         sessionmap.put("factory", factory);
         dh = new Dataholder();
         dh.setSession(sessionmap);
         dh.viewlist();
-        
+
         //adding lists into application
         applicationmap.put("breeds", BREEDS);
         applicationmap.put("gender", GENDER);
         applicationmap.put("searchlist", SEARCHTYPES);
+    }
+
+    @Override
+    public String execute() {
+        System.out.println("inside execute, running setsession...");
+        setSession(sessionmap);
+        return SUCCESS;
     }
 
     public String logout() {
@@ -172,22 +172,45 @@ public class Credentials extends ActionSupport implements SessionAware {
         return "success";
     }
 
-   
     @Override
     public void validate() {
-        if (!getUser1().equals("radtech".trim())) {
-            addFieldError("user1", "Invalid username");
-        }
 
-        if (!getPass1().equals("@ics123".trim())) {
-            addFieldError("pass1", "Invalid Password");
-        }
+        String validUsername = c.getProperty("hibernate.connection.username");
+        String validPassword = c.getProperty("hibernate.connection.password");
+
         if (sessionmap != null) {
             System.out.println("Inside validate");
         }
+
+        loginValidation(user1, pass1, validUsername, validPassword);
+        
+//        signupValidation(user2, pass2, firstName, lastName);
+      
+    }
+
+    private void loginValidation(String user, String pass, String validUsername, String validPassword) {
+        if (user.trim().length() < 1 || pass.trim().length() < 1) {
+            addActionError("Fields can't be blank");
+        } else {
+            if (!user.equals(validUsername.trim())) {
+                addFieldError("user1", "Invalid username");
+            }
+
+            if (!pass.equals(validPassword.trim())) {
+                addFieldError("pass1", "Invalid password");
+            }
+
+        }
+
     }
     
-    
-   
+    private void signupValidation(String user, String pass, String fname, String lname){
+        
+         if (fname.trim().length() < 0 || lname.trim().length() < 0
+            || user.trim().length() < 0 || pass.trim().length() < 0) {
+            
+             addActionError("Fields can't be blank");
+        }
 
+    }
 }
