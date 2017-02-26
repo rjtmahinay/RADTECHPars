@@ -12,6 +12,34 @@ import org.hibernate.cfg.Configuration;
 
 public class Credentials extends ActionSupport implements SessionAware {
 
+    /**
+     * @return the GENDER
+     */
+    public static List<String> getGENDER() {
+        return GENDER;
+    }
+
+    /**
+     * @param aGENDER the GENDER to set
+     */
+    public static void setGENDER(List<String> aGENDER) {
+        GENDER = aGENDER;
+    }
+
+    /**
+     * @return the BREEDS
+     */
+    public static List<String> getBREEDS() {
+        return BREEDS;
+    }
+
+    /**
+     * @param aBREEDS the BREEDS to set
+     */
+    public static void setBREEDS(List<String> aBREEDS) {
+        BREEDS = aBREEDS;
+    }
+
     private static SessionFactory factory;
     private String user1;
     private String pass1;
@@ -23,14 +51,14 @@ public class Credentials extends ActionSupport implements SessionAware {
     private Map applicationmap;
     private Configuration c;
     private Dataholder dh;
-    public static List GENDER;
+    private static List<String> GENDER;
     public static List SEARCHTYPES;
-    public static List BREEDS;
+    private static List<String> BREEDS;
 
     public Credentials() {
 
         if (GENDER == null) {
-            GENDER = new ArrayList();
+            GENDER = new ArrayList<>();
             GENDER.add("MALE");
             GENDER.add("FEMALE");
         }
@@ -50,7 +78,7 @@ public class Credentials extends ActionSupport implements SessionAware {
         }
 
         if (BREEDS == null) {
-            BREEDS = new ArrayList();
+            BREEDS = new ArrayList<>();
         }
     }
 
@@ -154,11 +182,14 @@ public class Credentials extends ActionSupport implements SessionAware {
         dh.viewlist();
 
         //adding lists into application
-        applicationmap.put("breeds", BREEDS);
-        applicationmap.put("gender", GENDER);
+        applicationmap.put("breeds", getBREEDS());
+        applicationmap.put("gender", getGENDER());
         applicationmap.put("searchlist", SEARCHTYPES);
     }
 
+    public String display(){
+        return NONE;
+    }
     @Override
     public String execute() {
         System.out.println("inside execute, running setsession...");

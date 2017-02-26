@@ -4,22 +4,16 @@
  * and open the template in the editor.
  */
 package com.radtech;
+
 import com.opensymphony.xwork2.ActionSupport;
 import java.util.ArrayList;
 import java.util.List;
+
 /**
  *
  * @author Aspire
  */
-public class Information extends ActionSupport{
-
-    public long getControlNumber() {
-        return controlNumber;
-    }
-
-    public void setControlNumber(long controlNumber) {
-        this.controlNumber = controlNumber;
-    }
+public class Information extends ActionSupport {
 
     private long controlNumber;
     private String ownerName;
@@ -31,14 +25,93 @@ public class Information extends ActionSupport{
     private int age;
     private String color;
     private double weight;
-    
-    public Information(){
+    private List<String> breed_list;
+    private List<String> sex_list;
+
+    public Information() {
+
+        breed_list = new ArrayList<>();
+        breed_list.add("Doggy");
+        breed_list.add("German");
+        
+        
+        sex_list = new ArrayList<>();
+        sex_list.add("Male");
+        sex_list.add("Female");
+        
     }
-     @Override
-    public String execute(){
-         
+
+    @Override
+    public String execute() {
+
         return SUCCESS;
     }
+    
+
+    /**
+     * @return the breed_list
+     */
+    public List<String> getBreed_list() {
+        return breed_list;
+    }
+
+    /**
+     * @param breed_list the breed_list to set
+     */
+    public void setBreed_list(List<String> breed_list) {
+        this.breed_list = breed_list;
+    }
+
+    /**
+     * @return the sex_list
+     */
+    public List<String> getSex_list() {
+        return sex_list;
+    }
+
+    /**
+     * @param sex_list the sex_list to set
+     */
+    public void setSex_list(List<String> sex_list) {
+        this.sex_list = sex_list;
+    }
+
+    /**
+     * @return the breed
+     */
+    public String getBreed() {
+        return breed;
+    }
+
+    /**
+     * @param breed the breed to set
+     */
+    public void setBreed(String breed) {
+        this.breed = breed;
+    }
+
+    /**
+     * @return the sex
+     */
+    public String getSex() {
+        return sex;
+    }
+
+    /**
+     * @param sex the sex to set
+     */
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
+
+    public long getControlNumber() {
+        return controlNumber;
+    }
+
+    public void setControlNumber(long controlNumber) {
+        this.controlNumber = controlNumber;
+    }
+
     /**
      * @return the weight
      */
@@ -52,8 +125,7 @@ public class Information extends ActionSupport{
     public void setWeight(double weight) {
         this.weight = weight;
     }
-    
-   
+
     /**
      * @return the ownerName
      */
@@ -97,34 +169,6 @@ public class Information extends ActionSupport{
     }
 
     /**
-     * @return the breed
-     */
-    public String getBreed() {
-        return breed;
-    }
-
-    /**
-     * @param breed the breed to set
-     */
-    public void setBreed(String breed) {
-        this.breed = breed;
-    }
-
-    /**
-     * @return the sex
-     */
-    public String getSex() {
-        return sex;
-    }
-
-    /**
-     * @param sex the sex to set
-     */
-    public void setSex(String sex) {
-        this.sex = sex;
-    }
-
-    /**
      * @return the color
      */
     public String getColor() {
@@ -165,6 +209,5 @@ public class Information extends ActionSupport{
     public void setAge(int age) {
         this.age = age;
     }
-    
-    
+
 }

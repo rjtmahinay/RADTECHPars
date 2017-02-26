@@ -53,7 +53,7 @@
             </center>
         </div>
         
-        <h1>some text <s:property value="#session.login"/> 
+        <h1>some text <s:property value="#session.login"/></h1> 
     </div>
     
         

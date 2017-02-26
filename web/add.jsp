@@ -19,8 +19,6 @@
     
     <body>
         
-        <s:include value="home.jsp" />   
-    
     <div class="container-fluid">
         
         
@@ -73,10 +71,11 @@
             <p align="center"><button name="action" value="add" class="btn btn-primary" type="submit">Add</button>
             <button class="btn btn-secondary" type="reset">Clear</button>
             </form>    --%>    
-               
-        <s:form action="info">
+         <s:include value="home.jsp"/>      
+        <s:form action="resultInfo">
             <div class="col-md-12 col-sm-12">
-            <table class="table table-condensed">
+                <br/><br/><br/><br/><br/><br/><br/>   
+            <table class="table table-condensed">        
                 <tr>
                     <td><s:textfield label="Owner Name" name="ownerName"/></td>
                 </tr>
@@ -88,6 +87,12 @@
                 </tr>
                 <tr>
                     <td><s:textfield label="Patient Name" name="patientName"/></td>
+                </tr>
+                <tr>
+                    <td><s:radio label="Sex" name="sex" list="{'Male','Female'}"/></td>
+                </tr>
+                <tr>
+                    <td><s:select label="Breed" name="breed" list="{}" headerKey="-1"/></td>
                 </tr>
                 <tr>
                     <td><s:textfield label="Age" name="age"/></td>
