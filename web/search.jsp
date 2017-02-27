@@ -10,14 +10,14 @@
        <s:include value="home.jsp" />
        <div class="container-fluid">
             <s:form action="searchDatabase" namespace="/">
-               <h1 align="center">
+               <h4 align="center">
                     <s:select headerKey="-1" headerValue="Select Search Type"
                     list="#application.searchlist"
                     name="searchType"/>
                     <s:textfield name="searchInput" />
                 
                     <s:submit cssClass="btn btn-primary" name="submit" value="submit"/>
-                    </h1>
+                </h4>    
             </s:form>
         </div> 
         

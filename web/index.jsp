@@ -21,7 +21,7 @@
 
         <title>RADTECH PARS</title>
     </head>
-    <body>
+    <body background="cat1.jpg">
 
         <div class="container">
             <div class="row">

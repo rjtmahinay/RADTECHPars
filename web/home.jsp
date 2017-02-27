@@ -21,7 +21,7 @@
     <body>
         
         <nav class="navbar navbar-fixed-top navbar-inverse" role="navigation">
-    <div class="container-fluid">
+    
 
         <!-- Logo -->
         <div class="navbar-header">
@@ -37,7 +37,7 @@
 
         <!-- Menu Items -->
         <div class="collapse navbar-collapse" id="mainNavBar">
-            <center>
+            
             <ul class="nav navbar-nav">
                 <li><a href="home.jsp">Home</a></li>
                 <li><a href="add.jsp">Add Record</a></li>
@@ -47,20 +47,22 @@
                 <li><a href="#">Statistics</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-            <li><a href="index.jsp" class="navbar-brand pull-right"><strong>Logout</strong></a></li>
+                <li><a href="index.jsp"><span class="glyphicon-log-in"></span>Logout</a></li>
             </ul>        
                
-            </center>
         </div>
-        
-        <h1>some text <s:property value="#session.login"/></h1> 
-    </div>
-    
-        
-        <s:iterator value="#session.view" var="record">
-            <s:property value="#record.controlNumber" />
-        </s:iterator>
-</nav>
-        
+    </nav> 
+        <div class="container-fluid">
+            <br>
+            <br>
+            <h1>some text <s:property value="#session.login"/></h1> 
+
+
+
+            <s:iterator value="#session.view" var="record">
+                <s:property value="#record.controlNumber" />
+            </s:iterator>
+
+        </div>   
     </body>
 </html>

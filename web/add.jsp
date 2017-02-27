@@ -19,7 +19,7 @@
     
     <body>
         
-    <div class="container-fluid">
+    <div class="container">
         
         
         
@@ -73,34 +73,58 @@
             </form>    --%>    
          <s:include value="home.jsp"/>      
         <s:form action="resultInfo">
-            <div class="col-md-12 col-sm-12">
-                <br/><br/><br/><br/><br/><br/><br/>   
-            <table class="table table-condensed">        
-                <tr>
-                    <td><s:textfield label="Owner Name" name="ownerName"/></td>
-                </tr>
-                <tr>
-                    <td><s:textfield label="Address" name="address"/></td>
-                </tr>
-                <tr>
-                    <td><s:textfield label="Contact Number" name="contactNumber"/></td>
-                </tr>
-                <tr>
-                    <td><s:textfield label="Patient Name" name="patientName"/></td>
-                </tr>
-                <tr>
-                    <td><s:radio label="Sex" name="sex" list="{'Male','Female'}"/></td>
-                </tr>
-                <tr>
-                    <td><s:select label="Breed" name="breed" list="{}" headerKey="-1"/></td>
-                </tr>
-                <tr>
-                    <td><s:textfield label="Age" name="age"/></td>
-                </tr>
-                <tr>
-                    <td><s:textfield label="Weight" name="weight"/></td>
-                </tr>
-            </table>
+            
+                <br/><br/>  
+            <form>
+                <div class="form-group">
+                    <label for="ownerName">Owner name:</label>
+                    <s:textfield name="ownerName" placeholder="Enter Owner name"/>
+                </div>
+            
+                <div class="form-group">
+                    <label for="addres">Address:</label>
+                    <s:textfield name="address" placeholder="Enter Patient Address"/>
+                </div>
+                
+                <div class="form-group">
+                    <label for="contactNumber:">Contact Number</label>
+                    <s:textfield name="contactNumber" placeholder="Enter Contact Number"/>
+                </div>
+                
+                <div class="form-group">
+                    <label for="patientName">Patient Name</label>
+                    <s:textfield name="patientName" placeholder="Enter Pet Name"/>
+                </div> 
+                
+                <div class="form-group">
+                    <label for="sex">Sex:</label>
+                    <s:radio name="sex" list="{'Male','Female'}" />
+                </div> 
+                
+                <div class="form-group">
+                    <label for="breed">Breed</label>
+                    <s:select  name="breed" list="{'Unknown', 'Beagle', 'Great Dane'}" headerKey="-1"/>
+                </div> 
+                
+                <div class="form-group">
+                    <label for="age">Age</label>
+                    <s:textfield  name="age" placeholder="Enter Pet Age"/>
+                </div> 
+                
+                <div class="form-group">
+                    <label for="weight">Weight</label>
+                    <s:textfield  name="weight" placeholder="Enter Pet Weight"/>
+                </div> 
+                
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                
+            </form>
                 
                 <center>
                     <s:submit value="Add" cssClass="btn btn-primary"/>
