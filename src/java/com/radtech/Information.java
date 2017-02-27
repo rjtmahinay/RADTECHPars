@@ -8,6 +8,10 @@ package com.radtech;
 import com.opensymphony.xwork2.ActionSupport;
 import java.util.ArrayList;
 import java.util.List;
+import org.hibernate.HibernateException;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+import org.hibernate.cfg.Configuration;
 
 /**
  *
@@ -15,6 +19,8 @@ import java.util.List;
  */
 public class Information extends ActionSupport {
 
+    private Session s;
+    private Transaction t;
     private long controlNumber;
     private String ownerName;
     private String address;
@@ -33,20 +39,42 @@ public class Information extends ActionSupport {
         breed_list = new ArrayList<>();
         breed_list.add("Doggy");
         breed_list.add("German");
-        
-        
+
         sex_list = new ArrayList<>();
         sex_list.add("Male");
         sex_list.add("Female");
-        
+
     }
 
     @Override
     public String execute() {
-
-        return SUCCESS;
+        if (addInfo(this) <= 0) {
+            return ERROR;
+        } else {
+            return SUCCESS;
+        }
     }
-    
+
+    public long addInfo(Information information) {
+        long i = 0;
+        try {
+            s = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory().openSession();
+
+            t = s.beginTransaction();
+            i = (long) s.save(information);
+            t.commit();
+
+        } catch (HibernateException e) {
+            if (t != null) {
+                t.rollback();
+            }
+        } finally {
+            if (s != null) {
+                s.close();
+            }
+        }
+        return i;
+    }
 
     /**
      * @return the breed_list

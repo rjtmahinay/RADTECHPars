@@ -10,11 +10,12 @@
         </group>
         <group>
             <file>file:/C:/Users/Aspire/Documents/NetBeansProjects/RADTECHPars/src/java/hibernate.cfg.xml</file>
-            <file>file:/C:/Users/Aspire/Documents/NetBeansProjects/RADTECHPars/web/index.jsp</file>
+            <file>file:/C:/Users/Aspire/Documents/NetBeansProjects/RADTECHPars/web/search.jsp</file>
+            <file>file:/C:/Users/Aspire/Documents/NetBeansProjects/RADTECHPars/web/add.jsp</file>
             <file>file:/C:/Users/Aspire/Documents/NetBeansProjects/RADTECHPars/src/java/Information.hbm.xml</file>
             <file>file:/C:/Users/Aspire/Documents/NetBeansProjects/RADTECHPars/src/java/struts.xml</file>
-            <file>file:/C:/Users/Aspire/Documents/NetBeansProjects/RADTECHPars/src/java/com/radtech/SearchEngine.java</file>
             <file>file:/C:/Users/Aspire/Documents/NetBeansProjects/RADTECHPars/src/java/com/radtech/Dataholder.java</file>
+            <file>file:/C:/Users/Aspire/Documents/NetBeansProjects/RADTECHPars/src/java/com/radtech/Information.java</file>
             <file>file:/C:/Users/Aspire/Documents/NetBeansProjects/RADTECHPars/src/java/com/radtech/Credentials.java</file>
         </group>
     </open-files>

@@ -4,7 +4,7 @@
 
 <struts>
     <!-- Configuration for the default package. -->
-    <constant name="struts.devMode" value="true" />
+    <constant name="struts.devMode" value="false" />
     <constant name="struts.ui.theme" value="bootstrap" />
     <package name="default" extends="struts-default">
         
@@ -22,13 +22,12 @@
             <result name="none">add.jsp</result>
         </action> -->
         
-        <action name="info" class="com.radtech.Information" >
-            <result name="input">add.jsp</result>
+        <action name="info" class="com.radtech.Information">
+           <result name="success">home.jsp</result>
+           <result name="input">add.jsp</result>
         </action>
         
-        <action name="resultInfo" class="com.radtech.Information" >
-            <result name="success">home.jsp</result>
-        </action>
+      
         
         <action name="searchDatabase" class="com.radtech.SearchEngine" method="searchDatabase">
             <result>search.jsp</result>
