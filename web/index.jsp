@@ -49,7 +49,7 @@
                                     <div class="tab-pane active" id="1b">
 
                                         <s:actionerror/>
-                                        <s:form action="login" theme="bootstrap">
+                                        <s:form action="login" theme="bootstrap" cssClass="form">
 
                                             <br/>
                                             <div class="form-group">

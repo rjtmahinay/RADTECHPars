@@ -9,12 +9,12 @@
     <package name="default" extends="struts-default">
         
         <action name="login" class="com.radtech.Credentials">
-            <result>home.jsp</result>
+            <result>welcome.jsp</result>
             <result name="input">index.jsp</result>
         </action>
         
          <action name="signup" class="com.radtech.Credentials">
-            <result>home.jsp</result>
+            <result>welcome.jsp</result>
             <result name="input">index.jsp</result>
         </action>
         
@@ -23,7 +23,7 @@
         </action> -->
         
         <action name="info" class="com.radtech.Information">
-           <result name="success">home.jsp</result>
+           <result name="success">welcome.jsp</result>
            <result name="input">add.jsp</result>
         </action>
         

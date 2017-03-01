@@ -19,16 +19,19 @@
 
     <body>
 
-        <div class="container">
+        
 
-            <s:include value="home.jsp"/>      
-            <s:form action="info">
-
+        <s:include value="home.jsp"/>      
+        <s:form action="info" theme="bootstrap" enctype="multipart/form-data" cssClass="form">
+            
+            <div class="container-fluid">
                 <br/><br/>  
                 <form>
                     <div class="form-group">
                         <label for="ownerName">Owner name:</label>
+                        
                         <s:textfield name="ownerName" placeholder="Enter Owner name"/>
+                        
                     </div>
 
                     <div class="form-group">

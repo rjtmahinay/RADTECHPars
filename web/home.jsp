@@ -42,7 +42,7 @@
                 <li><a href="home.jsp">Home</a></li>
                 <li><a href="add.jsp">Add Record</a></li>
                 <li><a href="search.jsp">Search</a></li>
-                <li><a href="#">Schedule</a></li>
+                <li><a href="userProfile.jsp">Schedule</a></li>
                 <li><a href="#">Archives</a></li>
                 <li><a href="#">Statistics</a></li>
             </ul>
@@ -55,13 +55,13 @@
         <div class="container-fluid">
             <br>
             <br>
-            <h1>some text <s:property value="#session.login"/></h1> 
+            <h1>some text <s:property value="#session.login"/></h1>
+            
+            
 
 
 
-            <s:iterator value="#session.view" var="record">
-                <s:property value="#record.controlNumber" />
-            </s:iterator>
+            
 
         </div>   
     </body>
