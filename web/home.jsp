@@ -39,7 +39,7 @@
         <div class="collapse navbar-collapse" id="mainNavBar">
             
             <ul class="nav navbar-nav">
-                <li><a href="home.jsp">Home</a></li>
+                <li><a href="welcome.jsp">Home</a></li>
                 <li><a href="add.jsp">Add Record</a></li>
                 <li><a href="search.jsp">Search</a></li>
                 <li><a href="userProfile.jsp">Schedule</a></li>

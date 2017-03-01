@@ -26,6 +26,8 @@
                 <table class="table table-bordered table-hover table-striped" align="center">
                     <thead>
                         <tr>
+                            <th>Update</th>
+                            <th>Delete</th>
                             <th>#</th>                                
                             <th>Owner Name</th>
                             <th>Address</th>
@@ -38,8 +40,43 @@
                         </tr>
                     </thead>
                     <tbody>
+                        <tr>
+                                <td>
+                                    <input type="hidden" name="controlNumber" value="" >         
+                                    <button type="submit" name="action" value="update1">Update</button>
+                                </td>
+                    
+                                <td>
+                                    <input type="hidden" name="controlNumber" value="" >         
+                                    <button type="submit" name="action" value="delete">Delete</button>
+                                </td>
+                                <td>sample</td>
+                                <td>sample</td>
+                                <td>sample</td>
+                                <td>2</td>
+                                <td>sample</td>
+                                <td>sample</td>
+                                <td>sample</td>
+                                <td>2</td>
+                                <td>2</td>
+                                
+                                
+                                
+                            </tr>
+                        
                         <s:iterator value="#session.view" var="record">
+                            
+                                
                             <tr>
+                                <td>
+                                    <input type="hidden" name="controlnum" value="${item.control_number}" >         
+                                    <button type="submit" name="action" value="update1">Update</button>
+                                </td>
+                    
+                                <td>
+                                    <input type="hidden" name="controlnum" value="${item.control_number}" >         
+                                    <button type="submit" name="action" value="delete">Delete</button>
+                                </td>
                                 <td><s:property value="#record.controlNumber" /></td>
                                 <td><s:property value="#record.ownerName" /></td>
                                 <td><s:property value="#record.address" /></td>
