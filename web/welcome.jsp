@@ -22,8 +22,43 @@
         <br><br>
         <h1>welcome to the new home page</h1>
         <div class="container-fluid">
-            <div class="table-responsive">
-                <table class="table table-bordered table-hover table-striped" align="center">
+            <center>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addRecord">Add Record</button>
+            </center>
+            
+            <div class="modal fade" id="addRecord">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+
+
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h3 class="modal-title">Add Record</h3>
+                        </div>
+
+                        <s:form action="" theme="bootstrap" cssClass="form">
+                            <div class="modal-body">
+                                <div class="form-group">
+                                    <s:textfield name="ownerName" placeholder="Enter Owner name"/>
+                                </div>
+                                
+                                <div class="form-group"> 
+                                    <s:textfield name="contact number" placeholder="Enter Contact Number"/>
+                                    
+                                </div>
+                                <div class="modal-footer form-group" >
+
+                                    <s:submit cssClass="btn btn-primary btn-block" value="Add Diagnosis" />
+                                </div>
+                            </div>
+                        </s:form>
+                    </div>
+                </div>
+            </div>
+                
+                
+            <div class="table-responsive table-">
+                <table class="table table-bordered table-hover table-striped table-reverse" align="center">
                     <thead>
                         <tr>
                             <th>Update</th>
@@ -43,12 +78,12 @@
                         <tr>
                                 <td>
                                     <input type="hidden" name="controlNumber" value="" >         
-                                    <button type="submit" name="action" value="update1">Update</button>
+                                    <button class="btn btn-block btn-primary" type="submit" name="action" value="update1">Update</button>
                                 </td>
                     
                                 <td>
                                     <input type="hidden" name="controlNumber" value="" >         
-                                    <button type="submit" name="action" value="delete">Delete</button>
+                                    <button class="btn btn-block btn-danger" type="submit" name="action" value="delete">Delete</button>
                                 </td>
                                 <td>sample</td>
                                 <td>sample</td>
@@ -70,14 +105,14 @@
                             <tr>
                                 <td>
                                     <input type="hidden" name="controlnum" value="${item.control_number}" >         
-                                    <button type="submit" name="action" value="update1">Update</button>
+                                    <button class="btn btn-block btn-primary" type="submit" name="action" value="update1">Update</button>
                                 </td>
                     
                                 <td>
                                     <input type="hidden" name="controlnum" value="${item.control_number}" >         
-                                    <button type="submit" name="action" value="delete">Delete</button>
+                                    <button class="btn btn-block btn-danger" type="submit" name="action" value="delete">Delete</button>
                                 </td>
-                                <td><s:property value="#record.controlNumber" /></td>
+                                <td><s:property value="#record.CONTROL_NUMBER" /></td>
                                 <td><s:property value="#record.ownerName" /></td>
                                 <td><s:property value="#record.address" /></td>
                                 <td><s:property value="#record.contactNumber" /></td>

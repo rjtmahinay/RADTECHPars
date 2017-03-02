@@ -44,7 +44,7 @@
                 </div>
             </div>              <!-END OF ROW->
             <center>
-                <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#diagnoWindow">Add Diagnosis</button>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#diagnoWindow">Add Diagnosis</button>
             </center>
             <div class="modal fade" id="diagnoWindow">
                 <div class="modal-dialog">
