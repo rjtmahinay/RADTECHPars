@@ -115,6 +115,7 @@
                                 <s:url action="getRecord" var="rec">
                                     <s:param name="id"><s:property value="#record.controlNumber"/></s:param>
                                 </s:url>
+                                
                                 <td><s:a href="%{rec}"> <s:property value="#record.controlNumber"/> </s:a> </td>
                                 <td><s:property value="#record.ownerName" /></td>
                                 <td><s:property value="#record.address" /></td>
