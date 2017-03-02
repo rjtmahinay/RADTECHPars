@@ -78,7 +78,7 @@
             </div>   
         </s:form>
 
-        <s:form action="home.jsp">
+      <%--  <s:form action="home.jsp">
         <center>
             <s:submit value="Back" cssClass="btn btn-secondary"/>
         </center>
