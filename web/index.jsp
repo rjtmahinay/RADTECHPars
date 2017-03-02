@@ -53,9 +53,9 @@
 
                                             <br/>
                                             <div class="form-group">
-                                                <s:textfield name="user1" placeholder="Username" class="form-control" /></div>
+                                                <s:textfield name="username" placeholder="Username" class="form-control" /></div>
                                             <div class="form-group">  
-                                                <s:password name="pass1" placeholder="Password" class="form-control" /></div>
+                                                <s:password name="password" placeholder="Password" class="form-control" /></div>
 
 
                                             <s:submit cssClass="btn btn-primary " value="submit" />

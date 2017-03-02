@@ -6,22 +6,31 @@
 package com.radtech;
 
 import com.opensymphony.xwork2.ActionSupport;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import javax.servlet.http.HttpServletRequest;
 import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.dispatcher.SessionMap;
-import org.apache.struts2.interceptor.SessionAware;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+
 import org.hibernate.cfg.Configuration;
 
 /**
  *
  * @author Aspire
  */
-public class Information extends ActionSupport{
+@Entity
+@Table(name="MEDICALDB" )
+public class Information extends ActionSupport implements Serializable{
     private static SessionMap sessionmap;
     private Session s;
     private Transaction t;
@@ -35,19 +44,8 @@ public class Information extends ActionSupport{
     private int age;
     private String color;
     private double weight;
-    private List<String> breed_list;
-    private List<String> sex_list;
     
     public Information() {
-
-        breed_list = new ArrayList<>();
-        breed_list.add("Doggy");
-        breed_list.add("German");
-
-        sex_list = new ArrayList<>();
-        sex_list.add("Male");
-        sex_list.add("Female");
-
     }
 
 
@@ -80,38 +78,7 @@ public class Information extends ActionSupport{
         }
         return i;
     }
-
-    /**
-     * @return the breed_list
-     */
-    public List<String> getBreed_list() {
-        return breed_list;
-    }
-
-    /**
-     * @param breed_list the breed_list to set
-     */
-    public void setBreed_list(List<String> breed_list) {
-        this.breed_list = breed_list;
-    }
-
-    /**
-     * @return the sex_list
-     */
-    public List<String> getSex_list() {
-        return sex_list;
-    }
-
-    /**
-     * @param sex_list the sex_list to set
-     */
-    public void setSex_list(List<String> sex_list) {
-        this.sex_list = sex_list;
-    }
-
-    /**
-     * @return the breed
-     */
+    @Column(name="BREED")
     public String getBreed() {
         return breed;
     }
@@ -126,6 +93,7 @@ public class Information extends ActionSupport{
     /**
      * @return the sex
      */
+    @Column(name="SEX")
     public String getSex() {
         return sex;
     }
@@ -136,7 +104,9 @@ public class Information extends ActionSupport{
     public void setSex(String sex) {
         this.sex = sex;
     }
-
+    @Id
+    @Column(name="CONTROL_NUMBER")
+    @GeneratedValue(strategy=GenerationType.AUTO)
     public long getControlNumber() {
         return controlNumber;
     }
@@ -148,6 +118,7 @@ public class Information extends ActionSupport{
     /**
      * @return the weight
      */
+    @Column(name="WEIGHT")
     public double getWeight() {
         return weight;
     }
@@ -162,6 +133,7 @@ public class Information extends ActionSupport{
     /**
      * @return the ownerName
      */
+    @Column(name="OWNER_NAME")
     public String getOwnerName() {
         return ownerName;
     }
@@ -176,6 +148,7 @@ public class Information extends ActionSupport{
     /**
      * @return the address
      */
+    @Column(name="ADDRESS")
     public String getAddress() {
         return address;
     }
@@ -190,6 +163,7 @@ public class Information extends ActionSupport{
     /**
      * @return the patientName
      */
+    @Column(name="PATIENT_NAME")
     public String getPatientName() {
         return patientName;
     }
@@ -204,6 +178,7 @@ public class Information extends ActionSupport{
     /**
      * @return the color
      */
+    @Column(name="COLOR")
     public String getColor() {
         return color;
     }
@@ -218,6 +193,7 @@ public class Information extends ActionSupport{
     /**
      * @return the contactNumber
      */
+    @Column(name="CONTACT_NUMBER")
     public int getContactNumber() {
         return contactNumber;
     }
@@ -232,6 +208,7 @@ public class Information extends ActionSupport{
     /**
      * @return the age
      */
+    @Column(name="AGE")
     public int getAge() {
         return age;
     }
