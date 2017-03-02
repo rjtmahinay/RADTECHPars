@@ -26,7 +26,7 @@
         </action>
         
         <action name="info" class="com.radtech.Information">
-           <result name="success">welcome.jsp</result>
+           <result name="success">add.jsp</result>
            <result name="input">add.jsp</result>
         </action>
         

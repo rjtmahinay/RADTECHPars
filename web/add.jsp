@@ -72,6 +72,8 @@
                 </form>
 
                 <center>
+                    <s:actionerror/>
+                    <s:actionmessage/>
                     <s:submit value="Add" cssClass="btn btn-primary"/>
                     <s:reset value="clear" cssClass="btn btn-secondary"/>
                 </center>
