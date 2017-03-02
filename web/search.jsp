@@ -8,7 +8,7 @@
     </head>
     <body>
        <s:include value="home.jsp" />
-       <div class="container-fluid">
+       <div class="container">
             <s:form action="searchDatabase" namespace="/">
                 <div class="row">
                     <div class="col-md-3 col-sm-0"></div>

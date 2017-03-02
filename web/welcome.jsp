@@ -99,7 +99,7 @@
             </div>
                 
                 
-            <div class="table-responsive table-">
+            <div class="table-responsive">
                 <table class="table table-bordered table-hover table-striped table-inverse" align="center">
                     <thead>
                         <tr>
