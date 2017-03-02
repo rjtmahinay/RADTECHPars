@@ -21,6 +21,9 @@
        <!-- <action name="login" class="com.radtech.Credentials" method="display">
             <result name="none">add.jsp</result>
         </action> -->
+        <action name="getRecord" class="com.radtech.Information" method="single">
+            <result>welcome.jsp</result>
+        </action>
         
         <action name="info" class="com.radtech.Information">
            <result name="success">welcome.jsp</result>

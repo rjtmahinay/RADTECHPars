@@ -8,6 +8,10 @@ package com.radtech;
 import com.opensymphony.xwork2.ActionSupport;
 import java.util.ArrayList;
 import java.util.List;
+import javax.servlet.http.HttpServletRequest;
+import org.apache.struts2.ServletActionContext;
+import org.apache.struts2.dispatcher.SessionMap;
+import org.apache.struts2.interceptor.SessionAware;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -17,8 +21,8 @@ import org.hibernate.cfg.Configuration;
  *
  * @author Aspire
  */
-public class Information extends ActionSupport {
-
+public class Information extends ActionSupport{
+    private static SessionMap sessionmap;
     private Session s;
     private Transaction t;
     private long controlNumber;
@@ -33,7 +37,7 @@ public class Information extends ActionSupport {
     private double weight;
     private List<String> breed_list;
     private List<String> sex_list;
-
+    
     public Information() {
 
         breed_list = new ArrayList<>();
@@ -45,6 +49,7 @@ public class Information extends ActionSupport {
         sex_list.add("Female");
 
     }
+
 
     @Override
     public String execute() {
@@ -237,5 +242,18 @@ public class Information extends ActionSupport {
     public void setAge(int age) {
         this.age = age;
     }
-
+    
+    public String single(){
+        
+        HttpServletRequest req = ServletActionContext.getRequest();
+        System.out.println(req.getParameter("id") + " is the selected ID");
+        return SUCCESS;
+    }
+    public void validate(){
+        if(ServletActionContext.getRequest().getParameter("id") == ""){}
+        
+    }
+    public void setSession(SessionMap m){
+        sessionmap = m;
+    }
 }

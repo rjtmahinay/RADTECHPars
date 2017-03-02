@@ -112,7 +112,10 @@
                                     <input type="hidden" name="controlnum" value="${item.control_number}" >         
                                     <button class="btn btn-block btn-danger" type="submit" name="action" value="delete">Delete</button>
                                 </td>
-                                <td><s:property value="#record.CONTROL_NUMBER" /></td>
+                                <s:url action="getRecord" var="rec">
+                                    <s:param name="id"><s:property value="#record.controlNumber"/></s:param>
+                                </s:url>
+                                <td><s:a href="%{rec}"> <s:property value="#record.controlNumber"/> </s:a> </td>
                                 <td><s:property value="#record.ownerName" /></td>
                                 <td><s:property value="#record.address" /></td>
                                 <td><s:property value="#record.contactNumber" /></td>

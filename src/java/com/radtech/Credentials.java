@@ -180,6 +180,7 @@ public class Credentials extends ActionSupport implements SessionAware {
         dh = new Dataholder();
         dh.setSession(sessionmap);
         dh.viewlist();
+        sessionmap.put("dataholder", dh);
 
         //adding lists into application
         applicationmap.put("breeds", getBREEDS());
