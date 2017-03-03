@@ -22,6 +22,8 @@ import org.hibernate.cfg.Configuration;
  * @author Aspire
  */
 public class Information extends ActionSupport{
+    private final String SUCCESS_BANNER = "Add Sucessful";
+    private final String ERROR_BANNER = "Error";
     private static SessionMap sessionmap;
     private Session s;
     private Transaction t;
@@ -54,8 +56,10 @@ public class Information extends ActionSupport{
     @Override
     public String execute() {
         if (addInfo(this) <= 0) {
+            addActionError(ERROR_BANNER);
             return ERROR;
         } else {
+            addActionMessage(SUCCESS_BANNER);
             return SUCCESS;
         }
     }
