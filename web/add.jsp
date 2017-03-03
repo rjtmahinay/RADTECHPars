@@ -72,13 +72,15 @@
                 </form>
 
                 <center>
+                    <s:actionerror/>
+                    <s:actionmessage/>
                     <s:submit value="Add" cssClass="btn btn-primary"/>
                     <s:reset value="clear" cssClass="btn btn-secondary"/>
                 </center>
             </div>   
         </s:form>
 
-        <s:form action="home.jsp">
+      <%--  <s:form action="home.jsp">
         <center>
             <s:submit value="Back" cssClass="btn btn-secondary"/>
         </center>

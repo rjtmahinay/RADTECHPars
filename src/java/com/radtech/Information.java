@@ -30,6 +30,7 @@ import org.hibernate.cfg.Configuration;
 @Table(name="MEDICALDB" )
 public class Information extends ActionSupport implements Serializable{
     private static SessionMap sessionmap;
+    private static String ERROR_BANNER = "ERROR", SUCCESS_BANNER = "SUCCESS";
     private Session s;
     private Transaction t;
     private long controlNumber;
@@ -49,8 +50,10 @@ public class Information extends ActionSupport implements Serializable{
     @Override
     public String execute() {
         if (addInfo(this) <= 0) {
+            addActionError(ERROR_BANNER);
             return ERROR;
         } else {
+            addActionMessage(SUCCESS_BANNER);
             return SUCCESS;
         }
     }

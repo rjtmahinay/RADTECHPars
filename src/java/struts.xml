@@ -21,13 +21,9 @@
         <action name="logout" class="com.radtech.UserAction" method="logout">
             <result>index.jsp</result>
         </action>
-       <!-- <action name="login" class="com.radtech.Credentials" method="display">
-            <result name="none">add.jsp</result>
-        </action> -->
 
-        <action name="info" class="com.radtech.Information">
-           <result name="success">welcome.jsp</result>
-           <result name="input">add.jsp</result>
+        <action name="addRecord" class="com.radtech.InformationAction" method="add">
+           <result>welcome.jsp</result>
         </action>
         
       

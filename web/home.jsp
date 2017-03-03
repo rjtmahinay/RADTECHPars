@@ -41,7 +41,7 @@
                 <li><a href="add.jsp">Add Record</a></li>
                 <li><a href="search.jsp">Search</a></li>
                 <li><a href="userProfile.jsp">Schedule</a></li>
-                <li><a href="#">Archives</a></li>
+                <li><a href="archives.jsp">Archives</a></li>
                 <li><a href="#">Statistics</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">

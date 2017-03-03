@@ -7,12 +7,10 @@ import java.util.Map;
 import org.apache.struts2.dispatcher.SessionMap;
 import org.apache.struts2.interceptor.SessionAware;
 import org.hibernate.HibernateException;
-import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.AnnotationConfiguration;
-import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
 
@@ -70,6 +68,9 @@ public class UserAction extends ActionSupport implements ModelDriven<User>, Sess
                 if(db.getUsername().equalsIgnoreCase(user.getUsername())){
                     if(db.getPassword().equals(user.getPassword())){
                         sessionmap.put("currentuser", user);
+                        System.out.println(sessionmap.get("currentuser") == null);
+
+                        
                         return SUCCESS;
                     }
                     else{

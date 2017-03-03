@@ -11,7 +11,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
         <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
         
@@ -19,46 +19,88 @@
     </head>
     <body>
         <s:include value="home.jsp"/>
-        <br><br>
-        <h1>welcome to the new home page</h1>
+        
         <div class="container-fluid">
             <center>
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addRecord">Add Record</button>
             </center>
             
             <div class="modal fade" id="addRecord">
-                <div class="modal-dialog">
+                <div class="modal-dialog modal-sm">
                     <div class="modal-content">
-
+                        <center>
 
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal">&times;</button>
                             <h3 class="modal-title">Add Record</h3>
                         </div>
-
-                        <s:form action="" theme="bootstrap" cssClass="form">
+                            
+                            <!-INSERT FORM ACTION HERE->
+                            
+                            
+                        <s:form action="addRecord" theme="bootstrap" cssClass="form">
                             <div class="modal-body">
+                                
                                 <div class="form-group">
-                                    <s:textfield name="ownerName" placeholder="Enter Owner name"/>
+                                    <label for="ownerName">Owner Name</label>
+                                    <s:textfield name="ownerName" placeholder=""/>
                                 </div>
                                 
-                                <div class="form-group"> 
-                                    <s:textfield name="contact number" placeholder="Enter Contact Number"/>
-                                    
+                                <div class="form-group">
+                                    <label for="address">Address</label>
+                                    <s:textfield name="address" placeholder=""/>
                                 </div>
+                                
+                                <div class="form-group">
+                                    <label for="contactNumber">Contact Number</label>
+                                    <s:textfield name="contactNumber" placeholder=""/>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="patienttName">Pet Name</label>
+                                    <s:textfield name="patienttName" placeholder=""/>
+                                </div>
+                                    
+                                <div class="form-group">
+                                    <label for="sex">Sex</label>
+                                    <s:select cssClass="text text-block" name="sex" list="{'', 'Male','Female'}" headerKey="-1"/>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="breed">Breed</label>
+                                    <s:textfield name="breed" placeholder=""/>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="age">Age</label>
+                                    <s:textfield name="age" placeholder=""/>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="weight">Weight</label>
+                                    <s:textfield name="weight" placeholder=""/>
+                                </div>
+                                
+                                
+                                
+                                
+                                    
                                 <div class="modal-footer form-group" >
-
-                                    <s:submit cssClass="btn btn-primary btn-block" value="Add Diagnosis" />
+                                    <center>
+                                    <s:submit cssClass="btn btn-primary btn-block" value="Add Record" />
+                                    <s:reset value="clear" cssClass="btn btn-secondary btn-block"/>
+                                    </center>
                                 </div>
                             </div>
                         </s:form>
+                          </center>  
                     </div>
                 </div>
             </div>
                 
                 
-            <div class="table-responsive table-">
-                <table class="table table-bordered table-hover table-striped table-reverse" align="center">
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover table-striped table-inverse" align="center">
                     <thead>
                         <tr>
                             <th>Update</th>
