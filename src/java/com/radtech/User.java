@@ -5,6 +5,7 @@
  */
 package com.radtech;
 
+import com.opensymphony.xwork2.ActionSupport;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,11 +15,11 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="USERDB")
+@Table(name = "USERDB" )
 public class User implements Serializable{
     
     private long userNumber;
-    private String name, surname, newUsername, newPassword;
+    private String name, surname, username, password;
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     @Column(name="USER_NUMBER")
@@ -29,7 +30,7 @@ public class User implements Serializable{
     public void setUserNumber(long userNumber) {
         this.userNumber = userNumber;
     }
-    @Column(name="NAME")
+    @Column(name="NAME", nullable=false)
     public String getName() {
         return name;
     }
@@ -37,7 +38,7 @@ public class User implements Serializable{
     public void setName(String name) {
         this.name = name;
     }
-    @Column(name="SURNAME")
+    @Column(name="SURNAME", nullable=false)
     public String getSurname() {
         return surname;
     }
@@ -45,22 +46,25 @@ public class User implements Serializable{
     public void setSurname(String surname) {
         this.surname = surname;
     }
-    @Column(name="USERNAME")
-    public String getNewUsername() {
-        return newUsername;
+    @Column(name="USERNAME",nullable=false)
+    public String getUsername() {
+        return username;
     }
 
-    public void setNewUsername(String newUsername) {
-        this.newUsername = newUsername;
+    public void setUsername(String username) {
+        this.username = username;
     }
-    @Column(name="PASSWORD")
-    public String getNewPassword() {
-        return newPassword;
+    @Column(name="PASSWORD", nullable=false)
+    public String getPassword() {
+        return password;
     }
 
-    public void setNewPassword(String newPassword) {
-        this.newPassword = newPassword;
+    public void setPassword(String password) {
+        this.password = password;
     }
     
+    public String toString(){
+        return "Name: " + getName() + "\nSurname: " + getSurname() + "\nUsername: " + getUsername() + "Password: " + getPassword();
+    }
     
 }

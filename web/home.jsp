@@ -30,9 +30,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a href="#" class="navbar-brand">RADTECH PARS <s:iterator value="view">
-                        <s:property/> Appendix
-                </s:iterator></a>
+            <a href="#" class="navbar-brand">RADTECH PARS
         </div>
 
         <!-- Menu Items -->
@@ -55,14 +53,6 @@
         <div class="container-fluid">
             <br>
             <br>
-            <h1>some text <s:property value="#session.login"/></h1>
-            
-            
-
-
-
-            
-
         </div>   
     </body>
 </html>

@@ -47,6 +47,10 @@ Contributor(s):
     <property name="hibernate.connection.username">radtech</property>
     <property name="hibernate.connection.password">@ics123</property>
     <property name="hibernate.hbm2ddl.auto">update</property>
-    <mapping class="com.radtech.Information" file="" jar="" package="" resource="Information.hbm.xml"/>
+    <mapping class="com.radtech.Information"/>
+    <mapping class="com.radtech.User"/>
+    <mapping class="com.radtech.Diagnosis"/>
+    
+
   </session-factory>
 </hibernate-configuration>

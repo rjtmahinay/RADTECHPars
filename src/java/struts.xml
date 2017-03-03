@@ -8,12 +8,12 @@
     <constant name="struts.ui.theme" value="bootstrap" />
     <package name="default" extends="struts-default">
         
-        <action name="login" class="com.radtech.ModelManager" method="login">
+        <action name="login" class="com.radtech.UserAction" method="login">
             <result>welcome.jsp</result>
             <result name="input">index.jsp</result>
         </action>
         
-         <action name="signup" class="com.radtech.Credentials">
+         <action name="signup" class="com.radtech.UserAction" method="signup">
             <result>welcome.jsp</result>
             <result name="input">index.jsp</result>
         </action>

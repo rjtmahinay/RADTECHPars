@@ -7,8 +7,6 @@ package com.radtech;
 
 import com.opensymphony.xwork2.ActionSupport;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -44,7 +42,6 @@ public class Information extends ActionSupport implements Serializable{
     private int age;
     private String color;
     private double weight;
-    
     public Information() {
     }
 

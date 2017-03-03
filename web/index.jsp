@@ -70,16 +70,16 @@
 
                                             <br/>
                                             <div class="form-group">
-                                                <s:textfield name="firstname" placeholder="Firstname" />
+                                                <s:textfield name="name" placeholder="Firstname" />
                                             </div>
                                             <div class="form-group">
-                                                <s:textfield name="lastname" placeholder="Lastname"/>
+                                                <s:textfield name="surname" placeholder="Lastname"/>
                                             </div>
                                             <div class="form-group">
-                                                <s:textfield name="user2" placeholder="Username"/>
+                                                <s:textfield name="username" placeholder="Username"/>
                                             </div>
                                             <div class="form-group">
-                                                <s:password name="pass2" placeholder="Password"/>
+                                                <s:password name="password" placeholder="Password"/>
                                             </div>
 
                                             <s:submit cssClass="btn btn-primary btn" value="SIGN UP" />
