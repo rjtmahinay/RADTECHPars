@@ -17,6 +17,7 @@
         <title>Archives</title>
     </head>
     <body>
+        <s:include value="home.jsp"/>
         <h1>Archives</h1>
         <div class="table-responsive">
                 <table class="table table-bordered table-hover table-striped table-inverse" align="center">
@@ -42,7 +43,7 @@
                                 </td>
                     
                                 
-                                <td>sample</td>
+                                <td>1</td>
                                 <td>sample</td>
                                 <td>sample</td>
                                 <td>2</td>

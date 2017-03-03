@@ -104,7 +104,7 @@
                     <thead>
                         <tr>
                             <th>Update</th>
-                            <th>Delete</th>
+                            <th>Archive</th>    
                             <th>#</th>                                
                             <th>Owner Name</th>
                             <th>Address</th>
@@ -125,7 +125,7 @@
                     
                                 <td>
                                     <input type="hidden" name="controlNumber" value="" >         
-                                    <button class="btn btn-block btn-danger" type="submit" name="action" value="delete">Delete</button>
+                                    <button class="btn btn-block btn-danger" type="submit" name="action" value="delete">Archive</button>
                                 </td>
                                 <td>sample</td>
                                 <td>sample</td>
@@ -152,7 +152,7 @@
                     
                                 <td>
                                     <input type="hidden" name="controlnum" value="${item.control_number}" >         
-                                    <button class="btn btn-block btn-danger" type="submit" name="action" value="delete">Delete</button>
+                                    <button class="btn btn-block btn-danger" type="submit" name="action" value="delete">Archive</button>
                                 </td>
                                 <s:url action="getRecord" var="rec">
                                     <s:param name="id"><s:property value="#record.controlNumber"/></s:param>
