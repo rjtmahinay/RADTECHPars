@@ -45,7 +45,8 @@
                 <li><a href="#">Statistics</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="index.jsp"><span class="glyphicon-log-in"></span>Logout</a></li>
+                <s:url value="logout" var="logout"/>
+                <li><s:a href="%{logout}"><span class="glyphicon-log-in"></span>Logout</s:a></li>
             </ul>        
                
         </div>

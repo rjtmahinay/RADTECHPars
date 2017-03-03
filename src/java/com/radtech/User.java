@@ -17,19 +17,8 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "USERDB" )
 public class User implements Serializable{
-    
-    private long userNumber;
-    private String name, surname, username, password;
-    @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
-    @Column(name="USER_NUMBER")
-    public long getUserNumber() {
-        return userNumber;
-    }
 
-    public void setUserNumber(long userNumber) {
-        this.userNumber = userNumber;
-    }
+    private String name, surname, username, password;
     @Column(name="NAME", nullable=false)
     public String getName() {
         return name;
@@ -46,6 +35,7 @@ public class User implements Serializable{
     public void setSurname(String surname) {
         this.surname = surname;
     }
+    @Id
     @Column(name="USERNAME",nullable=false)
     public String getUsername() {
         return username;
