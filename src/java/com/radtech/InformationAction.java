@@ -1,7 +1,6 @@
 
 package com.radtech;
 
-import static com.opensymphony.xwork2.Action.INPUT;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 import java.util.List;
@@ -51,6 +50,29 @@ public class InformationAction extends ActionSupport implements ModelDriven<Info
         return SUCCESS;
     }
     
+    public String get(){
+        Session session = null;
+        try{
+            session = ((SessionFactory)sessionmap.get("factory")).openSession();
+            
+            Information info = (Information)session.get(Information.class, information.getId());
+            System.out.println("Owner name is " + info.getOwnerName());
+            if(info == null){
+                addActionError("Record is not found");
+                return INPUT;
+            }
+            else{
+                sessionmap.put("currentRecord", info);
+            }
+        }
+        catch(HibernateException e){
+            e.printStackTrace();
+        }
+        finally {
+            if(session!=null) session.close();
+        }
+        return SUCCESS;
+    }
     public String execute(){
         return SUCCESS;
     }

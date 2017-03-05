@@ -13,6 +13,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.servlet.http.HttpServletRequest;
 import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.dispatcher.SessionMap;
@@ -43,6 +44,7 @@ public class Information extends ActionSupport implements Serializable{
     private int age;
     private String color;
     private double weight;
+    private long id;
     public Information() {
     }
 
@@ -220,6 +222,14 @@ public class Information extends ActionSupport implements Serializable{
         this.age = age;
     }
     
+    public void setId(long id){
+        this.id = id;
+    }
+    @Transient
+    public long getId(){
+        return id;
+    }
+    
     public String single(){
         
         HttpServletRequest req = ServletActionContext.getRequest();
@@ -233,4 +243,6 @@ public class Information extends ActionSupport implements Serializable{
     public void setSession(SessionMap m){
         sessionmap = m;
     }
+    
+    
 }

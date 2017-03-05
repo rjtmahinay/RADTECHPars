@@ -23,6 +23,8 @@
                 <div class="col-md-6 col-sm-12">
                     <h1>User Profile</h1>
                     <!-INSERT USER PROFILE HERE->
+                    <s:property value="%{#session.currentRecord.ownerName}"/>
+                    should have been here
                     
                 </div>
                 

@@ -3,6 +3,7 @@ package com.radtech;
 
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
+import java.util.List;
 import java.util.Map;
 import org.apache.struts2.dispatcher.SessionMap;
 import org.apache.struts2.interceptor.SessionAware;
@@ -69,7 +70,7 @@ public class UserAction extends ActionSupport implements ModelDriven<User>, Sess
                     if(db.getPassword().equals(user.getPassword())){
                         sessionmap.put("currentuser", user);
                         System.out.println(sessionmap.get("currentuser") == null);
-
+                        sessionmap.put("view", (List)session.createQuery("from Information").list());
                         
                         return SUCCESS;
                     }
