@@ -121,7 +121,14 @@ public class UserAction extends ActionSupport implements ModelDriven<User>, Sess
     }
     
     public String logout(){
-        sessionmap.remove("currentuser");
+        sessionmap.invalidate();
+
+        //renew servlet session
+        sessionmap.put("renewServletSession", null);
+        sessionmap.remove("renewServletSession");
+
+        //populate the struts session
+        sessionmap.entrySet();
         return SUCCESS;
     }
 }

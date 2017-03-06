@@ -35,17 +35,21 @@ public class InformationAction extends ActionSupport implements ModelDriven<Info
     
     public String add(){
         Session session = null;
-        try {
-            session= ((SessionFactory)sessionmap.get("factory")).openSession();
-            session.getTransaction().begin();
-            session.save(information);
-            sessionmap.put("view", (List)session.createQuery("from Information").list());
-            session.getTransaction().commit();
-        }catch (HibernateException e){
-            e.printStackTrace();
-        }
-        finally{
-            if(session!=null)session.close();
+        if(information!=null){
+            try {
+                System.out.println(information.getPatientName() + "patientName");
+                session= ((SessionFactory)sessionmap.get("factory")).openSession();
+                session.getTransaction().begin();
+                session.save(information);
+                sessionmap.put("view", (List)session.createQuery("from Information").list());
+                information=null;
+                session.getTransaction().commit();
+            }catch (HibernateException e){
+                e.printStackTrace();
+            }
+            finally{
+                if(session!=null)session.close();
+            }
         }
         return SUCCESS;
     }

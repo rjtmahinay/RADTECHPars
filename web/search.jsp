@@ -15,9 +15,8 @@
 
 					<div class="col-md-2 col-sm-4">
 						<center>
-							<s:select headerKey="-1" headerValue="Select Search Type"
-						list="#application.searchlist"
-						name="searchType"/>
+                                                    <s:select name="searchType" list="{'Control Number', 'Address', 'Age', 'Breed', 'Color', 'Contact Number', 'Owner Name', 'Patient Name', 'Sex', 'Weight'}" 
+                                                              headerKey="-1" headerValue="Select Search Type"/>
 						</center>
 					</div>
 

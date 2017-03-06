@@ -57,8 +57,12 @@
 								</div>
 
 								<div class="form-group">
-									<label for="patienttName">Pet Name</label>
-									<s:textfield name="patienttName" placeholder=""/>
+									<label for="patientName">Pet Name</label>
+									<s:textfield name="patientName" placeholder=""/>
+								</div>
+                                                                <div class="form-group">
+									<label for="color">Color</label>
+									<s:textfield name="color" placeholder=""/>
 								</div>
 
 								<div class="form-group">
