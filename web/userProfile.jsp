@@ -58,7 +58,7 @@
                             <h3 class="modal-title">Add Diagnosis</h3>
                         </div>
 
-                        <s:form action="" theme="bootstrap" cssClass="form">
+                        <s:form action="addDiagnosis" theme="bootstrap" cssClass="form">
                             <div class="modal-body">
                                 <div class="form-group">
                                     <s:textarea label="Diagnosis" name="diagnosis" cols="74" rows="4" class="form-control" />

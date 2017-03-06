@@ -15,7 +15,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import java.sql.Date;
+import java.util.Date;
 
 /**
  *
@@ -26,7 +26,7 @@ import java.sql.Date;
 public class Diagnosis implements Serializable{
     private long diagnosisNumber;
     private long controlNumber;
-    private Date date;
+    private Date dateDiagnosed;
     private String diagnosis;
     
     @Id
@@ -40,8 +40,7 @@ public class Diagnosis implements Serializable{
         this.diagnosisNumber = diagnosisNumber;
     }
     
-    @OneToOne(cascade = CascadeType.ALL, targetEntity = Information.class)
-    @JoinColumn(name = "CONTROL_NUMBER")
+    @Column(name = "CONTROL_NUMBER")
     public long getControlNumber() {
         return controlNumber;
     }
@@ -50,12 +49,12 @@ public class Diagnosis implements Serializable{
         this.controlNumber = controlNumber;
     }
     @Column(name="DATE")
-    public Date getDate() {
-        return date;
+    public Date getDateDiagnosed() {
+        return dateDiagnosed;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setDateDiagnosed(Date dateDiagnosed) {
+        this.dateDiagnosed = dateDiagnosed;
     }
     @Column(name="DIAGNOSIS")
     public String getDiagnosis() {

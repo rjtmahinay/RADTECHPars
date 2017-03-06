@@ -37,7 +37,6 @@ public class InformationAction extends ActionSupport implements ModelDriven<Info
         Session session = null;
         if(information!=null){
             try {
-                System.out.println(information.getPatientName() + "patientName");
                 session= ((SessionFactory)sessionmap.get("factory")).openSession();
                 session.getTransaction().begin();
                 session.save(information);
