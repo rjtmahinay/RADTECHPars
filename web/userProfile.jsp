@@ -142,22 +142,26 @@
 			<div class="table table-responsive">
 				<table class="table table-striped table-bordered table-hover">
 					<thead>
-						<th>Date</th>
-						<th>Diagnosis</th>
+						<th width="20%">Date</th>
+						<th widht="40%">Diagnosis</th>
+						<th width="40%">Comments</th>
+						
 					</thead>
 					<tbody>
 						<tr>
-							<td>09/10/1998</td>
-							<td>There were no problems found during the initial testing, patient is due for further observation</td>
+							<td>03/7/2017</td>
+							<td>sample diag</td>
+							<td>sample comment</td>
 						</tr>
 						<tr>
-							<td>09/11/1998</td>
-							<td>doge has died</td>
+							<td>03/08/2017</td>
+							<td>dog appears to be dead</td>
+							<td>further treatment unnecessary</td>
 						</tr>
 						<%--
 						<tr>
 							<!--INSERT ITERATOR HERE-->
-							<td>
+							<td></td>
 						</tr>
 						--%>
 						

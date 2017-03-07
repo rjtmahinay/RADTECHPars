@@ -69,18 +69,18 @@
 					<div class="modal-content">
 						<div class="modal-header">
 							<button type="button" class="close" data-dismiss="modal">&times;</button>
-							<h3 align="center" class="modal-title">Confirm Delete</h3>
+							<h3 align="center" class="modal-title">Appointment Complete?</h3>
 						</div>
 						<div class="modal-body">
-							<p align="center">Are you sure you want to delete this appointment?</p>
+							<p align="center">This appointment will now be removed</p>
 						</div>
 						<div class="modal-footer form-group" >
 							<div class="row">
 								<div class="col-md-6 col-sm-6">
-									<center><s:submit cssClass="btn btn-danger" value="Delete" /></center>
+									<center><s:submit cssClass="btn btn-primary btn-block" value="Continue" /></center>
 								</div>
 								<div class="col-md-6 col-sm-6">
-									<center><button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button></center>
+									<center><button type="button" class="btn btn-secondary btn-block" data-dismiss="modal">Cancel</button></center>
 								</div>
 
 							</div>
@@ -93,25 +93,25 @@
 			<div class="table-responsive">
 				<table class="table table-bordered table-hover table-striped table-inverse" align="center">
 					<thead>
-						<th>Delete</th>
-						<th>#</th>
-						<th>Date</th>
-						<th>Comments</th>
+						<th width="15%">Completion</th>
+						<th width="20%">Appointment Number</th>
+						<th width="15%">Date</th>
+						<th width="50%">Comments</th>
 					</thead>
 					<tbody>
 						<tr>
 							<td>
 								<!--<input type="hidden" name="controlnum" value="${item.control_number}" >-->         
-								<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#confirmDelete">Delete</button>
+								<button type="button" class="btn btn-success btn-block" data-toggle="modal" data-target="#confirmDelete">Completed</button>
 							</td>
 							<td>
-								1
+								201
 							</td>
 							<td>
-								sample
+								03/7/2017
 							</td>
 							<td>
-								sample
+								big black doge
 							</td>
 						</tr>	
 							

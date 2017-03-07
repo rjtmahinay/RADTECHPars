@@ -60,7 +60,7 @@
 									<label for="patientName">Pet Name</label>
 									<s:textfield name="patientName" placeholder=""/>
 								</div>
-                                                                <div class="form-group">
+																<div class="form-group">
 									<label for="color">Color</label>
 									<s:textfield name="color" placeholder=""/>
 								</div>
@@ -147,18 +147,46 @@
 
 						<s:iterator value="#session.view" var="record">
 							<tr>
-                                                                <s:url action="getRecord" var="rec">
+								<s:url action="getRecord" var="rec">
 									<s:param name="id"><s:property value="#record.controlNumber"/></s:param>
 								</s:url>
-                                                                <s:url action="toArchive" var="arc">
+								<s:url action="toArchive" var="arc">
 									<s:param name="id"><s:property value="#record.controlNumber"/></s:param>
 								</s:url>
 								<td>       
-                                                                    <s:a href="%{rec}"><button class="btn btn-block btn-primary" type="submit" name="action">Update</button></s:a>
+									<s:a href="%{rec}"><button class="btn btn-block btn-primary" type="submit" name="action">Update</button></s:a>
 								</td>
 
-								<td>        
-                                                                    <s:a href="%{arc}"><button type="button" class="btn btn-danger btn-block" data-toggle="modal">Archive</button></s:a>
+								<td>
+									<button type="button" class="btn btn-danger btn-block" data-toggle="modal" data-target="#confirmArchive">Archive</button>
+									
+								<div class="modal fade" id="confirmArchive">
+									<div class="modal-dialog modal-sm">
+										<div class="modal-content">
+											<div class="modal-header">
+												<button type="button" class="close" data-dismiss="modal">&times;</button>
+												<h3 align="center" class="modal-title">Confirm Archive</h3>
+											</div>
+											<div class="modal-body">
+												<p align="center">Are you sure you want to archive this record?</p>
+											</div>
+											<div class="modal-footer form-group" >
+												<div class="row">
+													<div class="col-md-6 col-sm-6">
+														<center><s:a href="%{arc}"><button type="button" class="btn btn-danger btn-block" data-toggle="modal">Archive</button></s:a></center>
+													</div>
+													<div class="col-md-6 col-sm-6">
+														<center><button type="button" class="btn btn-secondary btn-block" data-dismiss="modal">Cancel</button></center>
+													</div>
+
+												</div>
+											</div>
+										</div>
+
+
+									</div>
+								</div>
+									
 								</td>
 								<td><s:property value="#record.controlNumber"/> </td>
 								<td><s:property value="#record.ownerName" /></td>
@@ -178,32 +206,7 @@
 					</tbody>
 				</table>
 			</div>
-			<div class="modal fade" id="confirmArchive">
-				<div class="modal-dialog modal-sm">
-					<div class="modal-content">
-						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal">&times;</button>
-							<h3 align="center" class="modal-title">Confirm Archive</h3>
-						</div>
-						<div class="modal-body">
-							<p align="center">Are you sure you want to archive this record?</p>
-						</div>
-						<div class="modal-footer form-group" >
-							<div class="row">
-								<div class="col-md-6 col-sm-6">
-									<center><s:submit cssClass="btn btn-danger" value="Archive" /></center>
-								</div>
-								<div class="col-md-6 col-sm-6">
-									<center><button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button></center>
-								</div>
 
-							</div>
-						</div>
-					</div>
-
-
-				</div>
-			</div>    
 		</div>
 	</body>
 </html>

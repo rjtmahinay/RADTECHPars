@@ -66,8 +66,36 @@
                                                                     <s:a href="%{rec}"><button class="btn btn-block btn-primary" type="submit" name="action">Update</button></s:a>
 								</td>
 
-								<td>        
-                                                                    <s:a href="%{arc}"><button type="button" class="btn btn-danger btn-block" data-toggle="modal">Archive</button></s:a>
+								<td>
+									<button type="button" class="btn btn-danger btn-block" data-toggle="modal" data-target="#confirmArchive">Archive</button>
+									
+								<div class="modal fade" id="confirmArchive">
+									<div class="modal-dialog modal-sm">
+										<div class="modal-content">
+											<div class="modal-header">
+												<button type="button" class="close" data-dismiss="modal">&times;</button>
+												<h3 align="center" class="modal-title">Confirm Archive</h3>
+											</div>
+											<div class="modal-body">
+												<p align="center">Are you sure you want to archive this record?</p>
+											</div>
+											<div class="modal-footer form-group" >
+												<div class="row">
+													<div class="col-md-6 col-sm-6">
+														<center><s:a href="%{arc}"><button type="button" class="btn btn-danger btn-block" data-toggle="modal">Archive</button></s:a></center>
+													</div>
+													<div class="col-md-6 col-sm-6">
+														<center><button type="button" class="btn btn-secondary btn-block" data-dismiss="modal">Cancel</button></center>
+													</div>
+
+												</div>
+											</div>
+										</div>
+
+
+									</div>
+								</div>
+									
 								</td>
 								<td><s:property value="#record.controlNumber" /></td>
 								<td><s:property value="#record.ownerName" /></td>
