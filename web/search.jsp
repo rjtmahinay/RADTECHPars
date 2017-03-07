@@ -27,7 +27,7 @@
 					</div>    
 					<div class="col-md-2 col-sm-4">
 						<center>
-							<s:submit cssClass="btn btn-primary btn-sm" name="submit" value="submit"/>
+							<s:submit cssClass="btn btn-primary btn-sm btn-block" name="submit" value="submit"/>
 						</center>
 					</div>
 					<div class="col-md-3 col-sm-0"></div>
@@ -56,20 +56,20 @@
 
 					<s:iterator value="#session.search" var="record">
 						<tr>
-								<td>
-									<input type="hidden" name="controlnum" value="${item.control_number}" >         
-									<button class="btn btn-block btn-primary" type="submit" name="action" value="update1">Update</button>
-								</td>
-
-								<td>
-									<input type="hidden" name="controlnum" value="${item.control_number}" >         
-									<button class="btn btn-block btn-danger" type="submit" name="action" value="delete">Delete</button>
-								</td>
-								<s:url action="getRecord" var="rec">
+                                                                <s:url action="getRecord" var="rec">
 									<s:param name="id"><s:property value="#record.controlNumber"/></s:param>
 								</s:url>
+                                                                <s:url action="toArchive" var="arc">
+									<s:param name="id"><s:property value="#record.controlNumber"/></s:param>
+								</s:url>
+								<td>       
+                                                                    <s:a href="%{rec}"><button class="btn btn-block btn-primary" type="submit" name="action">Update</button></s:a>
+								</td>
 
-								<td><s:a href="%{rec}"> <s:property value="#record.controlNumber"/> </s:a> </td>
+								<td>        
+                                                                    <s:a href="%{arc}"><button type="button" class="btn btn-danger btn-block" data-toggle="modal">Archive</button></s:a>
+								</td>
+								<td><s:property value="#record.controlNumber" /></td>
 								<td><s:property value="#record.ownerName" /></td>
 								<td><s:property value="#record.address" /></td>
 								<td><s:property value="#record.contactNumber" /></td>
