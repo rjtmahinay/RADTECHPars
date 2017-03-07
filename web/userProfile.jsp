@@ -99,7 +99,7 @@
 									<s:textfield name="age" value="%{#session.currentRecord.age}" />
 								</td>
 							</tr>
-							<s:property value="%{#session.currentRecord.}"/>
+							
 							
 							<tr>
 								<td>

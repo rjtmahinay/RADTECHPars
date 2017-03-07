@@ -125,7 +125,7 @@
 							</td>
 						</tr>	
 							
-						<%--
+						
 							
 						<s:iterator value="#session.view" var="record">	
 						
@@ -137,7 +137,7 @@
 							<td></td>
 						</tr>
 								
-						--%>
+						
 					</tbody>
 				</table>
 			</div>

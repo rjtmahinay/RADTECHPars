@@ -34,7 +34,7 @@
 					</div>
 
 					<div class="form-group">
-						<label for="addres">Address:</label>
+						<label for="address">Address:</label>
 						<s:textfield name="address" placeholder="Enter Patient Address"/>
 					</div>
 

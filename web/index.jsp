@@ -34,68 +34,30 @@
 					<br><br><br><br>
 
 					<div class="panel panel-default">
-						<div class="panel-heading">Select action below</div>
+						<div class="panel-heading">Enter login information below</div>
 						<div class="panel-body">
 							<div id="actionTabs" class="container">
-								<ul class="nav nav-pills">    
-									<li class="active">
-										<a href="#1b" data-toggle="tab">Login</a>
-									</li>
-									<li>
-										<a href="#2b" data-toggle="tab">Sign up</a>
-									</li>
-								</ul>
-								<div class="tab-content clearfix">
-									<div class="tab-pane active" id="1b">
+								<s:actionerror/>
+								<s:form action="login" theme="bootstrap" cssClass="form">
 
-										<s:actionerror/>
-										<s:form action="login" theme="bootstrap" cssClass="form">
-
-											<br/>
-											<div class="form-group">
-												<s:textfield name="username" placeholder="Username" class="form-control" /></div>
-											<div class="form-group">  
-												<s:password name="password" placeholder="Password" class="form-control" /></div>
+									<br/>
+									<div class="form-group">
+										<label for="username">Username</label>
+										<s:textfield name="username" placeholder="Username" class="form-control" /></div>
+									<div class="form-group">
+										<label for="password">Password</label>
+										<s:password name="password" placeholder="Password" class="form-control" /></div>
 
 
-											<s:submit cssClass="btn btn-primary " value="submit" />
+									<s:submit cssClass="btn btn-primary " value="submit" />
 
 
-										</s:form>
-
-									</div> <!end of tab 1->
-									<div class="tab-pane" id="2b">
-										<s:actionerror/>
-										<s:form action="signup" theme="bootstrap" >
-
-											<br/>
-											<div class="form-group">
-												<s:textfield name="name" placeholder="Firstname" />
-											</div>
-											<div class="form-group">
-												<s:textfield name="surname" placeholder="Lastname"/>
-											</div>
-											<div class="form-group">
-												<s:textfield name="username" placeholder="Username"/>
-											</div>
-											<div class="form-group">
-												<s:password name="password" placeholder="Password"/>
-											</div>
-											<div class="form-group">
-												<s:password name="password2" placeholder="Confirm Password"/>
-											</div>
-
-											<s:submit cssClass="btn btn-primary btn" value="SIGN UP" />
-
-
-										</s:form>
-									</div>  <!end of tab2->
-								</div>      <!end of tab content->
-							</div>          <!end of tab container->
-						</div>              <!end of panel body->
-					</div>                  <!end of panel->                
-				</div>                  <!end of column-> 
-			</div>                      <!end of row->
-		</div>                          <!end of container->    
-</body>
+								</s:form>
+							</div>              <!end of panel body->
+						</div>                  <!end of panel->                
+					</div>                  <!end of column-> 
+				</div>                      <!end of row->
+			</div>                          <!end of container->
+		</div>
+	</body>
 </html>
