@@ -47,10 +47,11 @@ Contributor(s):
     <property name="hibernate.connection.username">radtech</property>
     <property name="hibernate.connection.password">@ics123</property>
     <property name="hibernate.hbm2ddl.auto">update</property>
+    <property name="hibernate.show.sql">true</property>
     <mapping class="com.radtech.Information"/>
     <mapping class="com.radtech.User"/>
     <mapping class="com.radtech.Diagnosis"/>
-    
-
+    <mapping class="com.radtech.Archive"/>
+    <mapping class="com.radtech.Appointment"/>
   </session-factory>
 </hibernate-configuration>

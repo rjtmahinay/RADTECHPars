@@ -6,18 +6,14 @@
 package com.radtech;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import org.apache.struts2.components.Date;
 
-/**
- *
- * @author Lucas
- */
+
+
 @Entity
 @Table(name="AppointmentDB")
 public class Appointment implements Serializable{
@@ -34,8 +30,8 @@ public class Appointment implements Serializable{
     public void setAppointmentNumber(long appointmentNumber) {
         this.appointmentNumber = appointmentNumber;
     }
-    @ManyToOne
-    @JoinColumn(name="CONTROL_NUMBER")
+
+    @Column(name="CONTROL_NUMBER")
     public long getControlNumber() {
         return controlNumber;
     }

@@ -1,6 +1,7 @@
 
 package com.radtech;
 
+import static com.opensymphony.xwork2.Action.SUCCESS;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 import java.util.List;
@@ -8,6 +9,7 @@ import java.util.Map;
 import org.apache.struts2.dispatcher.SessionMap;
 import org.apache.struts2.interceptor.SessionAware;
 import org.hibernate.HibernateException;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
@@ -73,6 +75,33 @@ public class InformationAction extends ActionSupport implements ModelDriven<Info
         }
         finally {
             if(session!=null) session.close();
+        }
+        return SUCCESS;
+    }
+    
+    public String toArchive(){
+        
+        Session session = null;
+        if(information!=null){
+            try {
+                session= ((SessionFactory)sessionmap.get("factory")).openSession();
+                System.out.println("Is session null? " + session==null);
+                session.getTransaction().begin();
+                Information info = (Information)session.get(Information.class, information.getId());
+                Archive arc = new Archive();
+                arc.setInformation(info);
+                session.save(arc);
+                
+                session.delete(information);
+                arc=null;
+                information=null;
+                session.getTransaction().commit();
+            }catch (HibernateException e){
+                e.printStackTrace();
+            }
+            finally{
+                if(session!=null)session.close();
+            }
         }
         return SUCCESS;
     }

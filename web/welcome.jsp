@@ -146,23 +146,21 @@
 							</tr>
 
 						<s:iterator value="#session.view" var="record">
-
-
 							<tr>
-								<td>
-									<input type="hidden" name="controlnum" value="${item.control_number}" >         
-									<button class="btn btn-block btn-primary" type="submit" name="action" value="update1">Update</button>
-								</td>
-
-								<td>
-									<input type="hidden" name="controlnum" value="${item.control_number}" >         
-									<button type="button" class="btn btn-danger btn-block" data-toggle="modal" data-target="#confirmArchive">Archive</button>
-								</td>
-								<s:url action="getRecord" var="rec">
+                                                                <s:url action="getRecord" var="rec">
 									<s:param name="id"><s:property value="#record.controlNumber"/></s:param>
 								</s:url>
+                                                                <s:url action="toArchive" var="arc">
+									<s:param name="id"><s:property value="#record.controlNumber"/></s:param>
+								</s:url>
+								<td>       
+                                                                    <s:a href="%{rec}"><button class="btn btn-block btn-primary" type="submit" name="action">Update</button></s:a>
+								</td>
 
-								<td><s:a href="%{rec}"> <s:property value="#record.controlNumber"/> </s:a> </td>
+								<td>        
+                                                                    <s:a href="%{arc}"><button type="button" class="btn btn-danger btn-block" data-toggle="modal">Archive</button></s:a>
+								</td>
+								<td><s:property value="#record.controlNumber"/> </td>
 								<td><s:property value="#record.ownerName" /></td>
 								<td><s:property value="#record.address" /></td>
 								<td><s:property value="#record.contactNumber" /></td>

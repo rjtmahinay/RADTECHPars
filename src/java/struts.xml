@@ -40,6 +40,10 @@
             <result name="input"> welcome.jsp</result>
         </action>
         
+        <action name="toArchive" class="com.radtech.InformationAction" method="toArchive">
+            <result>welcome.jsp</result>
+        </action>
+        
         
     </package>
 </struts>

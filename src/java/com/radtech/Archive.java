@@ -19,7 +19,20 @@ public class Archive implements Serializable{
     private int age;
     private String color;
     private double weight;
+    private long id;
 
+    public Archive(){}
+    public Archive(Information i){
+        setAddress(i.getAddress());
+        setControlNumber(i.getControlNumber());
+        setOwnerName(i.getOwnerName());
+        setContactNumber(i.getContactNumber());
+        setBreed(i.getBreed());
+        setSex(i.getSex());
+        setAge(i.getAge());
+        setColor(i.getColor());
+        setWeight(i.getWeight());
+    }
     @Id
     @Column(name="CONTROL_NUMBER")
     public long getControlNumber() {
@@ -110,5 +123,25 @@ public class Archive implements Serializable{
 
     public void setWeight(double weight) {
         this.weight = weight;
+    }
+    
+    public void setId(long id){
+        this.id = id;
+    }
+    
+    public long getId(){
+        return id;
+    }
+    
+    public void setInformation(Information i){
+        setAddress(i.getAddress());
+        setControlNumber(i.getControlNumber());
+        setOwnerName(i.getOwnerName());
+        setContactNumber(i.getContactNumber());
+        setBreed(i.getBreed());
+        setSex(i.getSex());
+        setAge(i.getAge());
+        setColor(i.getColor());
+        setWeight(i.getWeight());
     }
 }
