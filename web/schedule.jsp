@@ -37,9 +37,19 @@
 								<center>
 
 								<div class="form-group">
-									<label for="controlNumber">Control Number</label>
+									<label for="controlNumber">Control Number: </label>
 									<s:textfield name="controlNumber" placeholder=""/>
 								</div>
+
+                                                            <script src="js/jquery-1.12.4.js"></script>
+                                                            <script src="js/jquery-ui.js"></script>
+                                                            <script>
+                                                            $( function() {
+                                                              $( "#datepicker" ).datepicker();
+                                                            } );
+                                                            </script>
+
+                                                          <p>Date: <input type="text" id="datepicker"></p>
 								
 								<div class="form-group">
 									<%--<s:datetimepicker name="date1" label="Format (MM-dd-yyyy)" displayFormat="dd-MMM-yyyy"  />--%>
