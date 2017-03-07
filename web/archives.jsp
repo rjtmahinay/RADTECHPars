@@ -56,22 +56,16 @@
                                 
                                 
                             </tr>
-                        <%--
-                        <s:iterator value="#session.view" var="record">
-                            
+                        
+                        <s:iterator value="#session.archive" var="record">
+
                                 
                             <tr>
                                 <td>
-                                    <input type="hidden" name="controlNumber" value="" >         
+                                    <input type="hidden" name="controlNumber" value="#record.controlNumber" >         
                                     <button class="btn btn-block btn-warning" type="submit" name="action" value="restore">Restore</button>
                                 </td>
-                    
-                                
-                                <s:url action="getRecord" var="rec">
-                                    <s:param name="id"><s:property value="#record.controlNumber"/></s:param>
-                                </s:url>
-                                
-                                <td><s:a href="%{rec}"> <s:property value="#record.controlNumber"/> </s:a> </td>
+                                <td><s:property value="#record.controlNumber"/></td>
                                 <td><s:property value="#record.ownerName" /></td>
                                 <td><s:property value="#record.address" /></td>
                                 <td><s:property value="#record.contactNumber" /></td>
@@ -81,7 +75,7 @@
                                 <td><s:property value="#record.age" /></td>
                                 <td><s:property value="#record.weight" /></td>
                             </tr>
-                        </s:iterator>--%>
+                        </s:iterator>
 
                         <!-INSERT TABLE BODY HERE->
                         

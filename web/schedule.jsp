@@ -34,15 +34,9 @@
 							<h3 align="center" class="modal-title">New Appointment</h3>
 						</div>
 						<div class="modal-body">
-							<s:form action="addRecord" theme="bootstrap" cssClass="form">
+							<s:form action="addAppointment" theme="bootstrap" cssClass="form" method="POST">
 							<div class="modal-body">
 								<center>
-
-								<div class="form-group">
-									<label for="controlNumber">Control Number: </label>
-									<s:textfield name="controlNumber" placeholder=""/>
-								</div>
-
 							<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 							<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 							<script>
@@ -51,10 +45,10 @@
 							} );
 							</script>
 
-								<p>Date: <s:textfield name="date" id="datepicker" placeholder="click here to set date"/></p>
+								<p>Date: <s:textfield name="dateinput" id="datepicker" placeholder="click here to set date"/></p>
 
 								<div class="form-group">
-									<%--<s:datetimepicker name="date1" label="Format (MM-dd-yyyy)" displayFormat="dd-MMM-yyyy"  />--%>
+                                                                    <s:textarea name="comment" label="Comment:"/>
 								</div>
 
 								<div class="modal-footer form-group" >
@@ -127,9 +121,9 @@
 							</td>
 						</tr>	
 
-						<%--
+						
 
-						<s:iterator value="#session.view" var="record">	
+						<s:iterator value="#session.appointments" var="record">	
 
 						<tr>
 							<td><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#confirmDelete">Delete</button></td>
@@ -138,7 +132,7 @@
 							<td><s:property value="#record.comments" /></td>
 							<td></td>
 						</tr>
-							--%>	
+                                                </s:iterator>
 
 					</tbody>
 				</table>

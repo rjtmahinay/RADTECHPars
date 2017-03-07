@@ -43,6 +43,14 @@
         <action name="toArchive" class="com.radtech.InformationAction" method="toArchive">
             <result>welcome.jsp</result>
         </action>
+        <action name="changePassword" class="com.radtech.UserAction" method="changePassword">
+            <result>welcome.jsp</result>
+            <result name="input"> accounts.jsp</result>
+        </action>
+        <action name="addAppointment" class="com.radtech.AppointmentAction" method="addAppointment">
+            <result>userProfile.jsp</result>
+        </action>
+        
         
         
     </package>

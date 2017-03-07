@@ -34,11 +34,11 @@
 					<div class="tab-pane active" id="1b">
 
 						<s:actionerror/>
-						<s:form action="newPass" theme="bootstrap" cssClass="form">
+                                                <s:form action="changePassword" theme="bootstrap" cssClass="form" method="POST">
 
 							<br/>
 							<div class="form-group">
-								<s:password name="password1" placeholder="Current Password" class="form-control" /></div>
+								<s:password name="password" placeholder="Current Password" class="form-control" /></div>
 							<div class="form-group">  
 								<s:password name="password2" placeholder="New Password" class="form-control" /></div>
 							<div class="form-group">  
@@ -53,7 +53,7 @@
 					</div> <!end of tab 1->
 					<div class="tab-pane" id="2b">
 						<s:actionerror/>
-						<s:form action="signup" theme="bootstrap" >
+						<s:form action="signup" theme="bootstrap" method="POST">
 
 							<br/>
 							<div class="form-group">

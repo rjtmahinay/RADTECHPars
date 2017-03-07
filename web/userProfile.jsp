@@ -116,26 +116,7 @@
 					</div>
 				</div>
 
-				<div class="col-md-6 col-sm-12">
-					<br>
-					<h2>Next Appointment</h2>
-					<s:form action="addAppointment" theme="bootstrap" cssClass="form">
-
-						<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-						<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-						<script>
-						$( function() {
-						 $( "#datepicker" ).datepicker();
-						} );
-						</script>
-
-						<p>Date: <s:textfield name="date" id="datepicker" placeholder="click here to set date"/></p>
-						<s:submit cssClass="btn btn-primary" value="Add Appointment" />											
-					</s:form>	
-					
-
-
-				</div>
+				
 			</div>              <!-END OF ROW->
 			<center>
 				<s:submit value="Edit Record" cssClass="btn btn-primary"/>
@@ -144,6 +125,27 @@
 			
 			
 			</s:form>
+                        <div class="col-md-6 col-sm-12">
+					<br>
+					<h2>Next Appointment</h2>
+					<s:form action="addAppointment" theme="bootstrap" cssClass="form" method="POST">
+
+						<script src="js/jquery-1.12.4.js"></script>
+						<script src="js/jquery-ui.js"></script>
+						<script>
+						$( function() {
+						 $( "#datepicker" ).datepicker();
+						} );
+						</script>
+
+						<p>Date: <s:textfield name="date" id="datepicker" placeholder="click here to set date"/></p>
+                                                <p><s:textarea name="comment" label="Comment:"/></p>
+						<s:submit cssClass="btn btn-primary" value="Add Appointment" />											
+					</s:form>	
+					
+
+
+				</div>
 			
 			<div class="table table-responsive">
 				<table class="table table-striped table-bordered table-hover">

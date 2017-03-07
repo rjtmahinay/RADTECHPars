@@ -96,6 +96,7 @@ public class InformationAction extends ActionSupport implements ModelDriven<Info
             System.out.println(arc.toString() + " arc");
             System.out.println(info.toString() + "info");
             sessionmap.put("view", session.createQuery("from Information").list());
+            sessionmap.put("archive", session.createQuery("from Archive").list());
             tx.commit();
 
         }catch (HibernateException e){

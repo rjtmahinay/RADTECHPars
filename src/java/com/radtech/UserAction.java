@@ -5,11 +5,13 @@ import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 import java.util.List;
 import java.util.Map;
+import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.dispatcher.SessionMap;
 import org.apache.struts2.interceptor.SessionAware;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.AnnotationConfiguration;
 import org.hibernate.service.ServiceRegistry;
@@ -50,7 +52,7 @@ public class UserAction extends ActionSupport implements ModelDriven<User>, Sess
     }
     
     public void validate(){
-        if(!(getModel() instanceof User)){}
+        if(!(sessionmap.get("currentuser") instanceof User)){}
         if(sessionmap == null){}
     }
     
@@ -71,12 +73,13 @@ public class UserAction extends ActionSupport implements ModelDriven<User>, Sess
                         sessionmap.put("currentuser", user);
                         System.out.println(sessionmap.get("currentuser") == null);
                         sessionmap.put("view", (List)session.createQuery("from Information").list());
+                        sessionmap.put("archive", (List)session.createQuery("from Archive").list());
                         
                         return SUCCESS;
                     }
                     else{
                         addFieldError("password", "Username/Password doesn't match");
-                        return INPUT;
+                       return INPUT;
                     }
                 }
                 else{
@@ -97,14 +100,20 @@ public class UserAction extends ActionSupport implements ModelDriven<User>, Sess
     public String signup(){
         //Insert register logic
         Session session =null;
+        Transaction tx = null;
         user.setPassword("" + user.getPassword().hashCode());
         try {
             session= ((SessionFactory)sessionmap.get("factory")).openSession();
             User db = (User)session.get(User.class, user.getUsername());
             if(db ==null){
-                session.getTransaction().begin();
-                session.save(user);
-                session.getTransaction().commit();
+                tx.begin();
+                if(user.getPassword().equals(user.getPassword2()))
+                    session.save(user);
+                else{
+                    addFieldError("password2", "Password does not match");
+                    return INPUT;
+                }
+                tx.commit();
             }
             else {
                 addFieldError("username", "Username already Used");
@@ -112,6 +121,7 @@ public class UserAction extends ActionSupport implements ModelDriven<User>, Sess
             }
             
         }catch (HibernateException e){
+            tx.rollback();
             e.printStackTrace();
         }
         finally{
@@ -120,6 +130,51 @@ public class UserAction extends ActionSupport implements ModelDriven<User>, Sess
         return SUCCESS;
     }
     
+    
+    public String changePassword(){
+        Session session = null;
+        Transaction tx = null;
+        try{
+            session = ((SessionFactory)sessionmap.get("factory")).openSession();
+            tx = session.getTransaction();
+            tx.begin();
+            if(user.getPassword() != null & user.getPassword2() != null & user.getPassword3() != null){
+                user = (User)sessionmap.get("currentuser");
+                User current = (User)session.load(User.class, user.getUsername());
+                if(user==null | current==null){
+                    addFieldError("password3", "Internal error. Field not found");
+                    return INPUT;
+                }
+                else if(user.getPassword().equals(current.getPassword())){
+                    if(ServletActionContext.getRequest().getParameter("password2")
+                        .equals(ServletActionContext.getRequest().getParameter("password3"))){
+                        current.setPassword(ServletActionContext.getRequest().getParameter("password2").hashCode() + "");
+                        session.saveOrUpdate(current);
+                    }
+                    else{
+                        addFieldError("password3", "Password does not match");
+                        return INPUT;
+                    }
+                }
+                else{
+                    addFieldError("password", "Incorrect password");
+                    return INPUT;
+                }
+            }
+            else{
+                addFieldError("password3", "A field is left blank");
+            }
+            tx.commit();
+        }
+        catch(HibernateException e){
+            tx.rollback();
+        }
+        finally{
+            if(session!=null)session.close();
+        }
+        
+        return SUCCESS;
+    }
     public String logout(){
         sessionmap.invalidate();
 

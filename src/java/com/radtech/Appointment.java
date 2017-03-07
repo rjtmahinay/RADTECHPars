@@ -11,6 +11,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 
 
@@ -19,7 +20,7 @@ import javax.persistence.Table;
 public class Appointment implements Serializable{
     private long appointmentNumber, controlNumber;
     private Date date;
-    private String comment;
+    private String comment, dateinput;
 
     @Id
     @Column(name="APPOINTMENT_NUMBER")
@@ -55,6 +56,22 @@ public class Appointment implements Serializable{
     public void setComment(String comment) {
         this.comment = comment;
     }
+    @Transient
+    public String getDateinput() {
+        return dateinput;
+    }
+
+    public void setDateinput(String dateinput) {
+        this.dateinput = dateinput;
+    }
+
+    
+    
+    @Override
+    public String toString() {
+        return "Appointment{" + "appointmentNumber=" + appointmentNumber + ", controlNumber=" + controlNumber + ", date=" + date + ", comment=" + comment + '}';
+    }
+    
     
     
 }
