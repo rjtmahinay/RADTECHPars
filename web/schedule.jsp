@@ -1,26 +1,28 @@
 <%-- 
-    Document   : schedule
-    Created on : Mar 5, 2017, 3:43:34 PM
-    Author     : Carl
+	Document   : schedule
+	Created on : Mar 5, 2017, 3:43:34 PM
+	Author     : Carl
 --%>
 <%--<%@taglib prefix="sx" uri="/struts-dojo-tags" %>--%>
 <%@taglib prefix="s" uri="/struts-tags"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-        <head>
-                <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-                <meta name="viewport" content="width=device-width, initial-scale=1">
-                <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-                <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-                <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-                <title>Doctor's Schedule</title>
+	<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	<link rel="stylesheet" href="/resources/demos/style.css">		
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+	<title>Doctor's Schedule</title>
 	</head>
 	<body>
 		<s:include value="home.jsp"/>
 		<div class="container-fluid">
 			<h1>Current Schedule</h1>
-			
+
 			<center>
 				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#newAppointment">Add Appointment</button>
 			</center>
@@ -41,16 +43,16 @@
 									<s:textfield name="controlNumber" placeholder=""/>
 								</div>
 
-                                                            <script src="js/jquery-1.12.4.js"></script>
-                                                            <script src="js/jquery-ui.js"></script>
-                                                            <script>
-                                                            $( function() {
-                                                              $( "#datepicker" ).datepicker();
-                                                            } );
-                                                            </script>
+							<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+							<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+							<script>
+							$( function() {
+							  $( "#datepicker" ).datepicker();
+							} );
+							</script>
 
-                                                          <p>Date: <input type="text" id="datepicker"></p>
-								
+								<p>Date: <s:textfield name="date" id="datepicker" placeholder="click here to set date"/></p>
+
 								<div class="form-group">
 									<%--<s:datetimepicker name="date1" label="Format (MM-dd-yyyy)" displayFormat="dd-MMM-yyyy"  />--%>
 								</div>
@@ -65,15 +67,15 @@
 							</s:form>
 							</div>
 						</div>
-						
+
 					</div>
 				</div>
 			</div>
-			
-			
-			
-			
-			
+
+
+
+
+
 			<div class="modal fade" id="confirmDelete">
 				<div class="modal-dialog modal-sm">
 					<div class="modal-content">
@@ -124,11 +126,11 @@
 								big black doge
 							</td>
 						</tr>	
-							
-						
-							
+
+						<%--
+
 						<s:iterator value="#session.view" var="record">	
-						
+
 						<tr>
 							<td><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#confirmDelete">Delete</button></td>
 							<td><s:property value="#record.controlNumber" /></td>
@@ -136,8 +138,8 @@
 							<td><s:property value="#record.comments" /></td>
 							<td></td>
 						</tr>
-								
-						
+							--%>	
+
 					</tbody>
 				</table>
 			</div>
