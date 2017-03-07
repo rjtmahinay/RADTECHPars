@@ -12,6 +12,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 
 /**
  *
@@ -82,27 +83,28 @@ public class InformationAction extends ActionSupport implements ModelDriven<Info
     public String toArchive(){
         
         Session session = null;
-        if(information!=null){
-            try {
-                session= ((SessionFactory)sessionmap.get("factory")).openSession();
-                System.out.println("Is session null? " + session==null);
-                session.getTransaction().begin();
-                Information info = (Information)session.get(Information.class, information.getId());
-                Archive arc = new Archive();
-                arc.setInformation(info);
-                session.save(arc);
-                
-                session.delete(information);
-                arc=null;
-                information=null;
-                session.getTransaction().commit();
-            }catch (HibernateException e){
-                e.printStackTrace();
-            }
-            finally{
-                if(session!=null)session.close();
-            }
+        try {
+            session = ((SessionFactory)sessionmap.get("factory")).openSession();
+            Transaction tx = session.getTransaction();
+            tx.begin();
+            Information info = (Information)session.load(Information.class, information.getId());
+            Archive arc = new Archive();
+            arc.setInformation(info);
+            session.save(arc);
+            session.delete(info);
+            session.flush();
+            System.out.println(arc.toString() + " arc");
+            System.out.println(info.toString() + "info");
+            sessionmap.put("view", session.createQuery("from Information").list());
+            tx.commit();
+
+        }catch (HibernateException e){
+            session.getTransaction().rollback();
         }
+        finally{
+            if(session!=null)session.close();
+        }
+        
         return SUCCESS;
     }
     public String execute(){

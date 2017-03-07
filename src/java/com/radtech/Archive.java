@@ -7,7 +7,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="ARCHIVES")
+@Table(name="ARCHIVE")
 public class Archive implements Serializable{
     private long controlNumber;
     private String ownerName;
@@ -22,17 +22,6 @@ public class Archive implements Serializable{
     private long id;
 
     public Archive(){}
-    public Archive(Information i){
-        setAddress(i.getAddress());
-        setControlNumber(i.getControlNumber());
-        setOwnerName(i.getOwnerName());
-        setContactNumber(i.getContactNumber());
-        setBreed(i.getBreed());
-        setSex(i.getSex());
-        setAge(i.getAge());
-        setColor(i.getColor());
-        setWeight(i.getWeight());
-    }
     @Id
     @Column(name="CONTROL_NUMBER")
     public long getControlNumber() {
@@ -144,4 +133,11 @@ public class Archive implements Serializable{
         setColor(i.getColor());
         setWeight(i.getWeight());
     }
+
+    @Override
+    public String toString() {
+        return "Archive{" + "controlNumber=" + controlNumber + ", ownerName=" + ownerName + ", address=" + address + ", contactNumber=" + contactNumber + ", patientName=" + patientName + ", breed=" + breed + ", sex=" + sex + ", age=" + age + ", color=" + color + ", weight=" + weight + ", id=" + id + '}';
+    }
+    
+    
 }

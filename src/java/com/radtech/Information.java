@@ -179,4 +179,11 @@ public class Information implements Serializable{
     public long getId(){
         return id;
     }
+
+    @Override
+    public String toString() {
+        return "Information{" + "controlNumber=" + controlNumber + ", ownerName=" + ownerName + ", address=" + address + ", contactNumber=" + contactNumber + ", patientName=" + patientName + ", breed=" + breed + ", sex=" + sex + ", age=" + age + ", color=" + color + ", weight=" + weight + ", id=" + id + '}';
+    }
+    
+    
 }
