@@ -76,8 +76,15 @@
 								</div>
 
 								<div class="form-group">
-									<label for="age">Age</label>
-									<s:textfield name="age" placeholder=""/>
+                                                                    <script src="js/jquery-1.12.4.js"></script>
+                                                                    <script src="js/jquery-ui.js"></script>
+                                                                    <script>
+                                                                    $( function() {
+                                                                     $( "#datepicker" ).datepicker();
+                                                                    } );
+                                                                    </script>
+
+                                                                    <p>Date: <s:textfield name="dateinput" id="datepicker" placeholder="click here to set date"/></p>
 								</div>
 
 								<div class="form-group">
@@ -171,7 +178,7 @@
 								<td><s:property value="#record.patientName" /></td>
 								<td><s:property value="#record.sex" /></td>
 								<td><s:property value="#record.breed" /></td>
-								<td><s:property value="#record.age" /></td>
+                                                                <td><s:date name="#record.dateOfBirth" format="MM/dd/yyyy"/></td>
 								<td><s:property value="#record.weight" /></td>
 							</tr>
 						</s:iterator>

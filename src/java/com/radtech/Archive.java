@@ -1,6 +1,7 @@
 package com.radtech;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -16,7 +17,7 @@ public class Archive implements Serializable{
     private String patientName;
     private String breed;
     private String sex;
-    private int age;
+    private Date dateOfBirth;
     private String color;
     private double weight;
     private long id;
@@ -86,15 +87,17 @@ public class Archive implements Serializable{
     public void setSex(String sex) {
         this.sex = sex;
     }
-
-    @Column(name="AGE")
-    public int getAge() {
-        return age;
+    
+    @Column(name="DATEOFBIRTH")
+    public Date getDateOfBirth() {
+        return dateOfBirth;
     }
 
-    public void setAge(int age) {
-        this.age = age;
+    public void setDateOfBirth(Date dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
     }
+
+    
 
     @Column(name="COLOR")
     public String getColor() {
@@ -129,15 +132,8 @@ public class Archive implements Serializable{
         setContactNumber(i.getContactNumber());
         setBreed(i.getBreed());
         setSex(i.getSex());
-        setAge(i.getAge());
+        setDateOfBirth(i.getDateOfBirth());
         setColor(i.getColor());
         setWeight(i.getWeight());
     }
-
-    @Override
-    public String toString() {
-        return "Archive{" + "controlNumber=" + controlNumber + ", ownerName=" + ownerName + ", address=" + address + ", contactNumber=" + contactNumber + ", patientName=" + patientName + ", breed=" + breed + ", sex=" + sex + ", age=" + age + ", color=" + color + ", weight=" + weight + ", id=" + id + '}';
-    }
-    
-    
 }

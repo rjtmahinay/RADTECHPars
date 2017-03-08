@@ -30,6 +30,10 @@
            <result>userProfile.jsp</result>
         </action>
         
+        <action name="updateRecord" class="com.radtech.InformationAction" method="updateRecord">
+           <result>userProfile.jsp</result>
+        </action>
+        
         <action name="searchDatabase" class="com.radtech.SearchEngine" method="searchDatabase">
             <result>search.jsp</result>
             <result name="input"> search.jsp</result>

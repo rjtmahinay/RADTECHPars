@@ -4,6 +4,8 @@ package com.radtech;
 import static com.opensymphony.xwork2.Action.SUCCESS;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Map;
 import org.apache.struts2.dispatcher.SessionMap;
@@ -42,12 +44,16 @@ public class InformationAction extends ActionSupport implements ModelDriven<Info
             try {
                 session= ((SessionFactory)sessionmap.get("factory")).openSession();
                 session.getTransaction().begin();
+                SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+                information.setDateOfBirth(sdf.parse(information.getDateinput()));
                 session.save(information);
                 sessionmap.put("view", (List)session.createQuery("from Information").list());
+                session.flush();
                 information=null;
                 session.getTransaction().commit();
-            }catch (HibernateException e){
+            }catch (HibernateException | ParseException e ){
                 e.printStackTrace();
+                
             }
             finally{
                 if(session!=null)session.close();
@@ -69,7 +75,7 @@ public class InformationAction extends ActionSupport implements ModelDriven<Info
             }
             else{
                 sessionmap.put("currentRecord", info);
-                Query qry = session.createQuery("from Appointment where controlNumber = :control and adate is null and order by date" );
+                Query qry = session.createQuery("from Appointment where controlNumber = :control and adate is null order by date" );
                 qry.setParameter("control", information.getId());
                 qry.setMaxResults(1);
                 sessionmap.put("nextsched", (Appointment)qry.uniqueResult());
@@ -110,6 +116,53 @@ public class InformationAction extends ActionSupport implements ModelDriven<Info
             if(session!=null)session.close();
         }
         
+        return SUCCESS;
+    }
+    
+    public String updateRecord(){
+        Session session = null;
+        Transaction tx= null;
+        try{
+            session = ((SessionFactory)sessionmap.get("factory")).openSession();
+            tx = session.getTransaction();
+            tx.begin();
+            
+            Information info = (Information)session.get(Information.class, ((Information)sessionmap.get("currentRecord")).getControlNumber());
+            information.setControlNumber(info.getControlNumber());
+            
+            SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+            information.setDateOfBirth(sdf.parse(information.getDateinput()));
+            if(info.getDateOfBirth().compareTo(information.getDateOfBirth()) != 0){
+                System.out.println(info.getDateOfBirth().compareTo(sdf.parse(information.getDateinput())) + " compareto");
+                information.setDateOfBirth(sdf.parse(information.getDateinput()));
+            }
+            if(information == null){
+                System.out.println("Says info is null");
+                tx.rollback();
+                information = null;
+                session.close();
+                return INPUT;
+            }
+            else {
+                System.out.println("Information " + information.toString());
+                System.out.println("Info " + info.toString());
+                System.out.println("Before saving");
+                session.merge(information);
+                information=null;
+            }
+            sessionmap.put("currentRecord", info);
+            sessionmap.put("view", session.createQuery("from Information").list());
+            System.out.println("I am out");
+            session.flush();
+            tx.commit();
+        }
+        catch(HibernateException | ParseException e){
+            tx.rollback();
+            e.printStackTrace();
+        }
+        finally{
+            if(session!=null)session.close();
+        }
         return SUCCESS;
     }
     public String execute(){

@@ -22,7 +22,7 @@
 
 		<div class="container-fluid">
 			
-			<s:form action="" theme="bootstrap" cssClass="form">
+			<s:form action="updateRecord" theme="bootstrap" cssClass="form" method="POST">
 			
 				<div class="row">
 				<div class="col-md-6 col-sm-12">
@@ -80,7 +80,9 @@
 									Sex:
 								</td>
 								<td>
-									<s:textfield name="sex" value="%{#session.currentRecord.sex}" />
+									<label for="sex">Sex</label>
+                                                                        <s:select cssClass="text text-block" name="sex" list="{'Male','Female'}" headerKey="%{#session.currentRecord.sex}" 
+                                                                                  headerValue="%{#session.currentRecord.sex}"/>
 								</td>
 							</tr>
 							
@@ -98,7 +100,17 @@
 									Age:
 								</td>
 								<td>
-									<s:textfield name="age" value="%{#session.currentRecord.age}" />
+                                                                    <script src="js/jquery-1.12.4.js"></script>
+                                                                    <script src="js/jquery-ui.js"></script>
+                                                                    <script>
+                                                                    $( function() {
+                                                                     $( "#datepicker" ).datepicker();
+                                                                    } );
+                                                                    </script>
+
+                                                                    <p>Date of Birth: 
+                                                                        <td/>                                                                        <td/>  
+                                                                        <s:textfield name="dateinput" id="datepicker" value="%{#session.currentRecord.dateOfBirth}" placeholder="click here to set date"/></p>
 								</td>
 							</tr>
 							
