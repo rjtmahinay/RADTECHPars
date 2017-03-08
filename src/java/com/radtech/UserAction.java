@@ -74,6 +74,7 @@ public class UserAction extends ActionSupport implements ModelDriven<User>, Sess
                         System.out.println(sessionmap.get("currentuser") == null);
                         sessionmap.put("view", (List)session.createQuery("from Information").list());
                         sessionmap.put("archive", (List)session.createQuery("from Archive").list());
+                        sessionmap.put("appointments", (List)session.createQuery("from Appointment where adate is null order by date").list());
                         
                         return SUCCESS;
                     }
@@ -102,30 +103,34 @@ public class UserAction extends ActionSupport implements ModelDriven<User>, Sess
         Session session =null;
         Transaction tx = null;
         user.setPassword("" + user.getPassword().hashCode());
-        try {
-            session= ((SessionFactory)sessionmap.get("factory")).openSession();
-            User db = (User)session.get(User.class, user.getUsername());
-            if(db ==null){
-                tx.begin();
-                if(user.getPassword().equals(user.getPassword2()))
-                    session.save(user);
-                else{
-                    addFieldError("password2", "Password does not match");
+        if(user!=null){
+            try {
+                session= ((SessionFactory)sessionmap.get("factory")).openSession();
+                User db = (User)session.get(User.class, user.getUsername());
+                if(db ==null){
+                    tx.begin();
+                    if(user.getPassword().equals(user.getPassword2())){
+                        session.save(user);
+                        user=null;
+                    }
+                    else{
+                        addFieldError("password2", "Password does not match");
+                        return INPUT;
+                    }
+                    tx.commit();
+                }
+                else {
+                    addFieldError("username", "Username already Used");
                     return INPUT;
                 }
-                tx.commit();
+
+            }catch (HibernateException e){
+                tx.rollback();
+                e.printStackTrace();
             }
-            else {
-                addFieldError("username", "Username already Used");
-                return INPUT;
+            finally{
+                if(session!=null)session.close();
             }
-            
-        }catch (HibernateException e){
-            tx.rollback();
-            e.printStackTrace();
-        }
-        finally{
-            if(session!=null)session.close();
         }
         return SUCCESS;
     }
@@ -150,6 +155,7 @@ public class UserAction extends ActionSupport implements ModelDriven<User>, Sess
                         .equals(ServletActionContext.getRequest().getParameter("password3"))){
                         current.setPassword(ServletActionContext.getRequest().getParameter("password2").hashCode() + "");
                         session.saveOrUpdate(current);
+                        current=null;
                     }
                     else{
                         addFieldError("password3", "Password does not match");

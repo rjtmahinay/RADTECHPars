@@ -9,6 +9,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 import org.apache.struts2.dispatcher.SessionMap;
 import org.apache.struts2.interceptor.SessionAware;
@@ -38,29 +39,58 @@ public class AppointmentAction extends ActionSupport implements ModelDriven<Appo
     public String addAppointment(){
         Session session = null;
         Transaction tx = null;
-        try{
-            SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
-            String str = app.getDateinput();
-            Date date = null;
-            date = formatter.parse(str.trim());
-            app.setDate(date);
-            app.setControlNumber(((Information)sessionmap.get("currentRecord")).getControlNumber());
-            System.out.println(app.toString());
-            session = ((SessionFactory)sessionmap.get("factory")).openSession();
-            tx = session.getTransaction();
-            tx.begin();
-            session.save(app);
-            sessionmap.put("appointments", session.createQuery("from Appointment").list());
-            tx.commit();
+        if(app!=null){
+            try{
+                SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
+                String str = app.getDateinput();
+                Date date = null;
+                date = formatter.parse(str.trim());
+                app.setDate(date);
+                app.setControlNumber(((Information)sessionmap.get("currentRecord")).getControlNumber());
+                System.out.println(app.toString());
+                session = ((SessionFactory)sessionmap.get("factory")).openSession();
+                tx = session.getTransaction();
+                tx.begin();
+                session.save(app);
+                app=null;
+                sessionmap.put("appointments", session.createQuery("from Appointment").list());
+                tx.commit();
+            }
+            catch(HibernateException e){
+                if(tx != null)tx.rollback();
+            }
+            catch(ParseException e){
+                System.out.println("Cannot parse");
+            }
+            finally{
+                if(session!= null) session.close();
+            }
         }
-        catch(HibernateException e){
-            if(tx != null)tx.rollback();
-        }
-        catch(ParseException e){
-            System.out.println("Cannot parse");
-        }
-        finally{
-            if(session!= null) session.close();
+        return SUCCESS;
+    }
+    
+    public String accomplishAppointment(){
+        Session session = null;
+        Transaction tx = null;
+        if(app!= null){
+            try{
+                session = ((SessionFactory)sessionmap.get("factory")).openSession();
+                tx = session.getTransaction();
+                tx.begin();
+                Appointment appon = (Appointment)session.load(Appointment.class,app.getAppointmentNumber());
+                appon.setAdate(new java.util.Date());
+                session.update(appon);
+                sessionmap.put("appointments", (List)session.createQuery("from Appointment where adate is null order by date").list());
+                appon=null;
+                app=null;
+                tx.commit();
+            }
+            catch(HibernateException e){
+                tx.rollback();
+            }
+            finally{
+                if(session!=null)session.close();
+            }        
         }
         return SUCCESS;
     }

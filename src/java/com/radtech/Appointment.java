@@ -21,7 +21,7 @@ import javax.persistence.Transient;
 @Table(name="AppointmentDB")
 public class Appointment implements Serializable{
     private long appointmentNumber, controlNumber;
-    private Date date;
+    private Date date, adate;
     private String comment, dateinput;
 
     @Id
@@ -66,6 +66,14 @@ public class Appointment implements Serializable{
 
     public void setDateinput(String dateinput) {
         this.dateinput = dateinput;
+    }
+    @Column(name="ACCOMPLISHED_DATE")
+    public Date getAdate() {
+        return adate;
+    }
+
+    public void setAdate(Date adate) {
+        this.adate = adate;
     }
 
     

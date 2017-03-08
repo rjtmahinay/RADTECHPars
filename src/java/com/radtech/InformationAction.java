@@ -69,7 +69,7 @@ public class InformationAction extends ActionSupport implements ModelDriven<Info
             }
             else{
                 sessionmap.put("currentRecord", info);
-                Query qry = session.createQuery("from Appointment where controlNumber = :control order by date" );
+                Query qry = session.createQuery("from Appointment where controlNumber = :control and adate is null and order by date" );
                 qry.setParameter("control", information.getId());
                 qry.setMaxResults(1);
                 sessionmap.put("nextsched", (Appointment)qry.uniqueResult());

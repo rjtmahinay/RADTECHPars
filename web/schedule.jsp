@@ -33,68 +33,9 @@
 							<button type="button" class="close" data-dismiss="modal">&times;</button>
 							<h3 align="center" class="modal-title">New Appointment</h3>
 						</div>
-						<div class="modal-body">
-							<s:form action="addAppointment" theme="bootstrap" cssClass="form" method="POST">
-							<div class="modal-body">
-								<center>
-							<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-							<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-							<script>
-							$( function() {
-							  $( "#datepicker" ).datepicker();
-							} );
-							</script>
-
-								<p>Date: <s:textfield name="dateinput" id="datepicker" placeholder="click here to set date"/></p>
-
-								<div class="form-group">
-                                                                    <s:textarea name="comment" label="Comment:"/>
-								</div>
-
-								<div class="modal-footer form-group" >
-									<center>
-									<s:submit cssClass="btn btn-primary btn-block" value="Add Appointment" />
-									<s:reset value="clear" cssClass="btn btn-secondary btn-block"/>
-									</center>
-								</div>
-								</center>
-							</s:form>
-							</div>
-						</div>
-
 					</div>
 				</div>
 			</div>
-
-
-
-
-
-			<div class="modal fade" id="confirmDelete">
-				<div class="modal-dialog modal-sm">
-					<div class="modal-content">
-						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal">&times;</button>
-							<h3 align="center" class="modal-title">Appointment Complete?</h3>
-						</div>
-						<div class="modal-body">
-							<p align="center">This appointment will now be removed</p>
-						</div>
-						<div class="modal-footer form-group" >
-							<div class="row">
-								<div class="col-md-6 col-sm-6">
-									<center><s:submit cssClass="btn btn-primary btn-block" value="Continue" /></center>
-								</div>
-								<div class="col-md-6 col-sm-6">
-									<center><button type="button" class="btn btn-secondary btn-block" data-dismiss="modal">Cancel</button></center>
-								</div>
-
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-
 
 			<div class="table-responsive">
 				<table class="table table-bordered table-hover table-striped table-inverse" align="center">
@@ -124,12 +65,39 @@
 						
 
 						<s:iterator value="#session.appointments" var="record">	
-
+                                                    <s:url value="accomplishAppointment" var="adate">
+                                                        <s:param name="appointmentNumber" value="#record.appointmentNumber"/>
+                                                    </s:url>
 						<tr>
-							<td><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#confirmDelete">Delete</button></td>
+                                                    
+                                                        <td><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#confirmDelete" >Delete</button></td>
+                                                        <div class="modal fade" id="confirmDelete">
+                                                            <div class="modal-dialog modal-sm">
+                                                                    <div class="modal-content">
+                                                                            <div class="modal-header">
+                                                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                                                <h3 align="center" class="modal-title">Appointment Complete?</h3>
+                                                                            </div>
+                                                                            <div class="modal-body">
+                                                                                    <p align="center">This appointment will now be removed</p>
+                                                                            </div>
+                                                                            <div class="modal-footer form-group" >
+                                                                                    <div class="row">
+                                                                                            <div class="col-md-6 col-sm-6">
+                                                                                                <s:a href="%{adate}"><center><s:submit type="button" cssClass="btn btn-primary btn-block" value="Continue" /></center></s:a>
+                                                                                            </div>
+                                                                                            <div class="col-md-6 col-sm-6">
+                                                                                                    <center><button type="button" class="btn btn-secondary btn-block" data-dismiss="modal">Cancel</button></center>
+                                                                                            </div>
+
+                                                                                    </div>
+                                                                            </div>
+                                                                    </div>
+                                                            </div>
+                                                    </div>
 							<td><s:property value="#record.controlNumber" /></td>
 							<td><s:property value="#record.date" /></td>
-							<td><s:property value="#record.comments" /></td>
+							<td><s:property value="#record.comment" /></td>
 							<td></td>
 						</tr>
                                                 </s:iterator>
