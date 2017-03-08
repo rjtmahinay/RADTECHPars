@@ -53,7 +53,33 @@
 
 
 								</s:form>
-							</div>              <!end of panel body->
+								<s:form action="signup" theme="bootstrap" method="POST">
+
+							<br/>
+							<div class="form-group">
+								<s:textfield name="name" placeholder="Firstname" />
+							</div>
+							<div class="form-group">
+								<s:textfield name="surname" placeholder="Lastname"/>
+							</div>
+							<div class="form-group">
+								<s:textfield name="username" placeholder="Username"/>
+							</div>
+							<div class="form-group">
+								<s:password name="password" placeholder="Password"/>
+							</div>
+							<div class="form-group">
+								<s:password name="password2" placeholder="Confirm Password"/>
+							</div>
+
+							<s:submit cssClass="btn btn-primary btn" value="SIGN UP" />
+
+
+						</s:form>
+							
+							</div>
+								
+								<!end of panel body->
 						</div>                  <!end of panel->                
 					</div>                  <!end of column-> 
 				</div>                      <!end of row->
