@@ -50,7 +50,9 @@
         <action name="addAppointment" class="com.radtech.AppointmentAction" method="addAppointment">
             <result>userProfile.jsp</result>
         </action>
-        
+        <action name="editRecord" class="com.radtech.AppointmentAction">
+            <result>userProfile.jsp</result>
+        </action>
         
         
     </package>

@@ -6,6 +6,8 @@ import com.opensymphony.xwork2.ModelDriven;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.Map;
 import org.apache.struts2.dispatcher.SessionMap;
@@ -37,8 +39,10 @@ public class AppointmentAction extends ActionSupport implements ModelDriven<Appo
         Session session = null;
         Transaction tx = null;
         try{
-            DateFormat dateFormat = new SimpleDateFormat("mm/dd/yyyy HH:mm:ss");
-            Date date = dateFormat.parse(app.getDateinput());
+            SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
+            String str = app.getDateinput();
+            Date date = null;
+            date = formatter.parse(str.trim());
             app.setDate(date);
             app.setControlNumber(((Information)sessionmap.get("currentRecord")).getControlNumber());
             System.out.println(app.toString());
@@ -49,8 +53,11 @@ public class AppointmentAction extends ActionSupport implements ModelDriven<Appo
             sessionmap.put("appointments", session.createQuery("from Appointment").list());
             tx.commit();
         }
-        catch(HibernateException | ParseException e){
+        catch(HibernateException e){
             if(tx != null)tx.rollback();
+        }
+        catch(ParseException e){
+            System.out.println("Cannot parse");
         }
         finally{
             if(session!= null) session.close();

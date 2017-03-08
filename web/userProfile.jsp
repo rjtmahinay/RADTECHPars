@@ -22,7 +22,7 @@
 
 		<div class="container-fluid">
 			
-			<s:form action="editRecord" theme="bootstrap" cssClass="form">
+			<s:form action="" theme="bootstrap" cssClass="form">
 			
 				<div class="row">
 				<div class="col-md-6 col-sm-12">
@@ -114,22 +114,16 @@
 							
 						</table>
 					</div>
-				</div>
-
-				
-			</div>              <!-END OF ROW->
-			<center>
+                            <center>
 				<s:submit value="Edit Record" cssClass="btn btn-primary"/>
 				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#diagnoWindow">&plus; Diagnosis</button>
-			</center>
-			
-			
+                            </center>
 			</s:form>
-                        <div class="col-md-6 col-sm-12">
+				</div>
+				<div class="col-md-6 col-sm-12">
 					<br>
-					<h2>Next Appointment</h2>
+                                        <h2>Next Appointment: <s:date name="#session.nextsched.date" format="MM/dd/yyyy"/></h2>
 					<s:form action="addAppointment" theme="bootstrap" cssClass="form" method="POST">
-
 						<script src="js/jquery-1.12.4.js"></script>
 						<script src="js/jquery-ui.js"></script>
 						<script>
@@ -138,14 +132,13 @@
 						} );
 						</script>
 
-						<p>Date: <s:textfield name="date" id="datepicker" placeholder="click here to set date"/></p>
+						<p>Date: <s:textfield name="dateinput" id="datepicker" placeholder="click here to set date"/></p>
                                                 <p><s:textarea name="comment" label="Comment:"/></p>
 						<s:submit cssClass="btn btn-primary" value="Add Appointment" />											
 					</s:form>	
-					
-
-
 				</div>
+			</div>              <!-END OF ROW->
+			
 			
 			<div class="table table-responsive">
 				<table class="table table-striped table-bordered table-hover">
