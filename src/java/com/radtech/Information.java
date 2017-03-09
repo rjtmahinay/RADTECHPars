@@ -7,11 +7,15 @@ package com.radtech;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -30,6 +34,7 @@ public class Information implements Serializable{
     private double weight;
     private long id;
     private String dateinput;
+    public List<Diagnosis> diagnosis;
     public Information() {
     }
     @Column(name="BREED")
@@ -186,6 +191,16 @@ public class Information implements Serializable{
         this.dateinput = dateinput;
     }
 
+    @OneToMany(targetEntity = Diagnosis.class, mappedBy = "info", 
+            cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    public List<Diagnosis> getDiagnosis() {
+        return diagnosis;
+    }
+
+    public void setDiagnosis(List<Diagnosis> diagnosis) {
+        this.diagnosis = diagnosis;
+    }
+    
     @Override
     public String toString() {
         return "Information{" + "controlNumber=" + controlNumber + ", ownerName=" + ownerName + ", address=" + address + ", contactNumber=" + contactNumber + ", patientName=" + patientName + ", breed=" + breed + ", dateOfBirth=" + dateOfBirth + ", sex=" + sex + ", color=" + color + ", weight=" + weight + ", id=" + id + ", dateinput=" + dateinput + '}';

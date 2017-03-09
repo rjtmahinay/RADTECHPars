@@ -2,6 +2,7 @@
 package com.radtech;
 
 import static com.opensymphony.xwork2.Action.SUCCESS;
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 import java.text.ParseException;
@@ -67,7 +68,7 @@ public class InformationAction extends ActionSupport implements ModelDriven<Info
         try{
             session = ((SessionFactory)sessionmap.get("factory")).openSession();
             
-            Information info = (Information)session.get(Information.class, information.getId());
+            Information info = (Information)session.load(Information.class, information.getId());
             System.out.println("Owner name is " + info.getOwnerName());
             if(info == null){
                 addActionError("Record is not found");
@@ -75,10 +76,14 @@ public class InformationAction extends ActionSupport implements ModelDriven<Info
             }
             else{
                 sessionmap.put("currentRecord", info);
+                System.out.println("Inside sessionmap putting");
                 Query qry = session.createQuery("from Appointment where controlNumber = :control and adate is null order by date" );
                 qry.setParameter("control", information.getId());
                 qry.setMaxResults(1);
+                System.out.println("--Will put it in");
                 sessionmap.put("nextsched", (Appointment)qry.uniqueResult());
+                sessionmap.put("currentDiag", info.getDiagnosis());
+                ActionContext.getContext().getValueStack().push(info);
             }
         }
         catch(HibernateException e){

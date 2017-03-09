@@ -6,6 +6,7 @@
     <!-- Configuration for the default package. -->
     <constant name="struts.devMode" value="false" />
     <constant name="struts.ui.theme" value="bootstrap" />
+    <constant name="struts.ognl.allowStaticMethodAccess" value="true"/> 
     <package name="default" extends="struts-default">
         
         <action name="login" class="com.radtech.UserAction" method="login">
@@ -58,6 +59,10 @@
         <action name="accomplishAppointment" class="com.radtech.AppointmentAction" method="accomplishAppointment">
             <result>schedule.jsp</result>
             <result name="input">schedule.jsp</result>
+        </action>
+        <action name="addDiagnosis" class="com.radtech.DiagnosisAction" method="addDiagnosis">
+            <result>userProfile.jsp</result>
+            <result name="input">userProfile.jsp</result>
         </action>
         
         

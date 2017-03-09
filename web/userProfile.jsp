@@ -136,14 +136,6 @@
 					<br>
                                         <h2>Next Appointment: <s:date name="#session.nextsched.date" format="MM/dd/yyyy"/></h2>
 					<s:form action="addAppointment" theme="bootstrap" cssClass="form" method="POST">
-						<script src="js/jquery-1.12.4.js"></script>
-						<script src="js/jquery-ui.js"></script>
-						<script>
-						$( function() {
-						 $( "#datepicker" ).datepicker();
-						} );
-						</script>
-
 						<p>Date: <s:textfield name="dateinput" id="datepicker" placeholder="click here to set date"/></p>
                                                 <p><s:textarea name="comment" label="Comment:"/></p>
 						<s:submit cssClass="btn btn-primary" value="Add Appointment" />											
@@ -164,19 +156,16 @@
 						<tr>
 							<td>03/7/2017</td>
 							<td>sample diag</td>
-							<td>sample comment</td>
 						</tr>
 						<tr>
 							<td>03/08/2017</td>
-							<td>dog appears to be dead</td>
-							<td>further treatment unnecessary</td>
+							<td>dog appears to be dead</td
 						</tr>
-						<%--
-						<tr>
-							<!--INSERT ITERATOR HERE-->
-							<td></td>
-						</tr>
-						--%>
+                                                
+                                                <s:iterator value="%{info.diagnosis}" var="diag">
+                                                    <s:param value="diagnosis"/>
+                                                </s:iterator>
+                                        
 						
 					</tbody>
 				</table>
@@ -192,17 +181,14 @@
 							<button type="button" class="close" data-dismiss="modal">&times;</button>
 							<h3 class="modal-title">Add Diagnosis</h3>
 						</div>
-
-						<s:form action="addDiagnosis" theme="bootstrap" cssClass="form">
+						<s:form action="addDiagnosis" theme="bootstrap" cssClass="form" method="POST">
+                                                    <s:hidden name="id" value="%{#session.currentRecord.controlNumber}"/>
 							<div class="modal-body">
 								<div class="form-group">
-									<s:textarea label="Diagnosis" name="diagnosis" cols="80" rows="4" class="form-control" />
+									<s:textarea label="Diagnosis" name="diagnosis" cols="70" rows="4" class="form-control" />
 								</div>
 
-								<div class="form-group"> 
-									<s:textarea label="Comments" name="comments" cols="80" rows="3" class="form-control"/>
 
-								</div>
 								<div class="modal-footer form-group" >
 
 									<s:submit cssClass="btn btn-primary btn-block" value="Add Diagnosis" />
