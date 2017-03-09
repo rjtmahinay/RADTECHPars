@@ -88,6 +88,7 @@ revenueChart.render();
 </script>
     </head>
     <body>
+        <s:include value="home.jsp"/>
         <h1>Animal Station statistics!</h1>
     </body>
     <body>

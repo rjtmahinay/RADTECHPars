@@ -5,6 +5,7 @@ import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -123,11 +124,13 @@ public class AppointmentAction extends ActionSupport implements ModelDriven<Appo
     public void tallyMonths(){
         //where MONTH(so.date) = MONTH(:date);
         System.out.println("Inside tally month");
-        SimpleDateFormat sdf = new SimpleDateFormat("MM");
+        SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
         Session session = null;
         try{
             session = ((SessionFactory)sessionmap.get("factory")).openSession();
             System.out.println("Session opened!");
+            java.time.LocalDateTime now = java.time.LocalDateTime.now();
+            int year = now.getYear();
             for(int i=0; i<12; i++){
                 //scores[i];
 //                Criteria criteria = session.createCriteria(Appointment.class);
@@ -137,9 +140,18 @@ public class AppointmentAction extends ActionSupport implements ModelDriven<Appo
 //                }
 //                else criteria.add(Restrictions.lt("date", sdf.parse(i+2+"")));
 //                List list = criteria.list();
-                Query qry = session.createQuery("from Appointment");
                 
-                List list = qry.list();
+                java.util.Calendar cal = java.util.Calendar.getInstance();
+                cal.setTime(sdf.parse(i+1+"/01/" + year));
+                Date inTime = cal.getTime();
+                System.out.println(inTime);
+                cal.add(Calendar.MONTH, 1);
+                cal.add(Calendar.DATE, -1);
+                Date outTime = cal.getTime();
+                System.out.println(outTime);
+                Criteria crit = session.createCriteria(Appointment.class);
+                crit.add(Restrictions.between("date", inTime, outTime));
+                List list = crit.list();
                 if(list == null) scores[i] = 0;
                 else scores[i] = list.size();
                 
@@ -147,7 +159,7 @@ public class AppointmentAction extends ActionSupport implements ModelDriven<Appo
             }
             sessionmap.put("scores", scores);
         }
-        catch(HibernateException e){
+        catch(HibernateException | ParseException e){
             System.out.println("Something happened midway...");
             e.printStackTrace();
         }
