@@ -28,6 +28,9 @@
 						<li>
 							<a href="#2b" data-toggle="tab">Create New User</a>
 						</li>
+						<li>
+							<a href="#3b" data-toggle="tab">Additional Security</a>
+						</li>
 					</ul>
 				</center>	
 				<div class="tab-content clearfix">
@@ -72,11 +75,35 @@
 								<s:password name="password2" placeholder="Confirm Password"/>
 							</div>
 
-							<s:submit cssClass="btn btn-primary btn" value="SIGN UP" />
+							<s:submit cssClass="btn btn-primary btn" value="sign up" />
 
 
 						</s:form>
-					</div>  
+					</div>
+						
+					<div class="tab-pane" id="3b">
+						
+						
+						<!--WALA PANG ACTION-->
+						<br>
+						
+						<s:form action="" theme="bootstrap" method="POST">
+						<div class="form-group">
+							
+							<s:textfield name="secretQuestion" placeholder="Enter secret question here" />
+						</div>
+						<div class="form-group">
+						
+							<s:password name="answer" placeholder="Enter answer here" />
+						</div>
+						<div class="form-group">
+							
+							<s:password name="password" placeholder="Enter password" />
+						</div>
+						<s:submit cssClass="btn btn-primary" value="submit" />
+						</s:form>
+					</div>
+						
 				</div>
 			</div>
 		</div>			

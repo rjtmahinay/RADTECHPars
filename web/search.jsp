@@ -47,7 +47,7 @@
 						<th>Pet Name</th>
 						<th>Sex</th>
 						<th>Breed</th>
-						<th>Age</th>
+						<th>Date of birth</th>
 						<th>Weight</th>
 					</tr>
 				</thead>

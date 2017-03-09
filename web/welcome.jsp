@@ -12,8 +12,11 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+		<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+		<link rel="stylesheet" href="/resources/demos/style.css">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+		
 
 		<title>Welcome To Radtech PARS</title>
 	</head>
@@ -76,15 +79,20 @@
 								</div>
 
 								<div class="form-group">
-                                                                    <script src="js/jquery-1.12.4.js"></script>
-                                                                    <script src="js/jquery-ui.js"></script>
-                                                                    <script>
-                                                                    $( function() {
-                                                                     $( "#adddate" ).datepicker();
-                                                                    } );
-                                                                    </script>
+									<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+									<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+									<script>
+									$( function() {
+									  $( "#datepicker" ).datepicker({
+										  minDate: -7300,
+										changeMonth: true,
+										changeYear: true
+									  });
+									} );
+									</script>
 
-                                                                    <p>Date: <s:textfield name="dateinput" id="adddate" placeholder="click here to set date"/></p>
+									<label for="date">Date of birth</label>
+									<s:textfield name="dateinput" id="datepicker" placeholder="click here to set date"/>
 								</div>
 
 								<div class="form-group">
@@ -123,7 +131,7 @@
 							<th>Pet Name</th>
 							<th>Sex</th>
 							<th>Breed</th>
-							<th>Age</th>
+							<th>Date of Birth</th>
 							<th>Weight</th>
 						</tr>
 					</thead>
@@ -178,7 +186,7 @@
 								<td><s:property value="#record.patientName" /></td>
 								<td><s:property value="#record.sex" /></td>
 								<td><s:property value="#record.breed" /></td>
-                                                                <td><s:date name="#record.dateOfBirth" format="MM/dd/yyyy"/></td>
+								<td><s:date name="#record.dateOfBirth" format="MM/dd/yyyy"/></td>
 								<td><s:property value="#record.weight" /></td>
 							</tr>
 						</s:iterator>
