@@ -25,38 +25,86 @@
 
 		<div class="container">
 			<div class="row">
-				<div class="col-md-9 col-sm-0">
+				<div class="col col-md-9">
 					<br><br><br><br>
 					<h1>Animal Station And Veterinary Clinic</h1>
 					<h2>by RadTech</h2>
 				</div>
-				<div class="col-md-3 col-sm-12">
+				<div class="col col-md-3">
 					<br><br><br><br>
-
+					
 					<div class="panel panel-default">
-						<div class="panel-heading">Enter login information below</div>
+					
+						<div class="panel-heading"><center>Enter login information below</center></div>
 						<div class="panel-body">
-							<div id="actionTabs" class="container">
+							<center>
 								<s:actionerror/>
 								<s:form action="login" theme="bootstrap" cssClass="form">
 
-									<br/>
+									<br>
 									<div class="form-group">
 										<label for="username">Username</label>
-										<s:textfield name="username" placeholder="Username" class="form-control" /></div>
+										<s:textfield name="username" placeholder="Username" class="form-control" />
+									</div>
 									<div class="form-group">
 										<label for="password">Password</label>
-										<s:password name="password" placeholder="Password" class="form-control" /></div>
-									<s:submit cssClass="btn btn-primary " value="submit" />
+										<s:password name="password" placeholder="Password" class="form-control" />
+									</div>
+									
+									<s:submit cssClass="btn btn-primary btn-block" value="submit" />
 								</s:form>
-								
-							</div>
-								
+								<button type="button" class="btn btn-secondary btn-block" data-toggle="modal" data-target="#forgotPass" >Forgot password?</button>
+							</center>
 								<!end of panel body->
 						</div>                  <!end of panel->                
-					</div>                  <!end of column-> 
-				</div>                      <!end of row->
-			</div>                          <!end of container->
-		</div>
+					
+					</div>
+				
+				
+				
+				</div>
+			</div>					
+		</div>				
+						
+						
+						
+						<div class="modal fade" id="forgotPass">
+							<div class="modal-dialog modal-sm">
+								<div class="modal-content">
+									
+									<center>
+									<div class="modal-header">
+										<button type="button" class="close" data-dismiss="modal">&times;</button>
+										<h3 class="modal-title">Forgot Password</h3>
+									</div>
+									<s:form action="forgotPassword" theme="bootstrap" cssClass="form" method="POST">
+										
+										<div class="modal-body">
+											<div class="form-group">
+												<s:textfield label="Username" name="username" class="form-control" />
+											</div>
+
+
+											<div class="modal-footer form-group" >
+
+												<s:submit cssClass="btn btn-primary btn-block" value="Submit" />
+											
+											</div>
+										</div>
+									</s:form>
+									</center>
+								</div>
+							</div>
+						</div>
+					
+					
+					
+					
+					
+					
+					                  <!end of column-> 
+				                      <!end of row->
+			                          <!end of container->
+		
 	</body>
 </html>
