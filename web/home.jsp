@@ -42,7 +42,8 @@
 				<li><a href="search.jsp">Search</a></li>
 				<li><a href="schedule.jsp">Schedule</a></li>
 				<li><a href="archives.jsp">Archives</a></li>
-				<li><a href="#">Statistics</a></li>
+                                <s:url action="statistics" var="stat"/>
+				<li><s:a href="statistics">Statistics</s:a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<li><a href="accounts.jsp"><span class="glyphicon glyphicon-cog"></span> <s:property value="%{#session.currentuser.name}"/></a></li>

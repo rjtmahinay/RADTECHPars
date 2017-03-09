@@ -65,7 +65,9 @@
             <result>userProfile.jsp</result>
             <result name="input">userProfile.jsp</result>
         </action>
-        
+        <action name="statistics" class="com.radtech.AppointmentAction" method="statistics">
+            <result>statistics.jsp</result>
+        </action>
         
     </package>
 </struts>

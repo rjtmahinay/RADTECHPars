@@ -3,26 +3,28 @@ package com.radtech;
 
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import org.apache.struts2.dispatcher.SessionMap;
 import org.apache.struts2.interceptor.SessionAware;
+import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Restrictions;
+import org.json.simple.JSONObject;
 
 
 public class AppointmentAction extends ActionSupport implements ModelDriven<Appointment>, SessionAware{
     Appointment app = new Appointment();
     SessionMap sessionmap;
+    JSONObject json = new JSONObject();
+    int[] scores = new int[12];
     
     @Override
     public Appointment getModel(){
@@ -99,6 +101,7 @@ public class AppointmentAction extends ActionSupport implements ModelDriven<Appo
         }
         return SUCCESS;
     }
+    
     public void setSchedule(Information source){
         if(source.getAppointments()!= null){
             source.setNextAppointment(null);
@@ -110,5 +113,47 @@ public class AppointmentAction extends ActionSupport implements ModelDriven<Appo
                 }
             }
         }
+    }
+    
+    public String statistics(){
+        tallyMonths();
+        
+        return SUCCESS;
+    }
+    public void tallyMonths(){
+        //where MONTH(so.date) = MONTH(:date);
+        System.out.println("Inside tally month");
+        SimpleDateFormat sdf = new SimpleDateFormat("MM");
+        Session session = null;
+        try{
+            session = ((SessionFactory)sessionmap.get("factory")).openSession();
+            System.out.println("Session opened!");
+            for(int i=0; i<12; i++){
+                //scores[i];
+//                Criteria criteria = session.createCriteria(Appointment.class);
+//                criteria.add(Restrictions.ge("date", sdf.parse(i+1+""))); 
+//                if(i==11){
+//                    criteria.add(Restrictions.lt("date", sdf.parse(i+1+"")));
+//                }
+//                else criteria.add(Restrictions.lt("date", sdf.parse(i+2+"")));
+//                List list = criteria.list();
+                Query qry = session.createQuery("from Appointment");
+                
+                List list = qry.list();
+                if(list == null) scores[i] = 0;
+                else scores[i] = list.size();
+                
+                System.out.println(i + " scores is " + scores[i]);
+            }
+            sessionmap.put("scores", scores);
+        }
+        catch(HibernateException e){
+            System.out.println("Something happened midway...");
+            e.printStackTrace();
+        }
+        finally{
+            if(session!=null)session.close();
+        }
+        
     }
 }
