@@ -15,7 +15,7 @@
 
 					<div class="col-md-2 col-sm-4">
 						<center>
-                                                    <s:select name="searchType" list="{'Control Number', 'Address', 'Age', 'Breed', 'Color', 'Contact Number', 'Owner Name', 'Patient Name', 'Sex', 'Weight'}" 
+                                                    <s:select name="searchType" list="{'Control Number', 'Address', 'Date of Birth', 'Breed', 'Color', 'Contact Number', 'Owner Name', 'Patient Name', 'Sex', 'Weight'}" 
                                                               headerKey="-1" headerValue="Select Search Type"/>
 						</center>
 					</div>
@@ -104,7 +104,7 @@
 								<td><s:property value="#record.patientName" /></td>
 								<td><s:property value="#record.sex" /></td>
 								<td><s:property value="#record.breed" /></td>
-								<td><s:property value="#record.age" /></td>
+								<td><s:property value="#record.dateOfBirth" /></td>
 								<td><s:property value="#record.weight" /></td>
 							</tr>
 						</s:iterator>

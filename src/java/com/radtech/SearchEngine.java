@@ -1,6 +1,8 @@
 package com.radtech;
 
 import com.opensymphony.xwork2.ActionSupport;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Map;
 import org.apache.struts2.convention.annotation.Action;
@@ -53,7 +55,7 @@ public class SearchEngine extends ActionSupport implements SessionAware{
             case "Patient Name" : return "patientName";
             case "Breed" : return "breed";
             case "Sex" : return "sex";
-            case "Age" : return "age";
+            case "Date of Birth" : return "dateOfBirth";
             case "Color" : return "color";
             case "Weight" : return "weight";
             default: break;
@@ -88,10 +90,14 @@ public class SearchEngine extends ActionSupport implements SessionAware{
             try{
                 switch(getSearchType()){
                     case "contactNumber" : query = session.createQuery("from Information where contactNumber = " + Integer.parseInt(getSearchInput())); break;
-                    case "age": query = session.createQuery("from Information where age = " + Integer.parseInt(getSearchInput())); break;
+                    case "age": query = session.createQuery("from Information where dateOfBirth = :dob"); 
+                    SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+                    query.setParameter("dob", sdf.parse(getSearchInput()));
+                    break;
                     case "controlNumber": query = session.createQuery("from Information where controlNumber = " + Long.parseLong(getSearchInput())); break;
                     case "weight": query = session.createQuery("from Information where weight = " + Double.parseDouble(getSearchInput())); break;
-                    case "sex": query = session.createQuery("from Information where sex = " + getSearchInput()); break;
+                    case "sex": query = session.createQuery("from Information where sex = :sex"); 
+                    query.setParameter("sex", getSearchInput()); break;
                     default: Criteria crit = session.createCriteria(Information.class);
                             crit.add(Restrictions.ilike(getSearchType(), '%' + getSearchInput() +'%'));
                             records = crit.list();
@@ -99,6 +105,9 @@ public class SearchEngine extends ActionSupport implements SessionAware{
             }
             catch(NumberFormatException e) {
                 throw new NumberFormatException("Invalid input on field");
+            }
+            catch(ParseException e){
+                e.printStackTrace();
             }
             if(records ==null) records = query.list();
             tx.commit();

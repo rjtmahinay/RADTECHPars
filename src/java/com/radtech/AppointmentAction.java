@@ -59,7 +59,7 @@ public class AppointmentAction extends ActionSupport implements ModelDriven<Appo
                 sessionmap.put("currentRecord", info);
                 info=null;
                 app=null;
-                sessionmap.put("appointments", session.createQuery("from Appointment").list());
+                sessionmap.put("appointments", session.createQuery("from Appointment where adate is null order by date").list());
                 tx.commit();
             }
             catch(HibernateException e){
@@ -101,6 +101,7 @@ public class AppointmentAction extends ActionSupport implements ModelDriven<Appo
     }
     public void setSchedule(Information source){
         if(source.getAppointments()!= null){
+            source.setNextAppointment(null);
             forwhile:
             for(Appointment a: source.getAppointments()){
                 if(a.getAdate()== null){

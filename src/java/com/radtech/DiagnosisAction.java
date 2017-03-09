@@ -49,13 +49,8 @@ public class DiagnosisAction extends ActionSupport implements ModelDriven<Diagno
             model.setControlNumber(Long.parseLong(model.getId()));
             Information info = (Information)session.load(Information.class, model.getControlNumber());
             model.setInformation(info);
-            if(info.getDiagnosis()!= null){
-                for(Object o: info.getDiagnosis()){
-                    System.out.println(o.toString());
-                }
-            }
-            System.out.println("CUrrent diagnosis is " + model.toString());
             session.save(model);  
+            sessionmap.put("currentRecord", info);
             model=null;
             tx.commit();
         }

@@ -74,7 +74,7 @@ public class UserAction extends ActionSupport implements ModelDriven<User>, Sess
                         System.out.println(sessionmap.get("currentuser") == null);
                         sessionmap.put("view", (List)session.createQuery("from Information").list());
                         sessionmap.put("archive", (List)session.createQuery("from Archive").list());
-                        sessionmap.put("appointments", (List)session.createQuery("from Appointment where adate is null order by date").list());
+                        sessionmap.put("appointments", session.createQuery("from Appointment where adate is null order by date").list());
                         
                         return SUCCESS;
                     }

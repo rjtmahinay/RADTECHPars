@@ -84,6 +84,7 @@ public class InformationAction extends ActionSupport implements ModelDriven<Info
                 return INPUT;
             }
             else{
+                setSchedule(information);
                 sessionmap.put("currentRecord", information);
                 sessionmap.put("currentDiag", information.getDiagnosis());
             }
@@ -175,4 +176,16 @@ public class InformationAction extends ActionSupport implements ModelDriven<Info
     public String execute(){
         return SUCCESS;
     }  
+    public void setSchedule(Information source){
+        if(source.getAppointments()!= null){
+            source.setNextAppointment(null);
+            forwhile:
+            for(Appointment a: source.getAppointments()){
+                if(a.getAdate()== null){
+                    source.setNextAppointment(a.getDate());
+                    break forwhile;
+                }
+            }
+        }
+    }
 }
