@@ -14,6 +14,7 @@ import java.util.Map;
 import org.apache.struts2.dispatcher.SessionMap;
 import org.apache.struts2.interceptor.SessionAware;
 import org.hibernate.HibernateException;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -46,12 +47,21 @@ public class AppointmentAction extends ActionSupport implements ModelDriven<Appo
                 Date date = null;
                 date = formatter.parse(str.trim());
                 app.setDate(date);
-                app.setControlNumber(((Information)sessionmap.get("currentRecord")).getControlNumber());
-                System.out.println(app.toString());
                 session = ((SessionFactory)sessionmap.get("factory")).openSession();
                 tx = session.getTransaction();
                 tx.begin();
+                System.out.println(app.getId());
+                Information info = (Information)session.load(Information.class, ((Information)sessionmap.get("currentRecord")).getControlNumber());
+                app.setInfo(info);
                 session.save(app);
+                forwhile:
+                for(Object o: info.getAppointments()){
+                    Appointment appoint = (Appointment)o;
+                    if(appoint.getAdate()== null){
+                        sessionmap.put("nextsched", appoint);
+                        break forwhile;
+                    }
+                }
                 app=null;
                 sessionmap.put("appointments", session.createQuery("from Appointment").list());
                 tx.commit();
@@ -77,11 +87,10 @@ public class AppointmentAction extends ActionSupport implements ModelDriven<Appo
                 session = ((SessionFactory)sessionmap.get("factory")).openSession();
                 tx = session.getTransaction();
                 tx.begin();
-                Appointment appon = (Appointment)session.load(Appointment.class,app.getAppointmentNumber());
-                appon.setAdate(new java.util.Date());
-                session.update(appon);
+                app = (Appointment)session.load(Appointment.class, app.getAppointmentNumber());
+                app.setAdate(new java.util.Date());
+                session.merge(app);
                 sessionmap.put("appointments", (List)session.createQuery("from Appointment where adate is null order by date").list());
-                appon=null;
                 app=null;
                 tx.commit();
             }

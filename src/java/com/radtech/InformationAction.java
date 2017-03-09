@@ -68,22 +68,23 @@ public class InformationAction extends ActionSupport implements ModelDriven<Info
         try{
             session = ((SessionFactory)sessionmap.get("factory")).openSession();
             
-            Information info = (Information)session.load(Information.class, information.getId());
-            System.out.println("Owner name is " + info.getOwnerName());
-            if(info == null){
+            information = (Information)session.load(Information.class, information.getId());
+            information.setNextAppointment();
+            System.out.println("Owner name is " + information.getOwnerName());
+            if(information == null){
                 addActionError("Record is not found");
                 return INPUT;
             }
             else{
-                sessionmap.put("currentRecord", info);
-                System.out.println("Inside sessionmap putting");
-                Query qry = session.createQuery("from Appointment where controlNumber = :control and adate is null order by date" );
-                qry.setParameter("control", information.getId());
-                qry.setMaxResults(1);
-                System.out.println("--Will put it in");
-                sessionmap.put("nextsched", (Appointment)qry.uniqueResult());
-                sessionmap.put("currentDiag", info.getDiagnosis());
-                ActionContext.getContext().getValueStack().push(info);
+                sessionmap.put("currentRecord", information);
+                forwhile:
+                for(Appointment ap: information.getAppointments()){
+                    if(ap!= null & ap.getAdate()==null){
+                        sessionmap.put("currentDiag", ap);
+                        break forwhile;
+                    }
+                }
+                sessionmap.put("currentDiag", information.getDiagnosis());
             }
         }
         catch(HibernateException e){

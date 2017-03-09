@@ -103,11 +103,15 @@
                                                                     <script src="js/jquery-1.12.4.js"></script>
                                                                     <script src="js/jquery-ui.js"></script>
                                                                     <script>
-                                                                    $( function() {
-                                                                     $( "#datepicker" ).datepicker();
-                                                                    } );
+                                                                        $( function() {
+                                                                         $( "#datepicker" ).datepicker();
+                                                                        } );
                                                                     </script>
-
+                                                                    <script>
+                                                                        $( function() {
+                                                                         $( "#apppicker" ).datepicker();
+                                                                        } );
+                                                                    </script>
                                                                     <p>Date of Birth: 
                                                                         <td/>                                                                        <td/>  
                                                                         <s:textfield name="dateinput" id="datepicker" value="%{#session.currentRecord.dateOfBirth}" placeholder="click here to set date"/></p>
@@ -134,10 +138,15 @@
 				</div>
 				<div class="col-md-6 col-sm-12">
 					<br>
-                                        <h2>Next Appointment: <s:date name="#session.nextsched.date" format="MM/dd/yyyy"/></h2>
+                                        <h2>Next Appointment: 
+                                            <s:if test="%{#action.information.nextAppointment not null}">
+                                                <s:date name="%{#action.information.nextAppointment.date}" format="MM/dd/yyy"/>
+                                                
+                                            </s:if></h2>
 					<s:form action="addAppointment" theme="bootstrap" cssClass="form" method="POST">
-						<p>Date: <s:textfield name="dateinput" id="datepicker" placeholder="click here to set date"/></p>
-                                                <p><s:textarea name="comment" label="Comment:"/></p>
+                                            <s:hidden name="id" value="%{#session.currentRecord.controlNumber}"/>
+						<p>Date: <s:textfield name="dateinput" id="apppicker" placeholder="click here to set date"/></p>
+                                                <p><s:textarea name="comment" label="Description:"/></p>
 						<s:submit cssClass="btn btn-primary" value="Add Appointment" />											
 					</s:form>	
 				</div>
@@ -153,6 +162,14 @@
 						
 					</thead>
 					<tbody>
+                                            
+                                                <s:iterator value="%{#session.currentRecord.diagnosis}" var="diag">
+                                                    <tr>
+                                                        <td><s:date name="dateDiagnosed" format="MM/dd/yyyy"/></td>
+                                                        <td><s:property value="%{#diag.diagnosis}"/></td>
+                                                    </tr>
+                                                </s:iterator>
+                                            
 						<tr>
 							<td>03/7/2017</td>
 							<td>sample diag</td>
@@ -162,9 +179,7 @@
 							<td>dog appears to be dead</td
 						</tr>
                                                 
-                                                <s:iterator value="%{info.diagnosis}" var="diag">
-                                                    <s:param value="diagnosis"/>
-                                                </s:iterator>
+                                                
                                         
 						
 					</tbody>

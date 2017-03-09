@@ -16,6 +16,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -35,6 +36,8 @@ public class Information implements Serializable{
     private long id;
     private String dateinput;
     public List<Diagnosis> diagnosis;
+    private List<Appointment> appointments;
+    private Appointment nextAppointment;
     public Information() {
     }
     @Column(name="BREED")
@@ -201,6 +204,32 @@ public class Information implements Serializable{
         this.diagnosis = diagnosis;
     }
     
+    @OneToMany(targetEntity = Appointment.class, mappedBy="info",
+            cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OrderBy("date")
+    public List<Appointment> getAppointments() {
+        return appointments;
+    }
+
+    public void setAppointments(List<Appointment> appointments) {
+        this.appointments = appointments;
+    }
+    
+    public void setNextAppointment(){
+        forwhile:
+        for(Appointment app: getAppointments()){
+            if(app!=null & app.getAdate() == null){
+                System.out.println(app.getDate());
+                nextAppointment= app;
+                break forwhile;
+            }
+        }
+    }
+    @Transient
+    public Appointment getNextAppointment(){
+        setNextAppointment();
+        return nextAppointment;
+    }
     @Override
     public String toString() {
         return "Information{" + "controlNumber=" + controlNumber + ", ownerName=" + ownerName + ", address=" + address + ", contactNumber=" + contactNumber + ", patientName=" + patientName + ", breed=" + breed + ", dateOfBirth=" + dateOfBirth + ", sex=" + sex + ", color=" + color + ", weight=" + weight + ", id=" + id + ", dateinput=" + dateinput + '}';

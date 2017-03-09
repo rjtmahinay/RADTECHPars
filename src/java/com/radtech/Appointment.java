@@ -12,6 +12,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -20,10 +22,12 @@ import javax.persistence.Transient;
 @Entity
 @Table(name="AppointmentDB")
 public class Appointment implements Serializable{
-    private long appointmentNumber, controlNumber;
+    private long appointmentNumber;
     private Date date, adate;
     private String comment, dateinput;
-
+    private Information info;
+    private long id;
+    
     @Id
     @Column(name="APPOINTMENT_NUMBER")
     @GeneratedValue(strategy=GenerationType.AUTO)
@@ -33,15 +37,6 @@ public class Appointment implements Serializable{
 
     public void setAppointmentNumber(long appointmentNumber) {
         this.appointmentNumber = appointmentNumber;
-    }
-
-    @Column(name="CONTROL_NUMBER")
-    public long getControlNumber() {
-        return controlNumber;
-    }
-
-    public void setControlNumber(long controlNumber) {
-        this.controlNumber = controlNumber;
     }
     @Column(name="DATE")
     public Date getDate() {
@@ -75,14 +70,25 @@ public class Appointment implements Serializable{
     public void setAdate(Date adate) {
         this.adate = adate;
     }
-
     
-    
-    @Override
-    public String toString() {
-        return "Appointment{" + "appointmentNumber=" + appointmentNumber + ", controlNumber=" + controlNumber + ", date=" + date + ", comment=" + comment + '}';
+    @ManyToOne
+    @JoinColumn(name="APPOINT_PK")
+    public Information getInfo() {
+        return info;
     }
-    
+
+    public void setInfo(Information info) {
+        this.info = info;
+    }
+
+    @Transient
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
     
     
 }

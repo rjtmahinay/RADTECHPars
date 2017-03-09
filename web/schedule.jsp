@@ -95,7 +95,7 @@
                                                                     </div>
                                                             </div>
                                                     </div>
-							<td><s:property value="#record.controlNumber" /></td>
+							<td><s:property value="#record.info.petName" /></td>
 							<td><s:property value="#record.date" /></td>
 							<td><s:property value="#record.comment" /></td>
 							<td></td>
