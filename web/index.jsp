@@ -63,48 +63,41 @@
 				
 				
 				</div>
-			</div>					
+			</div>
+								
 		</div>				
 						
 						
 						
-						<div class="modal fade" id="forgotPass">
-							<div class="modal-dialog modal-sm">
-								<div class="modal-content">
-									
-									<center>
-									<div class="modal-header">
-										<button type="button" class="close" data-dismiss="modal">&times;</button>
-										<h3 class="modal-title">Forgot Password</h3>
-									</div>
-									<s:form action="forgotPassword" theme="bootstrap" cssClass="form" method="POST">
-										
-										<div class="modal-body">
-											<div class="form-group">
-												<s:textfield label="Username" name="username" class="form-control" />
-											</div>
+		<div class="modal fade" id="forgotPass">
+			<div class="modal-dialog modal-sm">
+				<div class="modal-content">
+
+					<center>
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h3 class="modal-title">Forgot Password</h3>
+					</div>
+					<s:form action="forgotPassword" theme="bootstrap" cssClass="form" method="POST">
+
+						<div class="modal-body">
+							<div class="form-group">
+								<s:textfield label="Username" name="username" class="form-control" />
+							</div>
 
 
-											<div class="modal-footer form-group" >
+							<div class="modal-footer form-group" >
 
-												<s:submit cssClass="btn btn-primary btn-block" value="Submit" />
-											
-											</div>
-										</div>
-									</s:form>
-									</center>
-								</div>
+								<s:submit cssClass="btn btn-primary btn-block" value="Submit" />
+
 							</div>
 						</div>
-					
-					
-					
-					
-					
-					
-					                  <!end of column-> 
-				                      <!end of row->
-			                          <!end of container->
-		
+					</s:form>
+					</center>
+				</div>
+			</div>
+		</div>
+								
+								
 	</body>
 </html>
