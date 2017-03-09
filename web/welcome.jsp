@@ -38,7 +38,7 @@
 							<!-INSERT FORM ACTION HERE->
 
 
-						<s:form action="addRecord" theme="bootstrap" cssClass="form">
+						<s:form action="addRecord" theme="bootstrap" cssClass="form" method="POST">
 							<div class="modal-body">
 
 								<div class="form-group">
@@ -80,11 +80,11 @@
                                                                     <script src="js/jquery-ui.js"></script>
                                                                     <script>
                                                                     $( function() {
-                                                                     $( "#datepicker" ).datepicker();
+                                                                     $( "#adddate" ).datepicker();
                                                                     } );
                                                                     </script>
 
-                                                                    <p>Date: <s:textfield name="dateinput" id="datepicker" placeholder="click here to set date"/></p>
+                                                                    <p>Date: <s:textfield name="dateinput" id="adddate" placeholder="click here to set date"/></p>
 								</div>
 
 								<div class="form-group">

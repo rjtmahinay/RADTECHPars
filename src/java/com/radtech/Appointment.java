@@ -25,7 +25,7 @@ public class Appointment implements Serializable{
     private long appointmentNumber;
     private Date date, adate;
     private String comment, dateinput;
-    private Information info;
+    private Information information;
     private long id;
     
     @Id
@@ -73,12 +73,12 @@ public class Appointment implements Serializable{
     
     @ManyToOne
     @JoinColumn(name="APPOINT_PK")
-    public Information getInfo() {
-        return info;
+    public Information getInformation() {
+        return information;
     }
 
-    public void setInfo(Information info) {
-        this.info = info;
+    public void setInformation(Information information) {
+        this.information = information;
     }
 
     @Transient

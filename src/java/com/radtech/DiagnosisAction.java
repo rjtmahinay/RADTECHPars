@@ -48,7 +48,7 @@ public class DiagnosisAction extends ActionSupport implements ModelDriven<Diagno
             model.setDateDiagnosed(date);
             model.setControlNumber(Long.parseLong(model.getId()));
             Information info = (Information)session.load(Information.class, model.getControlNumber());
-            model.setInfo(info);
+            model.setInformation(info);
             if(info.getDiagnosis()!= null){
                 for(Object o: info.getDiagnosis()){
                     System.out.println(o.toString());

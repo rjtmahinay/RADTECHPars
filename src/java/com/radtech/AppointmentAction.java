@@ -50,18 +50,14 @@ public class AppointmentAction extends ActionSupport implements ModelDriven<Appo
                 session = ((SessionFactory)sessionmap.get("factory")).openSession();
                 tx = session.getTransaction();
                 tx.begin();
-                System.out.println(app.getId());
+                
                 Information info = (Information)session.load(Information.class, ((Information)sessionmap.get("currentRecord")).getControlNumber());
-                app.setInfo(info);
+                app.setInformation(info);
                 session.save(app);
-                forwhile:
-                for(Object o: info.getAppointments()){
-                    Appointment appoint = (Appointment)o;
-                    if(appoint.getAdate()== null){
-                        sessionmap.put("nextsched", appoint);
-                        break forwhile;
-                    }
-                }
+                setSchedule(info);
+                session.merge(info);
+                sessionmap.put("currentRecord", info);
+                info=null;
                 app=null;
                 sessionmap.put("appointments", session.createQuery("from Appointment").list());
                 tx.commit();
@@ -102,5 +98,16 @@ public class AppointmentAction extends ActionSupport implements ModelDriven<Appo
             }        
         }
         return SUCCESS;
+    }
+    public void setSchedule(Information source){
+        if(source.getAppointments()!= null){
+            forwhile:
+            for(Appointment a: source.getAppointments()){
+                if(a.getAdate()== null){
+                    source.setNextAppointment(a.getDate());
+                    break forwhile;
+                }
+            }
+        }
     }
 }

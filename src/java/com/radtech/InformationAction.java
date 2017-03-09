@@ -41,24 +41,33 @@ public class InformationAction extends ActionSupport implements ModelDriven<Info
     
     public String add(){
         Session session = null;
+        Transaction tx = null;
         if(information!=null){
             try {
                 session= ((SessionFactory)sessionmap.get("factory")).openSession();
-                session.getTransaction().begin();
+                tx = session.getTransaction();
+                tx.begin();
                 SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
                 information.setDateOfBirth(sdf.parse(information.getDateinput()));
+                setInformation(information);
                 session.save(information);
                 sessionmap.put("view", (List)session.createQuery("from Information").list());
                 session.flush();
                 information=null;
-                session.getTransaction().commit();
+                tx.commit();
             }catch (HibernateException | ParseException e ){
                 e.printStackTrace();
+                tx.rollback();
                 
             }
             finally{
                 if(session!=null)session.close();
             }
+        }
+        else{
+            System.out.println("MISSING INFORMATION");
+            addFieldError("ownerName", "Returned with error");
+            return INPUT;
         }
         return SUCCESS;
     }
@@ -69,21 +78,13 @@ public class InformationAction extends ActionSupport implements ModelDriven<Info
             session = ((SessionFactory)sessionmap.get("factory")).openSession();
             
             information = (Information)session.load(Information.class, information.getId());
-            information.setNextAppointment();
-            System.out.println("Owner name is " + information.getOwnerName());
+            
             if(information == null){
                 addActionError("Record is not found");
                 return INPUT;
             }
             else{
                 sessionmap.put("currentRecord", information);
-                forwhile:
-                for(Appointment ap: information.getAppointments()){
-                    if(ap!= null & ap.getAdate()==null){
-                        sessionmap.put("currentDiag", ap);
-                        break forwhile;
-                    }
-                }
                 sessionmap.put("currentDiag", information.getDiagnosis());
             }
         }
@@ -173,5 +174,5 @@ public class InformationAction extends ActionSupport implements ModelDriven<Info
     }
     public String execute(){
         return SUCCESS;
-    }
+    }  
 }

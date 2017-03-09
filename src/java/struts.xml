@@ -25,6 +25,7 @@
 
         <action name="addRecord" class="com.radtech.InformationAction" method="add">
            <result>welcome.jsp</result>
+           <result  name="input">welcome.jsp</result>
         </action>
         
         <action name="getRecord" class="com.radtech.InformationAction" method="get">

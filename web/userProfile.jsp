@@ -139,14 +139,12 @@
 				<div class="col-md-6 col-sm-12">
 					<br>
                                         <h2>Next Appointment: 
-                                            <s:if test="%{#action.information.nextAppointment not null}">
-                                                <s:date name="%{#action.information.nextAppointment.date}" format="MM/dd/yyy"/>
-                                                
-                                            </s:if></h2>
+                                            <s:date name="%{#session.currentRecord.nextAppointment}" format="MM/dd/yyy"/>
+</h2>
 					<s:form action="addAppointment" theme="bootstrap" cssClass="form" method="POST">
                                             <s:hidden name="id" value="%{#session.currentRecord.controlNumber}"/>
-						<p>Date: <s:textfield name="dateinput" id="apppicker" placeholder="click here to set date"/></p>
-                                                <p><s:textarea name="comment" label="Description:"/></p>
+						<p>Date: <s:textfield name="dateinput" id="apppicker" value="" placeholder="click here to set date"/></p>
+                                                <p><s:textarea name="comment" label="Description:" value=""/></p>
 						<s:submit cssClass="btn btn-primary" value="Add Appointment" />											
 					</s:form>	
 				</div>

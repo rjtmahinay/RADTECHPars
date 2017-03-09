@@ -37,7 +37,7 @@ public class Information implements Serializable{
     private String dateinput;
     public List<Diagnosis> diagnosis;
     private List<Appointment> appointments;
-    private Appointment nextAppointment;
+    private Date nextAppointment;
     public Information() {
     }
     @Column(name="BREED")
@@ -194,7 +194,7 @@ public class Information implements Serializable{
         this.dateinput = dateinput;
     }
 
-    @OneToMany(targetEntity = Diagnosis.class, mappedBy = "info", 
+    @OneToMany(targetEntity = Diagnosis.class, mappedBy = "information", 
             cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     public List<Diagnosis> getDiagnosis() {
         return diagnosis;
@@ -204,7 +204,7 @@ public class Information implements Serializable{
         this.diagnosis = diagnosis;
     }
     
-    @OneToMany(targetEntity = Appointment.class, mappedBy="info",
+    @OneToMany(targetEntity = Appointment.class, mappedBy="information",
             cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @OrderBy("date")
     public List<Appointment> getAppointments() {
@@ -214,22 +214,18 @@ public class Information implements Serializable{
     public void setAppointments(List<Appointment> appointments) {
         this.appointments = appointments;
     }
-    
-    public void setNextAppointment(){
-        forwhile:
-        for(Appointment app: getAppointments()){
-            if(app!=null & app.getAdate() == null){
-                System.out.println(app.getDate());
-                nextAppointment= app;
-                break forwhile;
-            }
-        }
-    }
-    @Transient
-    public Appointment getNextAppointment(){
-        setNextAppointment();
+
+    @Column(name="NEXT_APPOINTMENT")
+    public Date getNextAppointment() {
         return nextAppointment;
     }
+
+    public void setNextAppointment(Date nextAppointment) {
+        this.nextAppointment = nextAppointment;
+    }
+    
+    
+    
     @Override
     public String toString() {
         return "Information{" + "controlNumber=" + controlNumber + ", ownerName=" + ownerName + ", address=" + address + ", contactNumber=" + contactNumber + ", patientName=" + patientName + ", breed=" + breed + ", dateOfBirth=" + dateOfBirth + ", sex=" + sex + ", color=" + color + ", weight=" + weight + ", id=" + id + ", dateinput=" + dateinput + '}';

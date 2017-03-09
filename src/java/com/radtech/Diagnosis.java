@@ -30,7 +30,7 @@ public class Diagnosis implements Serializable{
     private long controlNumber;
     private Date dateDiagnosed;
     private String diagnosis, id;
-    public Information info;
+    public Information information;
     
     @Id
     @Column(name="DIAGNOSIS_NUMBER")
@@ -45,12 +45,12 @@ public class Diagnosis implements Serializable{
 
     @ManyToOne
     @JoinColumn(name="INFO_DIAG")
-    public Information getInfo() {
-        return info;
+    public Information getInformation() {
+        return information;
     }
 
-    public void setInfo(Information info) {
-        this.info = info;
+    public void setInformation(Information information) {
+        this.information = information;
     }
     @Column(name = "CONTROL_NUMBER")
     public long getControlNumber() {
