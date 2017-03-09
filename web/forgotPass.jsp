@@ -20,19 +20,23 @@
 	<body>
 		<div class="container">
 			<h1>Forgot Password</h1>
-			
+		
 			<!--NO ACTION YET-->
 			
-			<s:form action="" theme="bootstrap" cssClass="form">
+				<s:form action="" theme="bootstrap" cssClass="form">
 				
-				<!--ITERATOR VALUE AND PROPERTY VALUES -->
+				<!--EMPTY PA YUNG LIST-->
 				
-				<s:iterator value="#" var=""/>
-				<h3>Secret Question: <s:property value="%{#}" /></h3>
-				<s:textfield name="secretAnswer" placeholder="Enter Answer Here" />
+				
+				<h3>Secret Question: </h3>
+				<s:select name="secretQuestions" list="{'sample1', 'sample2'}" headerKey="-1" headerValue="Select Secret Question" />
+				
+				<s:password name="secretAnswer" placeholder="Enter Answer Here" />
 				<s:submit cssClass="btn btn-primary" value="Submit" />
-				
-			</s:form>	
+				</s:form>
+		
+		
+
 		</div>
 	</body>
 </html>
