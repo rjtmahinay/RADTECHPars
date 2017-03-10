@@ -80,6 +80,10 @@
             <result>accounts.jsp</result>
             <result name="input">index.jsp</result>
         </action>
+        <action name="resetPass" class="com.radtech.SecurityQuestionAction" method="resetPassword">
+            <result>index.jsp</result>
+            <result name="input">forgotPass.jsp</result>
+        </action>
         
         
     </package>

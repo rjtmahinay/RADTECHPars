@@ -3,6 +3,7 @@ package com.radtech;
 
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import org.apache.struts2.ServletActionContext;
@@ -55,8 +56,6 @@ public class UserAction extends ActionSupport implements ModelDriven<User>, Sess
     }
     
     public void validate(){
-        if(!(sessionmap.get("currentUser") instanceof User)){}
-        if(sessionmap == null){}
     }
     
     public String login(){
@@ -64,6 +63,7 @@ public class UserAction extends ActionSupport implements ModelDriven<User>, Sess
         Session session =null;
         user.setPassword("" + user.getPassword().hashCode());
         try {
+            System.out.println("Inside login try");
             session= ((SessionFactory)sessionmap.get("factory")).openSession();
             User db = (User)session.load(User.class, user.getUsername());
             if(db == null){
@@ -77,7 +77,11 @@ public class UserAction extends ActionSupport implements ModelDriven<User>, Sess
                         sessionmap.put("view", (List)session.createQuery("from Information").list());
                         sessionmap.put("archive", (List)session.createQuery("from Archive").list());
                         sessionmap.put("appointments", session.createQuery("from Appointment where adate is null order by date").list());
-                        return SUCCESS;
+                        if(sessionmap.get("tempPassword")!= null){
+                            sessionmap.remove("tempPassword");
+                            return "temp";
+                        }
+                        else return SUCCESS;
                     }
                     else{
                         addFieldError("password", "Username/Password doesn't match");
@@ -202,9 +206,12 @@ public class UserAction extends ActionSupport implements ModelDriven<User>, Sess
                 
                 else{
                     user = (User)session.load(User.class, user.getUsername());
+                    List questions = new ArrayList();
                     for(SecurityQuestion sq : user.getSQuestions()){
                         System.out.println(sq.getQuestion());
+                        questions.add(sq.getQuestion());
                     }
+                    sessionmap.put("tempUser", user);
                     return SUCCESS;
                 }
             }

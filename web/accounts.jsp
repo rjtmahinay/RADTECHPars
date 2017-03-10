@@ -21,9 +21,6 @@
 			<h1>Manage Accounts</h1>
                         <tr>
                             <td>Currently saved Security Questions</td>
-                            <script>
-                                alert('<s:property value="%{#session.currentUser.name}"/>');
-                            </script>
                         </tr>
 			<div id="actionTabs" class="container-fluid">
 				<center>
@@ -47,6 +44,7 @@
 
 							<br/>
 							<div class="form-group">
+                                                            <s:hidden name="username" value="%{#session.currentUser.username}"/>
 								<s:password name="password" placeholder="Current Password" class="form-control" /></div>
 							<div class="form-group">  
 								<s:password name="password2" placeholder="New Password" class="form-control" /></div>

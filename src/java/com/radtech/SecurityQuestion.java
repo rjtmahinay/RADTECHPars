@@ -45,7 +45,7 @@ public class SecurityQuestion implements Serializable{
     }
 
     public void setAnswer(String answer) {
-        this.answer = answer.toLowerCase().trim().hashCode() + "";
+        this.answer = answer;
     }
 
     

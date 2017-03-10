@@ -29,8 +29,8 @@
 				
 				
 				<h3>Secret Question: </h3>
-                                <s:hidden name="username" value="#session.currentUser.username"/>
-                                <s:select headerKey="-1" headerValue="Select" list="#attr.sQuestions" listKey="%{question}" listValue="%{question}"/>
+                                <s:hidden name="username" value="%{#session.tempUser.username}"/>
+                                <s:select name="sec_number" headerKey="-1" headerValue="Select" list="#session.tempUser.sQuestions" listKey="%{sec_number}" listValue="%{question}"/>
 				<s:password name="answer" placeholder="Enter Answer Here" />
 				<s:submit cssClass="btn btn-primary" value="Submit" />
 				</s:form>
