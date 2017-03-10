@@ -160,12 +160,12 @@
 					</thead>
 					<tbody>
 
-												<s:iterator value="%{#session.currentRecord.diagnosis}" var="diag">
-													<tr>
-														<td><s:date name="%{#dateDiagnosed}" format="MM/dd/yyyy"/></td>
-														<td><s:property value="%{#diag.diagnosis}"/></td>
-													</tr>
-												</s:iterator>
+                                                        <s:iterator value="%{#session.currentRecord.diagnosis}" var="diag">
+                                                                <tr>
+                                                                        <td><s:date name="%{#dateDiagnosed}" format="MM/dd/yyyy"/></td>
+                                                                        <td><s:property value="%{#diag.diagnosis}"/></td>
+                                                                </tr>
+                                                        </s:iterator>
 
 						<tr>
 							<td>03/7/2017</td>

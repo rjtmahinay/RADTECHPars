@@ -65,7 +65,7 @@ public class UserAction extends ActionSupport implements ModelDriven<User>, Sess
         try {
             System.out.println("Inside login try");
             session= ((SessionFactory)sessionmap.get("factory")).openSession();
-            User db = (User)session.load(User.class, user.getUsername());
+            User db = (User)session.get(User.class, user.getUsername());
             if(db == null){
                 addFieldError("password", "Username/Password doesn't match");
                 return INPUT;

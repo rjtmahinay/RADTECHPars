@@ -46,6 +46,7 @@ public class DiagnosisAction extends ActionSupport implements ModelDriven<Diagno
             model.setDateDiagnosed(date);
             model.setControlNumber(Long.parseLong(model.getId()));
             Information info = (Information)session.load(Information.class, model.getControlNumber());
+            info.getDiagnosis().size();
             model.setInformation(info);
             session.save(model);  
             sessionmap.put("currentRecord", info);

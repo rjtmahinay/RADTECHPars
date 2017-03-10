@@ -195,7 +195,7 @@ public class Information implements Serializable{
     }
 
     @OneToMany(targetEntity = Diagnosis.class, mappedBy = "information", 
-            cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+            cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     public List<Diagnosis> getDiagnosis() {
         return diagnosis;
     }
@@ -223,8 +223,6 @@ public class Information implements Serializable{
     public void setNextAppointment(Date nextAppointment) {
         this.nextAppointment = nextAppointment;
     }
-    
-    
     
     @Override
     public String toString() {

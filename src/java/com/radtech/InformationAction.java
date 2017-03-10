@@ -78,6 +78,7 @@ public class InformationAction extends ActionSupport implements ModelDriven<Info
             session = ((SessionFactory)sessionmap.get("factory")).openSession();
             
             information = (Information)session.load(Information.class, information.getId());
+            information.getDiagnosis().size();
             
             if(information == null){
                 addActionError("Record is not found");
@@ -106,6 +107,7 @@ public class InformationAction extends ActionSupport implements ModelDriven<Info
             Transaction tx = session.getTransaction();
             tx.begin();
             Information info = (Information)session.load(Information.class, information.getId());
+            info.getDiagnosis().size();
             Archive arc = new Archive();
             arc.setInformation(info);
             session.save(arc);

@@ -3,6 +3,7 @@ package com.radtech;
 import com.opensymphony.xwork2.ActionSupport;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
 import org.apache.struts2.convention.annotation.Action;
@@ -76,46 +77,27 @@ public class SearchEngine extends ActionSupport implements SessionAware{
     }
     @Action("searchDatabase")
     public String searchDatabase(){
+        Session session = null;
         if(getSearchType().equals("FAIL")) {
             addFieldError("searchInput", "Something went wrong...");
-            return "input";
+            return INPUT;
         }
-        Session session = ((SessionFactory)sessionmap.get("factory")).openSession();
-        System.out.println(sessionmap == null);
-        Transaction tx = null;
+        session = ((SessionFactory)sessionmap.get("factory")).openSession();
         List records = null;
         try{
-            tx = session.beginTransaction();
-            Query query = null;
+            Criteria criteria = session.createCriteria(Information.class);
+            System.out.println(getSearchInput() + "input " + getSearchType() + " type");
             try{
-                switch(getSearchType()){
-                    case "contactNumber" : query = session.createQuery("from Information where contactNumber = " + Integer.parseInt(getSearchInput())); break;
-                    case "age": query = session.createQuery("from Information where dateOfBirth = :dob"); 
-                    SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
-                    query.setParameter("dob", sdf.parse(getSearchInput()));
-                    break;
-                    case "controlNumber": query = session.createQuery("from Information where controlNumber = " + Long.parseLong(getSearchInput())); break;
-                    case "weight": query = session.createQuery("from Information where weight = " + Double.parseDouble(getSearchInput())); break;
-                    case "sex": query = session.createQuery("from Information where sex = :sex"); 
-                    query.setParameter("sex", getSearchInput()); break;
-                    default: Criteria crit = session.createCriteria(Information.class);
-                            crit.add(Restrictions.ilike(getSearchType(), '%' + getSearchInput() +'%'));
-                            records = crit.list();
-                }
+                criteria.add(Restrictions.eq(getSearchType(), getSearchInput()));
+                records = criteria.list();
+                sessionmap.put("search", records);
             }
             catch(NumberFormatException e) {
                 throw new NumberFormatException("Invalid input on field");
             }
-            catch(ParseException e){
-                e.printStackTrace();
-            }
-            if(records ==null) records = query.list();
-            tx.commit();
-            sessionmap.put("search", records);
         }
         catch (HibernateException e) {
-        if (tx!=null) tx.rollback();
-            e.printStackTrace(); 
+            e.printStackTrace();
         }
         finally {
             session.close(); 

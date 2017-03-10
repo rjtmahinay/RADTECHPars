@@ -12,6 +12,7 @@ import java.util.Map;
 import org.apache.struts2.dispatcher.SessionMap;
 import org.apache.struts2.interceptor.SessionAware;
 import org.hibernate.Criteria;
+import org.hibernate.Hibernate;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -53,8 +54,10 @@ public class AppointmentAction extends ActionSupport implements ModelDriven<Appo
                 session = ((SessionFactory)sessionmap.get("factory")).openSession();
                 tx = session.getTransaction();
                 tx.begin();
-                
                 Information info = (Information)session.load(Information.class, ((Information)sessionmap.get("currentRecord")).getControlNumber());
+                
+                info.getAppointments();
+                info.getDiagnosis().size();
                 app.setInformation(info);
                 session.save(app);
                 setSchedule(info);
