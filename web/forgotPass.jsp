@@ -23,15 +23,15 @@
 		
 			<!--NO ACTION YET-->
 			
-				<s:form action="" theme="bootstrap" cssClass="form">
+				<s:form action="resetPass" theme="bootstrap" cssClass="form">
 				
 				<!--EMPTY PA YUNG LIST-->
 				
 				
 				<h3>Secret Question: </h3>
-				<s:select name="secretQuestions" list="{'sample1', 'sample2'}" headerKey="-1" headerValue="Select Secret Question" />
-				
-				<s:password name="secretAnswer" placeholder="Enter Answer Here" />
+                                <s:hidden name="username" value="#session.currentUser.username"/>
+                                <s:select headerKey="-1" headerValue="Select" list="#attr.sQuestions" listKey="%{question}" listValue="%{question}"/>
+				<s:password name="answer" placeholder="Enter Answer Here" />
 				<s:submit cssClass="btn btn-primary" value="Submit" />
 				</s:form>
 		

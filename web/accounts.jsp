@@ -19,6 +19,12 @@
 		<div class="container">
 			<s:include value="home.jsp"/>
 			<h1>Manage Accounts</h1>
+                        <tr>
+                            <td>Currently saved Security Questions</td>
+                            <script>
+                                alert('<s:property value="%{#session.currentUser.name}"/>');
+                            </script>
+                        </tr>
 			<div id="actionTabs" class="container-fluid">
 				<center>
 					<ul class="nav nav-pills">    
@@ -86,21 +92,20 @@
 						
 						<!--WALA PANG ACTION-->
 						<br>
-						
-						<s:form action="" theme="bootstrap" method="POST">
-						<div class="form-group">
-							
-							<s:textfield name="secretQuestion" placeholder="Enter secret question here" />
-						</div>
-						<div class="form-group">
-						
-							<s:password name="answer" placeholder="Enter answer here" />
-						</div>
-						<div class="form-group">
-							
-							<s:password name="password" placeholder="Enter password" />
-						</div>
-						<s:submit cssClass="btn btn-primary" value="submit" />
+						<s:form action="addQuestion" theme="bootstrap" method="POST">
+                                                    <div class="form-group">
+                                                        <s:hidden name="username" value="%{#session.currentUser.username}"/>
+                                                        <s:textfield name="question" placeholder="Enter secret question here" />
+                                                    </div>
+                                                    <div class="form-group">
+
+                                                        <s:password name="answer" placeholder="Enter answer here" />
+                                                    </div>
+                                                    <div class="form-group">
+
+                                                        <s:password name="password" placeholder="Enter password" />
+                                                    </div>
+                                                    <s:submit cssClass="btn btn-primary" value="submit" />
 						</s:form>
 					</div>
 						

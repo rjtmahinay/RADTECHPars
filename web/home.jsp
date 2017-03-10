@@ -46,7 +46,10 @@
 				<li><s:a href="statistics">Statistics</s:a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
-				<li><a href="accounts.jsp"><span class="glyphicon glyphicon-cog"></span> <s:property value="%{#session.currentuser.name}"/></a></li>
+                        <s:url action="fetchuser">
+                            <s:param name="username" value="%{#session.currentuser.username}"/>
+                        </s:url>
+				<li><s:a href="fetchuser"><span class="glyphicon glyphicon-cog"></span> <s:property value="%{#session.currentuser.name}"/></s:a></li>
 				<s:url value="logout" var="logout"/>
 				<li><s:a href="%{logout}"><span class="glyphicon glyphicon-log-in"></span>&nbsp Logout &nbsp</s:a></li>
 			</ul>        

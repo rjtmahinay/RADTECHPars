@@ -68,6 +68,19 @@
         <action name="statistics" class="com.radtech.AppointmentAction" method="statistics">
             <result>statistics.jsp</result>
         </action>
+        <action name="forgotPassword" class="com.radtech.UserAction" method="forgotPassword">
+            <result>forgotPass.jsp</result>
+            <result name="input">index.jsp</result>
+        </action>
+        <action name="addQuestion" class="com.radtech.SecurityQuestionAction" method="addQuestion">
+            <result>accounts.jsp</result>
+            <result name="input">accounts.jsp</result>
+        </action>
+        <action name="fetchuser" class="com.radtech.UserAction" method="fetchuser">
+            <result>accounts.jsp</result>
+            <result name="input">index.jsp</result>
+        </action>
+        
         
     </package>
 </struts>

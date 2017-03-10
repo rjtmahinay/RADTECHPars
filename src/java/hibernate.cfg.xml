@@ -53,5 +53,6 @@ Contributor(s):
     <mapping class="com.radtech.Diagnosis"/>
     <mapping class="com.radtech.Archive"/>
     <mapping class="com.radtech.Appointment"/>
+    <mapping class="com.radtech.SecurityQuestion"/>
   </session-factory>
 </hibernate-configuration>

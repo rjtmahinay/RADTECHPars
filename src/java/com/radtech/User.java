@@ -6,9 +6,14 @@
 package com.radtech;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -18,7 +23,8 @@ public class User implements Serializable{
 
     private String name, surname, username, password;
     public String password2, password3;
-    
+    private List<SecurityQuestion> sQuestions = new ArrayList<SecurityQuestion>();
+
     @Column(name="NAME", nullable=false)
     public String getName() {
         return name;
@@ -68,9 +74,17 @@ public class User implements Serializable{
     public void setPassword3(String password3) {
         this.password3 = password3;
     }
-    
-    
-    
+
+    @OneToMany(targetEntity = SecurityQuestion.class, mappedBy = "user", 
+            cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    public List<SecurityQuestion> getSQuestions() {
+        return sQuestions;
+    }
+
+    public void setSQuestions(List<SecurityQuestion> sQuestions) {
+        this.sQuestions = sQuestions;
+    }
+
     public String toString(){
         return "Name: " + getName() + "\nSurname: " + getSurname() + "\nUsername: " + getUsername() + "Password: " + getPassword();
     }

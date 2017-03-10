@@ -20,10 +20,13 @@ import org.hibernate.service.ServiceRegistry;
 public class UserAction extends ActionSupport implements ModelDriven<User>, SessionAware{
     private User user = new User();
     private SessionMap sessionmap;
-    
 
     public void setUser(User u){
         user = u;
+    }
+
+    public User getUser() {
+        return user;
     }
     
     
@@ -52,7 +55,7 @@ public class UserAction extends ActionSupport implements ModelDriven<User>, Sess
     }
     
     public void validate(){
-        if(!(sessionmap.get("currentuser") instanceof User)){}
+        if(!(sessionmap.get("currentUser") instanceof User)){}
         if(sessionmap == null){}
     }
     
@@ -62,7 +65,7 @@ public class UserAction extends ActionSupport implements ModelDriven<User>, Sess
         user.setPassword("" + user.getPassword().hashCode());
         try {
             session= ((SessionFactory)sessionmap.get("factory")).openSession();
-            User db = (User)session.get(User.class, user.getUsername());
+            User db = (User)session.load(User.class, user.getUsername());
             if(db == null){
                 addFieldError("password", "Username/Password doesn't match");
                 return INPUT;
@@ -70,12 +73,10 @@ public class UserAction extends ActionSupport implements ModelDriven<User>, Sess
             else {
                 if(db.getUsername().equalsIgnoreCase(user.getUsername())){
                     if(db.getPassword().equals(user.getPassword())){
-                        sessionmap.put("currentuser", user);
-                        System.out.println(sessionmap.get("currentuser") == null);
+                        sessionmap.put("currentUser", db);
                         sessionmap.put("view", (List)session.createQuery("from Information").list());
                         sessionmap.put("archive", (List)session.createQuery("from Archive").list());
                         sessionmap.put("appointments", session.createQuery("from Appointment where adate is null order by date").list());
-                        
                         return SUCCESS;
                     }
                     else{
@@ -144,18 +145,19 @@ public class UserAction extends ActionSupport implements ModelDriven<User>, Sess
             tx = session.getTransaction();
             tx.begin();
             if(user.getPassword() != null & user.getPassword2() != null & user.getPassword3() != null){
-                user = (User)sessionmap.get("currentuser");
-                User current = (User)session.load(User.class, user.getUsername());
-                if(user==null | current==null){
+                User username = (User)sessionmap.get("currentUser");
+                user = (User)session.load(User.class, user.getUsername());
+                if(username==null | user==null){
                     addFieldError("password3", "Internal error. Field not found");
                     return INPUT;
                 }
-                else if(user.getPassword().equals(current.getPassword())){
+                else if(user.getPassword().equals(username.getPassword())){
                     if(ServletActionContext.getRequest().getParameter("password2")
                         .equals(ServletActionContext.getRequest().getParameter("password3"))){
-                        current.setPassword(ServletActionContext.getRequest().getParameter("password2").hashCode() + "");
-                        session.saveOrUpdate(current);
-                        current=null;
+                        user.setPassword(ServletActionContext.getRequest().getParameter("password2").hashCode() + "");
+                        session.merge(user);
+                        session.flush();
+                        user=null;
                     }
                     else{
                         addFieldError("password3", "Password does not match");
@@ -173,6 +175,7 @@ public class UserAction extends ActionSupport implements ModelDriven<User>, Sess
             tx.commit();
         }
         catch(HibernateException e){
+            e.printStackTrace();
             tx.rollback();
         }
         finally{
@@ -180,6 +183,40 @@ public class UserAction extends ActionSupport implements ModelDriven<User>, Sess
         }
         
         return SUCCESS;
+    }
+    
+    public String forgotPassword(){
+        if(!(user.getUsername().trim().equals("")) & user!=null){
+            System.out.println(user.getUsername());
+            Session session = null;
+            Transaction tx = null;
+            try{
+                session = ((SessionFactory)sessionmap.get("factory")).openSession();
+                System.out.println(user.getUsername());
+                user = (User)session.get(User.class, user.getUsername());
+                System.out.println("Users' " + (user == null));
+                if(user == null){
+                    addFieldError("username", "Username not found");
+                    return INPUT;
+                }
+                
+                else{
+                    user = (User)session.load(User.class, user.getUsername());
+                    for(SecurityQuestion sq : user.getSQuestions()){
+                        System.out.println(sq.getQuestion());
+                    }
+                    return SUCCESS;
+                }
+            }
+            catch(HibernateException e){
+                tx.rollback();
+            }
+            finally{
+                if(session!=null)session.close();
+            }
+        }
+        addFieldError("username", "Something happened midway...");
+        return INPUT;
     }
     public String logout(){
         sessionmap.invalidate();
@@ -192,4 +229,34 @@ public class UserAction extends ActionSupport implements ModelDriven<User>, Sess
         sessionmap.entrySet();
         return SUCCESS;
     }
+    
+    public String fetchuser(){
+        Session session = null;
+        try{
+            session = ((SessionFactory)sessionmap.get("factory")).openSession();
+            User userx = (User)sessionmap.get("currentUser");
+            user = (User)session.load(User.class, ((User)sessionmap.get("currentUser")).getUsername());
+            if(user == null){
+                addFieldError("username", "Fatal error : Code 1");
+                return INPUT;
+            }
+            else {
+                for(Object o: user.getSQuestions()){
+                    System.out.println(((SecurityQuestion)o).toString());
+                }
+                return SUCCESS;
+            }
+            
+        }
+        catch(HibernateException e){
+            e.printStackTrace();
+        }
+        finally{
+            if(session!=null)session.close();
+        }
+        
+        return INPUT;
+    }
+    
+    
 }
