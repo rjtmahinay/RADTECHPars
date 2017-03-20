@@ -26,7 +26,7 @@ public class Information implements Serializable{
     private long controlNumber;
     private String ownerName;
     private String address;
-    private int contactNumber;
+    private long contactNumber;
     private String patientName;
     private String breed;
     private Date dateOfBirth;
@@ -156,14 +156,14 @@ public class Information implements Serializable{
      * @return the contactNumber
      */
     @Column(name="CONTACT_NUMBER")
-    public int getContactNumber() {
+    public long getContactNumber() {
         return contactNumber;
     }
 
     /**
      * @param contactNumber the contactNumber to set
      */
-    public void setContactNumber(int contactNumber) {
+    public void setContactNumber(long contactNumber) {
         this.contactNumber = contactNumber;
     }
     
@@ -195,7 +195,7 @@ public class Information implements Serializable{
     }
 
     @OneToMany(targetEntity = Diagnosis.class, mappedBy = "information", 
-            cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+            cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     public List<Diagnosis> getDiagnosis() {
         return diagnosis;
     }

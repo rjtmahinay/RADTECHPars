@@ -13,7 +13,7 @@ public class Archive implements Serializable{
     private long controlNumber;
     private String ownerName;
     private String address;
-    private int contactNumber;
+    private long contactNumber;
     private String patientName;
     private String breed;
     private String sex;
@@ -53,11 +53,11 @@ public class Archive implements Serializable{
     }
 
     @Column(name="CONTACT_NUMBER")
-    public int getContactNumber() {
+    public long getContactNumber() {
         return contactNumber;
     }
 
-    public void setContactNumber(int contactNumber) {
+    public void setContactNumber(long contactNumber) {
         this.contactNumber = contactNumber;
     }
 

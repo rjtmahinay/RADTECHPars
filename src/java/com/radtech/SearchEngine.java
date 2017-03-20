@@ -3,9 +3,12 @@ package com.radtech;
 import com.opensymphony.xwork2.ActionSupport;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Pattern;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.dispatcher.SessionMap;
 import org.apache.struts2.interceptor.SessionAware;
@@ -15,6 +18,9 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.MatchMode;
+import org.hibernate.criterion.ProjectionList;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 
 
@@ -34,7 +40,7 @@ public class SearchEngine extends ActionSupport implements SessionAware{
     }
     
     public void setSearchInput(String s){
-        searchInput = s;
+        searchInput = s.trim();
     }
     
     public String getSearchInput(){
@@ -84,16 +90,74 @@ public class SearchEngine extends ActionSupport implements SessionAware{
         }
         session = ((SessionFactory)sessionmap.get("factory")).openSession();
         List records = null;
+        SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
         try{
             Criteria criteria = session.createCriteria(Information.class);
-            System.out.println(getSearchInput() + "input " + getSearchType() + " type");
+            ProjectionList pjl = Projections.projectionList()
+                                .add(Projections.property("controlNumber"))
+                                .add(Projections.property("address"))
+                                .add(Projections.property("breed"))
+                                .add(Projections.property("color"))
+                                .add(Projections.property("contactNumber"))
+                                .add(Projections.property("dateOfBirth"))
+                                .add(Projections.property("ownerName"))
+                                .add(Projections.property("patientName"))
+                                .add(Projections.property("sex"))
+                                .add(Projections.property("weight"));
+            criteria.setProjection(pjl);
+                                    
+            //executing the search
             try{
                 criteria.add(Restrictions.eq(getSearchType(), getSearchInput()));
+                //for exact fields
+                System.out.println(getSearchType()+ "Search type and " + getSearchInput() + " search input");
+                if(getSearchType().equals("contactNumber") | getSearchType().equals("controlNumber") 
+                        | getSearchType().equals("sex") | getSearchType().equals("dateOfBirth")){
+                    System.out.println("Inside first if for search type " + getSearchType());
+                    if(getSearchType().equals("dateOfBirth")){
+                        java.util.Date date = sdf.parse(getSearchInput());
+                        System.out.println("Inside dateOfBirth " + date);
+                        criteria.add(Restrictions.eq(getSearchType(), date));
+                    }
+                    else {
+                        System.out.println("Something else");
+                        criteria.add(Restrictions.eq(getSearchType(), getSearchInput()));
+                    }
+                }
+                //for non exact fields
+                else{
+                    System.out.println("Non exact matches and Type = ["  + getSearchType()+"] Input:[" + getSearchInput()+"]");
+                    
+                    criteria.add(Restrictions.ilike(getSearchType(), getSearchInput().trim(), MatchMode.ANYWHERE));
+                }
                 records = criteria.list();
-                sessionmap.put("search", records);
+                System.out.println("List is fired " + records.size());
+                ArrayList<Information> arl = new ArrayList();
+
+
+                
+            for (Iterator it = records.iterator(); it.hasNext(); ) {
+                Object[] myResult = (Object[]) it.next();
+                Information inf = new Information();
+                inf.setControlNumber((Long)myResult[0]);
+                inf.setAddress((String)myResult[1]);
+                inf.setBreed((String)myResult[2]);
+                inf.setColor((String)myResult[3]);
+                inf.setContactNumber((Long)myResult[4]);
+                inf.setDateOfBirth((java.util.Date)myResult[5]);
+                inf.setOwnerName((String)myResult[6]);
+                inf.setPatientName((String)myResult[7]);
+                inf.setSex((String)myResult[8]);
+                inf.setWeight((double)myResult[9]);
+                arl.add(inf);
+            }
+                sessionmap.put("search", arl);
             }
             catch(NumberFormatException e) {
                 throw new NumberFormatException("Invalid input on field");
+            }
+            catch(ParseException e){
+                e.printStackTrace();
             }
         }
         catch (HibernateException e) {
