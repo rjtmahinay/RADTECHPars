@@ -23,19 +23,8 @@
 		<div class="container-fluid">
 			<h1>Current Schedule</h1>
 
-			<center>
-				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#newAppointment">Add Appointment</button>
-			</center>
-			<div class="modal fade" id="newAppointment">
-				<div class="modal-dialog modal-sm">
-					<div class="modal-content">
-						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal">&times;</button>
-							<h3 align="center" class="modal-title">New Appointment</h3>
-						</div>
-					</div>
-				</div>
-			</div>
+			
+			
 
 			<div class="table-responsive">
 				<table class="table table-bordered table-hover table-striped table-inverse" align="center">

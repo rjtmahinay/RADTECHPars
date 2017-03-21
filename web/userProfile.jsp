@@ -211,7 +211,10 @@
 									 DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
 									   Calendar cal = Calendar.getInstance();           
 									%>
-									<s:date name="person.birthday" format="dd/MM/yyyy" />
+									
+									<%--<s:textfield label="Date today:" name="date" value="<%=    dateFormat.format(cal.getTime()) + "\n" %>">--%>
+									
+									<p>Date today: <%=    dateFormat.format(cal.getTime()) + "\n" %></p>
 								</div>
 								
 								<div class="form-group">

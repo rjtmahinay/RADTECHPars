@@ -21,9 +21,11 @@
 
 		<title>RADTECH PARS</title>
 	</head>
-	<body background="cat1.jpg">
-
+	<body background="dog.jpg" style="width:100%;height:100%;" alt="[]">
 		<div class="container">
+		
+
+		
 			<div class="row">
 				<div class="col col-md-9">
 					<br><br><br><br>
@@ -70,7 +72,8 @@
 			</div>
 								
 								
-		</div>				
+		
+	</div>							
 						
 						
 						

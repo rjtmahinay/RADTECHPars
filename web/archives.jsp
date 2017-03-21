@@ -1,87 +1,116 @@
 <%-- 
-    Document   : archives
-    Created on : Mar 2, 2017, 11:09:08 PM
-    Author     : Carl
+	Document   : archives
+	Created on : Mar 2, 2017, 11:09:08 PM
+	Author     : Carl
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="s" uri="/struts-tags"%>
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-        <title>Archives</title>
-    </head>
-    <body>
-        <s:include value="home.jsp"/>
-        <h1>Archives</h1>
-        <div class="table-responsive">
-                <table class="table table-bordered table-hover table-striped table-inverse" align="center">
-                    <thead>
-                        <tr>
-                            <th>Restore</th>
-                            <th>#</th>                                
-                            <th>Owner Name</th>
-                            <th>Address</th>
-                            <th>Contact Number</th>
-                            <th>Pet Name</th>
-                            <th>Sex</th>
-                            <th>Breed</th>
-                            <th>Age</th>
-                            <th>Weight</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                                <td>
-                                    <input type="hidden" name="controlNumber" value="" >         
-                                    <button class="btn btn-block btn-warning" type="submit" name="action" value="restore">Restore</button>
-                                </td>
-                    
-                                
-                                <td>1</td>
-                                <td>sample</td>
-                                <td>sample</td>
-                                <td>2</td>
-                                <td>sample</td>
-                                <td>sample</td>
-                                <td>sample</td>
-                                <td>2</td>
-                                <td>2</td>
-                                
-                                
-                                
-                            </tr>
-                        
-                        <s:iterator value="#session.archive" var="record">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+		<title>Archives</title>
+	</head>
+	<body>
+		
+		<s:include value="home.jsp"/>
+		<div class="container-fluid">
+		
 
-                                
-                            <tr>
-                                <td>
-                                    <input type="hidden" name="controlNumber" value="#record.controlNumber" >         
-                                    <button class="btn btn-block btn-warning" type="submit" name="action" value="restore">Restore</button>
-                                </td>
-                                <td><s:property value="#record.controlNumber"/></td>
-                                <td><s:property value="#record.ownerName" /></td>
-                                <td><s:property value="#record.address" /></td>
-                                <td><s:property value="#record.contactNumber" /></td>
-                                <td><s:property value="#record.patientName" /></td>
-                                <td><s:property value="#record.sex" /></td>
-                                <td><s:property value="#record.breed" /></td>
-                                <td><s:property value="#record.age" /></td>
-                                <td><s:property value="#record.weight" /></td>
-                            </tr>
-                        </s:iterator>
+			<div class="table-responsive">
+				<table class="table table-bordered table-hover table-striped table-inverse" align="center">
+					<thead>
+						<tr>
+							<th>Restore</th>
+							<th>#</th>                                
+							<th>Owner Name</th>
+							<th>Address</th>
+							<th>Contact Number</th>
+							<th>Pet Name</th>
+							<th>Sex</th>
+							<th>Breed</th>
+							<th>Age</th>
+							<th>Weight</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+								<td>
+									<input type="hidden" name="controlNumber" value="" >         
+									<button class="btn btn-block btn-danger" type="submit" name="action" value="restore">Delete</button>
+								</td>
 
-                        <!-INSERT TABLE BODY HERE->
-                        
 
-                    </tbody>
-                </table>
-            </div>
-    </body>
+								<td>1</td>
+								<td>sample</td>
+								<td>sample</td>
+								<td>2</td>
+								<td>sample</td>
+								<td>sample</td>
+								<td>sample</td>
+								<td>2</td>
+								<td>2</td>
+
+
+
+							</tr>
+
+						<s:iterator value="#session.archive" var="record">
+
+
+							<tr>
+								<td>
+									<input type="hidden" name="controlNumber" value="#record.controlNumber" >         
+									<button type="button" class="btn btn-danger btn-block" data-toggle="modal" data-target="#confirmDelete">Delete</button>
+								</td>
+								<td><s:property value="#record.controlNumber"/></td>
+								<td><s:property value="#record.ownerName" /></td>
+								<td><s:property value="#record.address" /></td>
+								<td><s:property value="#record.contactNumber" /></td>
+								<td><s:property value="#record.patientName" /></td>
+								<td><s:property value="#record.sex" /></td>
+								<td><s:property value="#record.breed" /></td>
+								<td><s:property value="#record.age" /></td>
+								<td><s:property value="#record.weight" /></td>
+							</tr>
+						</s:iterator>
+
+						<!-INSERT TABLE BODY HERE->
+
+
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<div class="modal fade" id="confirmDelete">
+				<div class="modal-dialog modal-sm">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+							<h3 align="center" class="modal-title">Permanently Delete?</h3>
+						</div>
+						<div class="modal-body">
+							<p align="center">This record will be removed from the database</p>
+						</div>
+						<div class="modal-footer form-group" >
+							<div class="row">
+								<div class="col-md-6 col-sm-6">
+									<s:a href="#"><center><s:submit type="button" cssClass="btn btn-danger btn-block" value="Delete" /></center></s:a>
+								</div>
+								<div class="col-md-6 col-sm-6">
+										<center><button type="button" class="btn btn-secondary btn-block" data-dismiss="modal">Cancel</button></center>
+								</div>
+
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+								
+	</body>
 </html>

@@ -30,7 +30,7 @@
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 			</button>
-			<a href="#" class="navbar-brand">RADTECH PARS</a>
+			<a href="welcome.jsp" class="navbar-brand">RADTECH PARS</a>
 		</div>
 
 		<!-- Menu Items -->
@@ -49,7 +49,7 @@
                         <s:url action="fetchuser">
                             <s:param name="username" value="%{#session.currentuser.username}"/>
                         </s:url>
-				<li><s:a href="fetchuser"><span class="glyphicon glyphicon-cog"></span> <s:property value="%{#session.currentuser.name}"/></s:a></li>
+				<li><s:a href="fetchuser"><span class="glyphicon glyphicon-cog"></span> <s:property value="%{#session.currentUser.name}"/></s:a></li>
 				<s:url value="logout" var="logout"/>
 				<li><s:a href="%{logout}"><span class="glyphicon glyphicon-log-in"></span>&nbsp Logout &nbsp</s:a></li>
 			</ul>        
