@@ -14,7 +14,9 @@
         <script type="text/javascript" src="js/fusioncharts.js"></script>
         <script type="text/javascript" src="js/themes/fusioncharts.theme.fint.js"></script>
         <script type="text/javascript">
-            var digits = '<s:property value="%{#session.scores}"/>';
+            var digits = [].concat(('<s:property value="%{#session.scores}"/>').trim().split(","));
+            alert(digits.length);
+            
   FusionCharts.ready(function(){
     var revenueChart = new FusionCharts({
         "type": "column2d",
