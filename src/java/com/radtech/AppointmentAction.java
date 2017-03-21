@@ -55,12 +55,17 @@ public class AppointmentAction extends ActionSupport implements ModelDriven<Appo
                 tx = session.getTransaction();
                 tx.begin();
                 Information info = (Information)session.load(Information.class, ((Information)sessionmap.get("currentRecord")).getControlNumber());
-                
-                info.getAppointments();
-                info.getDiagnosis().size();
                 app.setInformation(info);
+                if(info.getNextAppointment()== null){
+                    info.setNextAppointment(date);
+                }
+                else{
+                    if(date.compareTo(info.getNextAppointment()) < 0){
+                        info.setNextAppointment(date);
+                    }
+                }
                 session.save(app);
-                setSchedule(info);
+               //setSchedule(info);
                 session.merge(info);
                 sessionmap.put("currentRecord", info);
                 info=null;
