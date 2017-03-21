@@ -4,6 +4,7 @@
 	Author     : Carl
 --%>
 <%@taglib prefix="s" uri="/struts-tags"%>
+<%@page import="java.text.SimpleDateFormat, java.util.Calendar, java.text.DateFormat"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -22,12 +23,13 @@
 
 		<div class="container-fluid">
 
-			<s:form action="updateRecord" theme="bootstrap" cssClass="form" method="POST">
+			
 
 				<div class="row">
-				<div class="col-md-6 col-sm-12">
-					<h1>User Profile</h1>
-					<div class="table">
+					<div class="col-md-6">
+						<s:form action="updateRecord" theme="bootstrap" cssClass="form" method="POST">
+						<h1>User Profile</h1>
+						<div class="table">
 						<table class="table table-condensed table-">
 							<tr>
 								<td>
@@ -131,15 +133,23 @@
 
 						</table>
 					</div>
-				<center>
+					<center>
 					<s:submit value="Edit Record" cssClass="btn btn-primary"/>
 					<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#diagnoWindow">&plus; Diagnosis</button>
 				</center>
-			</s:form>
-				</div>
-				<div class="col-md-6 col-sm-12">
-					<br>
+					</s:form>
+			`	</div>
+			
+					
+			
+					
+				<div class="col-md-6">
+					
+					
 					<h2>Next Appointment: <s:date name="%{#session.currentRecord.nextAppointment}" format="MM/dd/yyyy"/></h2>
+					
+					<br><br>
+					<h3>New Appointment</h3>
 					<s:form action="addAppointment" theme="bootstrap" cssClass="form" method="POST">
 						<s:hidden name="id" value="%{#session.currentRecord.controlNumber}"/>
 						<p>Date: <s:textfield name="dateinput" id="apppicker" value="" placeholder="click here to set date"/></p>
@@ -194,8 +204,16 @@
 							<h3 class="modal-title">Add Diagnosis</h3>
 						</div>
 						<s:form action="addDiagnosis" theme="bootstrap" cssClass="form" method="POST">
-													<s:hidden name="id" value="%{#session.currentRecord.controlNumber}"/>
+							<s:hidden name="id" value="%{#session.currentRecord.controlNumber}"/>
 							<div class="modal-body">
+								<div class="form-group">
+									<%
+									 DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+									   Calendar cal = Calendar.getInstance();           
+									%>
+									<s:date name="person.birthday" format="dd/MM/yyyy" />
+								</div>
+								
 								<div class="form-group">
 									<s:textarea label="Diagnosis" name="diagnosis" cols="70" rows="4" class="form-control" />
 								</div>

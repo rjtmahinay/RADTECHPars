@@ -18,65 +18,85 @@
 	</head>
 
 	<body>
+		<div class="container-fluid">
+			
+
+
+		<s:include value="home.jsp"/>
+		
+		<h2>Add Record</h2>
+		
+		
+		<s:form action="addRecord" theme="bootstrap" cssClass="form" method="POST">
+			
+
+				
+					<label for="ownerName">Owner Name</label>
+					<s:textfield name="ownerName" placeholder=""/>
+				
+
+				
+					<label for="address">Address</label>
+					<s:textfield name="address" placeholder=""/>
+				
+
+				
+					<label for="contactNumber">Contact Number</label>
+					<s:textfield name="contactNumber" placeholder=""/>
+				
+
+				
+					<label for="patientName">Pet Name</label>
+					<s:textfield name="patientName" placeholder=""/>
+				
+												
+					<label for="color">Color</label>
+					<s:textfield name="color" placeholder=""/>
+				
+
+				
+					<label for="sex">Sex</label>
+					<s:select cssClass="text text-block" name="sex" list="{'', 'Male','Female'}" headerKey="-1"/>
+				
+
+				
+					<label for="breed">Breed</label>
+					<s:textfield name="breed" placeholder=""/>
+				
+
+				
+					<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+					<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+					<script>
+					$( function() {
+					  $( "#datepicker" ).datepicker({
+						  minDate: -7300,
+						changeMonth: true,
+						changeYear: true
+					  });
+					} );
+					</script>
+
+					<label for="date">Date of birth</label>
+					<s:textfield name="dateinput" id="datepicker" placeholder="click here to set date"/>
+				
+
+				
+					<label for="weight">Weight</label>
+					<s:textfield name="weight" placeholder=""/>
+				
 
 
 
-		<s:include value="home.jsp"/>      
-		<s:form action="info" theme="bootstrap" enctype="multipart/form-data" cssClass="form">
 
-			<div class="container-fluid">
-				<form>
-					<div class="form-group">
-						<label for="ownerName">Owner name:</label>
 
-						<s:textfield name="ownerName" placeholder="Enter Owner name"/>
-
-					</div>
-
-					<div class="form-group">
-						<label for="address">Address:</label>
-						<s:textfield name="address" placeholder="Enter Patient Address"/>
-					</div>
-
-					<div class="form-group">
-						<label for="contactNumber:">Contact Number</label>
-						<s:textfield name="contactNumber" placeholder="Enter Contact Number"/>
-					</div>
-
-					<div class="form-group">
-						<label for="patientName">Patient Name</label>
-						<s:textfield name="patientName" placeholder="Enter Pet Name"/>
-					</div> 
-
-					<div class="form-group">
-						<label for="sex">Sex:</label>
-						<s:select name="sex" list="{'Male','Female'}" headerKey="-1"/>
-					</div> 
-
-					<div class="form-group">
-						<label for="breed">Breed</label>
-						<s:select name="breed" list="{'Unknown', 'Beagle', 'Great Dane'}" headerKey="-1"/>
-					</div> 
-
-					<div class="form-group">
-						<label for="age">Age</label>
-						<s:textfield  name="age" placeholder="Enter Pet Age"/>
-					</div> 
-
-					<div class="form-group">
-						<label for="weight">Weight</label>
-						<s:textfield  name="weight" placeholder="Enter Pet Weight"/>
-					</div> 
-
-				</form>
 
 				<center>
-					<s:actionerror/>
-					<s:actionmessage/>
-					<s:submit value="Add" cssClass="btn btn-primary"/>
-					<s:reset value="clear" cssClass="btn btn-secondary"/>
+					<s:submit cssClass="btn btn-primary " value="Add Record" />
+					<s:reset value="clear data" cssClass="btn btn-secondary"/>
 				</center>
-			</div>   
+
+			
 		</s:form>
 
 	  <%--  <s:form action="home.jsp">
@@ -87,7 +107,7 @@
 	<%--     <form action="LoginController" method="POST">
 			 <center><button class="btn btn-secondary" name="action" value="viewall" type="submit">Back</button></center>
 		 </form> --%>
-
-   
+	
+		 </div>
 	</body>
 </html>
