@@ -15,7 +15,6 @@
         <script type="text/javascript" src="js/themes/fusioncharts.theme.fint.js"></script>
         <script type="text/javascript">
             var digits = [].concat(('<s:property value="%{#session.scores}"/>').trim().split(","));
-            alert(digits.length);
             
   FusionCharts.ready(function(){
     var revenueChart = new FusionCharts({
