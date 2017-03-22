@@ -19,13 +19,11 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
-import org.json.simple.JSONObject;
 
 
 public class AppointmentAction extends ActionSupport implements ModelDriven<Appointment>, SessionAware{
     Appointment app = new Appointment();
     SessionMap sessionmap;
-    JSONObject json = new JSONObject();
     int[] scores = new int[12];
     
     @Override
@@ -94,14 +92,17 @@ public class AppointmentAction extends ActionSupport implements ModelDriven<Appo
                 session = ((SessionFactory)sessionmap.get("factory")).openSession();
                 tx = session.getTransaction();
                 tx.begin();
-                app = (Appointment)session.load(Appointment.class, app.getAppointmentNumber());
-                app.setAdate(new java.util.Date());
-                session.merge(app);
-                sessionmap.put("appointments", (List)session.createQuery("from Appointment where adate is null order by date").list());
+                app = (Appointment)session.load(Appointment.class, Long.parseLong(app.getAppinput()));
+                if(app != null){
+                    app.setAdate(new java.util.Date());
+                    session.merge(app);
+                    sessionmap.put("appointments", (List)session.createQuery("from Appointment where adate is null order by date").list());
+                }
                 app=null;
                 tx.commit();
             }
             catch(HibernateException e){
+                e.printStackTrace();
                 tx.rollback();
             }
             finally{

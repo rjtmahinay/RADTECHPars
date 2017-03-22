@@ -84,6 +84,10 @@
             <result>index.jsp</result>
             <result name="input">forgotPass.jsp</result>
         </action>
+        <action name="deleteArchive" class="com.radtech.ArchiveAction" method="deleteArchive">
+            <result>archives.jsp</result>
+            <result name="input">welcome.jsp</result>
+        </action>
         
         
     </package>

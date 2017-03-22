@@ -10,6 +10,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 
 
 public class ArchiveAction extends ActionSupport implements ModelDriven<Archive>, SessionAware{
@@ -31,6 +32,33 @@ public class ArchiveAction extends ActionSupport implements ModelDriven<Archive>
     }
     
     public void validate(){
-        if(sessionmap.get("currentRecord")==null);
+    }
+    
+    public String deleteArchive(){
+        System.out.println(model.getControlInput());
+        Session session = null;
+        Transaction tx = null;
+        try{
+            session = ((SessionFactory)sessionmap.get("factory")).openSession();
+            tx = session.getTransaction();
+            tx.begin();
+            Archive arc = (Archive)session.load(Archive.class, Long.parseLong(model.getControlInput()));
+            System.out.println(arc.getControlNumber());
+            if(arc != null) {
+                session.delete(arc);
+                session.flush();
+            }
+            model=null;
+            sessionmap.put("archive", session.createQuery("from Archive order by controlNumber").list());
+            tx.commit();   
+        }
+        catch(HibernateException e){
+            e.printStackTrace();
+            tx.rollback();
+        }
+        finally{
+            if(session!=null)session.close();
+        }
+        return SUCCESS;
     }
 }

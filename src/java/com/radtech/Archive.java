@@ -6,6 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name="ARCHIVE")
@@ -21,6 +22,7 @@ public class Archive implements Serializable{
     private String color;
     private double weight;
     private long id;
+    private String controlInput;
 
     public Archive(){}
     @Id
@@ -124,6 +126,16 @@ public class Archive implements Serializable{
     public long getId(){
         return id;
     }
+
+    @Transient
+    public String getControlInput() {
+        return controlInput;
+    }
+
+    public void setControlInput(String controlInput) {
+        this.controlInput = controlInput;
+    }
+    
     
     public void setInformation(Information i){
         setAddress(i.getAddress());

@@ -27,6 +27,7 @@ public class Appointment implements Serializable{
     private String comment, dateinput;
     private Information information;
     private long id;
+    private String appinput;
     
     @Id
     @Column(name="APPOINTMENT_NUMBER")
@@ -88,6 +89,15 @@ public class Appointment implements Serializable{
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    @Transient
+    public String getAppinput() {
+        return appinput;
+    }
+
+    public void setAppinput(String appinput) {
+        this.appinput = appinput;
     }
     
     
