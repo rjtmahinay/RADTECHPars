@@ -13,7 +13,6 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
 		<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-		<link rel="stylesheet" href="/resources/demos/style.css">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 		<title>User Profile</title>
@@ -172,7 +171,7 @@
 
                                                         <s:iterator value="%{#session.currentRecord.diagnosis}" var="diag">
                                                                 <tr>
-                                                                        <td><s:date name="%{#dateDiagnosed}" format="MM/dd/yyyy"/></td>
+                                                                        <td><s:date name="%{#diag.dateDiagnosed}" format="MM/dd/yyyy"/></td>
                                                                         <td><s:property value="%{#diag.diagnosis}"/></td>
                                                                 </tr>
                                                         </s:iterator>
@@ -208,8 +207,8 @@
 							<div class="modal-body">
 								<div class="form-group">
 									<%
-									 DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
-									   Calendar cal = Calendar.getInstance();           
+                                                                            DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+                                                                            Calendar cal = Calendar.getInstance();           
 									%>
 									
 									<%--<s:textfield label="Date today:" name="date" value="<%=    dateFormat.format(cal.getTime()) + "\n" %>">--%>

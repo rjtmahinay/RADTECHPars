@@ -8,6 +8,10 @@
     <constant name="struts.ui.theme" value="bootstrap" />
     <constant name="struts.ognl.allowStaticMethodAccess" value="true"/> 
     <package name="default" extends="struts-default">
+        <global-exception-mappings>
+            <exception-mapping exception="java.lang.NullPointerException"
+            result="error" />
+        </global-exception-mappings>
         
         <action name="login" class="com.radtech.UserAction" method="login">
             <result>welcome.jsp</result>

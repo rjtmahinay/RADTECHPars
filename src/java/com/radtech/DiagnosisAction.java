@@ -42,14 +42,19 @@ public class DiagnosisAction extends ActionSupport implements ModelDriven<Diagno
             session= ((SessionFactory)sessionmap.get("factory")).openSession();
             tx = session.getTransaction();
             tx.begin();
-            Date date = new Date();
-            model.setDateDiagnosed(date);
-            model.setControlNumber(Long.parseLong(model.getId()));
-            Information info = (Information)session.load(Information.class, model.getControlNumber());
-            info.getDiagnosis().size();
-            model.setInformation(info);
-            session.save(model);  
-            sessionmap.put("currentRecord", info);
+            System.out.println(model.getId());
+            Information info = (Information)session.load(Information.class, Long.parseLong(model.getId()));
+            System.out.println(info.toString());
+            if(info != null){
+                model.setInformation(info);
+                model.setDateDiagnosed(new Date());
+                session.save(model);
+                //info = (Information)session.load(Information.class, Long.parseLong(model.getId()));
+                info.getAppointments();
+                session.merge(info);
+                sessionmap.put("currentRecord", info);
+                session.flush();
+            }
             model=null;
             tx.commit();
         }

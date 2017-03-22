@@ -27,7 +27,6 @@ import org.hibernate.annotations.ManyToAny;
 @Table(name="DIAGNOSISDB")
 public class Diagnosis implements Serializable{
     private long diagnosisNumber;
-    private long controlNumber;
     private Date dateDiagnosed;
     private String diagnosis, id;
     public Information information;
@@ -51,14 +50,6 @@ public class Diagnosis implements Serializable{
 
     public void setInformation(Information information) {
         this.information = information;
-    }
-    @Column(name = "CONTROL_NUMBER")
-    public long getControlNumber() {
-        return controlNumber;
-    }
-
-    public void setControlNumber(long controlNumber) {
-        this.controlNumber = controlNumber;
     }
     @Column(name="DATE")
     public Date getDateDiagnosed() {
@@ -88,7 +79,7 @@ public class Diagnosis implements Serializable{
 
     @Override
     public String toString() {
-        return "Diagnosis{" + "diagnosisNumber=" + diagnosisNumber + ", controlNumber=" + controlNumber + ", dateDiagnosed=" + dateDiagnosed + ", diagnosis=" + diagnosis + ", id=" + id + '}';
+        return "Diagnosis{" + "diagnosisNumber=" + diagnosisNumber + ", dateDiagnosed=" + dateDiagnosed + ", diagnosis=" + diagnosis + ", id=" + id + '}';
     }
     
     
