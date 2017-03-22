@@ -108,27 +108,30 @@ public class SearchEngine extends ActionSupport implements SessionAware{
                                     
             //executing the search
             try{
-                criteria.add(Restrictions.eq(getSearchType(), getSearchInput()));
                 //for exact fields
                 System.out.println(getSearchType()+ "Search type and " + getSearchInput() + " search input");
                 if(getSearchType().equals("contactNumber") | getSearchType().equals("controlNumber") 
                         | getSearchType().equals("sex") | getSearchType().equals("dateOfBirth")){
-                    System.out.println("Inside first if for search type " + getSearchType());
+                    
+                    //@for getting dob
                     if(getSearchType().equals("dateOfBirth")){
                         java.util.Date date = sdf.parse(getSearchInput());
                         System.out.println("Inside dateOfBirth " + date);
                         criteria.add(Restrictions.eq(getSearchType(), date));
                     }
-                    else {
-                        System.out.println("Something else");
-                        criteria.add(Restrictions.eq(getSearchType(), getSearchInput()));
+                    //@if either weight
+                    else if(getSearchType().equals("weight")){
+                        criteria.add(Restrictions.eq(getSearchType(), Double.parseDouble(getSearchInput())));
+                    }
+                    //@if controlNumber or contactNumber
+                    else{
+                        criteria.add(Restrictions.eq(getSearchType(), Long.parseLong(getSearchInput())));
                     }
                 }
                 //for non exact fields
                 else{
-                    System.out.println("Non exact matches and Type = ["  + getSearchType()+"] Input:[" + getSearchInput()+"]");
                     
-                    criteria.add(Restrictions.ilike(getSearchType(), getSearchInput().trim(), MatchMode.ANYWHERE));
+                    criteria.add(Restrictions.ilike(getSearchType(), "%"+getSearchInput().trim()+"%"));
                 }
                 records = criteria.list();
                 System.out.println("List is fired " + records.size());
