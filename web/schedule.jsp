@@ -20,7 +20,6 @@
             $(document).ready(function() {
                 $('#confirmComplete').on('show.bs.modal', function(e) {
                   var id = $(e.relatedTarget).data('id');
-                  alert(id);
                   document.getElementById('confirm').value = id;
                   
                 });
@@ -71,7 +70,7 @@
 						<tr>
 
                                                     <td><button type="button" class="btn btn-success btn-block" data-toggle="modal" data-target="#confirmComplete" data-id="<s:property value="#record.appointmentNumber"/>"> Mark as complete</button></td>
-							<td><s:property value="#record.appointmentNumber"/> <s:property value="%{#record.information.ownerName}" /></td>
+							<td><s:property value="%{#record.information.ownerName}" /></td>
 							<td><s:property value="%{#record.information.patientName}" /></td>
 							<td><s:property value="#record.date" /></td>
 							<td><s:property value="#record.comment" /></td>
