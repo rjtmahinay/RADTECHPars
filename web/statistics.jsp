@@ -20,8 +20,8 @@
 	var revenueChart = new FusionCharts({
 		"type": "column2d",
 		"renderAt": "chartContainer",
-		"width": "500",
-		"height": "300",
+		"width": "80%",
+		"height": "350",
 		"dataFormat": "json",
 		"dataSource":  {
 		  "chart": {

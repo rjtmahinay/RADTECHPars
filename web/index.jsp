@@ -51,18 +51,19 @@
 								<s:actionerror/>
 								<s:form action="login" theme="bootstrap" cssClass="form">
 									
-									<br>
+									
 								<div class="row">	
 									<div class="form-group">
-										<label for="username">Username:</label>
+										<label for="username"></label>
 										<s:textfield name="username" placeholder="Username" class="form-control" />
 									</div>
 								</div>
 								<div class="row">	
 									<div class="form-group">
-										<label for="password">Password:</label>
+										<label for="password"></label>
 										<s:password name="password" placeholder="Password" class="form-control" />
 									</div>
+									.
 								</div>	
 									<s:submit cssClass="btn btn-primary btn-block" value="Submit" />
 								</s:form>
