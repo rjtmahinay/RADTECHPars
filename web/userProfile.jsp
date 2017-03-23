@@ -21,13 +21,20 @@
 		<s:include value="home.jsp"/>
 
 		<div class="container-fluid">
-
-			
-
+			<div class="row">
+				<div class="col-md-6">
+					<h1>User Profile</h1>
+				</div>
+				<div class="col-md-6">
+					<h1>Next Appointment: <s:date name="%{#session.currentRecord.nextAppointment}" format="MM/dd/yyyy"/></h1>
+				</div>	
+			</div>
 				<div class="row">
 					<div class="col-md-6">
+						
 						<s:form action="updateRecord" theme="bootstrap" cssClass="form" method="POST">
-						<h1>User Profile</h1>
+						
+						<div class="panel panel-default">
 						<div class="table">
 						<table class="table table-condensed table-">
 							<tr>
@@ -81,7 +88,7 @@
 									Sex:
 								</td>
 								<td>
-									<label for="sex">Sex</label>
+									
 									<s:select cssClass="text text-block" name="sex" list="{'Male','Female'}" headerKey="%{#session.currentRecord.sex}" 
 									headerValue="%{#session.currentRecord.sex}"/>
 								</td>
@@ -113,7 +120,7 @@
 									 $( "#apppicker" ).datepicker();
 									} );
 									</script>
-									<p>Date of Birth: 
+									
 									
 									
 									<s:textfield name="dateinput" id="datepicker" value="%{#session.currentRecord.dateOfBirth}" placeholder="click here to set date"/></p>
@@ -132,31 +139,44 @@
 
 						</table>
 					</div>
-					<center>
-					<s:submit value="Edit Record" cssClass="btn btn-primary"/>
-					<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#diagnoWindow">&plus; Diagnosis</button>
-				</center>
-					</s:form>
-			`	</div>
+					</div>
+						<center>
+						<s:submit value="Edit Record" cssClass="btn btn-primary"/>
+						<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#diagnoWindow">&plus; Diagnosis</button>
+						</center>
+						</s:form>
+			`		
+					
+				</div>		
 			
 					
 			
-					
-				<div class="col-md-6">
-					
-					
-					<h2>Next Appointment: <s:date name="%{#session.currentRecord.nextAppointment}" format="MM/dd/yyyy"/></h2>
-					
+				<div class="col-md-1"></div>	
+				<div class="col-md-3">
 					<br><br>
-					<h3>New Appointment</h3>
-					<s:form action="addAppointment" theme="bootstrap" cssClass="form" method="POST">
-						<s:hidden name="id" value="%{#session.currentRecord.controlNumber}"/>
-						<p>Date: <s:textfield name="dateinput" id="apppicker" value="" placeholder="click here to set date"/></p>
-						<p><s:textarea name="comment" label="Description:" value=""/></p>
-						<s:submit cssClass="btn btn-primary" value="Add Appointment" />											
-					</s:form>	
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h3 align="center">New Appointment</h3>
+						</div>
+						<div class="panel-body">
+							<center>
+							<s:form action="addAppointment" theme="bootstrap" cssClass="form" method="POST">
+							<s:hidden name="id" value="%{#session.currentRecord.controlNumber}"/>
+							<p><s:textfield name="dateinput" label="Date:" id="apppicker" value="" placeholder="click here to set date"/></p>
+							<p><s:textarea name="comment" label="Description:" cols="22" value=""/></p>
+							</center>
+						</div>
+						<div class="panel-footer">
+							<center>
+								<s:submit cssClass="btn btn-primary" value="+ Appointment" />
+							</center>
+						</div>											
+							</s:form>
+
+					</div>	
+					</div><!-End of row in 2nd col->	
 				</div>
-			</div>              <!-END OF ROW->
+			              <!-END OF ROW->
 
 
 			<div class="table table-responsive">
@@ -213,7 +233,7 @@
 									
 									<%--<s:textfield label="Date today:" name="date" value="<%=    dateFormat.format(cal.getTime()) + "\n" %>">--%>
 									
-									<p>Date today: <%=    dateFormat.format(cal.getTime()) + "\n" %></p>
+									<p><b>Date today: <%=    dateFormat.format(cal.getTime()) + "\n" %></b></p>
 								</div>
 								
 								<div class="form-group">
@@ -231,5 +251,6 @@
 				</div>
 			</div> 
 		</div>
+				
 	</body>
 </html>

@@ -26,12 +26,7 @@
 
 		<div class="container-fluid">
 			
-			
-			<center>
-				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addRecord">Add Record</button>
-			</center>
-			
-			
+			<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addRecord">Add Record</button>
 			
 			<div class="modal fade" id="addRecord">
 				<div class="modal-dialog modal-sm">

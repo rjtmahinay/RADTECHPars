@@ -35,7 +35,7 @@
 				<table class="table table-bordered table-hover table-striped table-inverse" align="center">
 					<thead>
 						<tr>
-							<th>Restore</th>
+							<th>Delete</th>
 							<th>#</th>                                
 							<th>Owner Name</th>
 							<th>Address</th>
