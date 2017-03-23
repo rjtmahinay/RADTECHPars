@@ -7,10 +7,21 @@
     <constant name="struts.devMode" value="false" />
     <constant name="struts.ui.theme" value="bootstrap" />
     <constant name="struts.ognl.allowStaticMethodAccess" value="true"/> 
-    <package name="default" extends="struts-default">
+    <package name="default" extends="struts-default" namespace="/">
+        
+        <interceptors>
+            <interceptor name="RadtechInterceptor" class="com.radtech.RadtechInterceptor" />
+            <interceptor-stack name="radtechStack">
+                <interceptor-ref name="defaultStack"/>
+                <interceptor-ref name="RadtechInterceptor"/>
+            </interceptor-stack>
+        </interceptors>
+        
+        <default-interceptor-ref name="radtechStack"/>
+        
         <global-exception-mappings>
             <exception-mapping exception="java.lang.NullPointerException"
-            result="error" />
+                               result="error" />
         </global-exception-mappings>
         
         <action name="login" class="com.radtech.UserAction" method="login">
@@ -18,7 +29,7 @@
             <result name="input">index.jsp</result>
         </action>
         
-         <action name="signup" class="com.radtech.UserAction" method="signup">
+        <action name="signup" class="com.radtech.UserAction" method="signup">
             <result>welcome.jsp</result>
             <result name="input">index.jsp</result>
         </action>
@@ -28,30 +39,30 @@
         </action>
 
         <action name="addRecord" class="com.radtech.InformationAction" method="add">
-           <result>welcome.jsp</result>
-           <result  name="input">welcome.jsp</result>
+            <result>welcome.jsp</result>
+            <result name="input">welcome.jsp</result>
         </action>
         
         <action name="getRecord" class="com.radtech.InformationAction" method="get">
-           <result>userProfile.jsp</result>
+            <result>userProfile.jsp</result>
         </action>
         
         <action name="updateRecord" class="com.radtech.InformationAction" method="updateRecord">
-           <result>userProfile.jsp</result>
+            <result>userProfile.jsp</result>
         </action>
         
         <action name="searchDatabase" class="com.radtech.SearchEngine" method="searchDatabase">
-            <result>search.jsp</result>
-            <result name="input"> search.jsp</result>
+            <result>/WEB-INF/search.jsp</result>
+            <result name="input">/WEB-INF/search.jsp</result>
         </action>
         
         <action name="addDiagnosis" class="com.radtech.DiagnosisAction" method="addDiagnosis">
-            <result>diagnosis.jsp</result>
-            <result name="input"> welcome.jsp</result>
+            <result>/WEB-INF/diagnosis.jsp</result>
+            <result name="input">/WEB-INF/welcome.jsp</result>
         </action>
         
         <action name="toArchive" class="com.radtech.InformationAction" method="toArchive">
-            <result>welcome.jsp</result>
+            <result>/WEB-INF/welcome.jsp</result>
         </action>
         <action name="changePassword" class="com.radtech.UserAction" method="changePassword">
             <result>welcome.jsp</result>

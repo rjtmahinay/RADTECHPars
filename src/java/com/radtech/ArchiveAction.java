@@ -7,7 +7,6 @@ import java.util.Map;
 import org.apache.struts2.dispatcher.SessionMap;
 import org.apache.struts2.interceptor.SessionAware;
 import org.hibernate.HibernateException;
-import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -44,11 +43,13 @@ public class ArchiveAction extends ActionSupport implements ModelDriven<Archive>
             tx.begin();
             Archive arc = (Archive)session.load(Archive.class, Long.parseLong(model.getControlInput()));
             System.out.println(arc.getControlNumber());
+            
             if(arc != null) {
                 session.delete(arc);
                 session.flush();
             }
-            model=null;
+            
+            model = null;
             sessionmap.put("archive", session.createQuery("from Archive order by controlNumber").list());
             tx.commit();   
         }
@@ -57,7 +58,8 @@ public class ArchiveAction extends ActionSupport implements ModelDriven<Archive>
             tx.rollback();
         }
         finally{
-            if(session!=null)session.close();
+            if(session!=null)
+                session.close();
         }
         return SUCCESS;
     }

@@ -21,8 +21,9 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 @Entity
-@Table(name="MEDICALDB" )
-public class Information implements Serializable{
+@Table(name = "MEDICALDB")
+public class Information implements Serializable {
+
     private long controlNumber;
     private String ownerName;
     private String address;
@@ -38,37 +39,31 @@ public class Information implements Serializable{
     public List<Diagnosis> diagnosis;
     private List<Appointment> appointments;
     private Date nextAppointment;
+
     public Information() {
     }
-    @Column(name="BREED")
+
+    @Column(name = "BREED")
     public String getBreed() {
         return breed;
     }
 
-    /**
-     * @param breed the breed to set
-     */
     public void setBreed(String breed) {
         this.breed = breed;
     }
 
-    /**
-     * @return the sex
-     */
-    @Column(name="SEX")
+    @Column(name = "SEX")
     public String getSex() {
         return sex;
     }
 
-    /**
-     * @param sex the sex to set
-     */
     public void setSex(String sex) {
         this.sex = sex;
     }
+
     @Id
-    @Column(name="CONTROL_NUMBER")
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @Column(name = "CONTROL_NUMBER")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     public long getControlNumber() {
         return controlNumber;
     }
@@ -77,97 +72,61 @@ public class Information implements Serializable{
         this.controlNumber = controlNumber;
     }
 
-    /**
-     * @return the weight
-     */
-    @Column(name="WEIGHT")
+    @Column(name = "WEIGHT")
     public double getWeight() {
         return weight;
     }
 
-    /**
-     * @param weight the weight to set
-     */
     public void setWeight(double weight) {
         this.weight = weight;
     }
 
-    /**
-     * @return the ownerName
-     */
-    @Column(name="OWNER_NAME")
+    @Column(name = "OWNER_NAME")
     public String getOwnerName() {
         return ownerName;
     }
 
-    /**
-     * @param ownerName the ownerName to set
-     */
     public void setOwnerName(String ownerName) {
         this.ownerName = ownerName;
     }
 
-    /**
-     * @return the address
-     */
-    @Column(name="ADDRESS")
+    @Column(name = "ADDRESS")
     public String getAddress() {
         return address;
     }
 
-    /**
-     * @param address the address to set
-     */
     public void setAddress(String address) {
         this.address = address;
     }
 
-    /**
-     * @return the patientName
-     */
-    @Column(name="PATIENT_NAME")
+    @Column(name = "PATIENT_NAME")
     public String getPatientName() {
         return patientName;
     }
 
-    /**
-     * @param patientName the patientName to set
-     */
     public void setPatientName(String patientName) {
         this.patientName = patientName;
     }
 
-    /**
-     * @return the color
-     */
-    @Column(name="COLOR")
+    @Column(name = "COLOR")
     public String getColor() {
         return color;
     }
 
-    /**
-     * @param color the color to set
-     */
     public void setColor(String color) {
         this.color = color;
     }
 
-    /**
-     * @return the contactNumber
-     */
-    @Column(name="CONTACT_NUMBER")
+    @Column(name = "CONTACT_NUMBER")
     public long getContactNumber() {
         return contactNumber;
     }
 
-    /**
-     * @param contactNumber the contactNumber to set
-     */
     public void setContactNumber(long contactNumber) {
         this.contactNumber = contactNumber;
     }
-    
-    @Column(name="DATEOFBIRTH")
+
+    @Column(name = "DATEOFBIRTH")
     public Date getDateOfBirth() {
         return dateOfBirth;
     }
@@ -176,15 +135,15 @@ public class Information implements Serializable{
         this.dateOfBirth = dateOfBirth;
     }
 
- 
-    public void setId(long id){
+    public void setId(long id) {
         this.id = id;
     }
+
     @Transient
-    public long getId(){
+    public long getId() {
         return id;
     }
-    
+
     @Transient
     public String getDateinput() {
         return dateinput;
@@ -194,7 +153,7 @@ public class Information implements Serializable{
         this.dateinput = dateinput;
     }
 
-    @OneToMany(targetEntity = Diagnosis.class, mappedBy = "information", 
+    @OneToMany(targetEntity = Diagnosis.class, mappedBy = "information",
             cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     public List<Diagnosis> getDiagnosis() {
         return diagnosis;
@@ -203,8 +162,8 @@ public class Information implements Serializable{
     public void setDiagnosis(List<Diagnosis> diagnosis) {
         this.diagnosis = diagnosis;
     }
-    
-    @OneToMany(targetEntity = Appointment.class, mappedBy="information",
+
+    @OneToMany(targetEntity = Appointment.class, mappedBy = "information",
             cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @OrderBy("date")
     public List<Appointment> getAppointments() {
@@ -215,7 +174,7 @@ public class Information implements Serializable{
         this.appointments = appointments;
     }
 
-    @Column(name="NEXT_APPOINTMENT")
+    @Column(name = "NEXT_APPOINTMENT")
     public Date getNextAppointment() {
         return nextAppointment;
     }
@@ -223,11 +182,10 @@ public class Information implements Serializable{
     public void setNextAppointment(Date nextAppointment) {
         this.nextAppointment = nextAppointment;
     }
-    
+
     @Override
     public String toString() {
         return "Information{" + "controlNumber=" + controlNumber + ", ownerName=" + ownerName + ", address=" + address + ", contactNumber=" + contactNumber + ", patientName=" + patientName + ", breed=" + breed + ", dateOfBirth=" + dateOfBirth + ", sex=" + sex + ", color=" + color + ", weight=" + weight + ", id=" + id + ", dateinput=" + dateinput + '}';
     }
-    
-    
+
 }

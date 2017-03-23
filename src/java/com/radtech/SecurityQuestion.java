@@ -1,4 +1,3 @@
-
 package com.radtech;
 
 import java.io.Serializable;
@@ -11,16 +10,18 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+
 @Entity
-@Table(name="SECURITY_QUESTION")
-public class SecurityQuestion implements Serializable{
+@Table(name = "SECURITY_QUESTION")
+public class SecurityQuestion implements Serializable {
+
     private long sec_number;
-    private String  answer, username, password;
+    private String answer, username, password;
     private User user;
     public String question;
 
     @Id
-    @Column(name="SECURITY_NUMBER")
+    @Column(name = "SECURITY_NUMBER")
     @GeneratedValue(strategy = GenerationType.AUTO)
     public long getSec_number() {
         return sec_number;
@@ -29,8 +30,8 @@ public class SecurityQuestion implements Serializable{
     public void setSec_number(long sec_number) {
         this.sec_number = sec_number;
     }
-    
-    @Column(name="QUESTION")
+
+    @Column(name = "QUESTION")
     public String getQuestion() {
         return question;
     }
@@ -39,7 +40,7 @@ public class SecurityQuestion implements Serializable{
         this.question = question;
     }
 
-    @Column(name="ANSWER")
+    @Column(name = "ANSWER")
     public String getAnswer() {
         return answer;
     }
@@ -48,9 +49,8 @@ public class SecurityQuestion implements Serializable{
         this.answer = answer;
     }
 
-    
     @ManyToOne
-    @JoinColumn(name="SEC_USER_KEY")
+    @JoinColumn(name = "SEC_USER_KEY")
     public User getUser() {
         return user;
     }
@@ -67,7 +67,7 @@ public class SecurityQuestion implements Serializable{
     public void setUsername(String username) {
         this.username = username;
     }
-    
+
     @Transient
     public String getPassword() {
         return password;
@@ -81,6 +81,5 @@ public class SecurityQuestion implements Serializable{
     public String toString() {
         return "SecurityQuestion{" + "sec_number=" + sec_number + ", question=" + question + ", answer=" + answer + ", username=" + username + ", password=" + password + ", user=" + user + '}';
     }
-    
-    
+
 }

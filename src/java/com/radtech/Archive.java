@@ -9,8 +9,9 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 @Entity
-@Table(name="ARCHIVE")
-public class Archive implements Serializable{
+@Table(name = "ARCHIVE")
+public class Archive implements Serializable {
+
     private long controlNumber;
     private String ownerName;
     private String address;
@@ -24,9 +25,11 @@ public class Archive implements Serializable{
     private long id;
     private String controlInput;
 
-    public Archive(){}
+    public Archive() {
+    }
+
     @Id
-    @Column(name="CONTROL_NUMBER")
+    @Column(name = "CONTROL_NUMBER")
     public long getControlNumber() {
         return controlNumber;
     }
@@ -34,18 +37,17 @@ public class Archive implements Serializable{
     public void setControlNumber(long controlNumber) {
         this.controlNumber = controlNumber;
     }
-    
-    @Column(name="OWNER_NAME")
+
+    @Column(name = "OWNER_NAME")
     public String getOwnerName() {
         return ownerName;
     }
 
-    
     public void setOwnerName(String ownerName) {
         this.ownerName = ownerName;
     }
 
-    @Column(name="ADDRESS")
+    @Column(name = "ADDRESS")
     public String getAddress() {
         return address;
     }
@@ -54,7 +56,7 @@ public class Archive implements Serializable{
         this.address = address;
     }
 
-    @Column(name="CONTACT_NUMBER")
+    @Column(name = "CONTACT_NUMBER")
     public long getContactNumber() {
         return contactNumber;
     }
@@ -63,7 +65,7 @@ public class Archive implements Serializable{
         this.contactNumber = contactNumber;
     }
 
-    @Column(name="PATIENT_NAME")
+    @Column(name = "PATIENT_NAME")
     public String getPatientName() {
         return patientName;
     }
@@ -72,7 +74,7 @@ public class Archive implements Serializable{
         this.patientName = patientName;
     }
 
-    @Column(name="BREED")
+    @Column(name = "BREED")
     public String getBreed() {
         return breed;
     }
@@ -81,7 +83,7 @@ public class Archive implements Serializable{
         this.breed = breed;
     }
 
-    @Column(name="SEX")
+    @Column(name = "SEX")
     public String getSex() {
         return sex;
     }
@@ -89,8 +91,8 @@ public class Archive implements Serializable{
     public void setSex(String sex) {
         this.sex = sex;
     }
-    
-    @Column(name="DATEOFBIRTH")
+
+    @Column(name = "DATEOFBIRTH")
     public Date getDateOfBirth() {
         return dateOfBirth;
     }
@@ -99,9 +101,7 @@ public class Archive implements Serializable{
         this.dateOfBirth = dateOfBirth;
     }
 
-    
-
-    @Column(name="COLOR")
+    @Column(name = "COLOR")
     public String getColor() {
         return color;
     }
@@ -110,7 +110,7 @@ public class Archive implements Serializable{
         this.color = color;
     }
 
-    @Column(name="WEIGHT")
+    @Column(name = "WEIGHT")
     public double getWeight() {
         return weight;
     }
@@ -118,12 +118,12 @@ public class Archive implements Serializable{
     public void setWeight(double weight) {
         this.weight = weight;
     }
-    
-    public void setId(long id){
+
+    public void setId(long id) {
         this.id = id;
     }
-    
-    public long getId(){
+
+    public long getId() {
         return id;
     }
 
@@ -135,9 +135,8 @@ public class Archive implements Serializable{
     public void setControlInput(String controlInput) {
         this.controlInput = controlInput;
     }
-    
-    
-    public void setInformation(Information i){
+
+    public void setInformation(Information i) {
         setAddress(i.getAddress());
         setControlNumber(i.getControlNumber());
         setOwnerName(i.getOwnerName());

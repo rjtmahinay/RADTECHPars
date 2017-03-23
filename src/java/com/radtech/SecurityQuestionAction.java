@@ -97,7 +97,8 @@ public class SecurityQuestionAction extends ActionSupport implements ModelDriven
             tx.rollback();
         }
         finally{
-            if(session!=null)session.close();
+            if(session!=null)
+                session.close();
         }
         return INPUT;
     }

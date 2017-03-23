@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package com.radtech;
 
 import java.io.Serializable;
@@ -18,22 +14,23 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 @Entity
-@Table(name = "USERDB" )
-public class User implements Serializable{
+@Table(name = "USERDB")
+public class User implements Serializable {
 
     private String name, surname, username, password;
     public String password2, password3;
-    private List<SecurityQuestion> sQuestions = new ArrayList<SecurityQuestion>();
+    private List<SecurityQuestion> sQuestions = new ArrayList<>();
 
-    @Column(name="NAME", nullable=false)
+    @Column(name = "NAME", nullable = false)
     public String getName() {
         return name;
     }
-    
+
     public void setName(String name) {
         this.name = name;
     }
-    @Column(name="SURNAME", nullable=false)
+
+    @Column(name = "SURNAME", nullable = false)
     public String getSurname() {
         return surname;
     }
@@ -41,8 +38,9 @@ public class User implements Serializable{
     public void setSurname(String surname) {
         this.surname = surname;
     }
+
     @Id
-    @Column(name="USERNAME",nullable=false)
+    @Column(name = "USERNAME", nullable = false)
     public String getUsername() {
         return username;
     }
@@ -50,7 +48,8 @@ public class User implements Serializable{
     public void setUsername(String username) {
         this.username = username;
     }
-    @Column(name="PASSWORD", nullable=false)
+
+    @Column(name = "PASSWORD", nullable = false)
     public String getPassword() {
         return password;
     }
@@ -58,6 +57,7 @@ public class User implements Serializable{
     public void setPassword(String password) {
         this.password = password;
     }
+
     @Transient
     public String getPassword2() {
         return password2;
@@ -66,16 +66,17 @@ public class User implements Serializable{
     public void setPassword2(String password2) {
         this.password2 = password2;
     }
-    
+
     @Transient
     public String getPassword3() {
         return password3;
     }
+
     public void setPassword3(String password3) {
         this.password3 = password3;
     }
 
-    @OneToMany(targetEntity = SecurityQuestion.class, mappedBy = "user", 
+    @OneToMany(targetEntity = SecurityQuestion.class, mappedBy = "user",
             cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     public List<SecurityQuestion> getSQuestions() {
         return sQuestions;
@@ -85,8 +86,8 @@ public class User implements Serializable{
         this.sQuestions = sQuestions;
     }
 
-    public String toString(){
+    public String toString() {
         return "Name: " + getName() + "\nSurname: " + getSurname() + "\nUsername: " + getUsername() + "Password: " + getPassword();
     }
-    
+
 }
