@@ -19,11 +19,9 @@
 		<div class="container">
 			<s:include value="home.jsp"/>
 			<h1>Manage Accounts</h1>
-                        <tr>
-                            <td>Currently saved Security Questions</td>
-                        </tr>
+
 			<div id="actionTabs" class="container-fluid">
-				<center>
+				
 					<ul class="nav nav-pills">    
 						<li class="active">
 							<a href="#1b" data-toggle="tab">Change Password</a>
@@ -35,16 +33,16 @@
 							<a href="#3b" data-toggle="tab">Additional Security</a>
 						</li>
 					</ul>
-				</center>	
+				
 				<div class="tab-content clearfix">
 					<div class="tab-pane active" id="1b">
 
 						<s:actionerror/>
-                                                <s:form action="changePassword" theme="bootstrap" cssClass="form" method="POST">
+												<s:form action="changePassword" theme="bootstrap" cssClass="form" method="POST">
 
 							<br/>
 							<div class="form-group">
-                                                            <s:hidden name="username" value="%{#session.currentUser.username}"/>
+															<s:hidden name="username" value="%{#session.currentUser.username}"/>
 								<s:password name="password" placeholder="Current Password" class="form-control" /></div>
 							<div class="form-group">  
 								<s:password name="password2" placeholder="New Password" class="form-control" /></div>
@@ -84,29 +82,29 @@
 
 						</s:form>
 					</div>
-						
+
 					<div class="tab-pane" id="3b">
-						
-						
+
+
 						<!--WALA PANG ACTION-->
 						<br>
 						<s:form action="addQuestion" theme="bootstrap" method="POST">
-                                                    <div class="form-group">
-                                                        <s:hidden name="username" value="%{#session.currentUser.username}"/>
-                                                        <s:textfield name="question" placeholder="Enter secret question here" />
-                                                    </div>
-                                                    <div class="form-group">
+						<div class="form-group">
+							<s:hidden name="username" value="%{#session.currentUser.username}"/>
+							<s:textfield name="question" placeholder="Enter secret question here" />
+						</div>
+						<div class="form-group">
 
-                                                        <s:password name="answer" placeholder="Enter answer here" />
-                                                    </div>
-                                                    <div class="form-group">
+							<s:password name="answer" placeholder="Enter answer here" />
+						</div>
+						<div class="form-group">
 
-                                                        <s:password name="password" placeholder="Enter password" />
-                                                    </div>
-                                                    <s:submit cssClass="btn btn-primary" value="submit" />
+							<s:password name="password" placeholder="Enter password" />
+						</div>
+						<s:submit cssClass="btn btn-primary" value="submit" />
 						</s:form>
 					</div>
-						
+
 				</div>
 			</div>
 		</div>			

@@ -8,13 +8,15 @@
 	</head>
 	<body>
 	   <s:include value="home.jsp" />
-	   <div class="container">
+	   <div class="container-fluid">
 			<s:form action="searchDatabase" namespace="/">
+				<br>
 				<div class="row">
 					<div class="col-md-3 col-sm-0"></div>
 
 					<div class="col-md-2 col-sm-4">
 						<center>
+						
                                                     <s:select name="searchType" list="{'Control Number', 'Address', 'Date of Birth', 'Breed', 'Color', 'Contact Number', 'Owner Name', 'Patient Name', 'Sex', 'Weight'}" 
                                                               headerKey="-1" headerValue="Select Search Type"/>
 						</center>
@@ -31,9 +33,10 @@
 						</center>
 					</div>
 					<div class="col-md-3 col-sm-0"></div>
-				</div>         
+				</div>
+				<br>		
 			</s:form>
-		</div> 
+		 
 		<div class="table table-responsive">
 			<table class="table table-bordered table-hover table-inverse table-striped">
 				<thead>
@@ -111,6 +114,7 @@
 				</tbody>    
 			</table>
 		</div>    
+	</div>
 
 
 	</body>

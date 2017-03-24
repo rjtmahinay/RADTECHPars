@@ -22,12 +22,15 @@
 
 		<div class="container-fluid">
 			<div class="row">
+				<font face="roboto">
 				<div class="col-md-6">
+					
 					<h1>User Profile</h1>
 				</div>
 				<div class="col-md-6">
 					<h1>Next Appointment: <s:date name="%{#session.currentRecord.nextAppointment}" format="MM/dd/yyyy"/></h1>
-				</div>	
+				</div>
+				</font>
 			</div>
 				<div class="row">
 					<div class="col-md-6">

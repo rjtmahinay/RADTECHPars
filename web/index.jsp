@@ -45,7 +45,7 @@
 
 					<div class="panel panel-default">
 
-						<div class="panel-heading"><center>Enter login information below</center></div>
+						<div class="panel-heading"><center><b>Enter login information below</b></center></div>
 						<div class="panel-body">
 							<center>
 								<s:actionerror/>

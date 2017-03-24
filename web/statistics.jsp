@@ -20,8 +20,8 @@
 	var revenueChart = new FusionCharts({
 		"type": "column2d",
 		"renderAt": "chartContainer",
-		"width": "80%",
-		"height": "350",
+		"width": "90%",
+		"height": "400",
 		"dataFormat": "json",
 		"dataSource":  {
 		  "chart": {
@@ -92,7 +92,7 @@ revenueChart.render();
 		<s:include value="home.jsp"/>
 		<div class="container-fluid">
 			<center>
-			<h1>Animal Station Statistics</h1>
+			<h1><font face="roboto">Animal Station Statistics</font></h1>
 	
 	
 			<div id="chartContainer">FusionCharts XT will load here!

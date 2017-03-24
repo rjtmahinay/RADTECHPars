@@ -29,7 +29,7 @@
 		
 		<s:include value="home.jsp"/>
 		<div class="container-fluid">
-		
+			<h1 align="center"><font face="roboto">Archives</font></h1>
 
 			<div class="table-responsive">
 				<table class="table table-bordered table-hover table-striped table-inverse" align="center">

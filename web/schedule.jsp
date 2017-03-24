@@ -30,7 +30,7 @@
 	<body>
 		<s:include value="home.jsp"/>
 		<div class="container-fluid">
-			<h1>Current Schedule</h1>
+			<h1 align="center"><font face="roboto">Current Schedule</font></h1>
 
 			
 			
