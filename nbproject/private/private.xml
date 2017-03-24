@@ -8,19 +8,6 @@
             <file>file:/C:/Users/Carl/Documents/NetBeansProjects/RADTECHPars/web/index.jsp</file>
             <file>file:/C:/Users/Carl/Documents/NetBeansProjects/RADTECHPars/web/add.jsp</file>
         </group>
-        <group>
-            <file>file:/C:/Users/Sphere/Documents/NetBeansProjects/RADTECHPars/web/userProfile.jsp</file>
-            <file>file:/C:/Users/Sphere/Documents/NetBeansProjects/RADTECHPars/nbproject/private/private.properties</file>
-            <file>file:/C:/Users/Sphere/Documents/NetBeansProjects/RADTECHPars/src/java/struts.xml</file>
-            <file>file:/C:/Users/Sphere/Documents/NetBeansProjects/RADTECHPars/src/java/com/radtech/Credentials.java</file>
-            <file>file:/C:/Users/Sphere/Documents/NetBeansProjects/RADTECHPars/web/home.jsp</file>
-            <file>file:/C:/Users/Sphere/Documents/NetBeansProjects/RADTECHPars/src/java/com/radtech/Information.java</file>
-            <file>file:/C:/Users/Sphere/Documents/NetBeansProjects/RADTECHPars/web/index.jsp</file>
-            <file>file:/C:/Users/Sphere/Documents/NetBeansProjects/RADTECHPars/src/java/com/radtech/UserAction.java</file>
-            <file>file:/C:/Users/Sphere/Documents/NetBeansProjects/RADTECHPars/src/java/com/radtech/SearchEngine.java</file>
-            <file>file:/C:/Users/Sphere/Documents/NetBeansProjects/RADTECHPars/src/java/com/radtech/Diagnosis.java</file>
-            <file>file:/C:/Users/Sphere/Documents/NetBeansProjects/RADTECHPars/src/java/com/radtech/User.java</file>
-            <file>file:/C:/Users/Sphere/Documents/NetBeansProjects/RADTECHPars/src/java/hibernate.cfg.xml</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>
