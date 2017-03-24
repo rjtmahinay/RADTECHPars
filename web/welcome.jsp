@@ -30,7 +30,7 @@
 			<div class="row">
 				<div class="col-md-2">
 					<br>
-					<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addRecord"><font size="3"><b>&plus;</b></font></button>
+					<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addRecord"><span class="glyphicon glyphicon-plus"></span></button>
 				</div>
 				<div class="col-md-8">
 					<center>
@@ -41,7 +41,7 @@
 			</div>
 
 			<div class="modal fade" id="addRecord">
-				<div class="modal-dialog modal-sm">
+				<div class="modal-dialog">
 					<div class="modal-content">
 						<center>
 

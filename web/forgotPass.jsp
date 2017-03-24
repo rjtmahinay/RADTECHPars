@@ -18,24 +18,26 @@
 		<title>Forgot password</title>
 	</head>
 	<body>
-		<div class="container">
-			<h1>Forgot Password</h1>
-		
+		<div class="container-fluid">
+			<font face="roboto">
+				<h1 align="center">Forgot Password</h1>
+			</font>
 			<!--NO ACTION YET-->
-			
+
 				<s:form action="resetPass" theme="bootstrap" cssClass="form">
-				
+
 				<!--EMPTY PA YUNG LIST-->
-				
-				
-				<h3>Secret Question: </h3>
-                                <s:hidden name="username" value="%{#session.tempUser.username}"/>
-                                <s:select name="sec_number" headerKey="-1" headerValue="Select" list="#session.tempUser.sQuestions" listKey="%{sec_number}" listValue="%{question}"/>
-				<s:password name="answer" placeholder="Enter Answer Here" />
-				<s:submit cssClass="btn btn-primary" value="Submit" />
+				<br>
+				<center>
+					<h3>Secret Question: </h3>
+					<s:hidden name="username" value="%{#session.tempUser.username}"/>
+					<s:select name="sec_number" headerKey="-1" headerValue="Select" list="#session.tempUser.sQuestions" listKey="%{sec_number}" listValue="%{question}"/>
+					<s:password name="answer" placeholder="Enter Answer Here" />
+					<s:submit cssClass="btn btn-primary" value="Submit" />
+				</center>
 				</s:form>
-		
-		
+
+
 
 		</div>
 	</body>
