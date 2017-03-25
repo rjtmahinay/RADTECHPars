@@ -52,17 +52,17 @@
         </action>
         
         <action name="searchDatabase" class="com.radtech.SearchEngine" method="searchDatabase">
-            <result>/WEB-INF/search.jsp</result>
-            <result name="input">/WEB-INF/search.jsp</result>
+            <result>search.jsp</result>
+            <result name="input">search.jsp</result>
         </action>
         
         <action name="addDiagnosis" class="com.radtech.DiagnosisAction" method="addDiagnosis">
-            <result>/WEB-INF/diagnosis.jsp</result>
-            <result name="input">/WEB-INF/welcome.jsp</result>
+            <result>diagnosis.jsp</result>
+            <result name="input">welcome.jsp</result>
         </action>
         
         <action name="toArchive" class="com.radtech.InformationAction" method="toArchive">
-            <result>/WEB-INF/welcome.jsp</result>
+            <result>welcome.jsp</result>
         </action>
         <action name="changePassword" class="com.radtech.UserAction" method="changePassword">
             <result>welcome.jsp</result>

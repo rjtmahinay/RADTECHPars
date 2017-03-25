@@ -117,7 +117,7 @@ public class SearchEngine extends ActionSupport implements SessionAware {
                 //for exact fields
                 System.out.println(getSearchType() + "Search type and " + getSearchInput() + " search input");
                 if (getSearchType().equals("contactNumber") | getSearchType().equals("controlNumber")
-                        | getSearchType().equals("sex") | getSearchType().equals("dateOfBirth")) {
+                        | getSearchType().equals("sex") | getSearchType().equals("dateOfBirth") | getSearchType().equals("weight")) {
 
                     //@for getting dob
                     if (getSearchType().equals("dateOfBirth")) {
@@ -126,8 +126,14 @@ public class SearchEngine extends ActionSupport implements SessionAware {
                         criteria.add(Restrictions.eq(getSearchType(), date));
                     } //@if either weight
                     else if (getSearchType().equals("weight")) {
-                        criteria.add(Restrictions.eq(getSearchType(), Double.parseDouble(getSearchInput())));
+                        criteria.add(Restrictions.eq(getSearchType(), Double.parseDouble(getSearchInput().trim())));
                     } //@if controlNumber or contactNumber
+                    else if(getSearchType().equals("sex")){
+                        if(getSearchInput().toLowerCase().contains("f")){
+                            criteria.add(Restrictions.eq(getSearchType(), "Female"));
+                        }
+                        else criteria.add(Restrictions.eq(getSearchType(), "Male"));
+                    }
                     else {
                         criteria.add(Restrictions.eq(getSearchType(), Long.parseLong(getSearchInput())));
                     }

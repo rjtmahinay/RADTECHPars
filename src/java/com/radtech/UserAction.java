@@ -5,7 +5,6 @@ import com.opensymphony.xwork2.ModelDriven;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import javax.servlet.http.HttpServletResponse;
 import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.dispatcher.SessionMap;
 import org.apache.struts2.interceptor.SessionAware;
@@ -62,7 +61,7 @@ public class UserAction extends ActionSupport implements ModelDriven<User>, Sess
     public String login() {
         //Insert login logic
         Session session = null;
-        user.setPassword("" + user.getPassword());
+        user.setPassword("" + user.getPassword().hashCode());
         try {
             System.out.println("Inside login try");
             session = ((SessionFactory) sessionmap.get("factory")).openSession();
@@ -153,9 +152,8 @@ public class UserAction extends ActionSupport implements ModelDriven<User>, Sess
                     addFieldError("password3", "Internal error. Field not found");
                     return INPUT;
                 } else if (user.getPassword().equals(username.getPassword())) {
-                    if (ServletActionContext.getRequest().getParameter("password2")
-                            .equals(ServletActionContext.getRequest().getParameter("password3"))) {
-                        user.setPassword(ServletActionContext.getRequest().getParameter("password2").hashCode() + "");
+                    if (user.getPassword2().equals(user.getPassword3())) {
+                        user.setPassword(user.getPassword2().hashCode() + "");
                         session.merge(user);
                         session.flush();
                         user = null;

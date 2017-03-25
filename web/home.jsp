@@ -30,7 +30,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a href="rad/welcome.jsp" class="navbar-brand">RADTECH PARS <span class="glyphicon glyphicon-home"></span></a>
+                <a href="welcome.jsp" class="navbar-brand">RADTECH PARS <span class="glyphicon glyphicon-home"></span></a>
             </div>
 
             <!-- Menu Items -->

@@ -46,38 +46,14 @@
 						<th width="35%">Comments</th>
 					</thead>
 					<tbody>
-						<tr>
-							<td>
-								<!--<input type="hidden" name="controlnum" value="${item.control_number}" >-->         
-								<button type="button" class="btn btn-success btn-block" data-toggle="modal" data-target="#confirmComplete"><span class="glyphicon glyphicon-ok"></span></button>
-							</td>
-							<td>
-								<button type="button" class="btn btn-danger btn-block" data-toggle="modal" data-target="#confirmCancel"><span class="glyphicon glyphicon-remove"></span></button>
-							</td>
-							<td>
-								some dude
-							</td>
-							<td>
-								bruts
-							</td>
-							<td>
-								03/7/2017
-							</td>
-							<td>
-								big black doge
-							</td>
-						</tr>	
-
-
-
 						<s:iterator value="#session.appointments" var="record">	
 						<tr>
 
 							<td><button type="button" class="btn btn-success btn-block" data-toggle="modal" data-target="#confirmComplete"><span class="glyphicon glyphicon-ok"></span></button></td>
 							<td><button type="button" class="btn btn-danger btn-block" data-toggle="modal" data-target="#confirmCancel"><span class="glyphicon glyphicon-remove"></span></button></td>
 							<td><s:property value="%{#record.information.ownerName}" /></td>
-							<td><s:property value="%{#record.information.patientName}" /></td>
-							<td><s:property value="#record.date" /></td>
+                                                        <td><s:property value="%{#record.information.patientName}" /></td>
+                                                        <td><s:date name="#record.date" format="MM/dd/yyyy"/></td>
 							<td><s:property value="#record.comment" /></td>
 
 						</tr>
