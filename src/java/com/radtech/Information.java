@@ -164,7 +164,8 @@ public class Information implements Serializable {
     }
 
     @OneToMany(targetEntity = Appointment.class, mappedBy = "information",
-            cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+            cascade = CascadeType.ALL, fetch = FetchType.EAGER
+            , orphanRemoval = true)
     @OrderBy("date")
     public List<Appointment> getAppointments() {
         return appointments;

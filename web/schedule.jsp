@@ -23,7 +23,14 @@
 				  document.getElementById('confirm').value = id;
 
 				});
-			});    
+			});   
+                        $(document).ready(function() {
+				$('#confirmCancel').on('show.bs.modal', function(e) {
+				  var id = $(e.relatedTarget).data('id');
+				  document.getElementById('cancel').value = id;
+
+				});
+			});
 		</script>
 	<title>Doctor's Schedule</title>
 	</head>
@@ -50,7 +57,7 @@
 						<tr>
 
 							<td><button type="button" class="btn btn-success btn-block" data-toggle="modal" data-target="#confirmComplete" data-id="<s:property value="%{#record.appointmentNumber}" />"><span class="glyphicon glyphicon-ok"></span></button></td>
-							<td><button type="button" class="btn btn-danger btn-block" data-toggle="modal" data-target="#confirmCancel"><span class="glyphicon glyphicon-remove"></span></button></td>
+							<td><button type="button" class="btn btn-danger btn-block" data-toggle="modal" data-target="#confirmCancel" data-id="<s:property value="%{#record.appointmentNumber}" />"><span class="glyphicon glyphicon-remove"></span></button></td>
 							<td><s:property value="%{#record.information.ownerName}" /></td>
                                                         <td><s:property value="%{#record.information.patientName}" /></td>
                                                         <td><s:date name="#record.date" format="MM/dd/yyyy"/></td>
@@ -104,7 +111,7 @@
 						<div class="modal-footer form-group" >
 							<div class="row">
 								<div class="col-md-6 col-sm-6">
-									<input type="hidden" id="confirm" name="appinput"/>
+									<input type="hidden" id="cancel" name="appinput"/>
 									<center><s:submit type="button" cssClass="btn btn-danger btn-block" value="Delete" /></center>
 								</div>
 								<div class="col-md-6 col-sm-6">

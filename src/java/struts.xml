@@ -103,6 +103,11 @@
             <result>archives.jsp</result>
             <result name="input">welcome.jsp</result>
         </action>
+        <action name="cancelAppointment" class="com.radtech.AppointmentAction" method="cancelAppointment">
+            <result>schedule.jsp</result>
+            <result name="input">welcome.jsp</result>
+        </action>
+        
         
         
     </package>

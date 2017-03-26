@@ -178,6 +178,39 @@ public class AppointmentAction extends ActionSupport implements ModelDriven<Appo
                 session.close();
             }
         }
-
     }
+    public String cancelAppointment(){
+            Session session = null;
+            Transaction tx = null;
+            
+            try{
+                session = ((SessionFactory)sessionmap.get("factory")).openSession();
+                tx = session.getTransaction();
+                tx.begin();
+                Appointment appointment = (Appointment)session.load(Appointment.class, Long.parseLong(app.getAppinput()));
+                if(appointment!=null){
+                    Information info = appointment.getInformation();
+                    info.getAppointments().remove(appointment);
+                    session.merge(info);
+                    session.delete(appointment);
+                    session.flush();
+                    tx.commit();
+                    sessionmap.put("appointments", session.createQuery("from Appointment where adate is null order by date").list());
+                }
+                else{
+                    tx.rollback();
+                    return INPUT;
+                }
+                
+            }
+            catch(HibernateException e){
+                if(tx!=null) tx.rollback();
+                e.printStackTrace();
+            }
+            finally{
+                if(session!=null)session.close();
+            }
+            
+            return INPUT;
+        }
 }
