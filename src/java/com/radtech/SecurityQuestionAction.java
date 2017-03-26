@@ -83,8 +83,8 @@ public class SecurityQuestionAction extends ActionSupport implements ModelDriven
                 String password = ((Double)(Math.random()*10)).hashCode()+"";
                 user.setPassword(password.hashCode()+"");
                 session.merge(user);
-                sessionmap.put("tempPassword", password);
                 tx.commit();
+                sessionmap.put("tempPassword", password);
                 return SUCCESS;
             }
             else{

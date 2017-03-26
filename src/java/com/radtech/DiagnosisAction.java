@@ -54,14 +54,14 @@ public class DiagnosisAction extends ActionSupport implements ModelDriven<Diagno
                 model.setInformation(info);
                 model.setDateDiagnosed(new Date());
                 session.save(model);
-                //info = (Information)session.load(Information.class, Long.parseLong(model.getId()));
                 info.getAppointments();
                 session.merge(info);
-                sessionmap.put("currentRecord", info);
                 session.flush();
+                model = null;
+                tx.commit();
+                sessionmap.put("currentRecord", info);
             }
-            model = null;
-            tx.commit();
+            
         } catch (HibernateException e) {
             e.printStackTrace();
             tx.rollback();

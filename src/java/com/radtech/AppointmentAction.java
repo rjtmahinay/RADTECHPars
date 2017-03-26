@@ -66,8 +66,8 @@ public class AppointmentAction extends ActionSupport implements ModelDriven<Appo
                 sessionmap.put("currentRecord", info);
                 info = null;
                 app = null;
-                sessionmap.put("appointments", session.createQuery("from Appointment where adate is null order by date").list());
                 tx.commit();
+                sessionmap.put("appointments", session.createQuery("from Appointment where adate is null order by date").list());
             } catch (HibernateException e) {
                 if (tx != null) {
                     tx.rollback();
@@ -95,10 +95,14 @@ public class AppointmentAction extends ActionSupport implements ModelDriven<Appo
                 if (app != null) {
                     app.setAdate(new java.util.Date());
                     session.merge(app);
+                    tx.commit();
+                    app = null;
                     sessionmap.put("appointments", (List) session.createQuery("from Appointment where adate is null order by date").list());
                 }
-                app = null;
-                tx.commit();
+                else{
+                    tx.rollback();
+                }
+                
             } catch (HibernateException e) {
                 e.printStackTrace();
                 tx.rollback();
@@ -141,15 +145,6 @@ public class AppointmentAction extends ActionSupport implements ModelDriven<Appo
             java.time.LocalDateTime now = java.time.LocalDateTime.now();
             int year = now.getYear();
             for (int i = 0; i < 12; i++) {
-                //scores[i];
-//                Criteria criteria = session.createCriteria(Appointment.class);
-//                criteria.add(Restrictions.ge("date", sdf.parse(i+1+""))); 
-//                if(i==11){
-//                    criteria.add(Restrictions.lt("date", sdf.parse(i+1+"")));
-//                }
-//                else criteria.add(Restrictions.lt("date", sdf.parse(i+2+"")));
-//                List list = criteria.list();
-
                 java.util.Calendar cal = java.util.Calendar.getInstance();
                 cal.setTime(sdf.parse(i + 1 + "/01/" + year));
                 Date inTime = cal.getTime();
@@ -166,8 +161,6 @@ public class AppointmentAction extends ActionSupport implements ModelDriven<Appo
                 } else {
                     scores[i] = list.size();
                 }
-
-                System.out.println(i + " scores is " + scores[i]);
             }
             sessionmap.put("scores", scores);
         } catch (HibernateException | ParseException e) {

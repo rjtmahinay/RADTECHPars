@@ -48,10 +48,10 @@ public class InformationAction extends ActionSupport implements ModelDriven<Info
                 information.setDateOfBirth(sdf.parse(information.getDateinput()));
                 setInformation(information);
                 session.save(information);
-                sessionmap.put("view", (List) session.createQuery("from Information").list());
                 session.flush();
                 information = null;
                 tx.commit();
+                sessionmap.put("view", (List) session.createQuery("from Information").list());
             } catch (HibernateException | ParseException e) {
                 e.printStackTrace();
                 tx.rollback();
@@ -109,11 +109,9 @@ public class InformationAction extends ActionSupport implements ModelDriven<Info
             session.save(arc);
             session.delete(info);
             session.flush();
-            System.out.println(arc.toString() + " arc");
-            System.out.println(info.toString() + "info");
+            tx.commit();
             sessionmap.put("view", session.createQuery("from Information").list());
             sessionmap.put("archive", session.createQuery("from Archive").list());
-            tx.commit();
 
         } catch (HibernateException e) {
             session.getTransaction().rollback();
@@ -153,18 +151,13 @@ public class InformationAction extends ActionSupport implements ModelDriven<Info
                 session.close();
                 return INPUT;
             } else {
-                System.out.println("Information " + information.toString());
-                System.out.println("Info " + info.toString());
-                System.out.println("Before saving");
                 session.merge(information);
                 information = null;
             }
-
-            sessionmap.put("currentRecord", info);
-            sessionmap.put("view", session.createQuery("from Information").list());
-            System.out.println("I am out");
             session.flush();
             tx.commit();
+            sessionmap.put("currentRecord", info);
+            sessionmap.put("view", session.createQuery("from Information").list());
 
         } catch (HibernateException | ParseException e) {
             tx.rollback();

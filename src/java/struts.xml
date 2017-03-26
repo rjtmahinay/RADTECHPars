@@ -27,6 +27,8 @@
         <action name="login" class="com.radtech.UserAction" method="login">
             <result>welcome.jsp</result>
             <result name="input">index.jsp</result>
+            <result name="temp">accounts.jsp</result>
+
         </action>
         
         <action name="signup" class="com.radtech.UserAction" method="signup">
