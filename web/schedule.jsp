@@ -49,7 +49,7 @@
 						<s:iterator value="#session.appointments" var="record">	
 						<tr>
 
-							<td><button type="button" class="btn btn-success btn-block" data-toggle="modal" data-target="#confirmComplete"><span class="glyphicon glyphicon-ok"></span></button></td>
+							<td><button type="button" class="btn btn-success btn-block" data-toggle="modal" data-target="#confirmComplete" data-id="<s:property value="%{#record.appointmentNumber}" />"><span class="glyphicon glyphicon-ok"></span></button></td>
 							<td><button type="button" class="btn btn-danger btn-block" data-toggle="modal" data-target="#confirmCancel"><span class="glyphicon glyphicon-remove"></span></button></td>
 							<td><s:property value="%{#record.information.ownerName}" /></td>
                                                         <td><s:property value="%{#record.information.patientName}" /></td>
