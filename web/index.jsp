@@ -23,7 +23,7 @@
 		<title>RADTECH PARS</title>
 	</head>
 	<body background="dog.jpg" style="width:100%;height:100%;" alt="[]">
-		<div class="container">
+		<div class="container-fluid">
 
 
 
@@ -83,7 +83,9 @@
 
 	</div>
 	<div class="container-fluid">
-		<div style="position:fixed;bottom:0;height:auto;margin-top:40px;width:100%;text-align:center">Copyright © 2017 by Radian Technologies</div>
+		
+		<div style="background:black;position:fixed;bottom:0;height:auto;margin-top:40px;width:100%;text-align:center"><font color="white">Copyright © 2017 by Radian Technologies</font></div>
+		
 	</div>
 
 		<div class="modal fade" id="forgotPass">

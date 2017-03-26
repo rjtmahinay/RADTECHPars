@@ -7,16 +7,65 @@
 <%@taglib prefix="s" uri="/struts-tags"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
+<html style="overflow-x:hidden;" >
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-		<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+		<%--<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+		<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">--%>
 		<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 		<link rel="icon" href="favicon.ico" type="image/x-icon">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+		<style>
+		body
+		{
+			overflow-x:hidden;
+		}
+		.table-fixed th {
+		width:100%;
+		float:left;
+		height:50px;
+		border-bottom-width: 0;
+		}	
+		.table-fixed thead {
+		width: 97%;
+		}
+		.table-fixed tbody {
+		  height: 440px;
+		  overflow-y: auto;
+		  overflow-x:hidden;
+		  width: 101.3%;
+		}
+		.table-fixed tbody, .table-fixed tr, .table-fixed td {
+		  display: block;
+		}
+		 .table-fixed tbody td, .table-fixed thead > tr >th{
+		  width:8.33%;
+		  height:50px;
+		  float: left;
+		  border-bottom-width: 0;
+		}
+		
+<%--
+			table {
+				border-collapse: collapse;
+				width: 100%;
+			}
+			tbutton
+			{
+				width:10%;
+			}
+			
+			thead, tbody{ display: block; }
+
+			tbody {
+				width:100%;
+				height: 450px;       
+				overflow-y: auto;    /* Trigger vertical scroll    */
+				
+			} --%>
+		</style>
 
 		<script>
 			$('form').each(function () {
@@ -59,8 +108,8 @@
 								<div class="modal-body">
 
 
-									<div class="table">
-									<table class="table table-condensed table-">
+									<div style="width:400px;" class="table">
+									<table style=";" class="table table-condensed table-">
 										<tr>
 											<td><b>Owner Name:</b></td>
 											<td><s:textfield name="ownerName" placeholder=""/></td>
@@ -148,23 +197,25 @@
 
 
 			<div class="table-responsive">
-				<table style="page-break-before: always; page-break-after: always;" class="table table-bordered table-hover table-striped table-inverse" align="center">
+				<table class="table table-bordered table-hover table-striped table-inverse table-fixed" align="center">
 					<thead>
 						<tr>
 							<th>Update</th>
 							<th>Archive</th>    
-							<th>#</th>                                
+							<th>Record #</th>                                
 							<th>Owner Name</th>
 							<th>Address</th>
-							<th>Contact Number</th>
+							<th>Contact #</th>
 							<th>Pet Name</th>
 							<th>Sex</th>
 							<th>Breed</th>
 							<th>Color</th>
 							<th>Date of Birth</th>
-							<th>Weight</th>
+							<th>Weight (kg)</th>
+							
 						</tr>
 					</thead>
+					
 					<tbody>
 						<s:iterator value="#session.view" var="record">
 							<tr style="page-break-inside: avoid;">
@@ -224,8 +275,9 @@
 
 						<!-INSERT TABLE BODY HERE->
 
-
+						
 					</tbody>
+					
 				</table>
 			</div>
 
