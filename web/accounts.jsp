@@ -9,10 +9,12 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	 <meta name="viewport" content="width=device-width, initial-scale=1">
-				<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-				<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-				<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+		<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+		<link rel="icon" href="favicon.ico" type="image/x-icon">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 		<title>Account Settings</title>
 	</head>
 	<body>
@@ -21,7 +23,7 @@
 			<h1>Manage Accounts</h1>
 
 			<div id="actionTabs" class="container-fluid">
-				
+
 					<ul class="nav nav-pills">    
 						<li class="active">
 							<a href="#1b" data-toggle="tab">Change Password</a>
@@ -33,7 +35,7 @@
 							<a href="#3b" data-toggle="tab">Additional Security</a>
 						</li>
 					</ul>
-				
+
 				<div class="tab-content clearfix">
 					<div class="tab-pane active" id="1b">
 

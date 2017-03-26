@@ -14,6 +14,8 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" href="css/bootstrap.min.css">
+		<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+		<link rel="icon" href="favicon.ico" type="image/x-icon">
 
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
@@ -34,7 +36,7 @@
 						<p>by RadTech</p>
 
 					</font>
-					
+
 					<script>
 						var password = '<s:property value="#session.tempPassword"/>';
 						if(password) alert("temporary password is : " + password);
@@ -50,8 +52,8 @@
 							<center>
 								<s:actionerror/>
 								<s:form action="login" theme="bootstrap" cssClass="form">
-									
-									
+
+
 								<div class="row">	
 									<div class="form-group">
 										<label for="username"></label>
@@ -79,11 +81,10 @@
 				</div>
 			</div>
 
-
-
-	</div>							
-
-
+	</div>
+	<div class="container-fluid">
+		<div style="position:fixed;bottom:0;height:auto;margin-top:40px;width:100%;text-align:center">Copyright © 2017 by Radian Technologies</div>
+	</div>
 
 		<div class="modal fade" id="forgotPass">
 			<div class="modal-dialog modal-sm">

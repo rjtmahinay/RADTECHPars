@@ -13,6 +13,8 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
 		<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+		<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+		<link rel="icon" href="favicon.ico" type="image/x-icon">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 
@@ -28,7 +30,7 @@
 
 		<div class="container-fluid">
 			<div class="row">
-				<div class="col-md-2">
+				<div class="col-md-2 col-sm-2">
 					<br>
 					<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addRecord"><span class="glyphicon glyphicon-plus"></span></button>
 				</div>
