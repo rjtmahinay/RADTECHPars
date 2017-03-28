@@ -82,12 +82,13 @@
 			</div>
 
 	</div>
+	<%--
 	<div class="container-fluid">
 		
 		<div style="background:black;position:fixed;bottom:0;height:auto;margin-top:40px;width:100%;text-align:center"><font color="white">Copyright © 2017 by Radian Technologies</font></div>
 		
 	</div>
-
+	--%>
 		<div class="modal fade" id="forgotPass">
 			<div class="modal-dialog modal-sm">
 				<div class="modal-content">

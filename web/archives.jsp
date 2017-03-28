@@ -38,39 +38,20 @@
 					<thead>
 						<tr>
 							<th>Delete</th>
-							<th>#</th>                                
+							<th>#</th>
+							<th>reason</th>
 							<th>Owner Name</th>
 							<th>Address</th>
 							<th>Contact Number</th>
 							<th>Pet Name</th>
 							<th>Sex</th>
 							<th>Breed</th>
+							<th>Color</th>
 							<th>Age</th>
 							<th>Weight</th>
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
-								<td>
-									<input type="hidden" name="controlNumber" value="" >         
-									<button class="btn btn-block btn-danger" type="submit" name="action" value="restore">Delete</button>
-								</td>
-
-
-								<td>1</td>
-								<td>sample</td>
-								<td>sample</td>
-								<td>2</td>
-								<td>sample</td>
-								<td>sample</td>
-								<td>sample</td>
-								<td>2</td>
-								<td>2</td>
-
-
-
-							</tr>
-
 						<s:iterator value="#session.archive" var="record">
 
 
@@ -79,12 +60,14 @@
                                                                     <button type="button" data-id="<s:property value="#record.controlNumber"/>" class="btn btn-danger btn-block" data-toggle="modal" data-target="#confirmDelete">Delete</button>
 								</td>
 								<td><s:property value="#record.controlNumber"/></td>
+								<td><s:property value="#record.reason"/></td>
 								<td><s:property value="#record.ownerName" /></td>
 								<td><s:property value="#record.address" /></td>
 								<td><s:property value="#record.contactNumber" /></td>
 								<td><s:property value="#record.patientName" /></td>
 								<td><s:property value="#record.sex" /></td>
 								<td><s:property value="#record.breed" /></td>
+								<td><s:property value="#record.color" /></td>
 								<td><s:property value="#record.age" /></td>
 								<td><s:property value="#record.weight" /></td>
 							</tr>

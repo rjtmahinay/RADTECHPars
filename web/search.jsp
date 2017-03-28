@@ -52,6 +52,7 @@
 						<th>Pet Name</th>
 						<th>Sex</th>
 						<th>Breed</th>
+						<th>Color</th>
 						<th>Date of birth</th>
 						<th>Weight</th>
 					</tr>
@@ -109,6 +110,7 @@
 								<td><s:property value="#record.patientName" /></td>
 								<td><s:property value="#record.sex" /></td>
 								<td><s:property value="#record.breed" /></td>
+								<td><s:property value="#record.color" /></td>
 								<td><s:property value="#record.dateOfBirth" /></td>
 								<td><s:property value="#record.weight" /></td>
 							</tr>

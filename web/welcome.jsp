@@ -11,14 +11,15 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<%--<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-		<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">--%>
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+		<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 		<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 		<link rel="icon" href="favicon.ico" type="image/x-icon">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 		<style>
-		body
+		<%--	
+			body
 		{
 			overflow-x:hidden;
 		}
@@ -35,7 +36,7 @@
 		  height: 440px;
 		  overflow-y: auto;
 		  overflow-x:hidden;
-		  width: 101.3%;
+		  width: 101.25%;
 		}
 		.table-fixed tbody, .table-fixed tr, .table-fixed td {
 		  display: block;
@@ -47,7 +48,7 @@
 		  border-bottom-width: 0;
 		}
 		
-<%--
+
 			table {
 				border-collapse: collapse;
 				width: 100%;
@@ -197,7 +198,7 @@
 
 
 			<div class="table-responsive">
-				<table class="table table-bordered table-hover table-striped table-inverse table-fixed" align="center">
+				<table class="table table-bordered table-hover table-striped table-inverse table-fixed">
 					<thead>
 						<tr>
 							<th>Update</th>
@@ -227,40 +228,42 @@
 								</s:url>
 								<td>       
 									<s:a href="%{rec}"><button class="btn btn-block btn-primary" type="submit" name="action">Update</button></s:a>
-									</td>
+								</td>
 
-									<td>
-										<button type="button" class="btn btn-danger btn-block" data-toggle="modal" data-target="#confirmArchive">Archive</button>
+								<td>
+									<button type="button" class="btn btn-danger btn-block" data-toggle="modal" data-target="#confirmArchive">Archive</button>
 
-										<div class="modal fade" id="confirmArchive">
-											<div class="modal-dialog modal-sm">
-												<div class="modal-content">
-													<div class="modal-header">
-														<button type="button" class="close" data-dismiss="modal">&times;</button>
-														<h3 align="center" class="modal-title">Confirm Archive</h3>
-													</div>
-													<div class="modal-body">
-														<p align="center">Are you sure you want to archive this record?</p>
-													</div>
-													<div class="modal-footer form-group" >
-														<div class="row">
-															<div class="col-md-6 col-sm-6">
-																<center><s:a href="%{arc}"><button type="button" class="btn btn-danger btn-block" data-toggle="modal">Archive</button></s:a></center>
-															</div>
-															<div class="col-md-6 col-sm-6">
-																<center><button type="button" class="btn btn-secondary btn-block" data-dismiss="modal">Cancel</button></center>
-															</div>
-
+									<div class="modal fade" id="confirmArchive">
+										<div class="modal-dialog modal-sm">
+											<div class="modal-content">
+												<div class="modal-header">
+													<button type="button" class="close" data-dismiss="modal">&times;</button>
+													<h3 align="center" class="modal-title">Confirm Archive</h3>
+												</div>
+												<div class="modal-body">
+													<p align="center">Reason for archive:</p>
+													<center><s:textfield name="reason"/></center>
+													
+												</div>
+												<div class="modal-footer form-group" >
+													<div class="row">
+														<div class="col-md-6 col-sm-6">
+															<center><s:a href="%{arc}"><button type="button" class="btn btn-danger btn-block" data-toggle="modal">Archive</button></s:a></center>
 														</div>
+														<div class="col-md-6 col-sm-6">
+															<center><button type="button" class="btn btn-secondary btn-block" data-dismiss="modal">Cancel</button></center>
+														</div>
+
 													</div>
 												</div>
-
-
 											</div>
-										</div>
 
-									</td>
-									<td><s:property value="#record.controlNumber"/> </td>
+
+										</div>
+									</div>
+
+								</td>
+								<td><s:property value="#record.controlNumber"/> </td>
 								<td><s:property value="#record.ownerName" /></td>
 								<td><s:property value="#record.address" /></td>
 								<td><s:property value="#record.contactNumber" /></td>
