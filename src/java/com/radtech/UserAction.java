@@ -106,43 +106,39 @@ public class UserAction extends ActionSupport implements ModelDriven<User>, Sess
         //Insert register logic
         Session session = null;
         Transaction tx = null;
-        user.setPassword("" + user.getPassword().hashCode());
-        if (user != null) {
-            try {
-                session = ((SessionFactory) sessionmap.get("factory")).openSession();
-                System.out.println("The user is " + user.toString());
-                User db = (User) session.get(User.class, user.getUsername().trim());
-                System.out.println("OUtput is " + db.toString());
-                if (db == null) {
+        try{
+            session = ((SessionFactory)sessionmap.get("factory")).openSession();
+            tx = session.getTransaction();
+            User tempUser = (User)session.get(User.class, user.getUsername().trim());
+            if(tempUser == null){
+                //no username found, can use it
+                if(user.getPassword().trim().equals(user.getPassword2().trim())){
+                    //check if passwords match
+                    user.setPassword("" + user.getPassword2().trim().hashCode());
                     tx.begin();
-                    
-                    if (user.getPassword().equals(user.getPassword2())) {
-                        session.save(user);
-                        user = null;
-                        tx.commit();
-                    } else {
-                        addFieldError("password2", "Password does not match");
-                        tx.rollback();
-                        return INPUT;
-                    }
-                    
-                } else {
-                    addFieldError("username", "Username already Used");
-                    tx.rollback();
-                    return INPUT;
-                    
+                    session.save(user);
+                    tx.commit();
                 }
-
-            } catch (HibernateException e) {
-                tx.rollback();
-                e.printStackTrace();
-            } finally {
-                if (session != null) {
-                    session.close();
+                else{
+                    //Passwords does not match
+                    addFieldError("password", "Password does not match");
+                    return INPUT;
                 }
             }
+            else{
+                //username already used
+                addFieldError("username", "Username is already used");
+                return INPUT;
+            }
         }
-        return SUCCESS;
+        catch(HibernateException e){
+            e.printStackTrace();
+            if(tx!= null) tx.rollback();
+        }
+        finally{
+            if(session!=null)session.close();
+        }
+        return INPUT;
     }
 
     public String changePassword() {
@@ -160,6 +156,7 @@ public class UserAction extends ActionSupport implements ModelDriven<User>, Sess
                         session.merge(currentUser);
                         tx.commit();
                         sessionmap.put("currentUser", currentUser);
+                        user = null;
                         return SUCCESS;
                     }
                     else{
@@ -175,6 +172,7 @@ public class UserAction extends ActionSupport implements ModelDriven<User>, Sess
                 }
             }
             else{
+                addFieldError("password", "Critical Error: Code 5");
                 return INPUT;
             }
         } catch (HibernateException e) {

@@ -73,8 +73,6 @@
 							</div>
 
 							<s:submit cssClass="btn btn-primary btn" value="sign up" />
-
-
 						</s:form>
 					</div>
 
