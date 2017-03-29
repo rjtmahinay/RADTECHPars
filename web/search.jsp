@@ -61,49 +61,52 @@
 				<tbody>
 
 					<s:iterator value="#session.search" var="record">
-						<tr>
-                                                                <s:url action="getRecord" var="rec">
+					
+							<tr style="page-break-inside: avoid;">
+								<s:url action="getRecord" var="rec">
 									<s:param name="id"><s:property value="#record.controlNumber"/></s:param>
 								</s:url>
-                                                                <s:url action="toArchive" var="arc">
+								<s:url action="toArchive" var="arc">
 									<s:param name="id"><s:property value="#record.controlNumber"/></s:param>
 								</s:url>
 								<td>       
-                                                                    <s:a href="%{rec}"><button class="btn btn-block btn-primary" type="submit" name="action">Update</button></s:a>
+									<s:a href="%{rec}"><button class="btn btn-block btn-primary" type="submit" name="action">Update</button></s:a>
 								</td>
 
 								<td>
 									<button type="button" class="btn btn-danger btn-block" data-toggle="modal" data-target="#confirmArchive">Archive</button>
-									
-								<div class="modal fade" id="confirmArchive">
-									<div class="modal-dialog modal-sm">
-										<div class="modal-content">
-											<div class="modal-header">
-												<button type="button" class="close" data-dismiss="modal">&times;</button>
-												<h3 align="center" class="modal-title">Confirm Archive</h3>
-											</div>
-											<div class="modal-body">
-												<p align="center">Are you sure you want to archive this record?</p>
-											</div>
-											<div class="modal-footer form-group" >
-												<div class="row">
-													<div class="col-md-6 col-sm-6">
-														<center><s:a href="%{arc}"><button type="button" class="btn btn-danger btn-block" data-toggle="modal">Archive</button></s:a></center>
-													</div>
-													<div class="col-md-6 col-sm-6">
-														<center><button type="button" class="btn btn-secondary btn-block" data-dismiss="modal">Cancel</button></center>
-													</div>
 
+									<div class="modal fade" id="confirmArchive">
+										<div class="modal-dialog modal-sm">
+											<div class="modal-content">
+												<div class="modal-header">
+													<button type="button" class="close" data-dismiss="modal">&times;</button>
+													<h3 align="center" class="modal-title">Confirm Archive</h3>
+												</div>
+												<div class="modal-body">
+													<p align="center">Reason for archive:</p>
+													<center><s:textfield name="reason"/></center>
+													
+												</div>
+												<div class="modal-footer form-group" >
+													<div class="row">
+														<div class="col-md-6 col-sm-6">
+															<center><s:a href="%{arc}"><button type="button" class="btn btn-danger btn-block" data-toggle="modal">Archive</button></s:a></center>
+														</div>
+														<div class="col-md-6 col-sm-6">
+															<center><button type="button" class="btn btn-secondary btn-block" data-dismiss="modal">Cancel</button></center>
+														</div>
+
+													</div>
 												</div>
 											</div>
+
+
 										</div>
-
-
 									</div>
-								</div>
-									
+
 								</td>
-								<td><s:property value="#record.controlNumber" /></td>
+								<td><s:property value="#record.controlNumber"/> </td>
 								<td><s:property value="#record.ownerName" /></td>
 								<td><s:property value="#record.address" /></td>
 								<td><s:property value="#record.contactNumber" /></td>
@@ -111,7 +114,7 @@
 								<td><s:property value="#record.sex" /></td>
 								<td><s:property value="#record.breed" /></td>
 								<td><s:property value="#record.color" /></td>
-								<td><s:property value="#record.dateOfBirth" /></td>
+								<td><s:date name="#record.dateOfBirth" format="MM/dd/yyyy"/></td>
 								<td><s:property value="#record.weight" /></td>
 							</tr>
 						</s:iterator>

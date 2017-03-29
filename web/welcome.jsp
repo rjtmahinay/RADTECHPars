@@ -109,8 +109,8 @@
 								<div class="modal-body">
 
 
-									<div style="width:400px;" class="table">
-									<table style=";" class="table table-condensed table-">
+									<div class="table">
+									<table class="table table-condensed">
 										<tr>
 											<td><b>Owner Name:</b></td>
 											<td><s:textfield name="ownerName" placeholder=""/></td>

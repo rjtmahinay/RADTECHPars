@@ -23,7 +23,7 @@
 		<title>RADTECH PARS</title>
 	</head>
 	<body background="dog.jpg" style="width:100%;height:100%;" alt="[]">
-		<div class="container-fluid">
+		<div class="container">
 
 
 
