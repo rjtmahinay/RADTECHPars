@@ -8,17 +8,7 @@
     <constant name="struts.ui.theme" value="bootstrap" />
     <constant name="struts.ognl.allowStaticMethodAccess" value="true"/> 
     <package name="default" extends="struts-default" namespace="/">
-        
-        <interceptors>
-            <interceptor name="RadtechInterceptor" class="com.radtech.RadtechInterceptor" />
-            <interceptor-stack name="radtechStack">
-                <interceptor-ref name="defaultStack"/>
-                <interceptor-ref name="RadtechInterceptor"/>
-            </interceptor-stack>
-        </interceptors>
-        
-        <default-interceptor-ref name="radtechStack"/>
-        
+
         <global-exception-mappings>
             <exception-mapping exception="java.lang.NullPointerException"
                                result="error" />

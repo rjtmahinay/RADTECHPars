@@ -151,31 +151,32 @@ public class UserAction extends ActionSupport implements ModelDriven<User>, Sess
         try {
             session = ((SessionFactory) sessionmap.get("factory")).openSession();
             tx = session.getTransaction();
-            tx.begin();
-            if (user.getPassword() != null & user.getPassword2() != null & user.getPassword3() != null) {
-                User username = (User) sessionmap.get("currentUser");
-                user = (User) session.load(User.class, user.getUsername());
-                if (username == null | user == null) {
-                    addFieldError("password3", "Internal error. Field not found");
-                    return INPUT;
-                } else if (user.getPassword().equals(username.getPassword())) {
-                    if (user.getPassword2().equals(user.getPassword3())) {
-                        user.setPassword(user.getPassword2().hashCode() + "");
-                        session.merge(user);
-                        session.flush();
-                        user = null;
-                    } else {
-                        addFieldError("password3", "Password does not match");
+            User currentUser = (User)session.load(User.class, user.getUsername());
+            if(currentUser != null){
+                if(currentUser.getPassword().equals("" + user.getPassword().trim().hashCode())){
+                    if(user.getPassword2().equals(user.getPassword3())){
+                        currentUser.setPassword("" + user.getPassword2().trim().hashCode());
+                        tx.begin();
+                        session.merge(currentUser);
+                        tx.commit();
+                        sessionmap.put("currentUser", currentUser);
+                        return SUCCESS;
+                    }
+                    else{
+                        //passwords does not match
+                        addFieldError("password2", "Passwords does not match.");
                         return INPUT;
                     }
-                } else {
-                    addFieldError("password", "Incorrect password");
+                }
+                else{
+                    //password is incorrect
+                    addFieldError("password", "Password is incorrect.");
                     return INPUT;
                 }
-            } else {
-                addFieldError("password3", "A field is left blank");
             }
-            tx.commit();
+            else{
+                return INPUT;
+            }
         } catch (HibernateException e) {
             e.printStackTrace();
             tx.rollback();

@@ -38,22 +38,18 @@
 
 				<div class="tab-content clearfix">
 					<div class="tab-pane active" id="1b">
-												<s:form action="changePassword" theme="bootstrap" cssClass="form" method="POST">
+                                            <s:form action="changePassword" theme="bootstrap" cssClass="form" method="POST">
 
-							<br/>
-							<div class="form-group">
-															<s:hidden name="username" value="%{#session.currentUser.username}"/>
-								<s:password name="password" placeholder="Current Password" class="form-control" /></div>
-							<div class="form-group">  
-								<s:password name="password2" placeholder="New Password" class="form-control" /></div>
-							<div class="form-group">  
-								<s:password name="password3" placeholder="Confirm New Password" class="form-control" /></div>
-
-
-							<s:submit cssClass="btn btn-primary " value="submit" />
-
-
-						</s:form>
+                                                <br/>
+                                                <div class="form-group">
+                                                    <s:hidden name="username" value="%{#session.currentUser.username}"/>
+                                                    <s:password name="password" placeholder="Current Password" class="form-control" /></div>
+                                                    <div class="form-group">  
+                                                    <s:password name="password2" placeholder="New Password" class="form-control" /></div>
+                                                    <div class="form-group">  
+                                                    <s:password name="password3" placeholder="Confirm New Password" class="form-control" /></div>
+                                                <s:submit cssClass="btn btn-primary " value="submit" />
+                                            </s:form>
 
 					</div> <!end of tab 1->
 					<div class="tab-pane" id="2b">
