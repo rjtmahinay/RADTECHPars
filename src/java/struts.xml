@@ -33,7 +33,8 @@
         
         <action name="signup" class="com.radtech.UserAction" method="signup">
             <result>welcome.jsp</result>
-            <result name="input">index.jsp</result>
+            <result name="input">accounts.jsp</result>
+            <result name="error">index.jsp</result>
         </action>
         
         <action name="logout" class="com.radtech.UserAction" method="logout">

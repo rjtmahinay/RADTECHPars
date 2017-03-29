@@ -123,6 +123,7 @@ public class Archive implements Serializable {
         this.id = id;
     }
 
+    @Transient
     public long getId() {
         return id;
     }

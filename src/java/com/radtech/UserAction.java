@@ -110,20 +110,27 @@ public class UserAction extends ActionSupport implements ModelDriven<User>, Sess
         if (user != null) {
             try {
                 session = ((SessionFactory) sessionmap.get("factory")).openSession();
-                User db = (User) session.get(User.class, user.getUsername());
+                System.out.println("The user is " + user.toString());
+                User db = (User) session.get(User.class, user.getUsername().trim());
+                System.out.println("OUtput is " + db.toString());
                 if (db == null) {
                     tx.begin();
+                    
                     if (user.getPassword().equals(user.getPassword2())) {
                         session.save(user);
                         user = null;
+                        tx.commit();
                     } else {
                         addFieldError("password2", "Password does not match");
+                        tx.rollback();
                         return INPUT;
                     }
-                    tx.commit();
+                    
                 } else {
                     addFieldError("username", "Username already Used");
+                    tx.rollback();
                     return INPUT;
+                    
                 }
 
             } catch (HibernateException e) {

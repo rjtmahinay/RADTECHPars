@@ -38,8 +38,6 @@
 
 				<div class="tab-content clearfix">
 					<div class="tab-pane active" id="1b">
-
-						<s:actionerror/>
 												<s:form action="changePassword" theme="bootstrap" cssClass="form" method="POST">
 
 							<br/>
@@ -59,7 +57,6 @@
 
 					</div> <!end of tab 1->
 					<div class="tab-pane" id="2b">
-						<s:actionerror/>
 						<s:form action="signup" theme="bootstrap" method="POST">
 
 							<br/>
