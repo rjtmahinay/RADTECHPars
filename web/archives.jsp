@@ -68,7 +68,7 @@
 								<td><s:property value="#record.sex" /></td>
 								<td><s:property value="#record.breed" /></td>
 								<td><s:property value="#record.color" /></td>
-								<td><s:property value="#record.age" /></td>
+                                                                <td><s:date format="MM/dd/yyyy" name="#record.dateOfBirth" /></td>
 								<td><s:property value="#record.weight" /></td>
 							</tr>
 						</s:iterator>

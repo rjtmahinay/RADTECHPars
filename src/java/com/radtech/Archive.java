@@ -141,9 +141,11 @@ public class Archive implements Serializable {
         setAddress(i.getAddress());
         setControlNumber(i.getControlNumber());
         setOwnerName(i.getOwnerName());
+        setPatientName(i.getPatientName());
         setContactNumber(i.getContactNumber());
         setBreed(i.getBreed());
         setSex(i.getSex());
+        System.out.println(i.getDateOfBirth());
         setDateOfBirth(i.getDateOfBirth());
         setColor(i.getColor());
         setWeight(i.getWeight());
