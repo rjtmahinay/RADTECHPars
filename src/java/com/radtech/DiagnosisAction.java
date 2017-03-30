@@ -3,6 +3,7 @@ package com.radtech;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 import org.apache.struts2.dispatcher.SessionMap;
 import org.apache.struts2.interceptor.SessionAware;
@@ -51,17 +52,20 @@ public class DiagnosisAction extends ActionSupport implements ModelDriven<Diagno
             tx.begin();
             System.out.println(model.getId());
             Information info = (Information) session.load(Information.class, Long.parseLong(model.getId()));
-            System.out.println(info.toString());
+            System.out.println(info.getDiagnosis().size());
             if (info != null) {
                 model.setInformation(info);
                 model.setDateDiagnosed(new Date());
-                session.save(model);
-                info.getAppointments();
-                session.merge(info);
-                session.flush();
-                model = null;
+                info.getDiagnosis().add(model);
+                session.persist(model);
                 tx.commit();
+                session.refresh(info);
+                session.refresh(model);
+                System.out.println(info.getDiagnosis().size() + " the size next");
                 sessionmap.put("currentRecord", info);
+                session.clear();
+                model = null;
+                return SUCCESS;
             }
             
         } catch (HibernateException e) {
