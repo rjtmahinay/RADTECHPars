@@ -10,8 +10,12 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+		<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+		<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+		<link rel="icon" href="favicon.ico" type="image/x-icon">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 		
@@ -38,6 +42,7 @@
 			<div class="collapse navbar-collapse" id="mainNavBar">
 
 				<ul class="nav navbar-nav">
+					<li><a href="#" data-toggle="modal" data-target="#addRecord2">Record <span class="glyphicon glyphicon-plus"></span></a></li>
 					<li><a href="search.jsp">Search <span class="glyphicon glyphicon-search"></span></a></li>
 					<li><a href="schedule.jsp">Schedule <span class="glyphicon glyphicon-calendar"></span></a></li>
 						<s:url action="statistics" var="stat"/>
@@ -52,10 +57,98 @@
                                         <s:url action='logout' var="logout"/>
 					<li><s:a href="%{logout}"> Logout <span class="glyphicon glyphicon-log-in"/></s:a></li>
 				</ul>        
-
+				
 			</div>
 		</nav> 
 		<div class="container-fluid">
+			<div class="modal fade" id="addRecord2">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<center>
+
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal">&times;</button>
+								<h3 class="modal-title">Add Record</h3>
+							</div>
+
+							<!-INSERT FORM ACTION HERE->
+
+
+							<s:form action="addRecord" theme="bootstrap" cssClass="form" method="POST">
+								<div class="modal-body">
+
+
+									<div class="table">
+									<table class="table table-condensed">
+										<tr>
+											<td><b>Owner Name:</b></td>
+											<td><s:textfield name="ownerName" placeholder=""/></td>
+										</tr>
+
+										<tr>
+											<td><b>Address:</b></td>
+											<td><s:textfield name="address" placeholder=""/></td>
+										</tr>
+
+										<tr>
+											<td><b>Contact Number:</b></td>
+											<td><s:textfield name="contactNumber" placeholder=""/></td>
+										</tr>
+
+										<tr>
+											<td><b>Pet Name:</b></td>
+											<td><s:textfield name="patientName" placeholder=""/></td>
+										</tr>
+
+										<tr>
+											<td><b>Sex:</b></td>
+											<td><s:select cssClass="text text-block" name="sex" list="{'', 'Male','Female'}" headerKey="-1"/></td>
+										</tr>
+
+										<tr>
+											<td><b>Breed:</b></td>
+											<td><s:textfield name="breed" placeholder=""/></td>
+										</tr>
+										
+										<tr>
+											<td><b>Color:</b></td>
+											<td><s:textfield name="color" placeholder=""/></td>
+										</tr>
+										
+										<tr>
+											<td><b>Date of birth:</b></td>
+											<td>
+                                                                                                <s:textfield name="dateinput" id="datepicker" />
+											</td>
+										</tr>
+										
+										
+										
+										<tr>
+											<td><b>Weight:</b></td>
+											<td><s:textfield name="weight" placeholder=""/></td>
+										</tr>
+
+									</table>
+								</div>
+
+
+
+
+
+
+									<div class="modal-footer form-group" >
+										<center>
+											<s:submit cssClass="btn btn-primary btn-block" value="submit" />
+											<s:reset value="clear" cssClass="btn btn-secondary btn-block"/>
+										</center>
+									</div>
+								</div>
+							</s:form>
+						</center>  
+					</div>
+				</div>
+			</div>
 			<br>
 			<br>
 			<br>

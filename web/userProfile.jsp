@@ -18,6 +18,38 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 		<title>User Profile</title>
+		<style>
+		
+			
+		body
+		{
+			overflow-x:hidden;
+		}
+		.table-fixed th {
+		width:100%;
+		float:left;
+		height:50px;
+		border-bottom-width: 0;
+		}	
+		.table-fixed thead {
+		width: 97%;
+		}
+		.table-fixed tbody {
+		  height: 150px;
+		  overflow-y: auto;
+		  overflow-x:hidden;
+		  width: 101.4%;
+		}
+		.table-fixed tbody, .table-fixed tr, .table-fixed td {
+		  display: block;
+		}
+		 .table-fixed tbody td, .table-fixed thead > tr >th{
+		  width:50%;
+		  height:50px;
+		  float: left;
+		  border-bottom-width: 0;
+		}
+		</style>
 	</head>
 	<body>
 		<s:include value="home.jsp"/>
@@ -193,7 +225,7 @@
 
 
 			<div class="table table-responsive">
-				<table class="table table-striped table-bordered table-hover">
+				<table class="table table-striped table-bordered table-hover table-fixed">
 					<thead>
 						<th width="20%">Date</th>
 						<th widht="80%">Diagnosis</th>
@@ -209,14 +241,7 @@
                                                                 </tr>
                                                         </s:iterator>
 
-						<tr>
-							<td>03/7/2017</td>
-							<td>sample diag</td>
-						</tr>
-						<tr>
-							<td>03/08/2017</td>
-							<td>dog appears to be dead</td>
-						</tr>
+						
 
 
 

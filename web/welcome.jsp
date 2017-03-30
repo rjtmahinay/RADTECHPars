@@ -95,16 +95,17 @@
 
 		<div class="container-fluid">
 			<div class="row">
+				<%--
 				<div class="col-md-2 col-sm-2">
 					<br>
 					<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addRecord"><span class="glyphicon glyphicon-plus"></span></button>
 				</div>
-				<div class="col-md-8">
+				--%>
+				
 					<center>
 					<h1><font face="roboto">All Records</font></h1>
 					</center>
-				</div>
-				<div class="col-md-2"></div>
+				
 			</div>
                         <div class="modal fade" id="confirmArchive">
                             <s:form action="toArchive">
@@ -137,6 +138,7 @@
                             </div>
                             </s:form>
                     </div>
+			<%--
 			<div class="modal fade" id="addRecord">
 				<div class="modal-dialog">
 					<div class="modal-content">
@@ -225,7 +227,7 @@
 					</div>
 				</div>
 			</div>
-
+			--%>
 
 			<div class="table-responsive">
 				<table class="table table-bordered table-hover table-striped table-inverse table-fixed">
