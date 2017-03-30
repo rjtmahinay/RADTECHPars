@@ -33,14 +33,16 @@ public class DiagnosisAction extends ActionSupport implements ModelDriven<Diagno
 
     @Override
     public void validate() {
-        if (sessionmap.get("currentRecord") == null);
         if (model.getDiagnosis() == null | model.getDiagnosis().equals("")) {
             addFieldError("diagnosis", "Diagnosis cannot be empty");
         }
     }
 
     public String addDiagnosis() {
-
+        if(checkUser()){
+            addFieldError("username", "Session Timeout");
+            return "error";
+        }
         Session session = null;
         Transaction tx = null;
         try {
@@ -71,5 +73,8 @@ public class DiagnosisAction extends ActionSupport implements ModelDriven<Diagno
             }
         }
         return SUCCESS;
+    }
+    public boolean checkUser(){
+        return sessionmap.get("currentUser")==null;
     }
 }

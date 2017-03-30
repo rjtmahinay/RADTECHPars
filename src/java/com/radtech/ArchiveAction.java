@@ -31,6 +31,9 @@ public class ArchiveAction extends ActionSupport implements ModelDriven<Archive>
     }
     
     public void validate(){
+        if(checkUser()){
+            addFieldError("username", "Session timeout");
+        }
     }
     
     public String deleteArchive(){
@@ -62,5 +65,8 @@ public class ArchiveAction extends ActionSupport implements ModelDriven<Archive>
                 session.close();
         }
         return SUCCESS;
+    }
+    public boolean checkUser(){
+        return sessionmap.get("currentUser")==null;
     }
 }

@@ -15,6 +15,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 
 public class AppointmentAction extends ActionSupport implements ModelDriven<Appointment>, SessionAware {
@@ -39,6 +40,10 @@ public class AppointmentAction extends ActionSupport implements ModelDriven<Appo
     }
 
     public String addAppointment() {
+        if(checkUser()){
+            addFieldError("username", "Session timeout");
+            return "error";
+        }
         Session session = null;
         Transaction tx = null;
         if (app != null) {
@@ -84,6 +89,10 @@ public class AppointmentAction extends ActionSupport implements ModelDriven<Appo
     }
 
     public String accomplishAppointment() {
+        if(checkUser()){
+            addFieldError("username", "Session timeout");
+            return "error";
+        }
         Session session = null;
         Transaction tx = null;
         if (app != null) {
@@ -129,6 +138,10 @@ public class AppointmentAction extends ActionSupport implements ModelDriven<Appo
     }
 
     public String statistics() {
+        if(checkUser()){
+            addFieldError("username", "Session timeout");
+            return "error";
+        }
         tallyMonths();
 
         return SUCCESS;
@@ -141,7 +154,6 @@ public class AppointmentAction extends ActionSupport implements ModelDriven<Appo
         Session session = null;
         try {
             session = ((SessionFactory) sessionmap.get("factory")).openSession();
-            System.out.println("Session opened!");
             java.time.LocalDateTime now = java.time.LocalDateTime.now();
             int year = now.getYear();
             for (int i = 0; i < 12; i++) {
@@ -154,12 +166,14 @@ public class AppointmentAction extends ActionSupport implements ModelDriven<Appo
                 Date outTime = cal.getTime();
                 System.out.println(outTime);
                 Criteria crit = session.createCriteria(Appointment.class);
+                crit.setProjection(Projections.property("date"));
                 crit.add(Restrictions.between("date", inTime, outTime));
                 List list = crit.list();
                 if (list == null) {
                     scores[i] = 0;
                 } else {
                     scores[i] = list.size();
+                    System.out.println("Size of " + (i+1) + " is " + list.size());
                 }
             }
             sessionmap.put("scores", scores);
@@ -173,37 +187,44 @@ public class AppointmentAction extends ActionSupport implements ModelDriven<Appo
         }
     }
     public String cancelAppointment(){
-            Session session = null;
-            Transaction tx = null;
-            
-            try{
-                session = ((SessionFactory)sessionmap.get("factory")).openSession();
-                tx = session.getTransaction();
-                tx.begin();
-                Appointment appointment = (Appointment)session.load(Appointment.class, Long.parseLong(app.getAppinput()));
-                if(appointment!=null){
-                    Information info = appointment.getInformation();
-                    info.getAppointments().remove(appointment);
-                    session.merge(info);
-                    session.delete(appointment);
-                    session.flush();
-                    tx.commit();
-                    sessionmap.put("appointments", session.createQuery("from Appointment where adate is null order by date").list());
-                }
-                else{
-                    tx.rollback();
-                    return INPUT;
-                }
-                
-            }
-            catch(HibernateException e){
-                if(tx!=null) tx.rollback();
-                e.printStackTrace();
-            }
-            finally{
-                if(session!=null)session.close();
-            }
-            
-            return INPUT;
+        if(checkUser()){
+            addFieldError("username", "Session timeout");
+            return "error";
         }
+        Session session = null;
+        Transaction tx = null;
+
+        try{
+            session = ((SessionFactory)sessionmap.get("factory")).openSession();
+            tx = session.getTransaction();
+            tx.begin();
+            Appointment appointment = (Appointment)session.load(Appointment.class, Long.parseLong(app.getAppinput()));
+            if(appointment!=null){
+                Information info = appointment.getInformation();
+                info.getAppointments().remove(appointment);
+                session.merge(info);
+                session.delete(appointment);
+                session.flush();
+                tx.commit();
+                sessionmap.put("appointments", session.createQuery("from Appointment where adate is null order by date").list());
+            }
+            else{
+                tx.rollback();
+                return INPUT;
+            }
+
+        }
+        catch(HibernateException e){
+            if(tx!=null) tx.rollback();
+            e.printStackTrace();
+        }
+        finally{
+            if(session!=null)session.close();
+        }
+
+        return INPUT;
+    }
+    public boolean checkUser(){
+        return sessionmap.get("currentUser")==null;
+    }
 }

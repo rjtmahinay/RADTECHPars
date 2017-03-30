@@ -29,33 +29,40 @@
         
         <action name="logout" class="com.radtech.UserAction" method="logout">
             <result>index.jsp</result>
+            
         </action>
 
         <action name="addRecord" class="com.radtech.InformationAction" method="add">
             <result>welcome.jsp</result>
             <result name="input">welcome.jsp</result>
+            <result name="error">index.jsp</result>
         </action>
         
         <action name="getRecord" class="com.radtech.InformationAction" method="get">
             <result>userProfile.jsp</result>
+            <result name="error">index.jsp</result>
         </action>
         
         <action name="updateRecord" class="com.radtech.InformationAction" method="updateRecord">
             <result>userProfile.jsp</result>
+            <result name="error">index.jsp</result>
         </action>
         
         <action name="searchDatabase" class="com.radtech.SearchEngine" method="searchDatabase">
             <result>search.jsp</result>
             <result name="input">search.jsp</result>
+            <result name="error">index.jsp</result>
         </action>
         
         <action name="addDiagnosis" class="com.radtech.DiagnosisAction" method="addDiagnosis">
             <result>diagnosis.jsp</result>
             <result name="input">welcome.jsp</result>
+            <result name="error">index.jsp</result>
         </action>
         
         <action name="toArchive" class="com.radtech.InformationAction" method="toArchive">
             <result>welcome.jsp</result>
+            <result name="error">index.jsp</result>
         </action>
         <action name="changePassword" class="com.radtech.UserAction" method="changePassword">
             <result>welcome.jsp</result>
@@ -64,17 +71,22 @@
         <action name="addAppointment" class="com.radtech.AppointmentAction" method="addAppointment">
             <result>userProfile.jsp</result>
             <result name="input">userProfile.jsp</result>
+            <result name="error">index.jsp</result>
         </action>
         <action name="accomplishAppointment" class="com.radtech.AppointmentAction" method="accomplishAppointment">
             <result>schedule.jsp</result>
             <result name="input">schedule.jsp</result>
+            <result name="error">index.jsp</result>
         </action>
         <action name="addDiagnosis" class="com.radtech.DiagnosisAction" method="addDiagnosis">
             <result>userProfile.jsp</result>
             <result name="input">userProfile.jsp</result>
+            <result name="error">index.jsp</result>
         </action>
         <action name="statistics" class="com.radtech.AppointmentAction" method="statistics">
             <result>statistics.jsp</result>
+            <result name="error">index.jsp</result>
+            
         </action>
         <action name="forgotPassword" class="com.radtech.UserAction" method="forgotPassword">
             <result>forgotPass.jsp</result>
@@ -91,17 +103,17 @@
         <action name="resetPass" class="com.radtech.SecurityQuestionAction" method="resetPassword">
             <result>index.jsp</result>
             <result name="input">forgotPass.jsp</result>
+            
         </action>
         <action name="deleteArchive" class="com.radtech.ArchiveAction" method="deleteArchive">
             <result>archives.jsp</result>
-            <result name="input">welcome.jsp</result>
+            <result name="input">index.jsp</result>
+            
         </action>
         <action name="cancelAppointment" class="com.radtech.AppointmentAction" method="cancelAppointment">
             <result>schedule.jsp</result>
             <result name="input">welcome.jsp</result>
+            <result name="error">index.jsp</result>
         </action>
-        
-        
-        
     </package>
 </struts>

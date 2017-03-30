@@ -77,6 +77,7 @@ public class SearchEngine extends ActionSupport implements SessionAware {
     }
 
     public void validate() {
+        
         if (getSearchType().equals("FAIL")) {
             sessionmap.put("search", (List) sessionmap.get("view"));
             addFieldError("searchInput", "Field is left blank");
@@ -89,6 +90,10 @@ public class SearchEngine extends ActionSupport implements SessionAware {
 
     @Action("searchDatabase")
     public String searchDatabase() {
+        if(checkUser()){
+            addFieldError("username", "Session Timeout");
+            return "error";
+        }
         Session session = null;
         if (getSearchType().equals("FAIL")) {
             addFieldError("searchInput", "Something went wrong...");
@@ -174,5 +179,8 @@ public class SearchEngine extends ActionSupport implements SessionAware {
         }
 
         return SUCCESS;
+    }
+    public boolean checkUser(){
+        return sessionmap.get("currentUser")==null;
     }
 }

@@ -37,6 +37,10 @@ public class InformationAction extends ActionSupport implements ModelDriven<Info
     }
 
     public String add() {
+        if(checkUser()){
+            addFieldError("username", "Session timeout");
+            return "error";
+        }
         Session session = null;
         Transaction tx = null;
         if (information != null) {
@@ -70,6 +74,10 @@ public class InformationAction extends ActionSupport implements ModelDriven<Info
     }
 
     public String get() {
+        if(checkUser()){
+            addFieldError("username", "Session timeout");
+            return "error";
+        }
         Session session = null;
         try {
             session = ((SessionFactory) sessionmap.get("factory")).openSession();
@@ -96,7 +104,10 @@ public class InformationAction extends ActionSupport implements ModelDriven<Info
     }
 
     public String toArchive() {
-
+        if(checkUser()){
+            addFieldError("username", "Session timeout");
+            return "error";
+        }
         Session session = null;
         try {
             session = ((SessionFactory) sessionmap.get("factory")).openSession();
@@ -125,6 +136,10 @@ public class InformationAction extends ActionSupport implements ModelDriven<Info
     }
 
     public String updateRecord() {
+        if(checkUser()){
+            addFieldError("username", "Session timeout");
+            return "error";
+        }
         Session session = null;
         Transaction tx = null;
 
@@ -175,6 +190,7 @@ public class InformationAction extends ActionSupport implements ModelDriven<Info
     }
 
     public void setSchedule(Information source) {
+        
         if (source.getAppointments() != null) {
             source.setNextAppointment(null);
             forwhile:
@@ -185,5 +201,8 @@ public class InformationAction extends ActionSupport implements ModelDriven<Info
                 }
             }
         }
+    }
+    public boolean checkUser(){
+        return sessionmap.get("currentUser")==null;
     }
 }

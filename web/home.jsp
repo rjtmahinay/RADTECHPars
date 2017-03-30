@@ -49,8 +49,8 @@
 						<s:param name="username" value="%{#session.currentuser.username}"/>
 					</s:url>
 					<li><s:a href="%{getUser}"> <s:property value="%{#session.currentUser.name}"/> <span class="glyphicon glyphicon-cog"></span> </s:a></li>
-                                        
-					<li><s:a href="<s:url action='logout'/>"> Logout <span class="glyphicon glyphicon-log-in"></span></s:a></li>
+                                        <s:url action='logout' var="logout"/>
+					<li><s:a href="%{logout}"> Logout <span class="glyphicon glyphicon-log-in"/></s:a></li>
 				</ul>        
 
 			</div>
