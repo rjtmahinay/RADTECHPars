@@ -19,6 +19,8 @@
 		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
                 <script src="js/jquery-1.12.4.js"></script>
                 <script src="js/jquery-ui.js"></script>
+
+                
 		<style>
 		<%--	
 			body
@@ -80,13 +82,11 @@
                           var id = $(e.relatedTarget).data('id');
                           document.getElementById('arcinput').value = id;
                           alert(id);
+                            });
                         });
-                    });  
-                    
-                   
-                   $( function() {
-                    $( "#apppicker" ).datepicker();
-                   } );
+                        $( function() {
+                        $( "#datepicker" ).datepicker();
+                    } );
 		</script>
 		<title>Welcome To Radtech PARS</title>
 	</head>
@@ -194,12 +194,7 @@
 										<tr>
 											<td><b>Date of birth:</b></td>
 											<td>
-												<s:textfield name="dateinput" id="datepicker" />
-                                                                                                <script>
-                                                                                                $( function() {
-                                                                                                    $( "#datepicker" ).datepicker();
-                                                                                                } );
-                                                                                                </script>
+                                                                                                <s:textfield name="dateinput" id="datepicker" />
 											</td>
 										</tr>
 										
