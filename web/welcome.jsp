@@ -17,6 +17,8 @@
 		<link rel="icon" href="favicon.ico" type="image/x-icon">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+                <script src="js/jquery-1.12.4.js"></script>
+                <script src="js/jquery-ui.js"></script>
 		<style>
 		<%--	
 			body
@@ -70,8 +72,21 @@
 
 		<script>
 			$('form').each(function () {
-				this.reset()
+				this.reset();
 			});
+                        
+                        $(document).ready(function() {
+                        $('#confirmArchive').on('show.bs.modal', function(e) {
+                          var id = $(e.relatedTarget).data('id');
+                          document.getElementById('arcinput').value = id;
+                          alert(id);
+                        });
+                    });  
+                    
+                   
+                   $( function() {
+                    $( "#apppicker" ).datepicker();
+                   } );
 		</script>
 		<title>Welcome To Radtech PARS</title>
 	</head>
@@ -91,7 +106,37 @@
 				</div>
 				<div class="col-md-2"></div>
 			</div>
+                        <div class="modal fade" id="confirmArchive">
+                            <s:form action="toArchive">
+                                <input type="hidden" name="idinput" value="" id="arcinput"/>
+                            <div class="modal-dialog modal-sm">
+                                    <div class="modal-content">
+                                            <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                    <h3 align="center" class="modal-title">Confirm Archive</h3>
+                                            </div>
+                                            <div class="modal-body">
+                                                    <p align="center">Reason for archive:</p>
+                                                    <center><s:textfield name="reason"/></center>
 
+                                            </div>
+                                            <div class="modal-footer form-group" >
+                                                    <div class="row">
+                                                            <div class="col-md-6 col-sm-6">
+                                                                <center><s:submit type="button" cssClass="btn btn-danger btn-block" value="Archive" /></center>
+                                                            </div>
+                                                            <div class="col-md-6 col-sm-6">
+                                                                    <center><button type="button" class="btn btn-secondary btn-block" data-dismiss="modal">Cancel</button></center>
+                                                            </div>
+
+                                                    </div>
+                                            </div>
+                                    </div>
+
+
+                            </div>
+                            </s:form>
+                    </div>
 			<div class="modal fade" id="addRecord">
 				<div class="modal-dialog">
 					<div class="modal-content">
@@ -149,22 +194,12 @@
 										<tr>
 											<td><b>Date of birth:</b></td>
 											<td>
-												<script src="js/jquery-1.12.4.js"></script>
-												<script src="js/jquery-ui.js"></script>
-												<script>
-												$( function() {
-												 $( "#datepicker" ).datepicker();
-												} );
-												</script>
-												<script>
-												$( function() {
-												 $( "#apppicker" ).datepicker();
-												} );
-												</script>
-
-
-
 												<s:textfield name="dateinput" id="datepicker" />
+                                                                                                <script>
+                                                                                                $( function() {
+                                                                                                    $( "#datepicker" ).datepicker();
+                                                                                                } );
+                                                                                                </script>
 											</td>
 										</tr>
 										
@@ -223,44 +258,16 @@
 								<s:url action="getRecord" var="rec">
 									<s:param name="id"><s:property value="#record.controlNumber"/></s:param>
 								</s:url>
-								<s:url action="toArchive" var="arc">
-									<s:param name="id"><s:property value="#record.controlNumber"/></s:param>
-								</s:url>
 								<td>       
 									<s:a href="%{rec}"><button class="btn btn-block btn-primary" type="submit" name="action">Update</button></s:a>
 								</td>
 
 								<td>
-									<button type="button" class="btn btn-danger btn-block" data-toggle="modal" data-target="#confirmArchive">Archive</button>
+									<button type="button" data-id="<s:property value="#record.controlNumber"/>" class="btn btn-danger btn-block" 
+                                                                        
+                                                                        data-toggle="modal" data-target="#confirmArchive">Archive</button>
 
-									<div class="modal fade" id="confirmArchive">
-										<div class="modal-dialog modal-sm">
-											<div class="modal-content">
-												<div class="modal-header">
-													<button type="button" class="close" data-dismiss="modal">&times;</button>
-													<h3 align="center" class="modal-title">Confirm Archive</h3>
-												</div>
-												<div class="modal-body">
-													<p align="center">Reason for archive:</p>
-													<center><s:textfield name="reason"/></center>
-													
-												</div>
-												<div class="modal-footer form-group" >
-													<div class="row">
-														<div class="col-md-6 col-sm-6">
-															<center><s:a href="%{arc}"><button type="button" class="btn btn-danger btn-block" data-toggle="modal">Archive</button></s:a></center>
-														</div>
-														<div class="col-md-6 col-sm-6">
-															<center><button type="button" class="btn btn-secondary btn-block" data-dismiss="modal">Cancel</button></center>
-														</div>
-
-													</div>
-												</div>
-											</div>
-
-
-										</div>
-									</div>
+									
 
 								</td>
 								<td><s:property value="#record.controlNumber"/> </td>

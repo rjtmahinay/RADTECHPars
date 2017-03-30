@@ -36,6 +36,7 @@ public class Information implements Serializable {
     private double weight;
     private long id;
     private String dateinput;
+    private String idinput;
     public List<Diagnosis> diagnosis;
     private List<Appointment> appointments;
     private Date nextAppointment;
@@ -181,6 +182,15 @@ public class Information implements Serializable {
 
     public void setNextAppointment(Date nextAppointment) {
         this.nextAppointment = nextAppointment;
+    }
+
+    @Transient
+    public String getIdinput() {
+        return idinput;
+    }
+
+    public void setIdinput(String idinput) {
+        this.idinput = idinput;
     }
 
     @Override

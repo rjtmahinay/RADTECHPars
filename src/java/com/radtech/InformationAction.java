@@ -110,6 +110,7 @@ public class InformationAction extends ActionSupport implements ModelDriven<Info
         }
         Session session = null;
         try {
+            information.setId(Long.parseLong(information.getIdinput()));
             session = ((SessionFactory) sessionmap.get("factory")).openSession();
             Transaction tx = session.getTransaction();
             tx.begin();
