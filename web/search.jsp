@@ -9,7 +9,7 @@
 		<title>RADTECH PARS</title>
 	</head>
 	<body>
-	   <s:include value="home.jsp" />
+	   <s:include value="assistantNav.jsp" />
 	   <div class="container-fluid">
 			<s:form action="searchDatabase" namespace="/">
 				<br>
@@ -43,18 +43,10 @@
 			<table class="table table-bordered table-hover table-inverse table-striped">
 				<thead>
 					<tr>
-						<th>Update</th>
-						<th>Delete</th>
+						<th>Profile</th>
 						<th>#</th>                                
-						<th>Owner Name</th>
-						<th>Address</th>
+						<th>Customer Name</th>
 						<th>Contact Number</th>
-						<th>Pet Name</th>
-						<th>Sex</th>
-						<th>Breed</th>
-						<th>Color</th>
-						<th>Date of birth</th>
-						<th>Weight</th>
 					</tr>
 				</thead>
 
@@ -70,52 +62,48 @@
 									<s:param name="id"><s:property value="#record.controlNumber"/></s:param>
 								</s:url>
 								<td>       
-									<s:a href="%{rec}"><button class="btn btn-block btn-primary" type="submit" name="action">Update</button></s:a>
+									<s:a href="%{rec}"><button class="btn btn-block btn-primary" type="submit" name="action">Profile</button></s:a>
 								</td>
+								<%--
+								
+									<td>
+										<button type="button" class="btn btn-danger btn-block" data-toggle="modal" data-target="#confirmArchive">Archive</button>
 
-								<td>
-									<button type="button" class="btn btn-danger btn-block" data-toggle="modal" data-target="#confirmArchive">Archive</button>
-
-									<div class="modal fade" id="confirmArchive">
-										<div class="modal-dialog modal-sm">
-											<div class="modal-content">
-												<div class="modal-header">
-													<button type="button" class="close" data-dismiss="modal">&times;</button>
-													<h3 align="center" class="modal-title">Confirm Archive</h3>
-												</div>
-												<div class="modal-body">
-													<p align="center">Reason for archive:</p>
-													<center><s:textfield name="reason"/></center>
-													
-												</div>
-												<div class="modal-footer form-group" >
-													<div class="row">
-														<div class="col-md-6 col-sm-6">
-															<center><s:a href="%{arc}"><button type="button" class="btn btn-danger btn-block" data-toggle="modal">Archive</button></s:a></center>
-														</div>
-														<div class="col-md-6 col-sm-6">
-															<center><button type="button" class="btn btn-secondary btn-block" data-dismiss="modal">Cancel</button></center>
-														</div>
+										<div class="modal fade" id="confirmArchive">
+											<div class="modal-dialog modal-sm">
+												<div class="modal-content">
+													<div class="modal-header">
+														<button type="button" class="close" data-dismiss="modal">&times;</button>
+														<h3 align="center" class="modal-title">Confirm Archive</h3>
+													</div>
+													<div class="modal-body">
+														<p align="center">Reason for archive:</p>
+														<center><s:textfield name="reason"/></center>
 
 													</div>
+													<div class="modal-footer form-group" >
+														<div class="row">
+															<div class="col-md-6 col-sm-6">
+																<center><s:a href="%{arc}"><button type="button" class="btn btn-danger btn-block" data-toggle="modal">Archive</button></s:a></center>
+															</div>
+															<div class="col-md-6 col-sm-6">
+																<center><button type="button" class="btn btn-secondary btn-block" data-dismiss="modal">Cancel</button></center>
+															</div>
+
+														</div>
+													</div>
 												</div>
+
+
 											</div>
-
-
 										</div>
-									</div>
 
-								</td>
+									</td>
+								
+								--%>
 								<td><s:property value="#record.controlNumber"/> </td>
 								<td><s:property value="#record.ownerName" /></td>
-								<td><s:property value="#record.address" /></td>
 								<td><s:property value="#record.contactNumber" /></td>
-								<td><s:property value="#record.patientName" /></td>
-								<td><s:property value="#record.sex" /></td>
-								<td><s:property value="#record.breed" /></td>
-								<td><s:property value="#record.color" /></td>
-								<td><s:date name="#record.dateOfBirth" format="MM/dd/yyyy"/></td>
-								<td><s:property value="#record.weight" /></td>
 							</tr>
 						</s:iterator>
 				</tbody>    

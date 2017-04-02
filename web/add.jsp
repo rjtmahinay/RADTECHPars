@@ -24,68 +24,20 @@
 			
 
 
-		<s:include value="home.jsp"/>
+		<s:include value="assistantNav.jsp"/>
 		
 		<h2>Add Record</h2>
 		
 		
 		<s:form action="addRecord" theme="bootstrap" cssClass="form" method="POST">
-			
-
 				
 					<label for="ownerName">Owner Name</label>
 					<s:textfield name="ownerName" placeholder=""/>
-				
-
-				
-					<label for="address">Address</label>
-					<s:textfield name="address" placeholder=""/>
-				
-
-				
+		
 					<label for="contactNumber">Contact Number</label>
 					<s:textfield name="contactNumber" placeholder=""/>
 				
 
-				
-					<label for="patientName">Pet Name</label>
-					<s:textfield name="patientName" placeholder=""/>
-				
-												
-					<label for="color">Color</label>
-					<s:textfield name="color" placeholder=""/>
-				
-
-				
-					<label for="sex">Sex</label>
-					<s:select cssClass="text text-block" name="sex" list="{'', 'Male','Female'}" headerKey="-1"/>
-				
-
-				
-					<label for="breed">Breed</label>
-					<s:textfield name="breed" placeholder=""/>
-				
-
-				
-					<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-					<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-					<script>
-					$( function() {
-					  $( "#datepicker" ).datepicker({
-						  minDate: -7300,
-						changeMonth: true,
-						changeYear: true
-					  });
-					} );
-					</script>
-
-					<label for="date">Date of birth</label>
-					<s:textfield name="dateinput" id="datepicker" placeholder="click here to set date"/>
-				
-
-				
-					<label for="weight">Weight</label>
-					<s:textfield name="weight" placeholder=""/>
 				
 
 
