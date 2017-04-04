@@ -16,7 +16,14 @@
 		<link rel="icon" href="favicon.ico" type="image/x-icon">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-		<title>RADTECH PARS</title>
+		<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<script>
+	$( function() {
+	  $( "#datepicker" ).datepicker();
+	} );
+	</script>
+		<title>Add new customers here</title>
 	</head>
 
 	<body>
@@ -33,21 +40,16 @@
 				
 					<label for="ownerName">Owner Name</label>
 					<s:textfield name="ownerName" placeholder=""/>
-		
+					
+					<label for="address">Address</label>
+					<s:textfield name="address" placeholder=""/>
+					
 					<label for="contactNumber">Contact Number</label>
 					<s:textfield name="contactNumber" placeholder=""/>
-				
-
-				
-
-
-
-
-
-
+			
 				<center>
 					<s:submit cssClass="btn btn-primary " value="Add Record" />
-					<s:reset value="clear data" cssClass="btn btn-secondary"/>
+					<s:reset value="Clear Data" cssClass="btn btn-secondary"/>
 				</center>
 
 			

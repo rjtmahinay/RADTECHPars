@@ -23,6 +23,7 @@
 	<body background="dog.jpg">
 		<s:include value="assistantNav.jsp"/>
 		<div class="container-fluid">
+			<h1>Schedule</h1>
 			<div class="table-responsive">
 				<table class="table table-bordered table-hover table-striped table-inverse" align="center">
 					<thead>
