@@ -31,7 +31,7 @@
 			
 
 
-		<s:include value="assistantNav.jsp"/>
+		<s:include value="home.jsp"/>
 		
 		<h2>Add Record</h2>
 		

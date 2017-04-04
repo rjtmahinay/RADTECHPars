@@ -3,7 +3,9 @@
 		Created on : 01 31, 17, 9:03:37 PM
 		Author     : Aspire
 --%>
+
 <%@taglib uri="/struts-tags" prefix="s" %>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -35,29 +37,31 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a href="welcome.jsp" class="navbar-brand">RADTECH PARS <span class="glyphicon glyphicon-home"></span></a>
+				<a href="schedule.jsp" class="navbar-brand">Animal Station <span class="glyphicon glyphicon-home"></span></a>
 			</div>
 
 			<!-- Menu Items -->
 			<div class="collapse navbar-collapse" id="mainNavBar">
-
+				
 				<ul class="nav navbar-nav">
-					<li><a href="#" data-toggle="modal" data-target="#addRecord2">Record <span class="glyphicon glyphicon-plus"></span></a></li>
-					<li><a href="search.jsp">Search <span class="glyphicon glyphicon-search"></span></a></li>
-					<li><a href="schedule.jsp">Schedule <span class="glyphicon glyphicon-calendar"></span></a></li>
-						<s:url action="statistics" var="stat"/>
-					<li><s:a href="statistics">Statistics <span class="glyphicon glyphicon-stats"></span></s:a></li>
+					<li><a href="schedule.jsp">Appointments <span class="glyphicon glyphicon-calendar"></span></a></li>
+					<li><a href="search.jsp">Add Existing <span class="glyphicon glyphicon-plus"></span></a></li>
+					<li><a href="add.jsp">Add New <span class="glyphicon glyphicon-plus"></span></a></li>
+					<s:if test="%{#session.currentUser.name=='admin'}">
+						<li><s:a href="statistics">Statistics <span class="glyphicon glyphicon-stats"></span></s:a></li>
 						<li><a href="archives.jsp">Archives <span class="glyphicon glyphicon-trash"></span></a></li>
-					</ul>
-					<ul class="nav navbar-nav navbar-right">
-                                        <s:url action="fetchuser" var="getUser">
+					</s:if>	
+					
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					<s:url action="fetchuser" var="getUser">
 						<s:param name="username" value="%{#session.currentuser.username}"/>
 					</s:url>
 					<li><s:a href="%{getUser}"> <s:property value="%{#session.currentUser.name}"/> <span class="glyphicon glyphicon-cog"></span> </s:a></li>
-                                        <s:url action='logout' var="logout"/>
+					<s:url action='logout' var="logout"/>
 					<li><s:a href="%{logout}"> Logout <span class="glyphicon glyphicon-log-in"/></s:a></li>
 				</ul>        
-				
+
 			</div>
 		</nav> 
 		<div class="container-fluid">
@@ -109,21 +113,21 @@
 											<td><b>Breed:</b></td>
 											<td><s:textfield name="breed" placeholder=""/></td>
 										</tr>
-										
+
 										<tr>
 											<td><b>Color:</b></td>
 											<td><s:textfield name="color" placeholder=""/></td>
 										</tr>
-										
+
 										<tr>
 											<td><b>Date of birth:</b></td>
 											<td>
-                                                                                                <s:textfield name="dateinput" id="datepicker" />
+																								<s:textfield name="dateinput" id="datepicker" />
 											</td>
 										</tr>
-										
-										
-										
+
+
+
 										<tr>
 											<td><b>Weight:</b></td>
 											<td><s:textfield name="weight" placeholder=""/></td>

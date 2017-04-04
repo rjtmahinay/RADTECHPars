@@ -45,7 +45,7 @@
 		</style>
 	</head>
 	<body>
-		<s:include value="assistantNav.jsp"/>
+		<s:include value="home.jsp"/>
 
 		<div class="container-fluid">
 

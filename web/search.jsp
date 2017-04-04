@@ -9,7 +9,7 @@
 		<title>RADTECH PARS</title>
 	</head>
 	<body>
-	   <s:include value="assistantNav.jsp" />
+	   <s:include value="home.jsp" />
 	   <div class="container-fluid">
 			<s:form action="searchDatabase" namespace="/">
 				<br>

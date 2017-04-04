@@ -47,23 +47,27 @@
 			<div class="table-responsive">
 				<table class="table table-bordered table-hover table-striped table-inverse" align="center">
 					<thead>
-						<th width="10%">Completed</th>
+						<s:if test="%{#session.currentUser.name=='admin'}">
+						<th width="10%">Diagnosis</th>	
+						</s:if>
 						<th width="10%">Canceled</th>
-						<th width="15%">Owner Name</th>
-						<th width="15%">Pet Name</th>
-						<th width="15%">Date</th>
-						<th width="35%">Comments</th>
+						<th width="">Customer Name</th>
+						
+						<th width="">Date</th>
+						<th width="">Transaction Type</th>
 					</thead>
 					<tbody>
 						<s:iterator value="#session.appointments" var="record">	
 						<tr>
-
-							<td><button type="button" class="btn btn-success btn-block" data-toggle="modal" data-target="#confirmComplete" data-id="<s:property value="%{#record.appointmentNumber}" />"><span class="glyphicon glyphicon-ok"></span></button></td>
-							<td><button type="button" class="btn btn-danger btn-block" data-toggle="modal" data-target="#confirmCancel" data-id="<s:property value="%{#record.appointmentNumber}" />"><span class="glyphicon glyphicon-remove"></span></button></td>
-							<td><s:property value="%{#record.information.ownerName}" /></td>
-                                                        <td><s:property value="%{#record.information.patientName}" /></td>
-                                                        <td><s:date name="#record.date" format="MM/dd/yyyy"/></td>
-							<td><s:property value="#record.comment" /></td>
+							<s:if test="%{#session.currentUser.name=='admin'}">
+							<td><button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#confirmComplete" data-id="
+								<s:property value="%{#record.appointmentNumber}" />"><span class="glyphicon glyphicon-ok"></span></button></td>
+							</s:if>
+							<td><button type="button" class="btn btn-danger btn-block" data-toggle="modal" data-target="#confirmCancel" data-id="
+								<s:property value="%{#record.appointmentNumber}" />"><span class="glyphicon glyphicon-remove"></span></button></td>
+							<td><s:property value="%{#record.information.ownerName}" /></td>	
+							<td><s:date name="#record.date" format="MM/dd/yyyy"/></td>
+							<td><s:property value="#record.transacType" /></td>
 
 						</tr>
 												</s:iterator>
