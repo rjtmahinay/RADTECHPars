@@ -27,7 +27,7 @@
                 </script>
 		<title>Archives</title>
 	</head>
-	<body>
+	<body background="dog.jpg">
 		
 		<s:include value="home.jsp"/>
 		<div class="container-fluid">
@@ -43,12 +43,6 @@
 							<th>Owner Name</th>
 							<th>Address</th>
 							<th>Contact Number</th>
-							<th>Pet Name</th>
-							<th>Sex</th>
-							<th>Breed</th>
-							<th>Color</th>
-							<th>Age</th>
-							<th>Weight</th>
 						</tr>
 					</thead>
 					<tbody>

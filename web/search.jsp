@@ -19,8 +19,8 @@
 					<div class="col-md-2 col-sm-4">
 						<center>
 						
-                                                    <s:select name="searchType" list="{'Control Number', 'Address', 'Date of Birth', 'Breed', 'Color', 'Contact Number', 'Owner Name', 'Patient Name', 'Sex', 'Weight'}" 
-                                                              headerKey="-1" headerValue="Select Search Type"/>
+                                                    <s:select name="searchType" list="{'Customer Name', 'Customer Number', 'Address'}" 
+                                                              headerKey="-1"/>
 						</center>
 					</div>
 
@@ -31,7 +31,7 @@
 					</div>    
 					<div class="col-md-2 col-sm-4">
 						<center>
-							<s:submit cssClass="btn btn-primary btn-sm btn-block" name="submit" value="submit"/>
+							<s:submit cssClass="btn btn-primary btn-sm btn-block" name="submit" value="Submit"/>
 						</center>
 					</div>
 					<div class="col-md-3 col-sm-0"></div>
@@ -43,7 +43,7 @@
 			<table class="table table-bordered table-hover table-inverse table-striped">
 				<thead>
 					<tr>
-						<th>Profile</th>
+						<th width="10%">Profile</th>
 						<th>#</th>                                
 						<th>Customer Name</th>
 						<th>Contact Number</th>
@@ -62,8 +62,11 @@
 									<s:param name="id"><s:property value="#record.controlNumber"/></s:param>
 								</s:url>
 								<td>       
-									<s:a href="%{rec}"><button class="btn btn-block btn-primary" type="submit" name="action">Profile</button></s:a>
+									<s:a href="%{rec}"><button class="btn btn-block btn-primary" type="submit" name="action">Appointment</button></s:a>
 								</td>
+								<td><s:property value="#record.controlNumber"/> </td>
+								<td><s:property value="#record.ownerName" /></td>
+								<td><s:property value="#record.contactNumber" /></td>
 								<%--
 								
 									<td>
@@ -101,9 +104,7 @@
 									</td>
 								
 								--%>
-								<td><s:property value="#record.controlNumber"/> </td>
-								<td><s:property value="#record.ownerName" /></td>
-								<td><s:property value="#record.contactNumber" /></td>
+								
 							</tr>
 						</s:iterator>
 				</tbody>    

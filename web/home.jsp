@@ -44,10 +44,10 @@
 			<div class="collapse navbar-collapse" id="mainNavBar">
 				
 				<ul class="nav navbar-nav">
-					<li><a href="schedule.jsp">Appointments <span class="glyphicon glyphicon-calendar"></span></a></li>
-					<li><a href="search.jsp">Add Existing <span class="glyphicon glyphicon-plus"></span></a></li>
-					<li><a href="add.jsp">Add New <span class="glyphicon glyphicon-plus"></span></a></li>
-					<s:if test="%{#session.currentUser.name=='admin'}">
+					<s:if test="%{#session.currentUser.name!='admin'}">
+					<li><a href="search.jsp">Appointment <span class="glyphicon glyphicon-plus"></span></a></li>
+					<li><a href="add.jsp">New Customer <span class="glyphicon glyphicon-user"></span></a></li>
+					
 						<li><s:a href="statistics">Statistics <span class="glyphicon glyphicon-stats"></span></s:a></li>
 						<li><a href="archives.jsp">Archives <span class="glyphicon glyphicon-trash"></span></a></li>
 					</s:if>	

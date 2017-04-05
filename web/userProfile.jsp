@@ -44,32 +44,32 @@
 		}
 		</style>
 	</head>
-	<body>
+	<body background="dog.jpg">
 		<s:include value="home.jsp"/>
 
 		<div class="container-fluid">
-
-				<font face="roboto">
-
-
-					<h1>Customer Profile</h1>
-
-
-
-					<%--<s:date name="%{#session.currentRecord.nextAppointment}" format="MM/dd/yyyy"/></h1>--%>
-
-				</font>
-
+				<s:form action="updateRecord" theme="bootstrap" cssClass="form" method="POST">
+				<div class="row">
+					<div class="col-md-4">
+						<font face="roboto">
+							<h1>Customer Profile</h1>
+						</font>
+					</div>
+					<div class="col-md-2">	
+						<br>
+						<p align="right"><s:submit value="Edit Record" cssClass="btn btn-primary"/></p>
+					</div>	
+				</div>
 				<div class="row">
 					<div class="col-md-6">
 
-						<s:form action="updateRecord" theme="bootstrap" cssClass="form" method="POST">
+						
 
 
 						<div class="table">
 						<table class="table table-condensed table-">
 							<tr>
-								<td>Control Number:</td>
+								<td>Customer Number:</td>
 								<td><s:property value="%{#session.currentRecord.controlNumber}"/></td>
 							</tr>
 
@@ -95,8 +95,8 @@
 				</div>		
 
 					<center>
-					<s:submit value="Edit Record" cssClass="btn btn-primary"/>
-					<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#diagnoWindow">&plus; Diagnosis</button>
+					
+					<%--<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#diagnoWindow">&plus; Diagnosis</button>--%>
 					<br><br>
 					</center>
 					</s:form>
@@ -203,19 +203,25 @@
 					</tbody>
 				</table>
 			</div>
-				<center>
-					<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-					<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-					<script>
-					$( function() {
-					  $( "#datepicker" ).datepicker();
-					} );
-					</script>
-					<s:textfield name="dateinput" id="datepicker" placeholder="mm/dd/yyyy" />
-					<br>
-					<s:submit cssClass="btn btn-primary" value="Create Appointment/s" />
 
-				</center>	
+			<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+			<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+			<script>
+			$( function() {
+			  $( "#datepicker" ).datepicker();
+			} );
+			</script>
+			<div class="row">
+				<div class="col-md-6">
+					
+					<p align="right"><s:submit cssClass="btn btn-primary" value="Create Appointment/s" /></p>
+				</div>	
+				<div class="col-md-6">
+					
+					<s:textfield name="dateinput" id="datepicker" placeholder="mm/dd/yyyy" />
+				</div>
+			</div>
+					
 			</s:form>		
 					<%--
 					<div class="panel panel-default">

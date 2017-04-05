@@ -28,9 +28,11 @@
 						<li class="active">
 							<a href="#1b" data-toggle="tab">Change Password</a>
 						</li>
+						<s:if test="%{#session.currentUser.name=='admin'}">
 						<li>
 							<a href="#2b" data-toggle="tab">Create New User</a>
 						</li>
+						</s:if>
 						<li>
 							<a href="#3b" data-toggle="tab">Additional Security</a>
 						</li>

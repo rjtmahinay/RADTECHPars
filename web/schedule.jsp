@@ -36,7 +36,7 @@
 		</script>
 	<title>Doctor's Schedule</title>
 	</head>
-	<body>
+	<body background="dog.jpg">
 		<s:include value="home.jsp"/>
 		<div class="container-fluid">
 			<h1 align="center"><font face="roboto">Current Schedule</font></h1>
@@ -50,41 +50,58 @@
 						<s:if test="%{#session.currentUser.name=='admin'}">
 						<th width="10%">Diagnosis</th>	
 						</s:if>
-						<th width="10%">Canceled</th>
+						<s:if test="%{#session.currentUser.name!='admin'}">
+						<th width="10%"><center><span class="glyphicon glyphicon-edit"></span></center></th>
+						<th width="10%"><center><span class="glyphicon glyphicon-remove"></span></center></th>
+						</s:if>
 						<th width="">Customer Name</th>
-						
+						<th>Pet Name</th>
 						<th width="">Date</th>
 						<th width="">Transaction Type</th>
 					</thead>
 					<tbody>
 						<s:iterator value="#session.appointments" var="record">	
+							
 						<tr>
+							
 							<s:if test="%{#session.currentUser.name=='admin'}">
 							<td><button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#confirmComplete" data-id="
-								<s:property value="%{#record.appointmentNumber}" />"><span class="glyphicon glyphicon-ok"></span></button></td>
+								<s:property value="%{#record.appointmentNumber}" />">Consult</button></td>
 							</s:if>
+							<s:if test="%{#session.currentUser.name!='admin'}">
+							<s:url action="getVitals" var="vit">
+								<s:param name="id"><s:property value="#record.controlNumber"/></s:param>
+							</s:url>
+							<td><s:a href="%{vit}"><button class="btn btn-block btn-primary" type="submit" name="action">Vitals</button></s:a></td>
 							<td><button type="button" class="btn btn-danger btn-block" data-toggle="modal" data-target="#confirmCancel" data-id="
-								<s:property value="%{#record.appointmentNumber}" />"><span class="glyphicon glyphicon-remove"></span></button></td>
+								<s:property value="%{#record.appointmentNumber}" />">Cancel</button></td>
+							</s:if>
 							<td><s:property value="%{#record.information.ownerName}" /></td>	
+							<td><s:property value="%{#record.information.patientName}" /></td>
 							<td><s:date name="#record.date" format="MM/dd/yyyy"/></td>
 							<td><s:property value="#record.transacType" /></td>
-
+							
 						</tr>
 												</s:iterator>
 
 					</tbody>
 				</table>
 			</div>
-			<div class="modal fade" id="confirmComplete">
-							<s:form action="accomplishAppointment">
+			<div class="modal fade" id="initialDiagnosis">
+							<s:form action="initialDiagnosis">
 				<div class="modal-dialog modal-sm">
 					<div class="modal-content">
 						<div class="modal-header">
 							<button type="button" class="close" data-dismiss="modal">&times;</button>
-							<h3 align="center" class="modal-title">Appointment Complete?</h3>
+							<h3 align="center" class="modal-title">Checklist</h3>
 						</div>
 						<div class="modal-body">
-							<p align="center">This appointment will be marked as accomplished?</p>
+							<div class="table table-bordered">
+								<table class="table table-responsive">
+								
+									<p align="center">Head <input type="checkbox" value="Head"></p>
+								</table>
+							</div>
 						</div>
 						<div class="modal-footer form-group" >
 							<div class="row">
