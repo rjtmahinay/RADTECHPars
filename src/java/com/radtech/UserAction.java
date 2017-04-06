@@ -41,7 +41,7 @@ public class UserAction extends ActionSupport implements ModelDriven<User>, Sess
             configuration.configure();
             configuration.addAnnotatedClass(User.class);
             configuration.addAnnotatedClass(Information.class);
-            configuration.addAnnotatedClass(Diagnosis.class);
+            configuration.addAnnotatedClass(Consultation.class);
             ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().applySettings(
                     configuration.getProperties()).build();
             SessionFactory sessionFactory = configuration.buildSessionFactory(serviceRegistry);

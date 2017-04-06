@@ -2,26 +2,20 @@
 package com.radtech;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Transient;
+
 
 @Entity
-@Table(name = "USERDB")
+@Table(name = "USERS")
 public class User implements Serializable {
+    private String name, username, password, userType, securityQuestion, securityAnswer;
+    private long userId;
+    //insert multiple appointments
 
-    private String name, surname, username, password;
-    public String password2, password3;
-    private List<SecurityQuestion> sQuestions = new ArrayList<>();
-
-    @Column(name = "NAME", nullable = false)
+    @Column(name="NAME")
     public String getName() {
         return name;
     }
@@ -30,17 +24,7 @@ public class User implements Serializable {
         this.name = name;
     }
 
-    @Column(name = "SURNAME", nullable = false)
-    public String getSurname() {
-        return surname;
-    }
-
-    public void setSurname(String surname) {
-        this.surname = surname;
-    }
-
-    @Id
-    @Column(name = "USERNAME", nullable = false)
+    @Column(name="USERNAME")
     public String getUsername() {
         return username;
     }
@@ -49,7 +33,7 @@ public class User implements Serializable {
         this.username = username;
     }
 
-    @Column(name = "PASSWORD", nullable = false)
+    @Column(name="PASSWORD")
     public String getPassword() {
         return password;
     }
@@ -58,36 +42,47 @@ public class User implements Serializable {
         this.password = password;
     }
 
-    @Transient
-    public String getPassword2() {
-        return password2;
+    @Column(name="USER_TYPE")
+    public String getUserType() {
+        return userType;
     }
 
-    public void setPassword2(String password2) {
-        this.password2 = password2;
+    public void setUserType(String userType) {
+        this.userType = userType;
     }
 
-    @Transient
-    public String getPassword3() {
-        return password3;
+    @Id
+    @Column(name="USER_ID")
+    public long getUserId() {
+        return userId;
     }
 
-    public void setPassword3(String password3) {
-        this.password3 = password3;
+    public void setUserId(long userId) {
+        this.userId = userId;
     }
 
-    @OneToMany(targetEntity = SecurityQuestion.class, mappedBy = "user",
-            cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    public List<SecurityQuestion> getSQuestions() {
-        return sQuestions;
+    @Column(name="SECURITY_QUESTION")
+    public String getSecurityQuestion() {
+        return securityQuestion;
     }
 
-    public void setSQuestions(List<SecurityQuestion> sQuestions) {
-        this.sQuestions = sQuestions;
+    public void setSecurityQuestion(String securityQuestion) {
+        this.securityQuestion = securityQuestion;
     }
 
+    @Column(name="SECURITY_ANSWER")
+    public String getSecurityAnswer() {
+        return securityAnswer;
+    }
+
+    public void setSecurityAnswer(String securityAnswer) {
+        this.securityAnswer = securityAnswer;
+    }
+
+    @Override
     public String toString() {
-        return "Name: " + getName() + "\nSurname: " + getSurname() + "\nUsername: " + getUsername() + "Password: " + getPassword();
+        return "User{" + "name=" + name + ", username=" + username + ", password=" + password + ", userType=" + userType + ", securityQuestion=" + securityQuestion + ", securityAnswer=" + securityAnswer + ", userId=" + userId + '}';
     }
-
+    
+    
 }

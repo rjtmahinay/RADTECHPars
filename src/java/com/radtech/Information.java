@@ -37,7 +37,7 @@ public class Information implements Serializable {
     private long id;
     private String dateinput;
     private String idinput;
-    public List<Diagnosis> diagnosis;
+    public List<Consultation> diagnosis;
     private List<Appointment> appointments;
     private Date nextAppointment;
 
@@ -154,13 +154,13 @@ public class Information implements Serializable {
         this.dateinput = dateinput;
     }
 
-    @OneToMany(targetEntity = Diagnosis.class, mappedBy = "information",
+    @OneToMany(targetEntity = Consultation.class, mappedBy = "information",
             cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    public List<Diagnosis> getDiagnosis() {
+    public List<Consultation> getDiagnosis() {
         return diagnosis;
     }
 
-    public void setDiagnosis(List<Diagnosis> diagnosis) {
+    public void setDiagnosis(List<Consultation> diagnosis) {
         this.diagnosis = diagnosis;
     }
 

@@ -9,46 +9,36 @@ import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
 @Entity
-@Table(name = "AppointmentDB")
+@Table(name = "Appointments")
 public class Appointment implements Serializable {
-
-    private long appointmentNumber;
-    private Date date, adate;
-    private String comment, dateinput;
-    private Information information;
-    private long id;
-    private String appinput;
+    private long appointmentId;
+    private String userType, comment, name;
+    private Date appointmentDate;
+    //single User?
 
     @Id
-    @Column(name = "APPOINTMENT_NUMBER")
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    public long getAppointmentNumber() {
-        return appointmentNumber;
+    @Column(name="APPOINTMENT_ID")
+    public long getAppointmentId() {
+        return appointmentId;
+    }
+    public void setAppointmentId(long appointmentId) {
+        this.appointmentId = appointmentId;
     }
 
-    public void setAppointmentNumber(long appointmentNumber) {
-        this.appointmentNumber = appointmentNumber;
+    @Column(name="USER_TYPE")
+    public String getUserType() {
+        return userType;
     }
 
-    @Column(name = "DATE")
-    public Date getDate() {
-        return date;
+    public void setUserType(String userType) {
+        this.userType = userType;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
-    }
-
-    @Column(name = "COMMENT")
+    @Column(name="COMMENT")
     public String getComment() {
         return comment;
     }
@@ -56,51 +46,29 @@ public class Appointment implements Serializable {
     public void setComment(String comment) {
         this.comment = comment;
     }
-
-    @Transient
-    public String getDateinput() {
-        return dateinput;
+    
+    @Column(name="NAME")
+    public String getName() {
+        return name;
     }
 
-    public void setDateinput(String dateinput) {
-        this.dateinput = dateinput;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    @Column(name = "ACCOMPLISHED_DATE")
-    public Date getAdate() {
-        return adate;
+    @Column(name="APPOINTMENT_DATE")
+    public Date getAppointmentDate() {
+        return appointmentDate;
     }
 
-    public void setAdate(Date adate) {
-        this.adate = adate;
+    public void setAppointmentDate(Date appointmentDate) {
+        this.appointmentDate = appointmentDate;
     }
 
-    @ManyToOne
-    @JoinColumn(name = "APPOINT_PK")
-    public Information getInformation() {
-        return information;
+    @Override
+    public String toString() {
+        return "Appointment{" + "appointmentId=" + appointmentId + ", userType=" + userType + ", comment=" + comment + ", name=" + name + ", appointmentDate=" + appointmentDate + '}';
     }
-
-    public void setInformation(Information information) {
-        this.information = information;
-    }
-
-    @Transient
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    @Transient
-    public String getAppinput() {
-        return appinput;
-    }
-
-    public void setAppinput(String appinput) {
-        this.appinput = appinput;
-    }
-
+    
+    
 }

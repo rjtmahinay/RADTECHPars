@@ -12,13 +12,13 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
-public class DiagnosisAction extends ActionSupport implements ModelDriven<Diagnosis>, SessionAware {
+public class DiagnosisAction extends ActionSupport implements ModelDriven<Consultation>, SessionAware {
 
-    private Diagnosis model = new Diagnosis();
+    private Consultation model = new Consultation();
     private SessionMap sessionmap;
 
     @Override
-    public Diagnosis getModel() {
+    public Consultation getModel() {
         return model;
     }
 
