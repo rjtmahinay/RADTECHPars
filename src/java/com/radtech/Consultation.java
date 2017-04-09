@@ -1,6 +1,7 @@
 package com.radtech;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,19 +9,24 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.util.Date;
+import java.util.List;
+import javax.persistence.CascadeType;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Transient;
 
 
 @Entity
-@Table(name="CONSULTATIONS")
+@Table(name="Consultations")
 public class Consultation implements Serializable{
     private long consultationId, petId;
     private Date consultationDate;
     private double weight, temperature;
     private String eyes, ears, nose, throat, derma, gums;
-    //insert single pet 
+    private Appointment appointment;
+    private List medicines = new ArrayList<Medicine>();
 
     @Id
     @Column(name="CONSULTATION_ID")
@@ -121,6 +127,30 @@ public class Consultation implements Serializable{
     public void setGums(String gums) {
         this.gums = gums;
     }
+
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, targetEntity = Appointment.class)
+    @JoinColumn(name="APPOINTMENT_ID")
+    public Appointment getAppointment() {
+        return appointment;
+    }
+
+    public void setAppointment(Appointment appointment) {
+        this.appointment = appointment;
+    }
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "medicines", targetEntity = Medicine.class)
+    @JoinColumn(name="MEDICINE_ID")
+    public List getMedicines() {
+        return medicines;
+    }
+
+    public void setMedicines(List medicines) {
+        this.medicines = medicines;
+    }
     
     
+    @Override
+    public String toString() {
+        return "Consultation{" + "consultationId=" + consultationId + ", petId=" + petId + ", consultationDate=" + consultationDate + ", weight=" + weight + ", temperature=" + temperature + ", eyes=" + eyes + ", ears=" + ears + ", nose=" + nose + ", throat=" + throat + ", derma=" + derma + ", gums=" + gums + ", appointment=" + appointment + '}';
+    }
 }

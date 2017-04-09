@@ -6,10 +6,17 @@
 package com.radtech;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -18,7 +25,9 @@ public class Appointment implements Serializable {
     private long appointmentId;
     private String userType, comment, name;
     private Date appointmentDate;
-    //single User?
+    private Customer customer;
+    private Pet pet;
+    private List consultations = new ArrayList<Consultation>();
 
     @Id
     @Column(name="APPOINTMENT_ID")
@@ -65,10 +74,40 @@ public class Appointment implements Serializable {
         this.appointmentDate = appointmentDate;
     }
 
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, targetEntity = Customer.class)
+    @JoinColumn(name="CUSTOMER_ID")
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
+
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, targetEntity = Pet.class)
+    @JoinColumn(name="PET_ID")
+    public Pet getPet() {
+        return pet;
+    }
+
+    public void setPet(Pet pet) {
+        this.pet = pet;
+    }
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "consultations", targetEntity = Consultation.class)
+    @JoinColumn(name="CONSULTATION_ID")
+    public List getConsultations() {
+        return consultations;
+    }
+
+    public void setConsultations(List consultations) {
+        this.consultations = consultations;
+    }
+    
+    
+    
     @Override
     public String toString() {
         return "Appointment{" + "appointmentId=" + appointmentId + ", userType=" + userType + ", comment=" + comment + ", name=" + name + ", appointmentDate=" + appointmentDate + '}';
     }
-    
-    
 }

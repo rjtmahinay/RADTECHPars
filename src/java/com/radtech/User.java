@@ -6,14 +6,14 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 
 @Entity
-@Table(name = "USERS")
+@Table(name = "Users")
 public class User implements Serializable {
-    private String name, username, password, userType, securityQuestion, securityAnswer;
+    private String name, username, password, userType, securityQuestion, securityAnswer, confirmPassword, newPassword;
     private long userId;
-    //insert multiple appointments
 
     @Column(name="NAME")
     public String getName() {
@@ -79,10 +79,30 @@ public class User implements Serializable {
         this.securityAnswer = securityAnswer;
     }
 
+    @Transient
+    public String getConfirmPassword() {
+        return confirmPassword;
+    }
+
+    public void setConfirmPassword(String confirmPassword) {
+        this.confirmPassword = confirmPassword;
+    }
+
+    @Transient
+    public String getNewPassword() {
+        return newPassword;
+    }
+
+    public void setNewPassword(String newPassword) {
+        this.newPassword = newPassword;
+    }
+
     @Override
     public String toString() {
-        return "User{" + "name=" + name + ", username=" + username + ", password=" + password + ", userType=" + userType + ", securityQuestion=" + securityQuestion + ", securityAnswer=" + securityAnswer + ", userId=" + userId + '}';
+        return "User{" + "name=" + name + ", username=" + username + ", password=" + password + ", userType=" + userType + ", securityQuestion=" + securityQuestion + ", securityAnswer=" + securityAnswer + ", confirmPassword=" + confirmPassword + ", newPassword=" + newPassword + ", userId=" + userId + '}';
     }
+
+    
     
     
 }

@@ -1,17 +1,22 @@
 package com.radtech;
 
 import java.io.Serializable;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Table;
 import javax.persistence.Id;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 
 @Entity
 @Table(name="Customers")
 public class Customer implements Serializable{
     private long cutomerId, contactNumber;
     private String name, address;
-    //insert single user
+    private List appointments, pets;
 
     @Id
     @Column(name="CUSTOMER_ID")
@@ -50,6 +55,27 @@ public class Customer implements Serializable{
         this.address = address;
     }
 
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "customer", targetEntity = Appointment.class)
+    @JoinColumn(name="APPOINTMENT_ID")
+    public List getAppointments() {
+        return appointments;
+    }
+
+    public void setAppointments(List appointments) {
+        this.appointments = appointments;
+    }
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "owner", targetEntity = Pet.class)
+    @JoinColumn(name="PET_ID")
+    public List getPets() {
+        return pets;
+    }
+
+    public void setPets(List pets) {
+        this.pets = pets;
+    }
+
+    
     @Override
     public String toString() {
         return "Customer{" + "cutomerId=" + cutomerId + ", contactNumber=" + contactNumber + ", name=" + name + ", address=" + address + '}';
