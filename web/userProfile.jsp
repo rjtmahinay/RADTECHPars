@@ -214,7 +214,7 @@
 			<div class="row">
 				<div class="col-md-6">
 					
-					<p align="right"><s:submit cssClass="btn btn-primary" value="Create Appointment/s" /></p>
+					<p align="right"><s:submit cssClass="btn btn-primary btn-sm" value="Create Appointment/s" /></p>
 				</div>	
 				<div class="col-md-6">
 					

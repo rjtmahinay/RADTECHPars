@@ -48,6 +48,7 @@
 			</div>
 			<div class="row">
 				<div class="col-md-6">
+					<s:if test="%{#session.currentUser.name!='admin'}">
 					<div class="panel panel-default">
 						<s:form action="petVitals" theme="bootstrap" cssClass="form" method="POST">
 						<div class="panel-heading">
@@ -60,7 +61,7 @@
 						<div class="panel-body">
 							
 							<div class="table table-responsive">
-								<table class="table table-bordered">
+								<table class="table table-bordered table-condensed">
 									<tr>
 										<td>Temperature: </td>
 										<td><center><s:textfield name="temperature" placeholder=""/></center></td>
@@ -71,9 +72,13 @@
 									</tr>
 									<tr>
 										<td>Eyes: </td>
-										<td><center><input type="checkbox" name="eyes"></center></td>
+													<%--EQUIVALENT DAW TO NG <S:CHECKBOX>--%>
+										<td><center>	<input type="checkbox" name="checkMe" value="" id="xx_checkMe"/>
+													<input type="hidden" id="__checkbox_xx_checkMe" name="__checkbox_checkMe" value="" /></center></td>
+													<%--PAG WORKING NA TO I APPLY KO NALANG SA LAHAT--%>
 									</tr>
 									<tr>
+										
 										<td>Ears: </td>
 										<td><center><input type="checkbox" name="ears"></center></td>
 									</tr>
@@ -105,11 +110,87 @@
 						</div>			
 						</s:form>		
 					</div>
+					</s:if>
+					
+<!-DOCTOR'S VERSION OF FIRST HALF, DOCTOR'S VERSION OF FIRST HALF, DOCTOR'S VERSION OF FIRST HALF, DOCTOR'S VERSION OF FIRST HALF, -->					
+					<s:if test="%{#session.currentUser.name=='admin'}">
+					<div class="panel panel-default">
+						<s:form action="petVitals" theme="bootstrap" cssClass="form" method="POST">
+						<div class="panel-heading">
+							
+								<div class="row">
+									<div class="col-md-5"></div>
+									<div class="col-md-1">
+										<p align><s:select name="selectPet" list="{'pet1', 'pet2', 'pet3'}" headerKey="-1"/></p>
+									</div>
+									<div class="col-md-1">
+										<s:submit cssClass="btn btn-primary" name="submit" value="View"/>
+									</div>
+									<div class="col-md-5"></div>
+								</div>
+								<br>
+							
+						</div>
+						
+						<div class="panel-body">
+							
+							<div class="table table-responsive">
+								<table class="table table-bordered table-condensed">
+									<tr>
+										<td>Temperature: </td>
+										<td><center><s:property value="%{#session.currentRecord.temperature}"/></center></td>
+									</tr>
+									<tr>
+										<td>Weight: </td>
+										<td><center><s:property value="%{#session.currentRecord.weight}"/></center></td>
+									</tr>
+									<tr>
+										<td>Eyes: </td>
+													
+										<td><center>	<input type="checkbox" name="checkMe" value="" id="xx_checkMe" onclick='return %{#session.curentRecord.eyes}'/>
+													<input type="hidden" id="__checkbox_xx_checkMe" name="__checkbox_checkMe" value="" /></center></td>
+									</tr>
+									<tr>
+										<td>Ears: </td>
+										<td><center><input type="checkbox" name="ears" value='true'></center></td>
+									</tr>
+									<tr>
+										<td>Nose: </td>
+										<td><center><input type="checkbox" name="nose"></center></td>
+									</tr>
+									<tr>
+										<td>Throat: </td>
+										<td><center><input type="checkbox" name="throat"></center></td>
+									</tr>
+									<tr>
+										<td>Derma: </td>
+										<td><center><input type="checkbox" name="derma"></center></td>
+									</tr>
+									<tr>
+										<td>Gums: </td>
+										<td><center><input type="checkbox" name="gums"></center></td>
+									</tr>
+									<tr>
+										<td>Lymph Nodes: </td>
+										<td><center><input type="checkbox" name="lymphNodes"></center></td>
+									</tr>
+								</table>
+							</div>
+						</div>
+									
+						</s:form>		
+					</div>
+					</s:if>
+					
+					
+					
+					
 				</div>
 				
 <!-END OF FIRST HALF, END OF FIRST HALF, END OF FIRST HALF, END OF FIRST HALF, END OF FIRST HALF, END OF FIRST HALF, END OF FIRST HALF, ->
 				
 				<div class="col-md-6">
+					<s:if test="%{#session.currentUser.name=='admin'}">
 					<div class="panel panel-default">
 						<s:form action="addDiagnosis" theme="bootstrap" cssClass="form" method="POST">
 						<div class="panel-body">
@@ -133,6 +214,7 @@
 						</div>			
 						</s:form>		
 					</div>
+					</s:if>
 				</div>
 				
 			</div>
