@@ -11,8 +11,9 @@ import javax.persistence.Transient;
 
 @Entity
 @Table(name = "Users")
-public class User implements Serializable {
-    private String name, username, password, userType, securityQuestion, securityAnswer, confirmPassword, newPassword;
+public class User extends GenericModel{
+    private String name, username, password, userType, securityQuestion, 
+            securityAnswer, confirmPassword, newPassword;
     private long userId;
 
     @Column(name="NAME")
@@ -101,8 +102,4 @@ public class User implements Serializable {
     public String toString() {
         return "User{" + "name=" + name + ", username=" + username + ", password=" + password + ", userType=" + userType + ", securityQuestion=" + securityQuestion + ", securityAnswer=" + securityAnswer + ", confirmPassword=" + confirmPassword + ", newPassword=" + newPassword + ", userId=" + userId + '}';
     }
-
-    
-    
-    
 }

@@ -20,7 +20,7 @@ import javax.persistence.Transient;
 
 @Entity
 @Table(name="Consultations")
-public class Consultation implements Serializable{
+public class Consultation extends GenericModel{
     private long consultationId, petId;
     private Date consultationDate;
     private double weight, temperature;

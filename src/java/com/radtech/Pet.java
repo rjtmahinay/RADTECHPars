@@ -16,7 +16,7 @@ import javax.persistence.OneToMany;
 
 @Entity
 @Table(name="Pets")
-public class Pet implements Serializable{
+public class Pet extends GenericModel{
     private long petId, customerId;
     private String name, breed,color, sex;
     private Date dateOfBirth;

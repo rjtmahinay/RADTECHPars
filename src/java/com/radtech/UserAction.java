@@ -1,22 +1,16 @@
 package com.radtech;
 
-import com.opensymphony.xwork2.ActionSupport;
-import com.opensymphony.xwork2.ModelDriven;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.dispatcher.SessionMap;
-import org.apache.struts2.interceptor.SessionAware;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
-import org.hibernate.cfg.AnnotationConfiguration;
-import org.hibernate.service.ServiceRegistry;
 
-public class UserAction extends ActionSupport implements ModelDriven<User>, SessionAware {
+
+public class UserAction extends GenericAction{
 
     private User user = new User();
     private SessionMap sessionmap;
@@ -34,21 +28,6 @@ public class UserAction extends ActionSupport implements ModelDriven<User>, Sess
         return user;
     }
 
-    public void setSession(Map m) {
-        sessionmap = (SessionMap) m;
-        if (sessionmap.get("factory") == null) {
-            AnnotationConfiguration configuration = new AnnotationConfiguration();
-            configuration.configure();
-            configuration.addAnnotatedClass(User.class);
-            configuration.addAnnotatedClass(Information.class);
-            configuration.addAnnotatedClass(Consultation.class);
-            ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().applySettings(
-                    configuration.getProperties()).build();
-            SessionFactory sessionFactory = configuration.buildSessionFactory(serviceRegistry);
-            sessionmap.put("factory", sessionFactory);
-        }
-    }
-
     @Override
     public String execute() {
         return SUCCESS;
@@ -61,33 +40,28 @@ public class UserAction extends ActionSupport implements ModelDriven<User>, Sess
     public String login() {
         //Insert login logic
         Session session = null;
+        //insert crypto
+        //check for temporary password
         user.setPassword("" + user.getPassword().hashCode());
         try {
             System.out.println("Inside login try");
-            session = ((SessionFactory) sessionmap.get("factory")).openSession();
+            init();
+            session = getSession();
             User db = (User) session.get(User.class, user.getUsername());
             if (db == null) {
-                addFieldError("password", "Username/Password doesn't match");
+                addActionError("Username or password does not match");
                 return INPUT;
             } else {
                 if (db.getUsername().equalsIgnoreCase(user.getUsername())) {
                     if (db.getPassword().equals(user.getPassword())) {
-                        sessionmap.put("currentUser", db);
-                        sessionmap.put("view", (List) session.createQuery("from Information").list());
-                        sessionmap.put("archive", (List) session.createQuery("from Archive").list());
-                        sessionmap.put("appointments", session.createQuery("from Appointment where adate is null order by date").list());
-                        if (sessionmap.get("tempPassword") != null) {
-                            sessionmap.remove("tempPassword");
-                            return "temp";
-                        } else {
-                            return SUCCESS;
-                        }
+                        refreshUser(db);
+                        refresh();
                     } else {
-                        addFieldError("password", "Username/Password doesn't match");
+                        addActionError("Username/Password doesn't match");
                         return INPUT;
                     }
                 } else {
-                    addFieldError("username", "Username/Password doesn't match");
+                    addActionError("Username/Password doesn't match");
                     return INPUT;
                 }
             }
@@ -99,22 +73,20 @@ public class UserAction extends ActionSupport implements ModelDriven<User>, Sess
                 session.close();
             }
         }
-        return SUCCESS;
+        return ERROR;
     }
 
     public String signup() {
         //Insert register logic
-        Session session = null;
-        Transaction tx = null;
+        session = getSession();
+        tx = session.getTransaction();
         try{
-            session = ((SessionFactory)sessionmap.get("factory")).openSession();
-            tx = session.getTransaction();
             User tempUser = (User)session.get(User.class, user.getUsername().trim());
             if(tempUser == null){
                 //no username found, can use it
-                if(user.getPassword().trim().equals(user.getPassword2().trim())){
+                if(user.getPassword().trim().equals(user.getConfirmPassword().trim())){
                     //check if passwords match
-                    user.setPassword("" + user.getPassword2().trim().hashCode());
+                    user.setPassword("" + user.getConfirmPassword().trim().hashCode());
                     tx.begin();
                     session.save(user);
                     tx.commit();

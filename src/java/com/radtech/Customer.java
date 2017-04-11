@@ -13,7 +13,7 @@ import javax.persistence.OneToMany;
 
 @Entity
 @Table(name="Customers")
-public class Customer implements Serializable{
+public class Customer extends GenericModel{
     private long cutomerId, contactNumber;
     private String name, address;
     private List appointments, pets;

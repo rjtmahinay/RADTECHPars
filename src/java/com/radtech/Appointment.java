@@ -5,7 +5,6 @@
  */
 package com.radtech;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -21,7 +20,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "Appointments")
-public class Appointment implements Serializable {
+public class Appointment extends GenericModel{
     private long appointmentId;
     private String userType, comment, name;
     private Date appointmentDate;

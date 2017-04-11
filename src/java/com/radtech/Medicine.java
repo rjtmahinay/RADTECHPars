@@ -14,7 +14,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="Medicines")
-public class Medicine implements Serializable{  
+public class Medicine extends GenericModel{  
     private long medicineId, consultationId;
     private String name;
     private Consultation consultation;
