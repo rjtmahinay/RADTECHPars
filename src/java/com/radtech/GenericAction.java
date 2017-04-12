@@ -1,6 +1,5 @@
 package com.radtech;
 
-import static com.opensymphony.xwork2.Action.SUCCESS;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 import java.util.List;
@@ -73,3 +72,32 @@ public class GenericAction extends ActionSupport implements SessionAware, ModelD
         sessionmap.put("currentUser",user);
     }
 }
+
+//GenericModel
+//	get customers
+//	get pets
+//	get appointments
+//	get consultation
+//	get medicines
+//user 
+//	add user
+//	login
+//	logout
+//	change pass
+//	add sec question
+//	change sec pass
+//customer
+//	add customer
+//	edit customer
+//	delete customer
+//pet
+//	add pet
+//	edit pet
+//	delete pet?
+//appointment
+//	add appointment
+//	edit appointment
+//	delete appointment
+//	complete appointment
+//consultation
+//medicine
