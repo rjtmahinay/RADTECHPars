@@ -2,6 +2,9 @@ package com.radtech;
 
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import org.apache.struts2.dispatcher.SessionMap;
@@ -12,6 +15,10 @@ import org.hibernate.Transaction;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.AnnotationConfiguration;
 import org.hibernate.service.ServiceRegistry;
+import org.hibernate.HibernateException;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 
 public class GenericAction extends ActionSupport implements SessionAware, ModelDriven{
     SessionMap sessionmap;
@@ -19,6 +26,7 @@ public class GenericAction extends ActionSupport implements SessionAware, ModelD
     Transaction tx;
     SessionFactory factory;
     Object model;
+    SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
     
     @Override
     public void setSession(Map map) {
@@ -71,6 +79,51 @@ public class GenericAction extends ActionSupport implements SessionAware, ModelD
     public void refreshUser(User user){
         sessionmap.put("currentUser",user);
     }
+    
+    public void refreshCustomers(){
+        sessionmap.put("customers", (List) session.createQuery("from Customers").list());
+    }
+    
+    public void refreshPets(){
+        sessionmap.put("pets", (List) session.createQuery("from Pets").list());
+    }
+    
+    public void refreshAppointments(){
+        sessionmap.put("appointments", (List) session.createQuery("from Appointments order by date").list());
+    }
+    
+    public void refreshAppointmentsPending(){
+        sessionmap.put("appointments", session.createQuery("from Appointment where adate is null order by date").list());
+    }
+    
+    public void refreshConsultation(){
+        sessionmap.put("consultations", (List) session.createQuery("from Consultations").list());
+    }
+    
+    public void refreshMedicines(){
+        sessionmap.put("medicines", (List) session.createQuery("from Medicines").list());
+    }
+    
+    public Date toDate(String input){
+        Date result;
+        try{
+            result = sdf.parse(input);
+            return result;
+        }
+        catch(ParseException e){
+            return null;
+        }
+    }
+    
+    public Pet getCurrentPet(){
+        return (Pet)sessionmap.get("currentPet");
+    }
+    
+    public Customer getCurrentCustomer(){
+        return (Customer)sessionmap.get("currentCustomer");
+    }
+    
+    
 }
 
 //GenericModel
@@ -79,25 +132,3 @@ public class GenericAction extends ActionSupport implements SessionAware, ModelD
 //	get appointments
 //	get consultation
 //	get medicines
-//user 
-//	add user
-//	login
-//	logout
-//	change pass
-//	add sec question
-//	change sec pass
-//customer
-//	add customer
-//	edit customer
-//	delete customer
-//pet
-//	add pet
-//	edit pet
-//	delete pet?
-//appointment
-//	add appointment
-//	edit appointment
-//	delete appointment
-//	complete appointment
-//consultation
-//medicine

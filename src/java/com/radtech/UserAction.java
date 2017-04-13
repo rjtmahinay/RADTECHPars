@@ -28,41 +28,40 @@ public class UserAction extends GenericAction{
         return user;
     }
 
-    @Override
-    public String execute() {
-        return SUCCESS;
-    }
-
-    @Override
-    public void validate() {
-    }
-
     public String login() {
         //Insert login logic
         Session session = null;
         //insert crypto
         //check for temporary password
-        user.setPassword("" + user.getPassword().hashCode());
         try {
-            System.out.println("Inside login try");
             init();
             session = getSession();
-            User db = (User) session.get(User.class, user.getUsername());
-            if (db == null) {
-                addActionError("Username or password does not match");
-                return INPUT;
-            } else {
-                if (db.getUsername().equalsIgnoreCase(user.getUsername())) {
-                    if (db.getPassword().equals(user.getPassword())) {
-                        refreshUser(db);
-                        refresh();
+            //if admin, just get in for now
+            if(user.getUsername().equals("admin")){
+                refreshUser(user);
+                refresh();
+                return SUCCESS;
+            }
+            else{
+                //check if user exists
+                User db = (User) session.get(User.class, user.getUsername());
+                if (db == null) {
+                    addActionError("Username or password does not match");
+                    return INPUT;
+                } else {
+                    if (db.getUsername().equalsIgnoreCase(user.getUsername())) {
+                        if (db.getPassword().equals(user.getPassword())) {
+                            refreshUser(db);
+                            refresh();
+                            return SUCCESS;
+                        } else {
+                            addActionError("Username/Password doesn't match");
+                            return INPUT;
+                        }
                     } else {
                         addActionError("Username/Password doesn't match");
                         return INPUT;
                     }
-                } else {
-                    addActionError("Username/Password doesn't match");
-                    return INPUT;
                 }
             }
 
@@ -81,6 +80,7 @@ public class UserAction extends GenericAction{
         session = getSession();
         tx = session.getTransaction();
         try{
+            //check if user exists
             User tempUser = (User)session.get(User.class, user.getUsername().trim());
             if(tempUser == null){
                 //no username found, can use it
@@ -114,20 +114,19 @@ public class UserAction extends GenericAction{
     }
 
     public String changePassword() {
-        Session session = null;
-        Transaction tx = null;
+        session = getSession();
+        tx = session.getTransaction();
         try {
-            session = ((SessionFactory) sessionmap.get("factory")).openSession();
-            tx = session.getTransaction();
+            //fetch user from db using uname
             User currentUser = (User)session.load(User.class, user.getUsername());
             if(currentUser != null){
                 if(currentUser.getPassword().equals("" + user.getPassword().trim().hashCode())){
-                    if(user.getPassword2().equals(user.getPassword3())){
-                        currentUser.setPassword("" + user.getPassword2().trim().hashCode());
+                    if(user.getNewPassword().equals(user.getConfirmPassword())){
+                        currentUser.setPassword("" + user.getNewPassword().trim().hashCode());
                         tx.begin();
                         session.merge(currentUser);
                         tx.commit();
-                        sessionmap.put("currentUser", currentUser);
+                        refreshUser(currentUser);
                         user = null;
                         return SUCCESS;
                     }
@@ -143,6 +142,7 @@ public class UserAction extends GenericAction{
                     return INPUT;
                 }
             }
+            //if username is not found on DB
             else{
                 addFieldError("password", "Critical Error: Code 5");
                 return INPUT;
@@ -207,31 +207,13 @@ public class UserAction extends GenericAction{
         return SUCCESS;
     }
 
-    public String fetchuser() {
-        Session session = null;
-        try {
-            session = ((SessionFactory) sessionmap.get("factory")).openSession();
-            User userx = (User) sessionmap.get("currentUser");
-            user = (User) session.load(User.class, ((User) sessionmap.get("currentUser")).getUsername());
-            if (user == null) {
-                addFieldError("username", "Fatal error : Code 1");
-                return INPUT;
-            } else {
-                for (Object o : user.getSQuestions()) {
-                    System.out.println(((SecurityQuestion) o).toString());
-                }
-                return SUCCESS;
-            }
-
-        } catch (HibernateException e) {
-            e.printStackTrace();
-        } finally {
-            if (session != null) {
-                session.close();
-            }
-        }
-
-        return INPUT;
-    }
-
 }
+//user 
+//	add user checkk
+//	login   check   
+//	logout  check
+//	change pass check
+
+//      forgot password
+//	add sec question
+//	change sec pass

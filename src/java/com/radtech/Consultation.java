@@ -21,11 +21,12 @@ import javax.persistence.Transient;
 @Entity
 @Table(name="Consultations")
 public class Consultation extends GenericModel{
-    private long consultationId, petId;
+    private long consultationId;
     private Date consultationDate;
     private double weight, temperature;
     private String eyes, ears, nose, throat, derma, gums;
     private Appointment appointment;
+    private Pet pet;
     private List medicines = new ArrayList<Medicine>();
 
     @Id
@@ -38,13 +39,14 @@ public class Consultation extends GenericModel{
         this.consultationId = consultationId;
     }
 
-    @Column(name="PET_ID")
-    public long getPetId() {
-        return petId;
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, targetEntity = Pet.class)
+    @JoinColumn(name="PET_ID")
+    public Pet getPet() {
+        return pet;
     }
 
-    public void setPetId(long petId) {
-        this.petId = petId;
+    public void setPet(Pet pet) {
+        this.pet = pet;
     }
 
     @Column(name="CONSULTATION_DATE")
