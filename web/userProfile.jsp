@@ -50,16 +50,52 @@
 		<div class="container-fluid">
 				<s:form action="updateRecord" theme="bootstrap" cssClass="form" method="POST">
 				<div class="row">
-					<div class="col-md-4">
+					<div class="col-md-3">
 						<font face="roboto">
 							<h1>Customer Profile</h1>
 						</font>
 					</div>
-					<div class="col-md-2">	
+					<div class="col-md-3">	
 						<br>
-						<p align="right"><s:submit value="Edit Record" cssClass="btn btn-primary"/></p>
+						<p align="right"><s:submit value="Edit Record" cssClass="btn btn-primary"/> 
+							<button type="button" data-id="" class="btn btn-danger"         
+							data-toggle="modal" data-target="#confirmArchive"><span class="glyphicon glyphicon-trash"></span></button></p>
 					</div>	
 				</div>
+					
+					
+					
+				<div class="modal fade" id="confirmArchive">
+					<s:form action="toArchive">
+					<input type="hidden" name="idinput" value="" id="arcinput"/>
+					<div class="modal-dialog modal-sm">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal">&times;</button>
+								<h3 align="center" class="modal-title">Confirm Archive</h3>
+							</div>
+							<div class="modal-body">
+								<p align="center">Reason for archive:</p>
+								<center><s:textfield name="reason"/></center>
+							</div>
+							<div class="modal-footer form-group" >
+								<div class="row">
+									<div class="col-md-6 col-sm-6">
+										<center><s:submit type="button" cssClass="btn btn-danger btn-block" value="Archive" /></center>
+									</div>
+									<div class="col-md-6 col-sm-6">
+										<center><button type="button" class="btn btn-secondary btn-block" data-dismiss="modal">Cancel</button></center>
+									</div>
+
+								</div>
+							</div>
+						</div>
+
+
+					</div>
+					</s:form>
+				</div>	
+					
 				<div class="row">
 					<div class="col-md-6">
 
