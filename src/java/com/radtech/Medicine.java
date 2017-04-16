@@ -15,7 +15,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name="Medicines")
 public class Medicine extends GenericModel{  
-    private long medicineId, consultationId;
+    private long medicineId;
     private String name;
     private Consultation consultation;
 
@@ -27,15 +27,6 @@ public class Medicine extends GenericModel{
 
     public void setMedicineId(long medicineId) {
         this.medicineId = medicineId;
-    }
-
-    @Column(name="CONSULTATION_ID")
-    public long getConsultationId() {
-        return consultationId;
-    }
-
-    public void setConsultationId(long consultationId) {
-        this.consultationId = consultationId;
     }
 
     @Column(name="NAME")
@@ -60,6 +51,6 @@ public class Medicine extends GenericModel{
     
     @Override
     public String toString() {
-        return "Medicine{" + "medicineId=" + medicineId + ", consultationId=" + consultationId + ", name=" + name + '}';
+        return "Medicine{" + "medicineId=" + medicineId + ", name=" + name + '}';
     }   
 }

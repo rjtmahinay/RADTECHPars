@@ -33,7 +33,7 @@ public class GenericAction extends ActionSupport implements SessionAware, ModelD
         sessionmap = (SessionMap)map;
     }
     
-    public void init(){
+    public void initialize(){
         if (sessionmap.get("factory") == null) {
             AnnotationConfiguration configuration = new AnnotationConfiguration();
             configuration.configure();

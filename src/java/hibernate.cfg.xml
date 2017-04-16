@@ -48,11 +48,12 @@ Contributor(s):
     <property name="hibernate.connection.password">@ics123</property>
     <property name="hibernate.hbm2ddl.auto">update</property>
     <property name="show_sql">true</property>
-    <mapping class="com.radtech.Information"/>
+    <mapping class="com.radtech.Customer"/>
     <mapping class="com.radtech.User"/>
-    <mapping class="com.radtech.Diagnosis"/>
+    <mapping class="com.radtech.Consultation"/>
     <mapping class="com.radtech.Archive"/>
+    <mapping class="com.radtech.Medicine"/>
     <mapping class="com.radtech.Appointment"/>
-    <mapping class="com.radtech.SecurityQuestion"/>
+    <mapping class="com.radtech.Pet"/>
   </session-factory>
 </hibernate-configuration>

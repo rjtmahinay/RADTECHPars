@@ -9,16 +9,8 @@
 	<constant name="struts.ognl.allowStaticMethodAccess" value="true"/> 
 	<package name="default" extends="struts-default" namespace="/">
 
-		<global-exception-mappings>
-			<exception-mapping exception="java.lang.NullPointerException"
-							   result="error" />
-		</global-exception-mappings>
-
 		<action name="login" class="com.radtech.UserAction" method="login">
-			<result>schedule.jsp</result>
-			<result name="input">index.jsp</result>
-			<result name="temp">accounts.jsp</result>
-
+                        <result>welcome.jsp</result>
 		</action>
 
 	</package>

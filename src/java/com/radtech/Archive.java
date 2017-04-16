@@ -9,7 +9,7 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 @Entity
-@Table(name = "ARCHIVE")
+@Table(name = "Archives")
 public class Archive implements Serializable {
 
     private long controlNumber;
@@ -135,19 +135,5 @@ public class Archive implements Serializable {
 
     public void setControlInput(String controlInput) {
         this.controlInput = controlInput;
-    }
-
-    public void setInformation(Information i) {
-        setAddress(i.getAddress());
-        setControlNumber(i.getControlNumber());
-        setOwnerName(i.getOwnerName());
-        setPatientName(i.getPatientName());
-        setContactNumber(i.getContactNumber());
-        setBreed(i.getBreed());
-        setSex(i.getSex());
-        System.out.println(i.getDateOfBirth());
-        setDateOfBirth(i.getDateOfBirth());
-        setColor(i.getColor());
-        setWeight(i.getWeight());
     }
 }

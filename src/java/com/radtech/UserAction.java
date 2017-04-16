@@ -1,19 +1,13 @@
 package com.radtech;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
 import org.apache.struts2.dispatcher.SessionMap;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 
 
 public class UserAction extends GenericAction{
 
     private User user = new User();
-    private SessionMap sessionmap;
 
     public void setUser(User u) {
         user = u;
@@ -30,20 +24,22 @@ public class UserAction extends GenericAction{
 
     public String login() {
         //Insert login logic
-        Session session = null;
+        initialize();
         //insert crypto
         //check for temporary password
         try {
-            init();
-            session = getSession();
             //if admin, just get in for now
-            if(user.getUsername().equals("admin")){
-                refreshUser(user);
-                refresh();
+            if(user.getUsername().trim().equals("admin")){
+                user.setUserType(user.getPassword());
+                sessionmap.put("currentUser", user);
+                System.out.println("User is " + user.toString());
+                
                 return SUCCESS;
             }
             else{
                 //check if user exists
+                
+                session = getSession();
                 User db = (User) session.get(User.class, user.getUsername());
                 if (db == null) {
                     addActionError("Username or password does not match");
@@ -159,40 +155,40 @@ public class UserAction extends GenericAction{
         return SUCCESS;
     }
 
-    public String forgotPassword() {
-        if (!(user.getUsername().trim().equals("")) & user != null) {
-            System.out.println(user.getUsername());
-            Session session = null;
-            Transaction tx = null;
-            try {
-                session = ((SessionFactory) sessionmap.get("factory")).openSession();
-                System.out.println(user.getUsername());
-                user = (User) session.get(User.class, user.getUsername());
-                System.out.println("Users' " + (user == null));
-                if (user == null) {
-                    addFieldError("username", "Username not found");
-                    return INPUT;
-                } else {
-                    user = (User) session.load(User.class, user.getUsername());
-                    List questions = new ArrayList();
-                    for (SecurityQuestion sq : user.getSQuestions()) {
-                        System.out.println(sq.getQuestion());
-                        questions.add(sq.getQuestion());
-                    }
-                    sessionmap.put("tempUser", user);
-                    return SUCCESS;
-                }
-            } catch (HibernateException e) {
-                tx.rollback();
-            } finally {
-                if (session != null) {
-                    session.close();
-                }
-            }
-        }
-        addFieldError("username", "Something happened midway...");
-        return INPUT;
-    }
+//    public String forgotPassword() {
+//        if (!(user.getUsername().trim().equals("")) & user != null) {
+//            System.out.println(user.getUsername());
+//            Session session = null;
+//            Transaction tx = null;
+//            try {
+//                session = ((SessionFactory) sessionmap.get("factory")).openSession();
+//                System.out.println(user.getUsername());
+//                user = (User) session.get(User.class, user.getUsername());
+//                System.out.println("Users' " + (user == null));
+//                if (user == null) {
+//                    addFieldError("username", "Username not found");
+//                    return INPUT;
+//                } else {
+//                    user = (User) session.load(User.class, user.getUsername());
+//                    List questions = new ArrayList();
+//                    for (SecurityQuestion sq : user.getSQuestions()) {
+//                        System.out.println(sq.getQuestion());
+//                        questions.add(sq.getQuestion());
+//                    }
+//                    sessionmap.put("tempUser", user);
+//                    return SUCCESS;
+//                }
+//            } catch (HibernateException e) {
+//                tx.rollback();
+//            } finally {
+//                if (session != null) {
+//                    session.close();
+//                }
+//            }
+//        }
+//        addFieldError("username", "Something happened midway...");
+//        return INPUT;
+//    }
 
     public String logout() {
 

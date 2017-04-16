@@ -56,7 +56,6 @@ public class Customer extends GenericModel{
     }
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "customer", targetEntity = Appointment.class)
-    @JoinColumn(name="APPOINTMENT_ID")
     public List getAppointments() {
         return appointments;
     }
@@ -66,7 +65,6 @@ public class Customer extends GenericModel{
     }
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "owner", targetEntity = Pet.class)
-    @JoinColumn(name="PET_ID")
     public List getPets() {
         return pets;
     }

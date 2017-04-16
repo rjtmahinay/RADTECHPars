@@ -7,7 +7,7 @@ public class ConsultationAction extends GenericAction{
         try{
             session=getSession();
             tx=session.getTransaction();
-            
+            return SUCCESS;
             
         }
         catch(HibernateException e){

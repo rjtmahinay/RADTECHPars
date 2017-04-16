@@ -36,11 +36,6 @@
 						<p>by RadTech</p>
 
 					</font>
-
-					<script>
-						var password = '<s:property value="#session.tempPassword"/>';
-						if(password) alert("temporary password is : " + password);
-					</script>
 				</div>
 				<div class="col col-md-3">
 					<br><br><br><br>
@@ -50,7 +45,6 @@
 						<div class="panel-heading"><center><b>Enter login information below</b></center></div>
 						<div class="panel-body">
 							<center>
-								<s:actionerror/>
 								<s:form action="login" theme="bootstrap" cssClass="form">
 
 

@@ -98,7 +98,6 @@ public class Pet extends GenericModel{
     }
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, targetEntity = Appointment.class, mappedBy = "pet")
-    @JoinColumn(name="APPOINTMENT_ID")
     public List getAppointments() {
         return appointments;
     }

@@ -140,8 +140,7 @@ public class Consultation extends GenericModel{
         this.appointment = appointment;
     }
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "medicines", targetEntity = Medicine.class)
-    @JoinColumn(name="MEDICINE_ID")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "consultation", targetEntity = Medicine.class)
     public List getMedicines() {
         return medicines;
     }
@@ -153,6 +152,6 @@ public class Consultation extends GenericModel{
     
     @Override
     public String toString() {
-        return "Consultation{" + "consultationId=" + consultationId + ", petId=" + petId + ", consultationDate=" + consultationDate + ", weight=" + weight + ", temperature=" + temperature + ", eyes=" + eyes + ", ears=" + ears + ", nose=" + nose + ", throat=" + throat + ", derma=" + derma + ", gums=" + gums + ", appointment=" + appointment + '}';
+        return "Consultation{" + "consultationId=" + consultationId  + ", consultationDate=" + consultationDate + ", weight=" + weight + ", temperature=" + temperature + ", eyes=" + eyes + ", ears=" + ears + ", nose=" + nose + ", throat=" + throat + ", derma=" + derma + ", gums=" + gums + ", appointment=" + appointment + '}';
     }
 }
