@@ -37,12 +37,49 @@
 				
 					
 						<h1>New Customer</h1>
-					
-					<s:form action="addRecord" theme="bootstrap" cssClass="form" method="POST">
+					<s:form action="tempet" theme="bootstrap" cssClass="form" method="POST">
+								<div class="modal-body">
+									<div class="table">
+									<table class="table table-condensed">
+										<tr>
+											<td><b>Pet Name:</b></td>
+											<td><s:textfield name="name" placeholder=""/></td>
+										</tr>
+										<tr>
+											<td><b>Breed:</b></td>
+											<td><s:textfield name="breed" placeholder=""/></td>
+										</tr>
+										<tr>
+											<td><b>Color:</b></td>
+											<td><s:textfield name="color" placeholder=""/></td>
+										</tr>
+										<tr>
+											<td><b>Sex:</b></td>
+											<td><s:select cssClass="text text-block" name="sex" list="{'Male','Female'}" headerKey="-1"/></td>
+										</tr>
+										<tr>
+											<td><b>Date of birth:</b></td>
+											<td>
+											<s:textfield name="dateInput" id="datepicker" />
+											</td>
+										</tr>
+
+									</table>
+								</div>
+
+									<div class="modal-footer form-group" >
+										<center>
+											<s:submit cssClass="btn btn-primary btn-block" value="submit" />
+											<s:reset value="clear" cssClass="btn btn-secondary btn-block"/>
+										</center>
+									</div>
+								</div>
+							</s:form>
+					<s:form action="addCustomer" theme="bootstrap" cssClass="form" method="POST">
 					
 						
-							<label for="ownerName">Customer Name</label>
-							<s:textfield name="ownerName" placeholder=""/>
+							<label for="name">Customer Name</label>
+							<s:textfield name="name" placeholder=""/>
 
 							<label for="address">Address</label>
 							<s:textfield name="address" placeholder=""/>
@@ -67,50 +104,6 @@
 								<button type="button" class="close" data-dismiss="modal">&times;</button>
 								<h3 class="modal-title">Add Record</h3>
 							</div>
-
-
-							<s:form action="addPet" theme="bootstrap" cssClass="form" method="POST">
-								<div class="modal-body">
-									<div class="table">
-									<table class="table table-condensed">
-										<tr>
-											<td><b>Pet Name:</b></td>
-											<td><s:textfield name="patientName" placeholder=""/></td>
-										</tr>
-										<tr>
-											<td><b>Breed:</b></td>
-											<td><s:textfield name="breed" placeholder=""/></td>
-										</tr>
-										<tr>
-											<td><b>Color:</b></td>
-											<td><s:textfield name="color" placeholder=""/></td>
-										</tr>
-										<tr>
-											<td><b>Sex:</b></td>
-											<td><s:select cssClass="text text-block" name="sex" list="{'', 'Male','Female'}" headerKey="-1"/></td>
-										</tr>
-										<tr>
-											<td><b>Date of birth:</b></td>
-											<td>
-											<s:textfield name="dateinput" id="datepicker" />
-											</td>
-										</tr>
-										<tr>
-											<td><b>Weight:</b></td>
-											<td><s:textfield name="weight" placeholder=""/></td>
-										</tr>
-
-									</table>
-								</div>
-
-									<div class="modal-footer form-group" >
-										<center>
-											<s:submit cssClass="btn btn-primary btn-block" value="submit" />
-											<s:reset value="clear" cssClass="btn btn-secondary btn-block"/>
-										</center>
-									</div>
-								</div>
-							</s:form>
 						</center>  
 					</div>
 				</div>
@@ -125,7 +118,6 @@
 						<th>Color</th>
 						<th>Sex</th>
 						<th>Date of Birth</th>
-						<th>Weight</th>
 					</thead>
 					<tbody>
 						<tr>
@@ -135,21 +127,19 @@
 							<td>black</td>
 							<td>male</td>
 							<td>03/28/1997</td>
-							<td>16</td>
 						</tr>
 
-						<%--
-						<s:iterator value="%{#session.currentRecord.}" var="diag">
+						
+						<s:iterator value="%{#session.tempets}" var="tempo">
 						<tr>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
+                                                    <td><s:property value="#tempo.name"/></td>
+                                                    <td><s:property value="#tempo.breed"/></td>
+                                                    <td><s:property value="#tempo.color"/></td>
+                                                    <td><s:property value="#tempo.sex"/></td>
+                                                    <td><s:property value="#tempo.dateOfBirth"/></td>
 						</tr>
 						</s:iterator>
-						--%>
+						
 					</tbody>
 				</table>
 			</div>

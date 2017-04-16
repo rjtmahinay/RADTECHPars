@@ -1,5 +1,6 @@
 package com.radtech;
 
+import java.util.ArrayList;
 import org.hibernate.HibernateException;
 
 public class PetAction extends GenericAction{
@@ -35,6 +36,17 @@ public class PetAction extends GenericAction{
     }
     public String editPet(){
         return addPet();
+    }
+    
+    //function processes
+    public String tempet(){
+        //building pet list for new customer
+        ArrayList<Pet> tempets = (ArrayList)sessionmap.get("tempets");
+        if(tempets == null) tempets = new ArrayList<Pet>();
+        pet.setDateOfBirth(toDate(pet.getDateInput()));
+        tempets.add(pet);
+        sessionmap.put("tempets", tempets);
+        return SUCCESS;
     }
 }
 //pet

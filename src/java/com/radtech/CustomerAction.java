@@ -1,5 +1,6 @@
 package com.radtech;
 
+import java.util.ArrayList;
 import org.hibernate.HibernateException;
 
 
@@ -18,9 +19,17 @@ public class CustomerAction extends GenericAction{
             //input is customer info
             //save it into customer
             tx.begin();
+            ArrayList<Pet> tempets = (ArrayList)sessionmap.get("tempets");
+                if(tempets == null | tempets.size()<=0) return INPUT;           //no pet input
+            for(Pet p: tempets){
+                p.setOwner(customer);
+                session.saveOrUpdate(p);
+            }
+            customer.setPets(tempets);
             session.saveOrUpdate(customer);
             tx.commit();
             refresh(); 
+            sessionmap.remove("tempets");
            return SUCCESS;
         }
         catch(HibernateException e){

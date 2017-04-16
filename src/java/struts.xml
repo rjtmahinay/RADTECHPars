@@ -12,6 +12,14 @@
 		<action name="login" class="com.radtech.UserAction" method="login">
                         <result>welcome.jsp</result>
 		</action>
+                <action name="tempet" class="com.radtech.PetAction" method="tempet">
+                        <result>add.jsp</result>
+                        <result name="input">add.jsp</result>
+		</action>
+                <action name="addCustomer" class="com.radtech.CustomerAction" method="addCustomer">
+                        <result>welcome.jsp</result>
+                        <result name="input">add.jsp</result>
+		</action>
 
 	</package>
 </struts>

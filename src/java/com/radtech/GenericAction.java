@@ -26,7 +26,6 @@ public class GenericAction extends ActionSupport implements SessionAware, ModelD
     Transaction tx;
     SessionFactory factory;
     Object model;
-    SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
     
     @Override
     public void setSession(Map map) {
@@ -55,7 +54,6 @@ public class GenericAction extends ActionSupport implements SessionAware, ModelD
         factory = ((SessionFactory)sessionmap.get("factory"));
         if(factory!= null){
             session = factory.openSession();
-            factory = null;
             return session;
         }
         else{
@@ -71,9 +69,8 @@ public class GenericAction extends ActionSupport implements SessionAware, ModelD
     
     public void refresh(){
         //change table names
-        sessionmap.put("view", (List) session.createQuery("from Information").list());
         sessionmap.put("archive", (List) session.createQuery("from Archive").list());
-        sessionmap.put("appointments", session.createQuery("from Appointment where adate is null order by date").list());
+        sessionmap.put("appointments", session.createQuery("from Appointment order by appointmentDate").list());
     }
     
     public void refreshUser(User user){
@@ -89,12 +86,12 @@ public class GenericAction extends ActionSupport implements SessionAware, ModelD
     }
     
     public void refreshAppointments(){
-        sessionmap.put("appointments", (List) session.createQuery("from Appointments order by date").list());
+        sessionmap.put("appointments", (List) session.createQuery("from Appointments order by appointmentDate").list());
     }
     
-    public void refreshAppointmentsPending(){
-        sessionmap.put("appointments", session.createQuery("from Appointment where adate is null order by date").list());
-    }
+//    public void refreshAppointmentsPending(){
+//        sessionmap.put("appointments", session.createQuery("from Appointment where adate is null order by date").list());
+//    }
     
     public void refreshConsultation(){
         sessionmap.put("consultations", (List) session.createQuery("from Consultations").list());
@@ -107,7 +104,7 @@ public class GenericAction extends ActionSupport implements SessionAware, ModelD
     public Date toDate(String input){
         Date result;
         try{
-            result = sdf.parse(input);
+            result = new SimpleDateFormat("MM/dd/yyyy").parse(input);
             return result;
         }
         catch(ParseException e){
