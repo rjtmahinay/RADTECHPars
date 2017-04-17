@@ -69,8 +69,13 @@ public class GenericAction extends ActionSupport implements SessionAware, ModelD
     
     public void refresh(){
         //change table names
-        sessionmap.put("archive", (List) session.createQuery("from Archive").list());
+        System.out.println(sessionmap == null);
+        session = getSession();
+        sessionmap.put("archive", session.createQuery("from Archive").list());
         sessionmap.put("appointments", session.createQuery("from Appointment order by appointmentDate").list());
+        sessionmap.put("customers", session.createQuery("from Customer").list());
+        sessionmap.put("search", session.createQuery("from Customer").list());
+        System.out.println("Refresh done");
     }
     
     public void refreshUser(User user){

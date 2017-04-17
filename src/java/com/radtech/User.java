@@ -4,6 +4,8 @@ package com.radtech;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
@@ -54,6 +56,7 @@ public class User extends GenericModel{
 
     @Id
     @Column(name="USER_ID")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     public long getUserId() {
         return userId;
     }

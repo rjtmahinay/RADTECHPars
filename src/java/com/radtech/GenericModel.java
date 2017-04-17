@@ -1,6 +1,8 @@
 package com.radtech;
 
 import java.io.Serializable;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 
 
 public class GenericModel implements Serializable{

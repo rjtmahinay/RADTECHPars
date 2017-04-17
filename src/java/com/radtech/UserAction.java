@@ -33,7 +33,7 @@ public class UserAction extends GenericAction{
                 user.setUserType(user.getPassword());
                 sessionmap.put("currentUser", user);
                 System.out.println("User is " + user.toString());
-                
+                refresh();
                 return SUCCESS;
             }
             else{

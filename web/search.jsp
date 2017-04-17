@@ -56,16 +56,16 @@
 					
 							<tr style="page-break-inside: avoid;">
 								<s:url action="getRecord" var="rec">
-									<s:param name="id"><s:property value="#record.controlNumber"/></s:param>
+									<s:param name="id"><s:property value="#record.customerId"/></s:param>
 								</s:url>
 								<s:url action="toArchive" var="arc">
-									<s:param name="id"><s:property value="#record.controlNumber"/></s:param>
+									<s:param name="id"><s:property value="#record.customerId"/></s:param>
 								</s:url>
 								<td>       
 									<s:a href="%{rec}"><button class="btn btn-block btn-primary" type="submit" name="action">Appointment</button></s:a>
 								</td>
-								<td><s:property value="#record.controlNumber"/> </td>
-								<td><s:property value="#record.ownerName" /></td>
+								<td><s:property value="#record.customerId"/> </td>
+								<td><s:property value="#record.name" /></td>
 								<td><s:property value="#record.contactNumber" /></td>
 								<%--
 								
