@@ -55,8 +55,8 @@
 					<s:iterator value="#session.search" var="record">
 					
 							<tr style="page-break-inside: avoid;">
-								<s:url action="getRecord" var="rec">
-									<s:param name="id"><s:property value="#record.customerId"/></s:param>
+								<s:url action="fetchCustomer" var="rec">
+                                                                    <s:param name="numberInput"> <s:property value="#record.customerId"/> </s:param>                  
 								</s:url>
 								<s:url action="toArchive" var="arc">
 									<s:param name="id"><s:property value="#record.customerId"/></s:param>

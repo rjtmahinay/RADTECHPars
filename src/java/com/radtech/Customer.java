@@ -16,19 +16,19 @@ import javax.persistence.OneToMany;
 @Entity
 @Table(name="Customers")
 public class Customer extends GenericModel{
-    private long cutomerId, contactNumber;
+    private long customerId, contactNumber;
     private String name, address;
     private List appointments, pets;
 
     @Id
     @Column(name="CUSTOMER_ID")
     @GeneratedValue(strategy = GenerationType.AUTO)
-    public long getCutomerId() {
-        return cutomerId;
+    public long getCustomerId() {
+        return customerId;
     }
 
-    public void setCutomerId(long cutomerId) {
-        this.cutomerId = cutomerId;
+    public void setCustomerId(long customerId) {
+        this.customerId = customerId;
     }
 
     @Column(name="CONTACT_NUMBER")
@@ -67,7 +67,7 @@ public class Customer extends GenericModel{
         this.appointments = appointments;
     }
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "owner", targetEntity = Pet.class)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "owner", targetEntity = Pet.class)
     public List getPets() {
         return pets;
     }
@@ -79,7 +79,7 @@ public class Customer extends GenericModel{
     
     @Override
     public String toString() {
-        return "Customer{" + "cutomerId=" + cutomerId + ", contactNumber=" + contactNumber + ", name=" + name + ", address=" + address + '}';
+        return "Customer{" + "customerId=" + customerId + ", contactNumber=" + contactNumber + ", name=" + name + ", address=" + address + '}';
     }
     
     

@@ -105,12 +105,11 @@ public class Pet extends GenericModel{
         return consultations;
     }
 
-    public void setConsultationss(List consultations) {
+    public void setConsultations(List consultations) {
         this.consultations = consultations;
     }
 
-    
-    
+
     @Override
     public String toString() {
         return "Pet{" + "petId=" + petId + ", customerId=" + customerId + ", name=" + name + ", breed=" + breed + ", color=" + color + ", sex=" + sex + ", dateOfBirth=" + dateOfBirth + '}';

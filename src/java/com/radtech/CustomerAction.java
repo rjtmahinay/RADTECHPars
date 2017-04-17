@@ -46,6 +46,22 @@ public class CustomerAction extends GenericAction{
         return addCustomer();
     }
     
+    public String fetchCustomer(){
+        try{
+            session = getSession();
+            Customer custom = (Customer)session.load(Customer.class, Long.parseLong(customer.getNumberInput()));
+            System.out.println(custom.toString());
+            sessionmap.put("currentCustomer", custom);
+            return SUCCESS;
+        }
+        catch(HibernateException e){
+            e.printStackTrace();
+        }
+        finally{
+            if(session != null) session.close();
+        }
+        return INPUT;
+    }
 }
 //customer
 //	add customer check

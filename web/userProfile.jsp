@@ -70,22 +70,22 @@
 						<table class="table table-condensed table-">
 							<tr>
 								<td>Customer Number:</td>
-								<td><s:property value="%{#session.currentRecord.controlNumber}"/></td>
+								<td><s:property value="%{#session.currentCustomer.customerId}"/></td>
 							</tr>
 
 							<tr>
 								<td>Owner Name:</td>
-								<td><s:textfield name="ownerName" value="%{#session.currentRecord.ownerName}" /></td>
+								<td><s:textfield name="name" value="%{#session.currentCustomer.name}" /></td>
 							</tr>
 
 							<tr>
 								<td>Address:</td>
-								<td><s:textfield name="address" value="%{#session.currentRecord.address}" /></td>
+								<td><s:textfield name="address" value="%{#session.currentCustomer.address}" /></td>
 							</tr>
 
 							<tr>
 								<td>Contact Number:</td>
-								<td><s:textfield name="contactNumber" value="%{#session.currentRecord.contactNumber}" /></td>
+								<td><s:textfield name="contactNumber" value="%{#session.currentCustomer.contactNumber}" /></td>
 							</tr>
 
 						</table>
@@ -135,17 +135,13 @@
 										</tr>
 										<tr>
 											<td><b>Sex:</b></td>
-											<td><s:select cssClass="text text-block" name="sex" list="{'', 'Male','Female'}" headerKey="-1"/></td>
+											<td><s:select cssClass="text text-block" name="sex" list="{'Male','Female'}" headerKey="-1"/></td>
 										</tr>
 										<tr>
 											<td><b>Date of birth:</b></td>
 											<td>
 											<s:textfield name="dateinput" id="datepicker" />
 											</td>
-										</tr>
-										<tr>
-											<td><b>Weight:</b></td>
-											<td><s:textfield name="weight" placeholder=""/></td>
 										</tr>
 
 									</table>
@@ -175,7 +171,6 @@
 						<th>Color</th>
 						<th>Sex</th>
 						<th>Date of Birth</th>
-						<th>Weight</th>
 					</thead>
 					<tbody>
 						<tr>
@@ -185,21 +180,20 @@
 							<td>black</td>
 							<td>male</td>
 							<td>03/28/1997</td>
-							<td>16</td>
 						</tr>
 
-						<%--
-						<s:iterator value="%{#session.currentRecord.}" var="diag">
+						
+						<s:iterator value="%{#session.currentCustomer.pets}" var="pet">
 						<tr>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
+							<td><s:checkbox fieldValue="%{#pet.petId}" name="input3"/></td>
+                                                        <td><s:property value="pets.name"/></td>
+							<td><s:property value="pets.breed"/></td>
+							<td><s:property value="pets.color"/></td>
+							<td><s:property value="pets.sex"/></td>
+							<td><s:property value="pets.dateOfBirth"/></td>
 						</tr>
 						</s:iterator>
-						--%>
+						
 					</tbody>
 				</table>
 			</div>
@@ -218,7 +212,7 @@
 				</div>	
 				<div class="col-md-6">
 					
-					<s:textfield name="dateinput" id="datepicker" placeholder="mm/dd/yyyy" />
+					<s:textfield name="dateInput" id="datepicker" placeholder="mm/dd/yyyy" />
 				</div>
 			</div>
 					

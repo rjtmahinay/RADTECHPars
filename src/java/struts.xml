@@ -20,6 +20,15 @@
                         <result>welcome.jsp</result>
                         <result name="input">add.jsp</result>
 		</action>
+                <action name="fetchCustomer" class="com.radtech.CustomerAction" method="fetchCustomer">
+                        <result>userProfile.jsp</result>
+                        <result name="input">welcome.jsp</result>
+		</action>
+                <action name="addAppointment" class="com.radtech.AppointmentAction" method="addAppointment">
+                        <result>schedule.jsp</result>
+                        <result name="input">userProfile.jsp</result>
+		</action>
+                
 
 	</package>
 </struts>

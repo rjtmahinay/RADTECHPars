@@ -22,7 +22,7 @@ import javax.persistence.Table;
 @Table(name = "Appointments")
 public class Appointment extends GenericModel{
     private long appointmentId;
-    private String userType, comment, name;
+    private String comment;
     private Date appointmentDate;
     private Customer customer;
     private Pet pet;
@@ -37,15 +37,6 @@ public class Appointment extends GenericModel{
         this.appointmentId = appointmentId;
     }
 
-    @Column(name="USER_TYPE")
-    public String getUserType() {
-        return userType;
-    }
-
-    public void setUserType(String userType) {
-        this.userType = userType;
-    }
-
     @Column(name="COMMENT")
     public String getComment() {
         return comment;
@@ -53,15 +44,6 @@ public class Appointment extends GenericModel{
 
     public void setComment(String comment) {
         this.comment = comment;
-    }
-    
-    @Column(name="NAME")
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     @Column(name="APPOINTMENT_DATE")
@@ -106,6 +88,6 @@ public class Appointment extends GenericModel{
     
     @Override
     public String toString() {
-        return "Appointment{" + "appointmentId=" + appointmentId + ", userType=" + userType + ", comment=" + comment + ", name=" + name + ", appointmentDate=" + appointmentDate + '}';
+        return "Appointment{" + "appointmentId=" + appointmentId +  ", comment=" + comment  + ", appointmentDate=" + appointmentDate + '}';
     }
 }

@@ -24,21 +24,27 @@ public class AppointmentAction extends GenericAction{
     }   
 
     public String addAppointment() {
-        
+        System.out.println(app.getInput3());
         String[] pets = app.getInput3().split(",");
-        
         try{
             session = getSession();
             tx = session.getTransaction();
             tx.begin();
+            app.setAppointmentDate(toDate(app.getDateInput()));
             for(String s: pets){
-                Pet pet = (Pet)session.load(Pet.class, Long.parseLong(s));
+                Pet pet = (Pet)session.load(Pet.class, Long.parseLong(s.trim()));
                 Consultation consultation = new Consultation();
                 consultation.setPet(pet);
                 consultation.setAppointment(app);
                 app.getConsultations().add(consultation);
-                
+                pet.getConsultations().add(consultation);
+                session.saveOrUpdate(pet);
+                session.saveOrUpdate(consultation);
             }
+            session.saveOrUpdate(app);
+            tx.commit();
+            refresh();
+            return SUCCESS;
         }
         catch(HibernateException e){
             e.printStackTrace();

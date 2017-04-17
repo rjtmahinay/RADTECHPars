@@ -31,6 +31,7 @@ public class Consultation extends GenericModel{
 
     @Id
     @Column(name="CONSULTATION_ID")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     public long getConsultationId() {
         return consultationId;
     }
