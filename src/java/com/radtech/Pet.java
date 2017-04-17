@@ -23,7 +23,7 @@ public class Pet extends GenericModel{
     private String name, breed,color, sex;
     private Date dateOfBirth;
     private Customer owner;
-    private List appointments = new ArrayList<Appointment>();
+    private List consultations = new ArrayList<Consultation>();
 
     @Id
     @Column(name="PET_ID")
@@ -100,13 +100,13 @@ public class Pet extends GenericModel{
         this.owner = owner;
     }
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, targetEntity = Appointment.class, mappedBy = "pet")
-    public List getAppointments() {
-        return appointments;
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, targetEntity = Consultation.class, mappedBy = "pet")
+    public List getConsultations() {
+        return consultations;
     }
 
-    public void setAppointments(List appointments) {
-        this.appointments = appointments;
+    public void setConsultationss(List consultations) {
+        this.consultations = consultations;
     }
 
     

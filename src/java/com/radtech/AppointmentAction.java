@@ -21,33 +21,24 @@ public class AppointmentAction extends GenericAction{
     @Override
     public Appointment getModel() {
         return app;
-    }
+    }   
 
     public String addAppointment() {
-        session = getSession();
-        tx = session.getTransaction();
+        
+        String[] pets = app.getInput3().split(",");
+        
         try{
-            //get pet
-            //get customer from pet
-            //make the appointment
+            session = getSession();
+            tx = session.getTransaction();
             tx.begin();
-            //get the pet being done
-            Pet currentPet = (Pet)session.load(Pet.class, getCurrentPet());
-            //load owner from pet instance
-            Customer currentCustomer = currentPet.getOwner();
-            //set appointment values and associations
-            app.setPet(currentPet);
-            app.setCustomer(currentCustomer);
-            app.setAppointmentDate(toDate(app.getDateInput()));
-            //save appointment, pet, and customer objects on db
-            session.save(app);
-            session.merge(currentCustomer);
-            session.merge(currentPet);
-            session.flush();
-            tx.commit();
-            //reload session values for display
-            refresh();
-            return SUCCESS;
+            for(String s: pets){
+                Pet pet = (Pet)session.load(Pet.class, Long.parseLong(s));
+                Consultation consultation = new Consultation();
+                consultation.setPet(pet);
+                consultation.setAppointment(app);
+                app.getConsultations().add(consultation);
+                
+            }
         }
         catch(HibernateException e){
             e.printStackTrace();
