@@ -47,10 +47,10 @@
 			<div class="table-responsive">
 				<table class="table table-bordered table-hover table-striped table-inverse" align="center">
 					<thead>
-						<s:if test="%{#session.currentUser.name=='admin'}">
+						<s:if test="%{#session.currentUser.userType=='doctor'}">
 						<th width="10%">Diagnosis</th>	
 						</s:if>
-						<s:if test="%{#session.currentUser.name!='admin'}">
+						<s:if test="%{#session.currentUser.userType=='assistant'}">
 						<th width="10%"><center><span class="glyphicon glyphicon-edit"></span></center></th>
 						<th width="10%"><center><span class="glyphicon glyphicon-remove"></span></center></th>
 						</s:if>
@@ -64,11 +64,11 @@
 							
 						<tr>
 							
-							<s:if test="%{#session.currentUser.name=='admin'}">
+							<s:if test="%{#session.currentUser.userType=='doctor'}">
 							<td><button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#confirmComplete" data-id="
 								<s:property value="%{#record.appointmentNumber}" />">Consult</button></td>
 							</s:if>
-							<s:if test="%{#session.currentUser.name!='admin'}">
+							<s:if test="%{#session.currentUser.userType=='assistant'}">
 							<s:url action="getVitals" var="vit">
 								<s:param name="id"><s:property value="#record.controlNumber"/></s:param>
 							</s:url>

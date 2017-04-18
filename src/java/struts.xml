@@ -10,7 +10,7 @@
 	<package name="default" extends="struts-default" namespace="/">
 
 		<action name="login" class="com.radtech.UserAction" method="login">
-                        <result>welcome.jsp</result>
+                        <result>schedule.jsp</result>
 		</action>
                 <action name="tempet" class="com.radtech.PetAction" method="tempet">
                         <result>add.jsp</result>
