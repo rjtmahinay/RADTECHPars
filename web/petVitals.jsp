@@ -48,7 +48,7 @@
 			</div>
 			<div class="row">
 				<div class="col-md-6">
-					<s:if test="%{#session.currentUser.name!='admin'}">
+					<s:if test="%{#session.currentUser.userType=='assistant'}">
 					<div class="panel panel-default">
 						<s:form action="petVitals" theme="bootstrap" cssClass="form" method="POST">
 						<div class="panel-heading">
@@ -113,7 +113,7 @@
 					</s:if>
 					
 <!-DOCTOR'S VERSION OF FIRST HALF, DOCTOR'S VERSION OF FIRST HALF, DOCTOR'S VERSION OF FIRST HALF, DOCTOR'S VERSION OF FIRST HALF, -->					
-					<s:if test="%{#session.currentUser.name=='admin'}">
+					<s:if test="%{#session.currentUser.userType=='doctor'}">
 					<div class="panel panel-default">
 						<s:form action="petVitals" theme="bootstrap" cssClass="form" method="POST">
 						<div class="panel-heading">
@@ -190,7 +190,7 @@
 <!-END OF FIRST HALF, END OF FIRST HALF, END OF FIRST HALF, END OF FIRST HALF, END OF FIRST HALF, END OF FIRST HALF, END OF FIRST HALF, ->
 				
 				<div class="col-md-6">
-					<s:if test="%{#session.currentUser.name=='admin'}">
+					<s:if test="%{#session.currentUser.userType=='doctor'}">
 					<div class="panel panel-default">
 						<s:form action="addDiagnosis" theme="bootstrap" cssClass="form" method="POST">
 						<div class="panel-body">

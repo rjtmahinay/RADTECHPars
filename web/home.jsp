@@ -44,7 +44,7 @@
 			<div class="collapse navbar-collapse" id="mainNavBar">
 				
 				<ul class="nav navbar-nav">
-					<s:if test="%{#session.currentUser.name!='admin'}">
+					<s:if test="%{#session.currentUser.userType=='assistant'}">
 					<li><a href="search.jsp">Appointment <span class="glyphicon glyphicon-plus"></span></a></li>
 					<li><a href="add.jsp">New Customer <span class="glyphicon glyphicon-user"></span></a></li>
 					

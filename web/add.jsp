@@ -28,136 +28,180 @@
 
 	<body>
 		<div class="container-fluid">
-			
-
-
 		<s:include value="home.jsp"/>
+		<h1>New Customer</h1>
+		<h1>Pet List  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addPet"><span class="glyphicon glyphicon-plus"></span></button></h1>
+				
 		
-				
-				
-					
-						<h1>New Customer</h1>
+		<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+		<script>
+		$( function() {
+		  $( "#datepicker" ).datepicker();
+		} );
+		</script>
+		
+		
+		<div class="modal fade" id="addPet">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<center>
+
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h3 class="modal-title">Add Record</h3>
+					</div>
+
 					<s:form action="tempet" theme="bootstrap" cssClass="form" method="POST">
-								<div class="modal-body">
-									<div class="table">
-									<table class="table table-condensed">
-										<tr>
-											<td><b>Pet Name:</b></td>
-											<td><s:textfield name="name" placeholder=""/></td>
-										</tr>
-										<tr>
-											<td><b>Breed:</b></td>
-											<td><s:textfield name="breed" placeholder=""/></td>
-										</tr>
-										<tr>
-											<td><b>Color:</b></td>
-											<td><s:textfield name="color" placeholder=""/></td>
-										</tr>
-										<tr>
-											<td><b>Sex:</b></td>
-											<td><s:select cssClass="text text-block" name="sex" list="{'Male','Female'}" headerKey="-1"/></td>
-										</tr>
-										<tr>
-											<td><b>Date of birth:</b></td>
-											<td>
-											<s:textfield name="dateInput" id="datepicker" />
-											</td>
-										</tr>
+						<div class="modal-body">
+							<div class="table">
+							<table class="table table-condensed">
+								<tr>
+									<td><b>Pet Name:</b></td>
+									<td><s:textfield name="name" placeholder=""/></td>
+								</tr>
+								<tr>
+									<td><b>Breed:</b></td>
+									<td><s:textfield name="breed" placeholder=""/></td>
+								</tr>
+								<tr>
+									<td><b>Color:</b></td>
+									<td><s:textfield name="color" placeholder=""/></td>
+								</tr>
+								<tr>
+									<td><b>Sex:</b></td>
+									<td><s:select cssClass="text text-block" name="sex" list="{'Male','Female'}" headerKey="-1"/></td>
+								</tr>
+								<tr>
+									<td><b>Date of birth:</b></td>
+									<td>
+									<s:textfield name="dateInput" id="datepicker" />
+									</td>
+								</tr>
 
-									</table>
-								</div>
+							</table>
+						</div>
 
-									<div class="modal-footer form-group" >
-										<center>
-											<s:submit cssClass="btn btn-primary btn-block" value="submit" />
-											<s:reset value="clear" cssClass="btn btn-secondary btn-block"/>
-										</center>
-									</div>
-								</div>
-							</s:form>
-					<s:form action="addCustomer" theme="bootstrap" cssClass="form" method="POST">
-					
-						
-							<label for="name">Customer Name</label>
-							<s:textfield name="name" placeholder=""/>
+							<div class="modal-footer form-group" >
+								<center>
+									<s:submit cssClass="btn btn-primary btn-block" value="submit" />
+									<s:reset value="clear" cssClass="btn btn-secondary btn-block"/>
+								</center>
+							</div>
+						</div>
+					</s:form>
 
-							<label for="address">Address</label>
-							<s:textfield name="address" placeholder=""/>
 
-							<label for="contactNumber">Contact Number</label>
-							<s:textfield name="contactNumber" placeholder=""/>
-							
-							<br>
+				</center>  
+			</div>
+		</div>
+		</div>	
 
-							<s:reset value="Clear Data" cssClass="btn btn-secondary"/>
+		<div class="table table-responsive">
+		<table class="table table-striped table-bordered table-hover">
+			<thead>
+
+				<th>Name</th>
+				<th>Breed</th>
+				<th>Color</th>
+				<th>Sex</th>
+				<th>Date of Birth</th>
+			</thead>
+			<tbody>
+				<tr>
+
+					<td>Uvu</td>
+					<td>dog</td>
+					<td>black</td>
+					<td>male</td>
+					<td>03/28/1997</td>
+				</tr>
+
+
+				<s:iterator value="%{#session.tempets}" var="tempo">
+				<tr>
+					<td><s:property value="#tempo.name"/></td>
+					<td><s:property value="#tempo.breed"/></td>
+					<td><s:property value="#tempo.color"/></td>
+					<td><s:property value="#tempo.sex"/></td>
+					<td><s:property value="#tempo.dateOfBirth"/></td>
+				</tr>
+				</s:iterator>
+
+			</tbody>
+		</table>
+	</div>
+
+
+
+
+
+
+
+
+
+
+
+
+	<%--			
+			<s:form action="tempet" theme="bootstrap" cssClass="form" method="POST">
+						<div class="modal-body">
+							<div class="table">
+							<table class="table table-condensed">
+								<tr>
+									<td><b>Pet Name:</b></td>
+									<td><s:textfield name="name" placeholder=""/></td>
+								</tr>
+								<tr>
+									<td><b>Breed:</b></td>
+									<td><s:textfield name="breed" placeholder=""/></td>
+								</tr>
+								<tr>
+									<td><b>Color:</b></td>
+									<td><s:textfield name="color" placeholder=""/></td>
+								</tr>
+								<tr>
+									<td><b>Sex:</b></td>
+									<td><s:select cssClass="text text-block" name="sex" list="{'Male','Female'}" headerKey="-1"/></td>
+								</tr>
+								<tr>
+									<td><b>Date of birth:</b></td>
+									<td>
+									<s:textfield name="dateInput" id="datepicker" />
+									</td>
+								</tr>
+
+							</table>
+						</div>
+
+							<div class="modal-footer form-group" >
+								<center>
+									<s:submit cssClass="btn btn-primary btn-block" value="submit" />
+									<s:reset value="clear" cssClass="btn btn-secondary btn-block"/>
+								</center>
+							</div>
+						</div>
+					</s:form>
+	--%>
+			<s:form action="addCustomer" theme="bootstrap" cssClass="form" method="POST">
+				<label for="name">Customer Name</label>
+				<s:textfield name="name" placeholder=""/>
+
+				<label for="address">Address</label>
+				<s:textfield name="address" placeholder=""/>
+
+				<label for="contactNumber">Contact Number</label>
+				<s:textfield name="contactNumber" placeholder=""/>
+
+				<br>
+
+				<s:reset value="Clear Data" cssClass="btn btn-secondary"/>
+				<p align="CENTER"><s:submit cssClass="btn btn-primary" value="New Customer" /></p>
+			</s:form>
 						
 <!-END OF FIRST HALF OF ADD , END OF FIRST HALF OF ADD , END OF FIRST HALF OF ADD , END OF FIRST HALF OF ADD , END OF FIRST HALF OF ADD ,END OF FIRST HALF OF ADD ,->	
 							
-				<h1>Pet List  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addPet"><span class="glyphicon glyphicon-plus"></span></button></h1>
-				
-				<div class="modal fade" id="addPet">
-				<div class="modal-dialog">
-					<div class="modal-content">
-						<center>
-
-							<div class="modal-header">
-								<button type="button" class="close" data-dismiss="modal">&times;</button>
-								<h3 class="modal-title">Add Record</h3>
-							</div>
-						</center>  
-					</div>
-				</div>
-				</div>	
 						
-				<div class="table table-responsive">
-				<table class="table table-striped table-bordered table-hover">
-					<thead>
-						
-						<th>Name</th>
-						<th>Breed</th>
-						<th>Color</th>
-						<th>Sex</th>
-						<th>Date of Birth</th>
-					</thead>
-					<tbody>
-						<tr>
-							
-							<td>Uvu</td>
-							<td>dog</td>
-							<td>black</td>
-							<td>male</td>
-							<td>03/28/1997</td>
-						</tr>
-
-						
-						<s:iterator value="%{#session.tempets}" var="tempo">
-						<tr>
-                                                    <td><s:property value="#tempo.name"/></td>
-                                                    <td><s:property value="#tempo.breed"/></td>
-                                                    <td><s:property value="#tempo.color"/></td>
-                                                    <td><s:property value="#tempo.sex"/></td>
-                                                    <td><s:property value="#tempo.dateOfBirth"/></td>
-						</tr>
-						</s:iterator>
-						
-					</tbody>
-				</table>
-			</div>
-
-			<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-			<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-			<script>
-			$( function() {
-			  $( "#datepicker" ).datepicker();
-			} );
-			</script>
-							
-					<p align="CENTER"><s:submit cssClass="btn btn-primary" value="New Customer" /></p>
-					
-				
-			
-					
-			</s:form>		
 				
 			
 		
