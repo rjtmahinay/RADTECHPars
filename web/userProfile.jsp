@@ -206,6 +206,7 @@
 				<table class="table table-striped table-bordered table-hover">
 					<thead>
 						<th width="2%"></th>
+						<th width="8%"></th>
 						<th>Name</th>
 						<th>Breed</th>
 						<th>Color</th>
@@ -215,6 +216,7 @@
 					<tbody>
 						<tr>
 							<td><input type="checkbox" value=""></td>
+							<td><button class="btn btn-block btn-primary btn-sm" type="submit" name="action">History</button></td>
 							<td>Uvu</td>
 							<td>dog</td>
 							<td>black</td>
@@ -226,6 +228,7 @@
 						<s:iterator value="%{#session.currentCustomer.pets}" var="pet">
 						<tr>
 							<td><s:checkbox fieldValue="%{#pet.petId}" name="input3"/></td>
+							<td><button class="btn btn-block btn-primary btn-sm" type="submit" name="action">History</button></td>
                                                         <td><s:property value="pets.name"/></td>
 							<td><s:property value="pets.breed"/></td>
 							<td><s:property value="pets.color"/></td>
