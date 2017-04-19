@@ -12,7 +12,7 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+		<link rel="stylesheet" href="css/bootstrap.min.css">
 		<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 		<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 		<link rel="icon" href="favicon.ico" type="image/x-icon">
@@ -38,17 +38,17 @@
 				</thead>
 				<tbody>
 				<tr>
-					<td><s:property value="%{#session.currentRecord.controlNumber}"/></td>
-					<td><s:property value="%{#session.currentRecord.ownerName}" /></td>
-					<td><s:property  value="%{#session.currentRecord.address}" /></td>
-					<td><s:property value="%{#session.currentRecord.contactNumber}" /></td>
+					<td><s:property value="%{#session.currentCustomer.customerId}"/></td>
+					<td><s:property value="%{#session.currentCustomer.name}" /></td>
+					<td><s:property  value="%{#session.currentCustomer.address}" /></td>
+					<td><s:property value="%{#session.currentCustomer.contactNumber}" /></td>
 				</tr>
 				</tbody>
 			</table>
 			</div>
 			<div class="row">
 				<div class="col-md-6">
-					<s:if test="%{#session.currentUser.userType=='assistant'}">
+					<s:if test="%{#session.currentUser.userType.equals('assistant')}">
 					<div class="panel panel-default">
 						<s:form action="petVitals" theme="bootstrap" cssClass="form" method="POST">
 						<div class="panel-heading">
@@ -190,7 +190,7 @@
 <!-END OF FIRST HALF, END OF FIRST HALF, END OF FIRST HALF, END OF FIRST HALF, END OF FIRST HALF, END OF FIRST HALF, END OF FIRST HALF, ->
 				
 				<div class="col-md-6">
-					<s:if test="%{#session.currentUser.userType=='doctor'}">
+					<s:if test="%{#session.currentUser.userType.equals('doctor')}">
 					<div class="panel panel-default">
 						<s:form action="addDiagnosis" theme="bootstrap" cssClass="form" method="POST">
 						<div class="panel-body">

@@ -90,7 +90,7 @@ public class Pet extends GenericModel{
         this.dateOfBirth = dateOfBirth;
     }
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY,  targetEntity = Customer.class)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER,  targetEntity = Customer.class)
     @JoinColumn(name="OWNER_ID")
     public Customer getOwner() {
         return owner;

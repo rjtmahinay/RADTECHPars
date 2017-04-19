@@ -16,8 +16,8 @@
 		<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 		<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 		<link rel="icon" href="favicon.ico" type="image/x-icon">
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+		<script src="js/jquery.min.js"></script>
+		<script src="js/bootstrap.min.js"></script>
 		<title>Animal Station and Veterinary Clinic Home</title>
 	</head>
 	<body background="dog.jpg">
@@ -35,19 +35,13 @@
 						<th width="30%">Transaction Type</th>
 					</thead>
 					<tbody>
-						<tr>
-							<td><button type="button" class="btn btn-danger btn-block" data-toggle="modal" data-target="#confirmCancel" data-id="<s:property value="%{#record.appointmentNumber}" />"> <span class="glyphicon glyphicon-remove"></span></button></td>
-							<td>Diaz</td>
-							<td>today</td>
-							<td>appointment</td>
-						</tr>
 						<s:iterator value="#session.appointments" var="record">	
 						<tr>
 
 							
-							<td><button type="button" class="btn btn-danger btn-block" data-toggle="modal" data-target="#confirmCancel" data-id="<s:property value="%{#record.appointmentNumber}" /><span class="glyphicon glyphicon-remove"></span></button></td>
-							<td><s:property value="%{#record.information.ownerName}" /></td>	
-							<td><s:date name="#record.date" format="MM/dd/yyyy"/></td>
+							<td><button type="button" class="btn btn-danger btn-block" data-toggle="modal" data-target="#confirmCancel" data-id="<s:property value="%{#record.appointmentId}" /><span class="glyphicon glyphicon-remove"></span></button></td>
+							<td><s:property value="%{#record.customer.name}" /></td>	
+							<td><s:date name="#record.appointmentDate" format="MM/dd/yyyy"/></td>
 							<td><s:property value="#record.transacType" /></td>
 
 						</tr>

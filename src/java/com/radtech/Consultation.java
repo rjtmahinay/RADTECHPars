@@ -131,7 +131,7 @@ public class Consultation extends GenericModel{
         this.gums = gums;
     }
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, targetEntity = Appointment.class)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, targetEntity = Appointment.class)
     @JoinColumn(name="APPOINTMENT_ID")
     public Appointment getAppointment() {
         return appointment;

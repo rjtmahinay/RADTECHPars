@@ -25,7 +25,6 @@ public class Appointment extends GenericModel{
     private String comment;
     private Date appointmentDate;
     private Customer customer;
-    private Pet pet;
     private List consultations = new ArrayList<Consultation>();
 
     @Id
@@ -55,7 +54,7 @@ public class Appointment extends GenericModel{
         this.appointmentDate = appointmentDate;
     }
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, targetEntity = Customer.class)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, targetEntity = Customer.class)
     @JoinColumn(name="CUSTOMER_ID")
     public Customer getCustomer() {
         return customer;
@@ -63,16 +62,6 @@ public class Appointment extends GenericModel{
 
     public void setCustomer(Customer customer) {
         this.customer = customer;
-    }
-
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, targetEntity = Pet.class)
-    @JoinColumn(name="PET_ID")
-    public Pet getPet() {
-        return pet;
-    }
-
-    public void setPet(Pet pet) {
-        this.pet = pet;
     }
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "appointment", targetEntity = Consultation.class)

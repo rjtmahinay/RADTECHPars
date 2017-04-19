@@ -14,12 +14,12 @@
 
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+		<link rel="stylesheet" href="/css/bootstrap.min.css">
 		<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 		<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 		<link rel="icon" href="favicon.ico" type="image/x-icon">
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+		<script src="js/jquery.min.js"></script>
+		<script src="js/bootstrap.min.js"></script>
 		
 		<title>RADTECH PARS</title>
 	</head>
@@ -44,7 +44,7 @@
 			<div class="collapse navbar-collapse" id="mainNavBar">
 				
 				<ul class="nav navbar-nav">
-					<s:if test="%{#session.currentUser.userType=='assistant'}">
+					<s:if test="%{#session.currentUser.userType.equals('assistant')}">
 					<li><a href="search.jsp">Appointment <span class="glyphicon glyphicon-plus"></span></a></li>
 					<li><a href="add.jsp">New Customer <span class="glyphicon glyphicon-user"></span></a></li>
 					
@@ -54,10 +54,10 @@
 					
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
-					<s:url action="fetchuser" var="getUser">
-						<s:param name="username" value="%{#session.currentuser.username}"/>
+					<s:url action="fetchUser" var="getUser">
+						<s:param name="username" value="%{#session.currentUser.username}"/>
 					</s:url>
-					<li><s:a href="%{getUser}"> <s:property value="%{#session.currentUser.name}"/> <span class="glyphicon glyphicon-cog"></span> </s:a></li>
+					<li><s:a href="%{fetchUser}"> <s:property value="%{#session.currentUser.name}"/> <span class="glyphicon glyphicon-cog"></span> </s:a></li>
 					<s:url action='logout' var="logout"/>
 					<li><s:a href="%{logout}"> Logout <span class="glyphicon glyphicon-log-in"/></s:a></li>
 				</ul>        
@@ -106,7 +106,7 @@
 
 										<tr>
 											<td><b>Sex:</b></td>
-											<td><s:select cssClass="text text-block" name="sex" list="{'', 'Male','Female'}" headerKey="-1"/></td>
+											<td><s:select cssClass="text text-block" name="sex" list="{'Male','Female'}" headerKey="-1"/></td>
 										</tr>
 
 										<tr>

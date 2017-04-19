@@ -64,21 +64,21 @@
 							
 						<tr>
 							
-							<s:if test="%{#session.currentUser.userType=='doctor'}">
+							<s:if test="%{#session.currentUser.userType.equals('doctor')}">
 							<td><button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#confirmComplete" data-id="
-								<s:property value="%{#record.appointmentNumber}" />">Consult</button></td>
+								<s:property value="%{#record.appointmentId}" />">Consult</button></td>
 							</s:if>
-							<s:if test="%{#session.currentUser.userType=='assistant'}">
+							<s:if test="%{#session.currentUser.userType.equals('assistant')}">
 							<s:url action="getVitals" var="vit">
-								<s:param name="id"><s:property value="#record.controlNumber"/></s:param>
+								<s:param name="id"><s:property value="#record.customer.customerId"/></s:param>
 							</s:url>
 							<td><s:a href="%{vit}"><button class="btn btn-block btn-primary" type="submit" name="action">Vitals</button></s:a></td>
 							<td><button type="button" class="btn btn-danger btn-block" data-toggle="modal" data-target="#confirmCancel" data-id="
-								<s:property value="%{#record.appointmentNumber}" />">Cancel</button></td>
+								<s:property value="#record.appointmentId" />">Cancel</button></td>
 							</s:if>
-							<td><s:property value="%{#record.information.ownerName}" /></td>	
-							<td><s:property value="%{#record.information.patientName}" /></td>
-							<td><s:date name="#record.date" format="MM/dd/yyyy"/></td>
+							<td><s:property value="#record.customer.customerId" /></td>	
+							<td><s:property value="#record.customer.name" /></td>
+							<td><s:date name="#record.appointmentDate" format="MM/dd/yyyy"/></td>
 							<td><s:property value="#record.transacType" /></td>
 							
 						</tr>
