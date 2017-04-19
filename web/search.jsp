@@ -4,6 +4,94 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+		<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+		<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+		<link rel="icon" href="favicon.ico" type="image/x-icon">
+	</head>
+	<body>
+	   <s:include value="home.jsp" />
+	   <div class="container-fluid">
+			<s:form action="searchDatabase" namespace="/">
+				<br>
+				<div class="row">
+					<div class="col-md-3 col-sm-0"></div>
+
+					<div class="col-md-2 col-sm-4">
+						<center>
+						
+                                                    <s:select name="searchType" list="{'Customer Name', 'Customer Number', 'Address'}" 
+                                                              headerKey="-1"/>
+						</center>
+					</div>
+
+					<div class="col-md-2 col-sm-4">
+						<center>
+						   <s:textfield name="searchInput" />
+						</center>
+					</div>    
+					<div class="col-md-2 col-sm-4">
+						<center>
+							<s:submit cssClass="btn btn-primary btn-sm btn-block" name="submit" value="Submit"/>
+						</center>
+					</div>
+					<div class="col-md-3 col-sm-0"></div>
+				</div>
+				<br>		
+			</s:form>
+		 
+		<div class="table table-responsive">
+			<table class="table table-bordered table-hover table-inverse table-striped">
+				<thead>
+					<tr>
+						<th width="10%">Profile</th>
+						<th>#</th>                                
+						<th>Customer Name</th>
+						<th>Contact Number</th>
+					</tr>
+				</thead>
+
+				<tbody>
+
+					<s:iterator value="#session.search" var="record">
+					
+							<tr style="page-break-inside: avoid;">
+								<s:url action="fetchCustomer" var="rec">
+                                                                    <s:param name="numberInput"> <s:property value="#record.customerId"/> </s:param>                  
+								</s:url>
+								<s:url action="toArchive" var="arc">
+									<s:param name="id"><s:property value="#record.customerId"/></s:param>
+								</s:url>
+								<td>       
+									<s:a href="%{rec}"><button class="btn btn-block btn-primary" type="submit" name="action">Appointment</button></s:a>
+								</td>
+								<td><s:property value="#record.customerId"/> </td>
+								<td><s:property value="#record.name" /></td>
+								<td><s:property value="#record.contactNumber" /></td>
+								
+								
+							</tr>
+						</s:iterator>
+				</tbody>    
+			</table>
+		</div>    
+	</div>
+
+
+	</body>
+</html>
+
+
+<%-- OLD VERSION
+
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="s" uri="/struts-tags"%>
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -108,7 +196,7 @@
 
 									</td>
 								
-								--%>
+								
 								
 							</tr>
 						</s:iterator>
@@ -120,3 +208,4 @@
 
 	</body>
 </html>
+--%>
