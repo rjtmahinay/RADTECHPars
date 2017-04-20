@@ -26,7 +26,7 @@
 		<s:include value="home.jsp"/>
 		<div class="container-fluid">
 			<font face="roboto">
-				<h2>Customer Profile</h2>
+				
 			</font>
 			<div class="table">
 			<table class="table table-bordered ">
@@ -210,7 +210,7 @@
 							<s:select name="selectPet" list="{'med1', 'med2', 'med3'}" headerKey="-1"/>
 						</div>
 						<div class="panel-footer">
-							<center><s:submit cssClass="btn btn-primary" name="submit" value="Save"/></center>
+							<center><s:submit cssClass="btn btn-primary" name="submit" value="Save"/><button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#history">history</button></center>
 						</div>			
 						</s:form>		
 					</div>
@@ -219,6 +219,34 @@
 				
 			</div>
 				
+			<div id="history" class="collapse">
+				<div class="table table-responsive">
+					<table class="table table-bordered table-striped table-hover">
+						<thead>
+							<th width="20%">Date</th>
+							<th width="40%">Diagnosis</th>
+							<th width="40%">Prescription</th>
+
+						</thead>
+						<tbody>
+						<s:iterator value="%{#session.currentSomething.}">	
+						<tr>
+							<td><s:property value="%{#session.currentSomething.date}"/></td>
+							<td><s:property value="%{#session.currentSomething.diagnosis}" /></td>
+							<td><s:property  value="%{#session.currentSomething.prescription}" /></td>
+						</tr>
+						</s:iterator>
+						<tr>
+							<td>03/28/1997</td>
+							<td>some diagnosis here</td>
+							<td>drug1, drug2, drug3, drugs...</td>
+						</tr>
+						</tbody>
+					</table>
+				</div>	
+			</div>	
+		
 		</div>
+			
 	</body>
 </html>
