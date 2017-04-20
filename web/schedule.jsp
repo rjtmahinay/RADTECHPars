@@ -76,12 +76,21 @@
 							<td><button type="button" class="btn btn-danger btn-block" data-toggle="modal" data-target="#confirmCancel" data-id="
 								<s:property value="#record.appointmentId" />">Cancel</button></td>
 							</s:if>
-							<td><s:property value="#record.customer.customerId" /></td>	
-							<td><s:property value="#record.customer.name" /></td>
+							<td><s:property value="%{#record.customer.name}" /></td>	
+							<td></td>
 							<td><s:date name="#record.appointmentDate" format="MM/dd/yyyy"/></td>
-							<td><s:property value="#record.transacType" /></td>
-							
-						</tr>
+							<td><s:property value="#record.transactionType" /></td>
+                                                </tr>
+                                                <s:iterator value="#record.consultations" var="consultation">
+                                                    <tr>
+                                                        <td>History Button</td>
+                                                        <td></td>	
+                                                        <td><s:property value="%{#consultation.pet.name}"/> </td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                    </tr>
+                                                </s:iterator>
 												</s:iterator>
 
 					</tbody>

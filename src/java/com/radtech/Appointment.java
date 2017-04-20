@@ -12,6 +12,8 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -29,6 +31,7 @@ public class Appointment extends GenericModel{
 
     @Id
     @Column(name="APPOINTMENT_ID")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     public long getAppointmentId() {
         return appointmentId;
     }
@@ -54,23 +57,22 @@ public class Appointment extends GenericModel{
         this.appointmentDate = appointmentDate;
     }
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, targetEntity = Customer.class)
-    @JoinColumn(name="CUSTOMER_ID")
-    public Customer getCustomer() {
-        return customer;
-    }
-
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
-    }
-
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "appointment", targetEntity = Consultation.class)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "appointment", targetEntity = Consultation.class)
     public List getConsultations() {
         return consultations;
     }
 
     public void setConsultations(List consultations) {
         this.consultations = consultations;
+    }
+
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, targetEntity = Customer.class)
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
     
     

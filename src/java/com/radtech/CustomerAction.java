@@ -29,6 +29,7 @@ public class CustomerAction extends GenericAction{
             session.saveOrUpdate(customer);
             tx.commit();
             refresh(); 
+            putMap("currentCustomer", customer);
             sessionmap.remove("tempets");
            return SUCCESS;
         }

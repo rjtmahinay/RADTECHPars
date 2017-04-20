@@ -16,7 +16,6 @@ import javax.persistence.Transient;
 public class User extends GenericModel{
     private String name, username, password, userType, securityQuestion, 
             securityAnswer, confirmPassword, newPassword;
-    private long userId;
 
     @Column(name="NAME")
     public String getName() {
@@ -27,7 +26,9 @@ public class User extends GenericModel{
         this.name = name;
     }
 
+    @Id
     @Column(name="USERNAME")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     public String getUsername() {
         return username;
     }
@@ -52,17 +53,6 @@ public class User extends GenericModel{
 
     public void setUserType(String userType) {
         this.userType = userType;
-    }
-
-    @Id
-    @Column(name="USER_ID")
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    public long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(long userId) {
-        this.userId = userId;
     }
 
     @Column(name="SECURITY_QUESTION")
@@ -103,6 +93,6 @@ public class User extends GenericModel{
 
     @Override
     public String toString() {
-        return "User{" + "name=" + name + ", username=" + username + ", password=" + password + ", userType=" + userType + ", securityQuestion=" + securityQuestion + ", securityAnswer=" + securityAnswer + ", confirmPassword=" + confirmPassword + ", newPassword=" + newPassword + ", userId=" + userId + '}';
+        return "User{" + "name=" + name + ", username=" + username + ", password=" + password + ", userType=" + userType + ", securityQuestion=" + securityQuestion + ", securityAnswer=" + securityAnswer + ", confirmPassword=" + confirmPassword + ", newPassword=" + newPassword + '}';
     }
 }

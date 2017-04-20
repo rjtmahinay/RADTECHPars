@@ -20,7 +20,7 @@
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	<script>
 	$( function() {
-	  $( "#datepicker" ).datepicker();
+	  $("#petDateOfBirth").datepicker();
 	} );
 	</script>
 		<title>Add new customers here</title>
@@ -35,12 +35,6 @@
 		
 		<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-		<script>
-		$( function() {
-		  $( "#datepicker" ).datepicker();
-		} );
-		</script>
-		
 		
 		<div class="modal fade" id="addPet">
 		<div class="modal-dialog">
@@ -75,7 +69,7 @@
 								<tr>
 									<td><b>Date of birth:</b></td>
 									<td>
-									<s:textfield name="dateInput" id="datepicker" />
+									<s:textfield name="dateInput" id="petDateOfBirth" />
 									</td>
 								</tr>
 
@@ -108,23 +102,13 @@
 				<th>Date of Birth</th>
 			</thead>
 			<tbody>
-				<tr>
-
-					<td>Uvu</td>
-					<td>dog</td>
-					<td>black</td>
-					<td>male</td>
-					<td>03/28/1997</td>
-				</tr>
-
-
 				<s:iterator value="%{#session.tempets}" var="tempo">
 				<tr>
 					<td><s:property value="#tempo.name"/></td>
 					<td><s:property value="#tempo.breed"/></td>
 					<td><s:property value="#tempo.color"/></td>
 					<td><s:property value="#tempo.sex"/></td>
-					<td><s:property value="#tempo.dateOfBirth"/></td>
+                                        <td><s:date name="#tempo.dateOfBirth" format="MM/dd/yyyy"/></td>
 				</tr>
 				</s:iterator>
 

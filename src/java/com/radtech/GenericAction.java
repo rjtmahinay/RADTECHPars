@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 import org.apache.struts2.dispatcher.SessionMap;
 import org.apache.struts2.interceptor.SessionAware;
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -19,6 +20,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Order;
 
 public class GenericAction extends ActionSupport implements SessionAware, ModelDriven{
     SessionMap sessionmap;
@@ -72,7 +74,18 @@ public class GenericAction extends ActionSupport implements SessionAware, ModelD
         System.out.println(sessionmap == null);
         session = getSession();
         sessionmap.put("archive", session.createQuery("from Archive").list());
-        sessionmap.put("appointments", session.createQuery("from Appointment order by appointmentDate").list());
+        List<Appointment> apps = session.createCriteria(Appointment.class)
+                .addOrder(Order.asc("appointmentDate"))
+                .list();
+        for(Appointment app: apps){
+            app.setCustomer(app.getCustomer());
+            for(Object o: app.getConsultations()){
+                Consultation c = (Consultation)o;
+                c.setPet(c.getPet());  
+            }
+        }
+        sessionmap.put("appointments", apps);
+        
         sessionmap.put("customers", session.createQuery("from Customer").list());
         sessionmap.put("search", session.createQuery("from Customer").list());
         System.out.println("Refresh done");
@@ -125,7 +138,11 @@ public class GenericAction extends ActionSupport implements SessionAware, ModelD
         return (Customer)sessionmap.get("currentCustomer");
     }
     
-    
+    public String putMap(String s, Object o){
+        sessionmap.put(s, o);
+        
+        return s + " is placed on the map";   
+    }
 }
 
 //GenericModel

@@ -38,10 +38,8 @@ public class AppointmentAction extends GenericAction{
                 consultation.setAppointment(app);
                 app.getConsultations().add(consultation);
                 pet.getConsultations().add(consultation);
-                session.saveOrUpdate(pet);
-                session.saveOrUpdate(consultation);
+                if(app.getCustomer()==null)app.setCustomer(pet.getOwner());
             }
-            session.saveOrUpdate(app);
             tx.commit();
             refresh();
             return SUCCESS;

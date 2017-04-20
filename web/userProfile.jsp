@@ -50,20 +50,22 @@
 		<div class="container-fluid">
 				<s:form action="updateRecord" theme="bootstrap" cssClass="form" method="POST">
 				<div class="row">
-					<div class="col-md-4">
+					<div class="col-md-3">
 						<font face="roboto">
 							<h1>Customer Profile</h1>
 						</font>
 					</div>
-					<div class="col-md-2">	
+					<div class="col-md-3">	
 						<br>
-						<p align="right"><s:submit value="Edit Record" cssClass="btn btn-primary"/>
-				
-						<button type="button" data-id="" class="btn btn-danger"         
-						data-toggle="modal" data-target="#confirmArchive"><span class="glyphicon glyphicon-trash"></span></button></p>
-					</div>
+						<p align="right"><s:submit value="Edit Record" cssClass="btn btn-primary"/> 
+							<button type="button" data-id="" class="btn btn-danger"         
+							data-toggle="modal" data-target="#confirmArchive"><span class="glyphicon glyphicon-trash"></span></button></p>
+					</div>	
+				</div>
 					
-					<div class="modal fade" id="confirmArchive">
+					
+					
+				<div class="modal fade" id="confirmArchive">
 					<s:form action="toArchive">
 					<input type="hidden" name="idinput" value="" id="arcinput"/>
 					<div class="modal-dialog modal-sm">
@@ -92,14 +94,8 @@
 
 					</div>
 					</s:form>
-				</div>
+				</div>	
 					
-					
-					
-					
-					
-					
-				</div>
 				<div class="row">
 					<div class="col-md-6">
 
@@ -163,7 +159,7 @@
 									<table class="table table-condensed">
 										<tr>
 											<td><b>Pet Name:</b></td>
-											<td><s:textfield name="patientName" placeholder=""/></td>
+											<td><s:textfield name="name" placeholder=""/></td>
 										</tr>
 										<tr>
 											<td><b>Breed:</b></td>
@@ -180,7 +176,7 @@
 										<tr>
 											<td><b>Date of birth:</b></td>
 											<td>
-											<s:textfield name="dateinput" id="datepicker" />
+											<s:textfield name="dateInput" id="datepicker" />
 											</td>
 										</tr>
 
@@ -214,26 +210,15 @@
 						<th>Date of Birth</th>
 					</thead>
 					<tbody>
-						<tr>
-							<td><input type="checkbox" value=""></td>
-							<td><button class="btn btn-block btn-primary btn-sm" type="submit" name="action">History</button></td>
-							<td>Uvu</td>
-							<td>dog</td>
-							<td>black</td>
-							<td>male</td>
-							<td>03/28/1997</td>
-						</tr>
-
-						
 						<s:iterator value="%{#session.currentCustomer.pets}" var="pet">
 						<tr>
 							<td><s:checkbox fieldValue="%{#pet.petId}" name="input3"/></td>
 							<td><button class="btn btn-block btn-primary btn-sm" type="submit" name="action">History</button></td>
-                                                        <td><s:property value="pets.name"/></td>
-							<td><s:property value="pets.breed"/></td>
-							<td><s:property value="pets.color"/></td>
-							<td><s:property value="pets.sex"/></td>
-							<td><s:property value="pets.dateOfBirth"/></td>
+                                                        <td><s:property value="#pet.name"/></td>
+							<td><s:property value="#pet.breed"/></td>
+							<td><s:property value="#pet.color"/></td>
+							<td><s:property value="#pet.sex"/></td>
+							<td><s:property value="#pet.dateOfBirth"/></td>
 						</tr>
 						</s:iterator>
 						
@@ -245,7 +230,7 @@
 			<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 			<script>
 			$( function() {
-			  $( "#datepicker" ).datepicker();
+			  $( "#appointmentDate" ).datepicker();
 			} );
 			</script>
 			<div class="row">
@@ -255,7 +240,7 @@
 				</div>	
 				<div class="col-md-6">
 					
-					<s:textfield name="dateInput" id="datepicker" placeholder="mm/dd/yyyy" />
+					<s:textfield name="dateInput" id="appointmentDate" placeholder="mm/dd/yyyy" />
 				</div>
 			</div>
 					

@@ -8,6 +8,13 @@
             <file>file:/C:/Users/Carl/Documents/NetBeansProjects/RADTECHPars/web/index.jsp</file>
             <file>file:/C:/Users/Carl/Documents/NetBeansProjects/RADTECHPars/web/add.jsp</file>
         </group>
-        <group/>
+        <group>
+            <file>file:/C:/Users/Sphere/Documents/NetBeansProjects/RADTECHPars/src/java/com/radtech/CustomerAction.java</file>
+            <file>file:/C:/Users/Sphere/Documents/NetBeansProjects/RADTECHPars/src/java/com/radtech/Customer.java</file>
+            <file>file:/C:/Users/Sphere/Documents/NetBeansProjects/RADTECHPars/src/java/com/radtech/UserAction.java</file>
+            <file>file:/C:/Users/Sphere/Documents/NetBeansProjects/RADTECHPars/src/java/com/radtech/GenericAction.java</file>
+            <file>file:/C:/Users/Sphere/Documents/NetBeansProjects/RADTECHPars/web/search.jsp</file>
+            <file>file:/C:/Users/Sphere/Documents/NetBeansProjects/RADTECHPars/src/java/com/radtech/AppointmentAction.java</file>
+        </group>
     </open-files>
 </project-private>

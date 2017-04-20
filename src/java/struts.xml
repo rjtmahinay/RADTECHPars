@@ -17,7 +17,7 @@
                         <result name="input">add.jsp</result>
 		</action>
                 <action name="addCustomer" class="com.radtech.CustomerAction" method="addCustomer">
-                        <result>schedule.jsp</result>
+                        <result>userProfile.jsp</result>
                         <result name="input">add.jsp</result>
 		</action>
                 <action name="fetchCustomer" class="com.radtech.CustomerAction" method="fetchCustomer">
