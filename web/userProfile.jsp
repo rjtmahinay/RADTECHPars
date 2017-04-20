@@ -57,9 +57,15 @@
 					</div>
 					<div class="col-md-3">	
 						<br>
-						<p align="right"><s:submit value="Edit Record" cssClass="btn btn-primary"/> 
-							<button type="button" data-id="" class="btn btn-danger"         
-							data-toggle="modal" data-target="#confirmArchive"><span class="glyphicon glyphicon-trash"></span></button></p>
+						<p align="right">
+							<s:if test="%{#session.currentUser.userType.equals('assistant')}">	
+								<s:submit value="Edit Record" cssClass="btn btn-primary"/> 
+							</s:if>
+							<s:if test="%{#session.currentUser.userType.equals('doctor')}">	
+								<button type="button" data-id="" class="btn btn-danger"         
+								data-toggle="modal" data-target="#confirmArchive"><span class="glyphicon glyphicon-trash"></span></button>
+							</s:if>
+						</p>	
 					</div>	
 				</div>
 					

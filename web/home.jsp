@@ -45,9 +45,11 @@
 				
 				<ul class="nav navbar-nav">
 					<s:if test="%{#session.currentUser.userType.equals('assistant')}">
-					<li><a href="search.jsp">Appointment <span class="glyphicon glyphicon-plus"></span></a></li>
-					<li><a href="add.jsp">New Customer <span class="glyphicon glyphicon-user"></span></a></li>
-					
+						<li><a href="search.jsp">Appointment <span class="glyphicon glyphicon-plus"></span></a></li>
+						<li><a href="add.jsp">New Customer <span class="glyphicon glyphicon-user"></span></a></li>
+					</s:if>
+					<s:if test="%{#session.currentUser.userType.equals('doctor')}">
+						<li><a href="search.jsp">Profiles <span class="glyphicon glyphicon-user"></span></a></li>
 						<li><s:a href="statistics">Statistics <span class="glyphicon glyphicon-stats"></span></s:a></li>
 						<li><a href="archives.jsp">Archives <span class="glyphicon glyphicon-trash"></span></a></li>
 					</s:if>	

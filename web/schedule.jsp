@@ -47,10 +47,10 @@
 			<div class="table-responsive">
 				<table class="table table-bordered table-hover table-striped table-inverse" align="center">
 					<thead>
-						<s:if test="%{#session.currentUser.userType=='doctor'}">
+						<s:if test="%{#session.currentUser.userType.equals('doctor')}">
 						<th width="10%">Diagnosis</th>	
 						</s:if>
-						<s:if test="%{#session.currentUser.userType=='assistant'}">
+						<s:if test="%{#session.currentUser.userType.equals('assistant')}">
 						<th width="10%"><center><span class="glyphicon glyphicon-edit"></span></center></th>
 						<th width="10%"><center><span class="glyphicon glyphicon-remove"></span></center></th>
 						</s:if>
@@ -61,37 +61,35 @@
 					</thead>
 					<tbody>
 						<s:iterator value="#session.appointments" var="record">	
-							
-						<tr>
-							
-							<s:if test="%{#session.currentUser.userType.equals('doctor')}">
-							<td><button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#confirmComplete" data-id="
-								<s:property value="%{#record.appointmentId}" />">Consult</button></td>
-							</s:if>
-							<s:if test="%{#session.currentUser.userType.equals('assistant')}">
-							<s:url action="getVitals" var="vit">
-								<s:param name="id"><s:property value="#record.customer.customerId"/></s:param>
-							</s:url>
-							<td><s:a href="%{vit}"><button class="btn btn-block btn-primary" type="submit" name="action">Vitals</button></s:a></td>
-							<td><button type="button" class="btn btn-danger btn-block" data-toggle="modal" data-target="#confirmCancel" data-id="
-								<s:property value="#record.appointmentId" />">Cancel</button></td>
-							</s:if>
-							<td><s:property value="%{#record.customer.name}" /></td>	
-							<td></td>
-							<td><s:date name="#record.appointmentDate" format="MM/dd/yyyy"/></td>
-							<td><s:property value="#record.transactionType" /></td>
-                                                </tr>
-                                                <s:iterator value="#record.consultations" var="consultation">
-                                                    <tr>
-                                                        <td>History Button</td>
-                                                        <td></td>	
-                                                        <td><s:property value="%{#consultation.pet.name}"/> </td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                    </tr>
-                                                </s:iterator>
-												</s:iterator>
+							<tr>
+								<s:if test="%{#session.currentUser.userType.equals('doctor')}">
+								<td><button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#confirmComplete" data-id="
+									<s:property value="%{#record.appointmentId}" />">Consult</button></td>
+								</s:if>
+								<s:if test="%{#session.currentUser.userType.equals('assistant')}">
+								<s:url action="getVitals" var="vit">
+									<s:param name="id"><s:property value="#record.customer.customerId"/></s:param>
+								</s:url>
+								<td><s:a href="%{vit}"><button class="btn btn-block btn-primary" type="submit" name="action">Vitals</button></s:a></td>
+								<td><button type="button" class="btn btn-danger btn-block" data-toggle="modal" data-target="#confirmCancel" data-id="
+									<s:property value="#record.appointmentId" />">Cancel</button></td>
+								</s:if>
+								<td><s:property value="%{#record.customer.name}" /></td>	
+								<td></td>
+								<td><s:date name="#record.appointmentDate" format="MM/dd/yyyy"/></td>
+								<td><s:property value="#record.transactionType" /></td>
+							</tr>
+						<s:iterator value="#record.consultations" var="consultation">
+							<tr>
+								<td>History Button</td>
+								<td></td>	
+								<td><s:property value="%{#consultation.pet.name}"/> </td>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+						</s:iterator>
+						</s:iterator>
 
 					</tbody>
 				</table>
