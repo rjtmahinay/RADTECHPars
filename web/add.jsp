@@ -178,9 +178,16 @@
 				<s:textfield name="contactNumber" placeholder=""/>
 
 				<br>
-
-				<s:reset value="Clear Data" cssClass="btn btn-secondary"/>
-				<p align="CENTER"><s:submit cssClass="btn btn-primary" value="New Customer" /></p>
+				<div class="row">
+					<div class="col-md-5"></div>
+					<div class="col-md-1">	
+						<s:reset value="Clear" cssClass="btn btn-secondary btn-block"/>
+					</div>
+					<div class="col-md-1">
+						<p align="CENTER"><s:submit cssClass="btn btn-primary btn-block" value="Submit" /></p>
+					</div>
+					<div class="col-md-5"></div>
+				</div>
 			</s:form>
 						
 <!-END OF FIRST HALF OF ADD , END OF FIRST HALF OF ADD , END OF FIRST HALF OF ADD , END OF FIRST HALF OF ADD , END OF FIRST HALF OF ADD ,END OF FIRST HALF OF ADD ,->	

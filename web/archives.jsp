@@ -53,20 +53,13 @@
 								<td>     
                                                                     <button type="button" data-id="<s:property value="#record.controlNumber"/>" class="btn btn-danger btn-block" data-toggle="modal" data-target="#confirmDelete">Delete</button>
 								</td>
-								<td><s:property value="#record.controlNumber"/></td>
+								<td><s:property value="#record.customerid"/></td>
 								<td><s:property value="#record.reason"/></td>
-								<td><s:property value="#record.ownerName" /></td>
+								<td><s:property value="#record.name" /></td>
 								<td><s:property value="#record.address" /></td>
 								<td><s:property value="#record.contactNumber" /></td>
-								<td><s:property value="#record.patientName" /></td>
-								<td><s:property value="#record.sex" /></td>
-								<td><s:property value="#record.breed" /></td>
-								<td><s:property value="#record.color" /></td>
-                                                                <td><s:date format="MM/dd/yyyy" name="#record.dateOfBirth" /></td>
-								<td><s:property value="#record.weight" /></td>
 							</tr>
 						</s:iterator>
-
 						<!-INSERT TABLE BODY HERE->
 
 

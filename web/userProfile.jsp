@@ -1,8 +1,3 @@
-<%-- 
-	Document   : userProfile
-	Created on : Feb 28, 2017, 4:03:36 PM
-	Author     : Carl
---%>
 <%@taglib prefix="s" uri="/struts-tags"%>
 <%@page import="java.text.SimpleDateFormat, java.util.Calendar, java.text.DateFormat"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -110,26 +105,48 @@
 
 						<div class="table">
 						<table class="table table-condensed table-">
-							<tr>
-								<td>Customer Number:</td>
-								<td><s:property value="%{#session.currentCustomer.customerId}"/></td>
-							</tr>
+							<s:if test="%{#session.currentUser.userType.equals('assistant')}">
+								<tr>
+									<td>Customer Number:</td>
+									<td><s:property value="%{#session.currentCustomer.customerId}"/></td>
+								</tr>
 
-							<tr>
-								<td>Owner Name:</td>
-								<td><s:textfield name="name" value="%{#session.currentCustomer.name}" /></td>
-							</tr>
+								<tr>
+									<td>Owner Name:</td>
+									<td><s:textfield name="name" value="%{#session.currentCustomer.name}" /></td>
+								</tr>
 
-							<tr>
-								<td>Address:</td>
-								<td><s:textfield name="address" value="%{#session.currentCustomer.address}" /></td>
-							</tr>
+								<tr>
+									<td>Address:</td>
+									<td><s:textfield name="address" value="%{#session.currentCustomer.address}" /></td>
+								</tr>
 
-							<tr>
-								<td>Contact Number:</td>
-								<td><s:textfield name="contactNumber" value="%{#session.currentCustomer.contactNumber}" /></td>
-							</tr>
+								<tr>
+									<td>Contact Number:</td>
+									<td><s:textfield name="contactNumber" value="%{#session.currentCustomer.contactNumber}" /></td>
+								</tr>
+							</s:if>
+							<s:if test="%{#session.currentUser.userType.equals('doctor')}">
+								<tr>
+									<td>Customer Number:</td>
+									<td><s:property value="%{#session.currentCustomer.customerId}"/></td>
+								</tr>
 
+								<tr>
+									<td>Owner Name:</td>
+									<td><s:property value="%{#session.currentCustomer.ownerName}" /></td>
+								</tr>
+
+								<tr>
+									<td>Address:</td>
+									<td><s:property value="%{#session.currentCustomer.address}" /></td>
+								</tr>
+
+								<tr>
+									<td>Contact Number:</td>
+									<td><s:property value="%{#session.currentCustomer.contactNumber}" /></td>
+								</tr>
+							</s:if>
 						</table>
 						</div>
 

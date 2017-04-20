@@ -17,7 +17,7 @@
                         <result name="input">add.jsp</result>
 		</action>
                 <action name="addCustomer" class="com.radtech.CustomerAction" method="addCustomer">
-                        <result>userProfile.jsp</result>
+                        <result>schedule.jsp</result>
                         <result name="input">add.jsp</result>
 		</action>
                 <action name="fetchCustomer" class="com.radtech.CustomerAction" method="fetchCustomer">
@@ -29,6 +29,33 @@
                         <result name="input">userProfile.jsp</result>
 		</action>
                 
-
+		
+		<!--NEW BUT NOT COMPLETE _______NEW BUT NOT COMPLETE _______NEW BUT NOT COMPLETE _______NEW BUT NOT COMPLETE _______  -->
+		
+		<action name="logout" class="com.radtech.UserAction" method="logout">
+			<result>index.jsp</result>
+		</action>
+		
+		<action name="fetchuser" class="com.radtech.UserAction" method="fetchuser">
+			<result>accounts.jsp</result>
+			<result name="input">index.jsp</result>
+		</action>
+		
+		<action name="updateRecord" class="" method="updateRecord">
+			<result>userProfile.jsp</result>
+			<result name="input">userProfile.jsp</result>
+		</action>
+		
+		<action name="searchDatabase" class="" method="searchDatabase">
+			<result>search.jsp</result>
+			<result name="input">search.jsp</result>
+		</action>
+		
+		<action name="statistics" class="" method="statistics">
+			<result>statistics.jsp</result>
+		</action>
+		
+		
+		
 	</package>
 </struts>
