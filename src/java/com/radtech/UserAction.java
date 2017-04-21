@@ -202,7 +202,6 @@ public class UserAction extends GenericAction{
         sessionmap.entrySet();
         return SUCCESS;
     }
-
 }
 //user 
 //	add user checkk

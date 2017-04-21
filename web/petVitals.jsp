@@ -38,10 +38,10 @@
 				</thead>
 				<tbody>
 				<tr>
-					<td><s:property value="%{#session.currentCustomer.customerId}"/></td>
-					<td><s:property value="%{#session.currentCustomer.name}" /></td>
-					<td><s:property  value="%{#session.currentCustomer.address}" /></td>
-					<td><s:property value="%{#session.currentCustomer.contactNumber}" /></td>
+					<td><s:property value="#session.currentAppointment.appointmentId"/></td>
+					<td><s:property value="%{#session.currentAppointment.customer.name}" /></td>
+					<td><s:property value="%{#session.currentAppointment.customer.address}" /></td>
+					<td><s:property value="%{#session.currentAppointment.customer.contactNumber}" /></td>
 				</tr>
 				</tbody>
 			</table>
@@ -50,10 +50,11 @@
 				<div class="col-md-6">
 					<s:if test="%{#session.currentUser.userType.equals('assistant')}">
 					<div class="panel panel-default">
-						<s:form action="petVitals" theme="bootstrap" cssClass="form" method="POST">
+						<s:form action="setVitals" theme="bootstrap" cssClass="form" method="POST">
 						<div class="panel-heading">
 							<center>
-								<s:select name="selectPet" list="{'pet1', 'pet2', 'pet3'}" headerKey="-1"/>
+								<s:select name="input3" list="#session.currentConsultations" headerKey="-1"
+                                                                          listKey="consultationId" listValue="%{pet.name}" requiredLabel="true"/>
 								<br>
 							</center>
 						</div>
@@ -64,17 +65,16 @@
 								<table class="table table-bordered table-condensed">
 									<tr>
 										<td>Temperature: </td>
-										<td><center><s:textfield name="temperature" placeholder=""/></center></td>
+										<td><center><s:textfield name="input1" placeholder=""/></center></td>
 									</tr>
 									<tr>
 										<td>Weight: </td>
-										<td><center><s:textfield name="weight" placeholder=""/></center></td>
+										<td><center><s:textfield name="input2" placeholder=""/></center></td>
 									</tr>
 									<tr>
 										<td>Eyes: </td>
 													<%--EQUIVALENT DAW TO NG <S:CHECKBOX>--%>
-										<td><center>	<input type="checkbox" name="checkMe" value="" id="xx_checkMe"/>
-													<input type="hidden" id="__checkbox_xx_checkMe" name="__checkbox_checkMe" value="" /></center></td>
+										<td><center>	<input type="checkbox" name="eyes">
 													<%--PAG WORKING NA TO I APPLY KO NALANG SA LAHAT--%>
 									</tr>
 									<tr>

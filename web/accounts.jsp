@@ -28,14 +28,11 @@
 						<li class="active">
 							<a href="#1b" data-toggle="tab">Change Password</a>
 						</li>
-						<s:if test="%{#session.currentUser.userType=='doctor'}">
+						<s:if test="%{#session.currentUser.userType.equals('doctor') | #session.currentUser.userType.equals('admin')}">
 						<li>
 							<a href="#2b" data-toggle="tab">Create New User</a>
 						</li>
 						</s:if>
-						<li>
-							<a href="#3b" data-toggle="tab">Additional Security</a>
-						</li>
 					</ul>
 
 				<div class="tab-content clearfix">
@@ -55,27 +52,30 @@
 
 					</div> <!end of tab 1->
 					<div class="tab-pane" id="2b">
-						<s:form action="signup" theme="bootstrap" method="POST">
+                                            <s:form action="signup" theme="bootstrap" method="POST">
+                                                <s:hidden name="userType" value="#session.currentUser.userType"/>
+                                                <br/>
+                                                <div class="form-group">
+                                                        <s:textfield name="name" placeholder="Firstname" />
+                                                </div>
+                                                <div class="form-group">
+                                                        <s:textfield name="username" placeholder="Username"/>
+                                                </div>
+                                                <div class="form-group">
+                                                        <s:password name="password" placeholder="Password"/>
+                                                </div>
+                                                <div class="form-group">
+                                                        <s:password name="confirmPassword" placeholder="Confirm Password"/>
+                                                </div>
+                                                <div class="form-group">
+                                                        <s:textfield name="securityQuestion" placeholder="Security Question"/>
+                                                </div>
+                                                <div class="form-group">
+                                                        <s:password name="securityAnswer" placeholder="Security Answer"/>
+                                                </div>
 
-							<br/>
-							<div class="form-group">
-								<s:textfield name="name" placeholder="Firstname" />
-							</div>
-							<div class="form-group">
-								<s:textfield name="surname" placeholder="Lastname"/>
-							</div>
-							<div class="form-group">
-								<s:textfield name="username" placeholder="Username"/>
-							</div>
-							<div class="form-group">
-								<s:password name="password" placeholder="Password"/>
-							</div>
-							<div class="form-group">
-								<s:password name="password2" placeholder="Confirm Password"/>
-							</div>
-
-							<s:submit cssClass="btn btn-primary btn" value="sign up" />
-						</s:form>
+                                                <s:submit cssClass="btn btn-primary btn" value="sign up" />
+                                            </s:form>
 					</div>
 
 					<div class="tab-pane" id="3b">

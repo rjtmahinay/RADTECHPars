@@ -60,36 +60,41 @@
 						<th width="">Transaction Type</th>
 					</thead>
 					<tbody>
-						<s:iterator value="#session.appointments" var="record">	
-							<tr>
-								<s:if test="%{#session.currentUser.userType.equals('doctor')}">
-								<td><button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#confirmComplete" data-id="
-									<s:property value="%{#record.appointmentId}" />">Consult</button></td>
-								</s:if>
-								<s:if test="%{#session.currentUser.userType.equals('assistant')}">
-								<s:url action="getVitals" var="vit">
-									<s:param name="id"><s:property value="#record.customer.customerId"/></s:param>
-								</s:url>
-								<td><s:a href="%{vit}"><button class="btn btn-block btn-primary" type="submit" name="action">Vitals</button></s:a></td>
-								<td><button type="button" class="btn btn-danger btn-block" data-toggle="modal" data-target="#confirmCancel" data-id="
-									<s:property value="#record.appointmentId" />">Cancel</button></td>
-								</s:if>
-								<td><s:property value="%{#record.customer.name}" /></td>	
-								<td></td>
-								<td><s:date name="#record.appointmentDate" format="MM/dd/yyyy"/></td>
-								<td><s:property value="#record.transactionType" /></td>
-							</tr>
-						<s:iterator value="#record.consultations" var="consultation">
-							<tr>
-								<td>History Button</td>
-								<td></td>	
-								<td><s:property value="%{#consultation.pet.name}"/> </td>
-								<td></td>
-								<td></td>
-								<td></td>
-							</tr>
-						</s:iterator>
-						</s:iterator>
+                                            <s:iterator value="#session.appointments" var="record">	
+                                                <tr>
+                                                    <s:if test="%{#session.currentUser.userType.equals('doctor')}">
+                                                        <s:url action="doctorDiagnosis" var="doc">
+                                                            <s:param name="appointmentId"><s:property value="#record.appointmentId"/></s:param>
+                                                        </s:url>
+                                                        <td><s:a href="%{doc}"><button class="btn btn-block btn-primary" type="submit" name="action">Diagnose</button></s:a></td>
+                                                        <td></td>
+                                                    </s:if>
+
+                                                    <s:if test="%{#session.currentUser.userType.equals('assistant')}">
+                                                        <s:url action="getVitals" var="vit">
+                                                            <s:param name="appointmentId"><s:property value="#record.appointmentId"/></s:param>
+                                                    </s:url>
+                                                    <td><s:a href="%{vit}"><button class="btn btn-block btn-primary" type="submit" name="action">Vitals</button></s:a></td>
+                                                    <td><button type="button" class="btn btn-danger btn-block" data-toggle="modal" data-target="#confirmCancel" data-id="
+                                                    <s:property value="#record.appointmentId" />">Cancel</button></td>
+                                                    </s:if>
+                                                    
+                                                    <td><s:property value="%{#record.customer.name}" /></td>	
+                                                    <td></td>
+                                                    <td><s:date name="#record.appointmentDate" format="MM/dd/yyyy"/></td>
+                                                    <td><s:property value="#record.transactionType" /></td>
+                                                </tr>
+                                                <s:iterator value="#record.consultations" var="consultation">
+                                                    <tr>
+                                                        <td>History Button</td>
+                                                        <td></td>	
+                                                        <td></td>
+                                                        <td><s:property value="%{#consultation.pet.name}"/></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                    </tr>
+                                                </s:iterator>
+                                            </s:iterator>
 
 					</tbody>
 				</table>

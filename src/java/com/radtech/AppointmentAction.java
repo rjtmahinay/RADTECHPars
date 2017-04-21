@@ -6,6 +6,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import org.hibernate.Criteria;
+import org.hibernate.Hibernate;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -36,6 +37,7 @@ public class AppointmentAction extends GenericAction{
                 Consultation consultation = new Consultation();
                 consultation.setPet(pet);
                 consultation.setAppointment(app);
+                consultation.setWeight(-1);
                 app.getConsultations().add(consultation);
                 pet.getConsultations().add(consultation);
                 if(app.getCustomer()==null)app.setCustomer(pet.getOwner());
@@ -167,6 +169,44 @@ public class AppointmentAction extends GenericAction{
         return INPUT;
     }
 
+    public String getVitals(){
+        try{
+            session = getSession();
+            Appointment custom = (Appointment)session.get(Appointment.class, app.getAppointmentId());
+            if(custom == null){
+                addActionError("Appointment is not found");
+                return INPUT;
+            }
+            else{
+                Appointment appoint = (Appointment)getSession().load(Appointment.class, custom.getAppointmentId());
+                System.out.println(appoint.toString());
+                refreshAppointmentConsultations(appoint);
+                return SUCCESS;
+            }
+        }
+        catch(HibernateException e){
+            e.printStackTrace();
+            return INPUT;
+        }
+        finally{
+            if(session!= null)session.close();
+        }
+    }
+    
+    public String doctorDiagnosis(){
+        session = getSession();
+        Appointment custom = (Appointment)session.get(Appointment.class, app.getAppointmentId());
+        if(custom == null){
+            addActionError("Appointment is not found");
+            return INPUT;
+        }
+        else{
+            Appointment appoint = (Appointment)getSession().load(Appointment.class, custom.getAppointmentId());
+            System.out.println(appoint.toString());
+            refreshUnfinishedConsultations(appoint);
+            return SUCCESS;
+        }
+    }
 }
 
 //appointment

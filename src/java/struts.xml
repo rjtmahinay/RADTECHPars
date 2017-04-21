@@ -29,6 +29,18 @@
                         <result name="input">userProfile.jsp</result>
 		</action>
                 
+                <action name="getVitals" class="com.radtech.AppointmentAction" method="getVitals">
+                        <result>petVitals.jsp</result>
+                        <result name="input">schedule.jsp</result>
+		</action>
+                <action name="setVitals" class="com.radtech.ConsultationAction" method="setVitals">
+                        <result>schedule.jsp</result>
+                        <result name="input">petVitals.jsp</result>
+		</action>
+                <action name="doctorDiagnosis" class="com.radtech.AppointmentAction" method="doctorDiagnosis">
+                        <result>petVitals.jsp</result>
+                        <result name="input">schedule.jsp</result>
+		</action>
 		
 		<!--NEW BUT NOT COMPLETE _______NEW BUT NOT COMPLETE _______NEW BUT NOT COMPLETE _______NEW BUT NOT COMPLETE _______  -->
 		
@@ -36,7 +48,7 @@
 			<result>index.jsp</result>
 		</action>
 		
-		<action name="fetchuser" class="com.radtech.UserAction" method="fetchuser">
+		<action name="fetchUser" class="com.radtech.UserAction" method="fetchUser">
 			<result>accounts.jsp</result>
 			<result name="input">index.jsp</result>
 		</action>

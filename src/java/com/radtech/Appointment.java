@@ -19,6 +19,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "Appointments")
@@ -28,6 +29,7 @@ public class Appointment extends GenericModel{
     private Date appointmentDate;
     private Customer customer;
     private List consultations = new ArrayList<Consultation>();
+    private List unfinishedConsultations;
 
     @Id
     @Column(name="APPOINTMENT_ID")
@@ -57,7 +59,7 @@ public class Appointment extends GenericModel{
         this.appointmentDate = appointmentDate;
     }
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "appointment", targetEntity = Consultation.class)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "appointment", targetEntity = Consultation.class)
     public List getConsultations() {
         return consultations;
     }
@@ -66,7 +68,7 @@ public class Appointment extends GenericModel{
         this.consultations = consultations;
     }
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, targetEntity = Customer.class)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, targetEntity = Customer.class)
     public Customer getCustomer() {
         return customer;
     }
@@ -74,8 +76,20 @@ public class Appointment extends GenericModel{
     public void setCustomer(Customer customer) {
         this.customer = customer;
     }
-    
-    
+
+    @Transient
+    public List getUnfinishedConsultations() {
+        unfinishedConsultations = new ArrayList<Consultation>();
+        for(Object o: getConsultations()){
+            Consultation c = (Consultation)o;
+            if(c.getWeight()==-1) unfinishedConsultations.add(c);
+        }
+        return unfinishedConsultations;
+    }
+
+    public void setUnfinishedConsultations(List unfinishedConsultations) {
+        this.unfinishedConsultations = unfinishedConsultations;
+    }
     
     @Override
     public String toString() {

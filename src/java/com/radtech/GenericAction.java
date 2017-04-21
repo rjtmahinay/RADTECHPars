@@ -4,12 +4,14 @@ import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import org.apache.struts2.dispatcher.SessionMap;
 import org.apache.struts2.interceptor.SessionAware;
 import org.hibernate.Criteria;
+import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -111,8 +113,28 @@ public class GenericAction extends ActionSupport implements SessionAware, ModelD
 //        sessionmap.put("appointments", session.createQuery("from Appointment where adate is null order by date").list());
 //    }
     
-    public void refreshConsultation(){
-        sessionmap.put("consultations", (List) session.createQuery("from Consultations").list());
+    public void refreshAppointmentConsultations(Appointment app){
+        Hibernate.initialize(app.getConsultations());
+        ArrayList<Consultation> consultations = new ArrayList<Consultation>();
+        for(Object o : app.getConsultations()){
+            Consultation c = (Consultation)o;
+            if(c.getWeight()<=0) consultations.add(c);
+            System.out.println("---->" + c.toString());
+        }
+        sessionmap.put("currentConsultations", consultations);
+    }
+    
+    public void refreshUnfinishedConsultations(Appointment app){
+        Hibernate.initialize(app.getConsultations());
+        ArrayList<Consultation> consultations = new ArrayList<Consultation>();
+        for(Object o : app.getConsultations()){
+            Consultation c = (Consultation)o;
+            if(c.getWeight()>=0 && c.getConsultationDate()==null) {
+                consultations.add(c);
+            }
+            System.out.println("---->" + c.toString());
+        }
+        sessionmap.put("currentConsultations", consultations);
     }
     
     public void refreshMedicines(){

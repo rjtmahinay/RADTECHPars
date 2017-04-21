@@ -24,7 +24,7 @@ public class Consultation extends GenericModel{
     private long consultationId;
     private Date consultationDate;
     private double weight, temperature;
-    private String eyes, ears, nose, throat, derma, gums;
+    private String eyes, ears, nose, throat, derma, gums, lymphNodes;
     private Appointment appointment;
     private Pet pet;
     private List medicines = new ArrayList<Medicine>();
@@ -131,6 +131,15 @@ public class Consultation extends GenericModel{
         this.gums = gums;
     }
 
+    @Column(name="LYMPH_NODES")
+    public String getLymphNodes() {
+        return lymphNodes;
+    }
+
+    public void setLymphNodes(String lymphNodes) {
+        this.lymphNodes = lymphNodes;
+    }
+    
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, targetEntity = Appointment.class)
     @JoinColumn(name="APPOINTMENT_ID")
     public Appointment getAppointment() {
@@ -153,6 +162,6 @@ public class Consultation extends GenericModel{
     
     @Override
     public String toString() {
-        return "Consultation{" + "consultationId=" + consultationId  + ", consultationDate=" + consultationDate + ", weight=" + weight + ", temperature=" + temperature + ", eyes=" + eyes + ", ears=" + ears + ", nose=" + nose + ", throat=" + throat + ", derma=" + derma + ", gums=" + gums + ", appointment=" + appointment + '}';
+        return "Consultation{" + "consultationId=" + consultationId  + ", consultationDate=" + consultationDate + ", weight=" + weight + ", temperature=" + temperature + ", eyes=" + eyes + ", ears=" + ears + ", nose=" + nose + ", throat=" + throat + ", derma=" + derma + ", gums=" + gums + ", lymphNodes=" + lymphNodes +  '}';
     }
 }
