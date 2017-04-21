@@ -28,7 +28,6 @@ public class User extends GenericModel{
 
     @Id
     @Column(name="USERNAME")
-    @GeneratedValue(strategy = GenerationType.AUTO)
     public String getUsername() {
         return username;
     }

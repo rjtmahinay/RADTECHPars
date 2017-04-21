@@ -30,7 +30,7 @@ public class GenericAction extends ActionSupport implements SessionAware, ModelD
     Transaction tx;
     SessionFactory factory;
     Object model;
-    
+    Deencrypt de = new Deencrypt();
     @Override
     public void setSession(Map map) {
         sessionmap = (SessionMap)map;
@@ -164,6 +164,9 @@ public class GenericAction extends ActionSupport implements SessionAware, ModelD
         sessionmap.put(s, o);
         
         return s + " is placed on the map";   
+    }
+    public Deencrypt getD(){
+        return de;
     }
 }
 

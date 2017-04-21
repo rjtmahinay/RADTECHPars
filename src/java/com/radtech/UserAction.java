@@ -45,8 +45,7 @@ public class UserAction extends GenericAction{
                     addActionError("Username or password does not match");
                     return INPUT;
                 } else {
-                    if (db.getUsername().equalsIgnoreCase(user.getUsername())) {
-                        if (db.getPassword().equals(user.getPassword())) {
+                         if (user.getPassword().equals(de.sha256(db.getPassword()))) {
                             refreshUser(db);
                             refresh();
                             return SUCCESS;
@@ -54,21 +53,9 @@ public class UserAction extends GenericAction{
                             addActionError("Username/Password doesn't match");
                             return INPUT;
                         }
-                    } else {
-                        addActionError("Username/Password doesn't match");
-                        return INPUT;
                     }
                 }
             }
-
-        } catch (HibernateException e) {
-            e.printStackTrace();
-        } finally {
-            if (session != null) {
-                session.close();
-            }
-        }
-        return ERROR;
     }
 
     public String signup() {
@@ -77,15 +64,25 @@ public class UserAction extends GenericAction{
         tx = session.getTransaction();
         try{
             //check if user exists
+            tx.begin();
             User tempUser = (User)session.get(User.class, user.getUsername().trim());
             if(tempUser == null){
                 //no username found, can use it
                 if(user.getPassword().trim().equals(user.getConfirmPassword().trim())){
+                    
                     //check if passwords match
-                    user.setPassword("" + user.getConfirmPassword().trim().hashCode());
-                    tx.begin();
-                    session.save(user);
+                    user.setPassword(de.sha256(user.getPassword()));
+                    User use = (User)sessionmap.get("currentUser");
+                    switch(use.getUserType()){
+                        case "admin": user.setUserType("doctor"); break;
+                        case "doctor": user.setUserType("assistant"); break;
+                        default: addActionError("Invalid user access"); return INPUT;
+                    }
+                    
+                    session.saveOrUpdate(user);
                     tx.commit();
+                    refresh();
+                    return SUCCESS;
                 }
                 else{
                     //Passwords does not match
