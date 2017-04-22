@@ -26,16 +26,18 @@
 			</font>
 			<!--NO ACTION YET-->
 
-				<s:form action="resetPass" theme="bootstrap" cssClass="form">
+				<s:form action="forgotPassword" theme="bootstrap" cssClass="form">
 
 				<!--EMPTY PA YUNG LIST-->
 				<br>
 				<center>
-					<h3>Secret Question: </h3>
-					<s:hidden name="username" value="%{#session.tempUser.username}"/>
-					<s:select name="sec_number" headerKey="-1" headerValue="Select" list="#session.tempUser.sQuestions" listKey="%{sec_number}" listValue="%{question}"/>
-					<s:password name="answer" placeholder="Enter Answer Here" />
-					<s:submit cssClass="btn btn-primary" value="Submit" />
+                                    <h3>Secret Question: </h3>
+                                    <s:hidden name="username" value="%{#session.tempUser.username}"/>
+                                    Username : <s:property value="#session.tempUser.username"/></br>
+                                    Question : <s:property value="#session.tempUser.securityQuestion"/></br>
+                                    <s:password name="securityAnswer" placeholder="Enter Answer Here" />
+                                    <s:submit cssClass="btn btn-primary" value="Submit" />
+                                    <s:actionerror/>
 				</center>
 				</s:form>
 

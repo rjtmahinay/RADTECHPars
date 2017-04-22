@@ -16,6 +16,19 @@
 
 		<action name="login" class="com.radtech.UserAction" method="login">
                         <result>schedule.jsp</result>
+                        <result name="input">index.jsp</result>
+		</action>
+                <action name="checkUser" class="com.radtech.UserAction" method="checkUser">
+                        <result>forgotPass.jsp</result>
+                        <result name="input">index.jsp</result>
+		</action>
+                <action name="forgotPassword" class="com.radtech.UserAction" method="forgotPassword">
+                        <result>index.jsp</result>
+                        <result name="input">forgotPass.jsp</result>
+		</action>
+                <action name="changePassword" class="com.radtech.UserAction" method="changePassword">
+                        <result>schedule.jsp</result>
+                        <result name="input">accounts.jsp</result>
 		</action>
                 <action name="signup" class="com.radtech.UserAction" method="signup">
                         <result>schedule.jsp</result>

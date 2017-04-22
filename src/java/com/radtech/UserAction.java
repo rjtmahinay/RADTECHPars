@@ -1,5 +1,7 @@
 package com.radtech;
 
+import javax.servlet.http.HttpServletRequest;
+import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.dispatcher.SessionMap;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -25,37 +27,38 @@ public class UserAction extends GenericAction{
     public String login() {
         //Insert login logic
         initialize();
-        //insert crypto
-        //check for temporary password
-        try {
-            //if admin, just get in for now
-            if(user.getUsername().trim().equals("admin")){
-                user.setUserType(user.getPassword());
-                sessionmap.put("currentUser", user);
-                System.out.println("User is " + user.toString());
-                refresh();
-                return SUCCESS;
-            }
-            else{
-                //check if user exists
-                
-                session = getSession();
-                User db = (User) session.get(User.class, user.getUsername());
-                if (db == null) {
-                    addActionError("Username or password does not match");
+        if(user.getUsername().trim().equals("admin")){
+            user.setUserType(user.getPassword());
+            sessionmap.put("currentUser", user);
+            System.out.println("User is " + user.toString());
+            refresh();
+            return SUCCESS;
+        }
+        else{
+            //check if user exists
+            session = getSession();
+            User db = (User) session.get(User.class, user.getUsername());
+            if (db == null) {
+                addActionError("Username or password does not match");
+                return INPUT;
+            } 
+            else {
+                db = (User) session.load(User.class, user.getUsername());
+                System.out.println("Input password is " + de.sha256(user.getPassword()));
+                System.out.println("DB password is " + db.getPassword());
+                if (de.sha256(user.getPassword()).equals(db.getPassword())) {
+                    refreshUser(db);
+                    refresh();
+                    session.close();
+                    return SUCCESS;
+                } 
+                else {
+                    addActionError("Username/Password doesn't match");
                     return INPUT;
-                } else {
-                         if (user.getPassword().equals(de.sha256(db.getPassword()))) {
-                            refreshUser(db);
-                            refresh();
-                            return SUCCESS;
-                        } else {
-                            addActionError("Username/Password doesn't match");
-                            return INPUT;
-                        }
-                    }
                 }
             }
+        }
+            
     }
 
     public String signup() {
@@ -78,7 +81,6 @@ public class UserAction extends GenericAction{
                         case "doctor": user.setUserType("assistant"); break;
                         default: addActionError("Invalid user access"); return INPUT;
                     }
-                    
                     session.saveOrUpdate(user);
                     tx.commit();
                     refresh();
@@ -111,33 +113,30 @@ public class UserAction extends GenericAction{
         tx = session.getTransaction();
         try {
             //fetch user from db using uname
-            User currentUser = (User)session.load(User.class, user.getUsername());
+            User currentUser = (User)session.get(User.class, user.getUsername());
             if(currentUser != null){
-                if(currentUser.getPassword().equals("" + user.getPassword().trim().hashCode())){
-                    if(user.getNewPassword().equals(user.getConfirmPassword())){
-                        currentUser.setPassword("" + user.getNewPassword().trim().hashCode());
-                        tx.begin();
-                        session.merge(currentUser);
+                currentUser = (User)session.load(User.class, user.getUsername());
+                tx.begin();
+                if(currentUser.getPassword().equals(de.sha256(user.getPassword()))){
+                    if(de.sha256(user.getNewPassword()).equals(de.sha256(user.getConfirmPassword()))){
+                        currentUser.setPassword(de.sha256(user.getNewPassword()));
                         tx.commit();
-                        refreshUser(currentUser);
-                        user = null;
+                        refresh();
                         return SUCCESS;
                     }
                     else{
-                        //passwords does not match
-                        addFieldError("password2", "Passwords does not match.");
+                        addActionError("Passwords does not match");
                         return INPUT;
                     }
                 }
                 else{
-                    //password is incorrect
-                    addFieldError("password", "Password is incorrect.");
+                    addActionError("Incorrect Password");
                     return INPUT;
                 }
             }
             //if username is not found on DB
             else{
-                addFieldError("password", "Critical Error: Code 5");
+                addActionError("User not found");
                 return INPUT;
             }
         } catch (HibernateException e) {
@@ -152,40 +151,21 @@ public class UserAction extends GenericAction{
         return SUCCESS;
     }
 
-//    public String forgotPassword() {
-//        if (!(user.getUsername().trim().equals("")) & user != null) {
-//            System.out.println(user.getUsername());
-//            Session session = null;
-//            Transaction tx = null;
-//            try {
-//                session = ((SessionFactory) sessionmap.get("factory")).openSession();
-//                System.out.println(user.getUsername());
-//                user = (User) session.get(User.class, user.getUsername());
-//                System.out.println("Users' " + (user == null));
-//                if (user == null) {
-//                    addFieldError("username", "Username not found");
-//                    return INPUT;
-//                } else {
-//                    user = (User) session.load(User.class, user.getUsername());
-//                    List questions = new ArrayList();
-//                    for (SecurityQuestion sq : user.getSQuestions()) {
-//                        System.out.println(sq.getQuestion());
-//                        questions.add(sq.getQuestion());
-//                    }
-//                    sessionmap.put("tempUser", user);
-//                    return SUCCESS;
-//                }
-//            } catch (HibernateException e) {
-//                tx.rollback();
-//            } finally {
-//                if (session != null) {
-//                    session.close();
-//                }
-//            }
-//        }
-//        addFieldError("username", "Something happened midway...");
-//        return INPUT;
-//    }
+    public String checkUser(){
+        initialize();
+        session = getSession();
+        System.out.println("["+user.getUsername()+"]");
+        User db = (User)session.get(User.class, user.getUsername().trim());
+        if(db != null){
+            db = (User) session.load(User.class, user.getUsername().trim());
+            putMap("tempUser", db);
+            return SUCCESS;
+        }
+        else{
+            addActionError("Username not found");
+            return INPUT;
+        }
+    }
 
     public String logout() {
 
@@ -198,6 +178,44 @@ public class UserAction extends GenericAction{
         //populate the struts session
         sessionmap.entrySet();
         return SUCCESS;
+    }
+    
+    public String forgotPassword(){
+        session = getSession();
+        tx = session.getTransaction();
+        System.out.println("Input is " + user.toString());
+        User db = (User)session.get(User.class, user.getUsername());
+        if(db != null){
+            try{
+                db = (User)session.load(User.class, user.getUsername());
+                if(user.getSecurityAnswer().trim().equalsIgnoreCase(db.getSecurityAnswer())){
+                    tx.begin();
+                    db.setPassword(de.generateRandom(10));
+                    System.out.println("new Password is " + db.getPassword());
+                    HttpServletRequest request = ServletActionContext.getRequest();
+                    request.setAttribute("tempUser", db);
+                    sessionmap.remove("tempUser");
+                    tx.commit();
+                    return SUCCESS;
+                }
+                else{
+                    addActionError("Incorrect answer");
+                    return INPUT;
+                }
+            }
+            catch(HibernateException e){
+                e.printStackTrace();
+                tx.rollback();
+                return INPUT;
+            }
+            finally{
+                if(session!= null)session.close();
+            }
+        }
+        else{
+            addActionError("Username is not found!");
+            return INPUT;
+        }
     }
 }
 //user 

@@ -56,10 +56,7 @@
 					
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
-					<s:url action="fetchUser" var="getUser">
-						<s:param name="username" value="%{#session.currentUser.username}"/>
-					</s:url>
-					<li><s:a href="%{fetchUser}"> <s:property value="%{#session.currentUser.userType}"/> <span class="glyphicon glyphicon-cog"></span> </s:a></li>
+					<li><s:a href="accounts.jsp"> <s:property value="%{#session.currentUser.userType}"/> <span class="glyphicon glyphicon-cog"></span> </s:a></li>
 					<s:url action='logout' var="logout"/>
 					<li><s:a href="%{logout}"> Logout <span class="glyphicon glyphicon-log-in"/></s:a></li>
 				</ul>        

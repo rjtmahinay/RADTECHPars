@@ -44,9 +44,9 @@
                                                     <s:hidden name="username" value="%{#session.currentUser.username}"/>
                                                     <s:password name="password" placeholder="Current Password" class="form-control" /></div>
                                                     <div class="form-group">  
-                                                    <s:password name="password2" placeholder="New Password" class="form-control" /></div>
+                                                    <s:password name="newPassword" placeholder="New Password" class="form-control" /></div>
                                                     <div class="form-group">  
-                                                    <s:password name="password3" placeholder="Confirm New Password" class="form-control" /></div>
+                                                    <s:password name="confirmPassword" placeholder="Confirm New Password" class="form-control" /></div>
                                                 <s:submit cssClass="btn btn-primary " value="submit" />
                                             </s:form>
 
