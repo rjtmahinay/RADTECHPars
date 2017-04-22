@@ -19,6 +19,20 @@
 	<script src="js/jquery-3.2.0.min.js"></script>
 		<script src="js/bootstrap.min.js"></script>
 		<script>
+			<%--
+			$('.panel-collapse').collapse({toggle: false});
+			$('body').on('click', '[data-toggle=collapse-next]', function (e) {
+				e.preventDefault();
+
+				// Try to close all of the collapse areas first
+				var parent_id = $(this).data('parent');
+				$(parent_id+' .panel-collapse').collapse('hide');
+
+				// ...then open just the one we want
+				var $target = $(this).parents('.panel').find('.panel-collapse');
+				$target.collapse('toggle');
+			});
+			--%>
 			$(document).ready(function() {
 				$('#confirmComplete').on('show.bs.modal', function(e) {
 				  var id = $(e.relatedTarget).data('id');
@@ -33,12 +47,172 @@
 
 				});
 			});
+			
+			
 		</script>
 	<title>Doctor's Schedule</title>
 	</head>
 	<body background="">
 		<s:include value="home.jsp"/>
+		<script>
+		$('.panel-collapse').collapse({toggle: false});
+			$('body').on('click', '[data-toggle=collapse-next]', function (e) {
+				e.preventDefault();
+
+				// Try to close all of the collapse areas first
+				var parent_id = $(this).data('parent');
+				$(parent_id+' .panel-collapse').collapse('hide');
+
+				// ...then open just the one we want
+				var $target = $(this).parents('.panel').find('.panel-collapse');
+				$target.collapse('toggle');
+			});
+		</script>	
 		<div class="container-fluid">
+			<h1 align="center"><font face="roboto">Current Schedule</font></h1>
+			<div class="panel panel-default">
+				<div class="panel-body">
+					<div class="row">
+						
+						<div class="col-md-1">
+							<s:if test="%{#session.currentUser.userType.equals('assistant')}">	
+								Vitals
+							</s:if>
+							<s:if test="%{#session.currentUser.userType.equals('doctor')}">	
+								Diagnosis
+							</s:if>	
+						</div>	
+						<div class="col-md-4">Customer Name</div>
+						<div class="col-md-3">Date</div>
+						<div class="col-md-4">Transaction Type</div>
+					</div>
+				</div>
+			</div>
+			
+			
+			<s:if test="%{#session.currentUser.userType.equals('assistant')}">
+			
+			<s:iterator value="#session.appointments" var="record">
+			<div class="panel-group" id="accordion">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h4 class="panel-title">
+						<a class="accordion-toggle" data-toggle="collapse-next" data-parent="#accordion">
+							<div class="row">
+								<div class="col-md-1">
+										<button type="button" class="btn btn-danger btn-block btn-sm" data-toggle="modal" data-target="#confirmCancel" 
+										data-id=" <s:property value="%{#record.appointmentNumber}" />">Cancel</button>	
+								</div>	
+								<div class="col-md-4"><s:property value="%{#record.customer.name}"/></div>
+								<div class="col-md-3"><s:date name="#record.appointmentDate" format="MM/dd/yyyy"/></div>
+								<div class="col-md-4"><s:property value="#record.transactionType"/></div>
+							</div>
+						</a>
+					</h4>
+				</div>
+				<div class="panel-collapse collapse">
+					<div class="panel-body">
+						<s:iterator value="#record.consultations" var="consultation">
+						<div class="row">
+							<div class="col-md-1">
+								<s:url action="getVitals" var="vit">
+                                                                                 <s:param name="consultationId"><s:property value="#consultation.consultationId"/></s:param>
+								</s:url>
+								<s:a href="%{vit}"><button class="btn btn-block btn-sm btn-primary" type="submit" name="action">Vitals</button></s:a>
+							</div>
+							<div class="col-md-3"><s:property value="%{consultation.pet.name}"/></div>
+							<div class="col-md-3"><s:property value="%{consultation.pet.breed}"/></div>
+						</div>
+						<br>
+						</s:iterator>						
+					</div>
+				</div>
+			</div>
+								
+			</s:iterator>
+			</div>
+			</s:if>
+			
+			
+			
+<%--END OF ASSISTANT VERSION, START OF DOCTOR VERSION, END OF ASSISTANT VERSION, START OF DOCTOR VERSION--%>
+			
+			
+			
+			
+			<s:if test="%{#session.currentUser.userType.equals('doctor')}">
+				<s:iterator value="#session.appointments" var="record">
+				<div class="panel-group" id="accordion">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h4 class="panel-title">
+							<a class="accordion-toggle" data-toggle="collapse-next" data-parent="#accordion">
+								<div class="row">
+									<div class="col-md-1"></div>
+									<div class="col-md-4"><s:property value="%{#record.customer.name}"/></div>
+									<div class="col-md-3"><s:date name="#record.appointmentDate" format="MM/dd/yyyy"/></div>
+									<div class="col-md-4"><s:property value="#record.transactionType"/></div>
+								</div>
+							</a>
+						</h4>
+					</div>
+					<div class="panel-collapse collapse">
+						<div class="panel-body">
+							<s:iterator value="#record.consultations" var="consultation">
+							<div class="row">
+								<div class="col-md-1">
+									<s:url action="doctorDiagnosis" var="doc">
+										<s:param name="consultationId"><s:property value="#consultation.consultationId"/></s:param>
+									</s:url>
+									<s:a href="%{doc}"> <button class="btn btn-block btn-primary btn-xs" 
+										type="submit" name="action">Vitals</button></s:a>
+								</div>
+								<div class="col-md-3"><s:property value="%{consultation.pet.name}"/></div>
+								<div class="col-md-3"><s:property value="%{consultation.pet.breed}"/></div>
+							</div>
+							<br>
+							</s:iterator>						
+						</div>
+					</div>
+				</div>
+
+				</s:iterator>
+				</div>
+			</s:if>	
+			<%--
+			
+			--%>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+		<%--	
+		<div class="container-fluid">	
 			<h1 align="center"><font face="roboto">Current Schedule</font></h1>
 			<div class="table-responsive">
 				<table class="table table-bordered table-hover table-inverse" align="center">
@@ -47,7 +221,7 @@
 						<th width="10%">Diagnosis</th>	
 						</s:if>
 						<s:if test="%{#session.currentUser.userType.equals('assistant')}">
-						<%--<th width="10%"><center><span class="glyphicon glyphicon-edit"></span></center></th>--%>
+						<th width="10%"><center><span class="glyphicon glyphicon-edit"></span></center></th>
 						<th width="10%"><center><span class="glyphicon glyphicon-remove"></span></center></th>
 						</s:if>
 						<th width="">Customer Name</th>
@@ -88,6 +262,7 @@
 					</tbody>
 				</table>
 			</div>
+		--%>				
 			<div class="modal fade" id="initialDiagnosis">
 							<s:form action="initialDiagnosis">
 				<div class="modal-dialog modal-sm">
