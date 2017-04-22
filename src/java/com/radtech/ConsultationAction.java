@@ -60,6 +60,43 @@ public class ConsultationAction extends GenericAction{
             if(session!= null) session.close();
         }
     }
+    public String getVitals(){
+        try{
+            session = getSession();
+            Consultation consul = (Consultation)session.get(Consultation.class, consultation.getConsultationId());
+            if(consul == null){
+                addActionError("Consultation not found");
+                return INPUT;
+            }
+            else{
+                consul = (Consultation)session.load(Consultation.class, consultation.getConsultationId());
+                refreshAppointmentConsultations(consul.getAppointment());
+                putMap("currentConsultation", consul);
+                return SUCCESS;
+            }
+        }
+        catch(HibernateException e){
+            e.printStackTrace();
+            return INPUT;
+        }
+        finally{
+            if(session!= null)session.close();
+        }
+    }
+    public String doctorDiagnosis(){
+        session = getSession();
+        Consultation consul = (Consultation)session.get(Consultation.class, consultation.getConsultationId());
+        if(consul == null){
+            addActionError("Consultation not found");
+            return INPUT;
+        }
+        else{
+            consul = (Consultation)session.load(Consultation.class, consultation.getConsultationId());
+            refreshUnfinishedConsultations(consul.getAppointment());
+            putMap("currentConsultation",consul);
+            return SUCCESS;
+        }
+    }
 }
 //consultation
 //  add consultation

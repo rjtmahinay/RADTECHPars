@@ -168,45 +168,7 @@ public class AppointmentAction extends GenericAction{
 
         return INPUT;
     }
-
-    public String getVitals(){
-        try{
-            session = getSession();
-            Appointment custom = (Appointment)session.get(Appointment.class, app.getAppointmentId());
-            if(custom == null){
-                addActionError("Appointment is not found");
-                return INPUT;
-            }
-            else{
-                Appointment appoint = (Appointment)getSession().load(Appointment.class, custom.getAppointmentId());
-                System.out.println(appoint.toString());
-                refreshAppointmentConsultations(appoint);
-                return SUCCESS;
-            }
-        }
-        catch(HibernateException e){
-            e.printStackTrace();
-            return INPUT;
-        }
-        finally{
-            if(session!= null)session.close();
-        }
-    }
     
-    public String doctorDiagnosis(){
-        session = getSession();
-        Appointment custom = (Appointment)session.get(Appointment.class, app.getAppointmentId());
-        if(custom == null){
-            addActionError("Appointment is not found");
-            return INPUT;
-        }
-        else{
-            Appointment appoint = (Appointment)getSession().load(Appointment.class, custom.getAppointmentId());
-            System.out.println(appoint.toString());
-            refreshUnfinishedConsultations(appoint);
-            return SUCCESS;
-        }
-    }
 }
 
 //appointment

@@ -51,7 +51,7 @@
                         <result name="input">userProfile.jsp</result>
 		</action>
                 
-                <action name="getVitals" class="com.radtech.AppointmentAction" method="getVitals">
+                <action name="getVitals" class="com.radtech.ConsultationAction" method="getVitals">
                         <result>petVitals.jsp</result>
                         <result name="input">schedule.jsp</result>
 		</action>
@@ -59,7 +59,7 @@
                         <result>schedule.jsp</result>
                         <result name="input">petVitals.jsp</result>
 		</action>
-                <action name="doctorDiagnosis" class="com.radtech.AppointmentAction" method="doctorDiagnosis">
+                <action name="doctorDiagnosis" class="com.radtech.ConsultationAction" method="doctorDiagnosis">
                         <result>petVitals.jsp</result>
                         <result name="input">schedule.jsp</result>
 		</action>

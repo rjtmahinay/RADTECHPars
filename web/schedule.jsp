@@ -40,10 +40,6 @@
 		<s:include value="home.jsp"/>
 		<div class="container-fluid">
 			<h1 align="center"><font face="roboto">Current Schedule</font></h1>
-
-
-
-
 			<div class="table-responsive">
 				<table class="table table-bordered table-hover table-inverse" align="center">
 					<thead>
@@ -60,86 +56,35 @@
 					</thead>
 					<tbody>
 						<s:iterator value="#session.appointments" var="record">	
-							
-								<%--
-								<s:if test="%{#session.currentUser.userType.equals('doctor')}">
-									<s:url action="doctorDiagnosis" var="doc">
-										<s:param name="appointmentId"><s:property value="#record.appointmentId"/></s:param>
-									</s:url>
-									<td><s:a href="%{doc}"><button class="btn btn-block btn-primary" type="submit" name="action">Diagnose</button></s:a></td>
-									
-								</s:if>
-<%--NEED HELP SA DATA TARGETS,--%>				
-								
-								<tr data-toggle="collapse" data-target="#accordion" class="clickable">
-									<s:if test="%{#session.currentUser.userType.equals('doctor')}">
-										<td></td>
-									</s:if>
-										
-									<s:if test="%{#session.currentUser.userType.equals('assistant')}">
-										<td><button type="button" class="btn btn-danger btn-block" data-toggle="modal" data-target="#confirmCancel" data-id="
-										<s:property value="#record.appointmentId" />">Cancel</button></td>
-									</s:if>
-										
-									<td><s:property value="%{#record.customer.name}" /></td>	
-									<td><s:date name="#record.appointmentDate" format="MM/dd/yyyy"/></td>
-									<td><s:property value="#record.transactionType" /></td>
-								</tr>
-<%--NEED HELP SA DIV ID--%>	
-
+                                                    <tr>
+                                                        </td>
+                                                        <td><s:property value="%{#record.customer.name}"/></td>
+                                                        <td><s:date name="#record.appointmentDate" format="MM/dd/yyyy"/></td>
+                                                        <td><s:property value="#record.transactionType"/> </td>
+                                                    </tr>
 							<s:iterator value="#record.consultations" var="consultation">
-							<tr>
-
-								<td>
-									<s:if test="%{#session.currentUser.userType.equals('assistant')}">
-										<s:url action="getVitals" var="vit">
-											<s:param name="appointmentId"><s:property value="#record.appointmentId"/></s:param>
-										</s:url>
-										<div id="accordion" class="collapse"><s:a href="%{vit}"><button class="btn btn-block btn-primary" 
-										type="submit" name="action">Vitals</button></s:a></div>
-									</s:if>
-									<s:if test="%{#session.currentUser.userType.equals('doctor')}">
-										<s:url action="doctorDiagnosis" var="doc">
-											<s:param name="appointmentId"><s:property value="#record.appointmentId"/></s:param>
-										</s:url>
-										
-
-										<div id="accordion" class="collapse"><s:a href="%{doc}"><button class="btn btn-block btn-primary" 
-										type="submit" name="action">Diagnose</button></s:a></div>
-
-										
-									</s:if>	
-								</td>
-
-								<td colspan="1">
-									<div id="accordion" class="collapse">something</div>
-								</td>
-								
-								<td>
-									<div id="accordion" class="collapse"></div>
-								</td>
-								
-								<td>
-									<div id="accordion" class="collapse"></div>
-								</td>
-							</tr>
+                                                        <tr>
+                                                            <td>
+                                                                    <s:if test="%{#session.currentUser.userType.equals('assistant')}">
+                                                                            <s:url action="getVitals" var="vit">
+                                                                                    <s:param name="consultationId"><s:property value="#consultation.consultationId"/></s:param>
+                                                                            </s:url>
+                                                                            <s:a href="%{vit}"><button class="btn btn-block btn-primary" 
+                                                                                    type="submit" name="action">Vitals</button></s:a>
+                                                                    </s:if>
+                                                                    <s:if test="%{#session.currentUser.userType.equals('doctor')}">
+                                                                            <s:url action="doctorDiagnosis" var="doc">
+                                                                                    <s:param name="consultationId"><s:property value="#consultation.consultationId"/></s:param>
+                                                                            </s:url>
+                                                                        <s:a href="%{doc}"> <button class="btn btn-block btn-primary" 
+                                                                                type="submit" name="action">Vitals</button></s:a>
+                                                                    </s:if>
+                                                            </td>
+                                                            <td><s:property value="%{consultation.pet.name}"/></td>
+                                                            <td/>
+                                                        </tr>
 							</s:iterator>
 						</s:iterator>
-							
-						<tr data-toggle="collapse" data-target="#accordions" class="clickable">
-							<td>Some Stuff</td>
-							<td>Some more stuff</td>
-							<td>And some more</td>
-						</tr>
-						<tr>
-							<td colspan="3">
-								<div id="accordions" class="collapse">Hidden by default</div>
-							</td>
-						</tr>	
-							
-								
-								
-
 					</tbody>
 				</table>
 			</div>
