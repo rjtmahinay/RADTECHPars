@@ -10,7 +10,7 @@ import javax.crypto.spec.SecretKeySpec;
 
 
 public class Deencrypt {
-    private static final String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    private static final String characters = "ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz23456789";
     public static String encrypt(String strClearText,String strKey) throws Exception{
         String strData="";
         try {

@@ -39,7 +39,7 @@ public class UserAction extends GenericAction{
             session = getSession();
             User db = (User) session.get(User.class, user.getUsername());
             if (db == null) {
-                addActionError("Username or password does not match");
+                addActionError("Username not found");
                 return INPUT;
             } 
             else {
@@ -190,11 +190,12 @@ public class UserAction extends GenericAction{
                 db = (User)session.load(User.class, user.getUsername());
                 if(user.getSecurityAnswer().trim().equalsIgnoreCase(db.getSecurityAnswer())){
                     tx.begin();
-                    db.setPassword(de.generateRandom(10));
-                    System.out.println("new Password is " + db.getPassword());
+                    String pass = de.generateRandom(10);
+                    db.setPassword(de.sha256(pass));
+                    System.out.println("new Password is " + pass);
                     HttpServletRequest request = ServletActionContext.getRequest();
-                    request.setAttribute("tempUser", db);
                     sessionmap.remove("tempUser");
+                    request.setAttribute("tempPass", pass);
                     tx.commit();
                     return SUCCESS;
                 }

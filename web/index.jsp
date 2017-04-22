@@ -21,8 +21,12 @@
 		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 		<title>RADTECH PARS</title>
                 <script>
-                    var tempo = '${request.tempUser}';
-                    alert(tempo['password']);
+                    var tempo = '${tempPass}';
+                    if(tempo !== ''){
+                        alert("Temporary password is set to\n\
+            " + tempo + "\n\
+            Record carefully before closing this window\n\ Password is case Sensitive!");
+                    }
                 </script>
 	</head>
 	<body background="dog.jpg" style="width:100%;height:100%;" alt="[]">
