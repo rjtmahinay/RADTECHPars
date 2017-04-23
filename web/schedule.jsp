@@ -35,11 +35,11 @@
 			$(document).ready(function() {
 				$('#confirmComplete').on('show.bs.modal', function(e) {
 				  var id = $(e.relatedTarget).data('id');
-				  document.getElementById('confirm').value = id;
+				  document.getElementById('complete').value = id;
 
 				});
 			});   
-						$(document).ready(function() {
+                                $(document).ready(function() {
 				$('#confirmCancel').on('show.bs.modal', function(e) {
 				  var id = $(e.relatedTarget).data('id');
 				  document.getElementById('cancel').value = id;
@@ -101,13 +101,13 @@
                                                             <s:if test="%{#session.currentUser.userType.equals('assistant')}">
 								<div class="col-md-1">
 										<button type="button" class="btn btn-danger btn-block btn-sm" data-toggle="modal" data-target="#confirmCancel" 
-										data-id=" <s:property value="%{#record.appointmentNumber}" />">Cancel</button>	
+										data-id="<s:property value="%{#record.appointmentId}"/>">Cancel</button>	
 								</div>	
                                                             </s:if>
                                                             
                                                             <s:if test="%{#session.currentUser.userType.equals('doctor')}">
                                                                 <div class="col-md-1"><button type="button" class="btn btn-success btn-block btn-sm" data-toggle="modal" data-target="#confirmComplete" 
-                                                                    data-id=" <s:property value="%{#record.appointmentNumber}" />">Complete</button></div>
+                                                                    data-id="<s:property value="%{#record.appointmentId}"/>">Complete</button></div>
                                                             </s:if>
 								<div class="col-md-4"><s:property value="%{#record.customer.name}"/></div>
 								<div class="col-md-3"><s:date name="#record.appointmentDate" format="MM/dd/yyyy"/></div>
@@ -210,7 +210,7 @@
 						<div class="modal-footer form-group" >
 							<div class="row">
 								<div class="col-md-6 col-sm-6">
-									<input type="hidden" id="cancel" name="appinput"/>
+									<input type="hidden" id="cancel" name="input3"/>
 									<center><s:submit type="button" cssClass="btn btn-danger btn-block" value="Delete" /></center>
 								</div>
 								<div class="col-md-6 col-sm-6">
@@ -232,7 +232,7 @@
 			
 			
 			<div class="modal fade" id="confirmComplete">
-							<s:form action="completeAppointment">
+							<s:form action="completeAppointment" method="post">
 				<div class="modal-dialog modal-sm">
 					<div class="modal-content">
 						<div class="modal-header">
@@ -245,7 +245,7 @@
 						<div class="modal-footer form-group" >
 							<div class="row">
 								<div class="col-md-6 col-sm-6">
-									<input type="hidden" id="cancel" name="appinput"/>
+									<input type="hidden" id="complete" name="input3"/>
 									<center><s:submit type="button" cssClass="btn btn-primary btn-block" value="Continue" /></center>
 								</div>
 								<div class="col-md-6 col-sm-6">

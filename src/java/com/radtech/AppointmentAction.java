@@ -175,6 +175,50 @@ public class AppointmentAction extends GenericAction{
         return INPUT;
     }
     
+    public String completeAppointment(){
+        session=getSession();
+        tx=session.getTransaction();
+        try{
+            Appointment appoint = ((Appointment)session.get(Appointment.class, Long.parseLong(app.getInput3().trim())));
+            if(appoint == null){
+                addActionError("Appointment not found!");
+                return INPUT;
+            }
+            appoint = ((Appointment)session.load(Appointment.class, Long.parseLong(app.getInput3().trim())));
+            tx.begin();
+            hiberialize(appoint.getConsultations());
+            for(Object o: appoint.getConsultations()){
+                Consultation c = (Consultation)o;
+                System.out.println("->consultation is " + c.toString());
+                if(c.getConsultationDate()==null){
+                    c.setEyes("N/A");
+                    c.setEars("N/A");
+                    c.setNose("N/A");
+                    c.setThroat("N/A");
+                    c.setDerma("N/A");
+                    c.setGums("N/A");
+                    c.setLymphNodes("N/A");
+                    c.setDiagnosis("N/A");
+                    c.setWeight(0);
+                    c.setTemperature(0);
+                    session.persist(c);
+                    session.flush();
+                }
+            }
+            session.persist(appoint);
+            refresh();
+            tx.commit();
+            return SUCCESS;
+        }
+        catch(HibernateException e){
+            e.printStackTrace();
+            tx.rollback();
+            return INPUT;
+        }
+        finally{
+            if(session!= null)session.close();
+        }
+    }
 }
 
 //appointment

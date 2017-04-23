@@ -105,7 +105,6 @@ public class GenericAction extends ActionSupport implements SessionAware, ModelD
     public void refreshAppointments(){
         List<Appointment> apps = session.createCriteria(Appointment.class)
                 .addOrder(Order.asc("appointmentDate"))
-                .add(Restrictions.isNull("appointmentDate"))
                 .list();
         System.out.println("The size of appointments is " + apps.size());
         for(Appointment app: apps){
