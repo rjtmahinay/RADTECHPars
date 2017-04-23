@@ -8,7 +8,8 @@
 	<constant name="struts.ui.theme" value="bootstrap" />
 	<constant name="struts.ognl.allowStaticMethodAccess" value="true"/> 
 	<package name="default" extends="struts-default" namespace="/">
-		
+	
+<!--TRANSACTION NOT SUCCESSFULLY STARTED DAW PERO NAG ADD NAMAN YUNG PET PAG BUMALIK SA PAGE-->			
 		<action name="addPet" class="com.radtech.PetAction" method="addPet">
 			<result>userProfile.jsp</result>
 			<result name="input">userProfile.jsp</result>

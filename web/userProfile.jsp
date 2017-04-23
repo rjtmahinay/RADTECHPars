@@ -217,7 +217,7 @@
 						<s:iterator value="%{#session.currentCustomer.pets}" var="pet">
 						<tr>
 							<td><s:checkbox fieldValue="%{#pet.petId}" name="input3"/></td>
-							<td><button class="btn btn-block btn-primary btn-sm" type="submit" name="action">History</button></td>
+							<%--<td><button class="btn btn-block btn-primary btn-sm" type="submit" name="action">History</button></td>--%>
 							<td><s:property value="#pet.name"/></td>
 							<td><s:property value="#pet.breed"/></td>
 							<td><s:property value="#pet.color"/></td>
