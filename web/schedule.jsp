@@ -119,8 +119,8 @@
 								</s:url>
 								<s:a href="%{vit}"><button class="btn btn-block btn-sm btn-primary" type="submit" name="action">Vitals</button></s:a>
 							</div>
-							<div class="col-md-4">name<s:property value="%{consultation.pet.name}"/></div>
-							<div class="col-md-3">breed<s:property value="%{consultation.pet.breed}"/></div>
+							<div class="col-md-4">Pet Name: <s:property value="%{#consultation.pet.name}"/></div>
+							<div class="col-md-3">Breed: <s:property value="%{#consultation.pet.breed}"/></div>
 						</div>
 						<br>
 						</s:iterator>						

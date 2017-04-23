@@ -68,7 +68,7 @@ public class Appointment extends GenericModel{
         this.consultations = consultations;
     }
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, targetEntity = Customer.class)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, targetEntity = Customer.class)
     public Customer getCustomer() {
         return customer;
     }

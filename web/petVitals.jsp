@@ -31,17 +31,17 @@
 			<div class="table">
 			<table class="table table-bordered ">
 				<thead>
-					<th width="25%">Customer Number</th>
 					<th width="25%">Customer Name</th>
+					<th width="25%">Pet Name</th>
 					<th width="25%">Address</th>
 					<th width="25%">Contact Number</th>
 				</thead>
 				<tbody>
 				<tr>
-					<td><s:property value="%{#session.currentConsultation.appointment.appointmentId}"/></td>
-					<td><s:property value="%{#session.currentConsultation.appointment.customer.name}" /></td>
-					<td><s:property value="%{#session.currentConsultation.appointment.customer.address}" /></td>
-					<td><s:property value="%{#session.currentConsultation.appointment.customer.contactNumber}" /></td>
+                                    <td><s:property value="%{#session.currentConsultation.appointment.customer.name}" /></td>
+                                    <td><s:property value="%{#session.currentConsultation.pet.name}"/></td>
+                                    <td><s:property value="%{#session.currentConsultation.appointment.customer.address}" /></td>
+                                    <td><s:property value="%{#session.currentConsultation.appointment.customer.contactNumber}" /></td>
 				</tr>
 				</tbody>
 			</table>
@@ -73,7 +73,7 @@
 									<tr>
 										<td>Eyes: </td>
 											
-										<td><center><s:textfield name="input1" placeholder=""/></center></td>
+										<td><center><s:textfield name="eyes" placeholder=""/></center></td>
 											
 									</tr>
 									<tr>

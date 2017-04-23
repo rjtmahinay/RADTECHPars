@@ -76,20 +76,9 @@ public class GenericAction extends ActionSupport implements SessionAware, ModelD
         System.out.println(sessionmap == null);
         session = getSession();
         sessionmap.put("archive", session.createQuery("from Archive").list());
-        List<Appointment> apps = session.createCriteria(Appointment.class)
-                .addOrder(Order.asc("appointmentDate"))
-                .list();
-        for(Appointment app: apps){
-            app.setCustomer(app.getCustomer());
-            for(Object o: app.getConsultations()){
-                Consultation c = (Consultation)o;
-                c.setPet(c.getPet());  
-            }
-        }
-        sessionmap.put("appointments", apps);
-        
         sessionmap.put("customers", session.createQuery("from Customer").list());
         sessionmap.put("search", session.createQuery("from Customer").list());
+        refreshAppointments();
         System.out.println("Refresh done");
     }
     
@@ -106,7 +95,21 @@ public class GenericAction extends ActionSupport implements SessionAware, ModelD
     }
     
     public void refreshAppointments(){
-        sessionmap.put("appointments", (List) session.createQuery("from Appointments order by appointmentDate").list());
+        List<Appointment> apps = session.createCriteria(Appointment.class)
+                .addOrder(Order.asc("appointmentDate"))
+                .list();
+        System.out.println("The size of appointments is " + apps.size());
+        for(Appointment app: apps){
+            System.out.println("Making appointment for " + app.toString());
+            //app.setCustomer(app.getCustomer());
+            for(Object o: app.getConsultations()){
+                Consultation c = (Consultation)o;
+                c.setPet(c.getPet());
+                c.setAppointment(app);
+                System.out.println("Consultation made for " + c.getAppointment().toString());
+            }
+        }
+        sessionmap.put("appointments", apps);
     }
     
 //    public void refreshAppointmentsPending(){

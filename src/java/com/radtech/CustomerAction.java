@@ -28,7 +28,8 @@ public class CustomerAction extends GenericAction{
             customer.setAppointments(new ArrayList());
             System.out.println("Customer appointments is null? " + customer.getAppointments()==null);
             customer.getAppointments().add(app);
-            
+            session.persist(app);
+            session.flush();
             for(Pet p: tempets){
                 p.setOwner(customer);
                 //make consultation

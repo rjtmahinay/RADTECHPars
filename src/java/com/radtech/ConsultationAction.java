@@ -70,6 +70,9 @@ public class ConsultationAction extends GenericAction{
             }
             else{
                 consul = (Consultation)session.load(Consultation.class, consultation.getConsultationId());
+                hiberialize(consul.getPet());
+                hiberialize(consul.getAppointment().getCustomer());
+                System.out.println("pet name is " + consul.getPet().getName());
                 refreshAppointmentConsultations(consul.getAppointment());
                 putMap("currentConsultation", consul);
                 return SUCCESS;

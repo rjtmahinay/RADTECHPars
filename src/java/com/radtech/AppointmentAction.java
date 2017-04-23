@@ -33,14 +33,20 @@ public class AppointmentAction extends GenericAction{
             tx.begin();
             app.setAppointmentDate(toDate(app.getDateInput()));
             for(String s: pets){
-                Pet pet = (Pet)session.load(Pet.class, Long.parseLong(s.trim()));
-                Consultation consultation = new Consultation();
-                consultation.setPet(pet);
-                consultation.setAppointment(app);
-                consultation.setWeight(-1);
-                app.getConsultations().add(consultation);
-                pet.getConsultations().add(consultation);
-                if(app.getCustomer()==null)app.setCustomer(pet.getOwner());
+                if(s.length()>0){
+                    Pet pet = (Pet)session.load(Pet.class, Long.parseLong(s.trim()));
+                    Consultation consultation = new Consultation();
+                    consultation.setPet(pet);
+                    consultation.setAppointment(app);
+                    consultation.setWeight(-1);
+                    app.getConsultations().add(consultation);
+                    pet.getConsultations().add(consultation);
+                    if(app.getCustomer()==null)app.setCustomer(pet.getOwner());
+                }
+                else {
+                    addActionError("Id not found");
+                    return INPUT;
+                }
             }
             tx.commit();
             refresh();

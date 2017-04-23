@@ -8,6 +8,18 @@
 	<constant name="struts.ui.theme" value="bootstrap" />
 	<constant name="struts.ognl.allowStaticMethodAccess" value="true"/> 
 	<package name="default" extends="struts-default" namespace="/">
+            <interceptors>
+                <interceptor class="com.radtech.LoginInterceptor" name="loginInterceptor"/>
+                <interceptor-stack name="loginStack">
+                        <interceptor-ref name="loginInterceptor" />
+                        <interceptor-ref name="defaultStack" />
+                </interceptor-stack>
+            </interceptors>
+            <default-interceptor-ref name="loginStack"/>
+            <global-results>
+                <result name="login" type="redirect">index.jsp</result>
+            </global-results>
+
 	
 <!--TRANSACTION NOT SUCCESSFULLY STARTED DAW PERO NAG ADD NAMAN YUNG PET PAG BUMALIK SA PAGE-->			
 		<action name="addPet" class="com.radtech.PetAction" method="addPet">
