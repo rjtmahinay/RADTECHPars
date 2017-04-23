@@ -25,7 +25,8 @@ public class CustomerAction extends GenericAction{
             Appointment app = new Appointment();
             //set appointment-customer, customer-appointment
             app.setCustomer(customer);
-            hiberialize(customer.getAppointments());
+            customer.setAppointments(new ArrayList());
+            System.out.println("Customer appointments is null? " + customer.getAppointments()==null);
             customer.getAppointments().add(app);
             
             for(Pet p: tempets){
@@ -35,6 +36,7 @@ public class CustomerAction extends GenericAction{
                 //setup pet-consult, consult-pet, consult-appoint
                 c.setPet(p);
                 hiberialize(p.getConsultations());
+                System.out.println("Pet consultations is null? " + p.getConsultations()==null);
                 p.getConsultations().add(c);
                 c.setAppointment(app);
                 session.saveOrUpdate(c);
