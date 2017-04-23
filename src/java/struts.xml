@@ -89,6 +89,12 @@
 			<result>statistics.jsp</result>
 		</action>
 		
+		<action name="showHistory" class="" method="showHistory">
+			<result>diagnoHistory.jsp</result>
+			<result name="input">userProfile.jsp</result>
+		</action>
+		
+		
 		
 		
 	</package>

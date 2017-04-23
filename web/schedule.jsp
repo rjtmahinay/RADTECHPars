@@ -104,7 +104,7 @@
 										data-id=" <s:property value="%{#record.appointmentNumber}" />">Cancel</button>	
 								</div>	
 								<div class="col-md-4"><s:property value="%{#record.customer.name}"/></div>
-								<div class="col-md-3"><s:date name="#record.appointmentDate" format="MM/dd/yyyy"/></div>
+								<div class="col-md-3">	<s:date name="#record.appointmentDate" format="MM/dd/yyyy"/></div>
 								<div class="col-md-4"><s:property value="#record.transactionType"/></div>
 							</div>
 						</a>
@@ -120,8 +120,8 @@
 								</s:url>
 								<s:a href="%{vit}"><button class="btn btn-block btn-sm btn-primary" type="submit" name="action">Vitals</button></s:a>
 							</div>
-							<div class="col-md-3"><s:property value="%{consultation.pet.name}"/></div>
-							<div class="col-md-3"><s:property value="%{consultation.pet.breed}"/></div>
+							<div class="col-md-4">name<s:property value="%{consultation.pet.name}"/></div>
+							<div class="col-md-3">breed<s:property value="%{consultation.pet.breed}"/></div>
 						</div>
 						<br>
 						</s:iterator>						
@@ -164,11 +164,11 @@
 									<s:url action="doctorDiagnosis" var="doc">
 										<s:param name="consultationId"><s:property value="#consultation.consultationId"/></s:param>
 									</s:url>
-									<s:a href="%{doc}"> <button class="btn btn-block btn-primary btn-xs" 
+									<s:a href="%{doc}"> <button class="btn btn-block btn-primary btn-sm" 
 										type="submit" name="action">Vitals</button></s:a>
 								</div>
-								<div class="col-md-3"><s:property value="%{consultation.pet.name}"/></div>
-								<div class="col-md-3"><s:property value="%{consultation.pet.breed}"/></div>
+								<div class="col-md-4">pet name<s:property value="%{consultation.pet.name}"/></div>
+								<div class="col-md-3">breed<s:property value="%{consultation.pet.breed}"/></div>
 							</div>
 							<br>
 							</s:iterator>						

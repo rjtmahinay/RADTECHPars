@@ -14,29 +14,9 @@
 		
 		<title>User Profile</title>
 		<style>
+		
 
-
-		body
-		{
-			overflow-x:hidden;
-		}
-		.table-fixed th {
 		
-		}	
-		.table-fixed thead {
-		
-		}
-		.table-fixed tbody {
-		
-		}
-		.table-fixed tbody, .table-fixed tr, .table-fixed td {
-		
-		}
-		 .table-fixed tbody td{
-		
-		  
-		
-		}
 		</style>
 	</head>
 	<body background="dog.jpg">
@@ -134,7 +114,7 @@
 
 								<tr>
 									<td>Owner Name:</td>
-									<td><s:property value="%{#session.currentCustomer.ownerName}" /></td>
+									<td><s:property value="%{#session.currentCustomer.name}" /></td>
 								</tr>
 
 								<tr>
@@ -219,13 +199,14 @@
 				</div>
 				</div>
 				
+		<s:if test="%{#session.currentUser.userType.equals('assistant')}">
 				
 			<s:form action="addAppointment" theme="bootstrap" cssClass="form" method="POST">	
 				<div class="table table-responsive">
 				<table class="table table-striped table-bordered table-hover">
 					<thead>
 						<th width="2%"></th>
-						<th width="8%"></th>
+						<%--<th width="8%"></th>--%>
 						<th>Name</th>
 						<th>Breed</th>
 						<th>Color</th>
@@ -237,7 +218,7 @@
 						<tr>
 							<td><s:checkbox fieldValue="%{#pet.petId}" name="input3"/></td>
 							<td><button class="btn btn-block btn-primary btn-sm" type="submit" name="action">History</button></td>
-                                                        <td><s:property value="#pet.name"/></td>
+							<td><s:property value="#pet.name"/></td>
 							<td><s:property value="#pet.breed"/></td>
 							<td><s:property value="#pet.color"/></td>
 							<td><s:property value="#pet.sex"/></td>
@@ -267,7 +248,51 @@
 				</div>
 			</div>
 					
-			</s:form>		
+			</s:form>	
+		</s:if>
+			
+			
+			
+<%--DOCTOR'S VERSION OF USERPROFILE , DOCTOR'S VERSION OF USERPROFILE, DOCTOR'S VERSION OF USERPROFILE--%>		
+			
+			
+			
+			
+			
+			
+			
+			
+		<s:if test="%{#session.currentUser.userType.equals('doctor')}">
+			<div class="table table-responsive">
+				<table class="table table-striped table-bordered table-hover">
+					<thead>
+						<th width="8%"></th>
+						<th>Name</th>
+						<th>Breed</th>
+						<th>Color</th>
+						<th>Sex</th>
+						<th>Date of Birth</th>
+					</thead>
+					<tbody>
+						<s:iterator value="%{#session.currentCustomer.pets}" var="pet">
+						<tr>
+							<td><button class="btn btn-block btn-primary btn-sm" type="submit" name="action">History</button></td>
+							<td><s:property value="#pet.name"/></td>
+							<td><s:property value="#pet.breed"/></td>
+							<td><s:property value="#pet.color"/></td>
+							<td><s:property value="#pet.sex"/></td>
+							<td><s:property value="#pet.dateOfBirth"/></td>
+						</tr>
+						</s:iterator>
+					</tbody>
+				</table>
+			</div>
+		</s:if>	
+			
+			
+			
+			
+			
 					<%--
 					<div class="panel panel-default">
 						<div class="panel-body">

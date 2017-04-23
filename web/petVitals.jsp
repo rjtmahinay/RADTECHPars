@@ -72,34 +72,34 @@
 									</tr>
 									<tr>
 										<td>Eyes: </td>
-													<%--EQUIVALENT DAW TO NG <S:CHECKBOX>--%>
-										<td><center>	<input type="checkbox" name="eyes">
-													<%--PAG WORKING NA TO I APPLY KO NALANG SA LAHAT--%>
+											
+										<td><center><s:textfield name="input1" placeholder=""/></center></td>
+											
 									</tr>
 									<tr>
 										
 										<td>Ears: </td>
-										<td><center><input type="checkbox" name="ears"></center></td>
+										<td><center><s:textfield name="ears" placeholder=""/></center></td>
 									</tr>
 									<tr>
 										<td>Nose: </td>
-										<td><center><input type="checkbox" name="nose"></center></td>
+										<td><center><s:textfield name="nose" placeholder=""/></center></td>
 									</tr>
 									<tr>
 										<td>Throat: </td>
-										<td><center><input type="checkbox" name="throat"></center></td>
+										<td><center><s:textfield name="throat" placeholder=""/></center></td>
 									</tr>
 									<tr>
 										<td>Derma: </td>
-										<td><center><input type="checkbox" name="derma"></center></td>
+										<td><center><s:textfield name="derma" placeholder=""/></center></td>
 									</tr>
 									<tr>
 										<td>Gums: </td>
-										<td><center><input type="checkbox" name="gums"></center></td>
+										<td><center><s:textfield name="gums" placeholder=""/></center></td>
 									</tr>
 									<tr>
 										<td>Lymph Nodes: </td>
-										<td><center><input type="checkbox" name="lymphNodes"></center></td>
+										<td><center><s:textfield name="lymphNodes" placeholder=""/></center></td>
 									</tr>
 								</table>
 							</div>
@@ -112,54 +112,66 @@
 					</s:if>
 					
 <!-DOCTOR'S VERSION OF FIRST HALF, DOCTOR'S VERSION OF FIRST HALF, DOCTOR'S VERSION OF FIRST HALF, DOCTOR'S VERSION OF FIRST HALF, -->					
-                                    <s:if test="%{#session.currentUser.userType.equals('doctor')}">
-                                        <s:form action="doctorDiagnosis" method="POST">
-                                            <div class="panel panel-default">
-                                                <div class="panel-body">
-                                                    <div class="table table-responsive">
-                                                        <table class="table table-bordered table-condensed">
-                                                            <tr>
-                                                                <td>Temperature: </td>
-                                                                <td><center><s:property value="#session.currentConsultation.temperature"/></center></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>Weight: </td>
-                                                                <td><center><s:property value="#session.currentConsultation.weight"/></center></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>Eyes: </td>
-                                                                <td><center><input type="checkbox" name="eyes"></center></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>Ears: </td>
-                                                                <td><center><input type="checkbox" name="nose"></center></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>Nose: </td>
-                                                                <td><center><input type="checkbox" name="nose"></center></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>Throat: </td>
-                                                                <td><center><input type="checkbox" name="throat"></center></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>Derma: </td>
-                                                                <td><center><input type="checkbox" name="derma"></center></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>Gums: </td>
-                                                                <td><center><input type="checkbox" name="gums"></center></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>Lymph Nodes: </td>
-                                                                <td><center><input type="checkbox" name="lymphNodes"></center></td>
-                                                            </tr>
-                                                        </table>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </s:form>
-                                    </s:if>
+					
+
+					<s:if test="%{#session.currentUser.userType.equals('doctor')}">
+						<s:form action="doctorDiagnosis" method="POST">
+							<div class="panel panel-default">
+								<div class="panel-heading">
+									<center><s:property value="%{#session.currentConsultation.pet.name}" /></center>
+								</div>
+								<div class="panel-body">
+									<div class="table table-responsive">
+										<table class="table table-bordered table-condensed">
+											<thead>
+												
+												<th width="40%">Part</th>
+												<th width="60%"><center>Value / Comment</center></th>
+												
+											</thead>	
+
+											<tr>
+												<td>Temperature: </td>
+												<td><center><s:property value="#session.currentConsultation.temperature"/></center></td>
+											</tr>
+											<tr>
+												<td>Weight: </td>
+												<td><center><s:property value="#session.currentConsultation.weight"/></center></td>
+											</tr>
+											<tr>
+												<td>Eyes: </td>
+												<td><center><s:property value="#session.currentConsultation.eyes"/></center></td>
+											</tr>
+											<tr>
+												<td>Ears: </td>
+												<td><center><s:property value="#session.currentConsultation.ears"/></center></td>
+											</tr>
+											<tr>
+												<td>Nose: </td>
+												<td><center><s:property value="#session.currentConsultation.nose"/></center></td>
+											</tr>
+											<tr>
+												<td>Throat: </td>
+												<td><center><s:property value="#session.currentConsultation.throat"/></center></td>
+											</tr>
+											<tr>
+												<td>Derma: </td>
+												<td><center><s:property value="#session.currentConsultation.derma"/></center></td>
+											</tr>
+											<tr>
+												<td>Gums: </td>
+												<td><center><s:property value="#session.currentConsultation.gums"/></center></td>
+											</tr>
+											<tr>
+												<td>Lymph Nodes: </td>
+												<td><center><s:property value="#session.currentConsultation.lymphNodes"/></center></td>
+											</tr>
+										</table>
+									</div>
+								</div>
+							</div>
+						</s:form>
+					</s:if>
 					
 					
 					
