@@ -21,12 +21,31 @@ public class CustomerAction extends GenericAction{
             tx.begin();
             ArrayList<Pet> tempets = (ArrayList)sessionmap.get("tempets");
                 if(tempets == null | tempets.size()<=0) return INPUT;           //no pet input
+            //make appointment
+            Appointment app = new Appointment();
+            //set appointment-customer, customer-appointment
+            app.setCustomer(customer);
+            hiberialize(customer.getAppointments());
+            customer.getAppointments().add(app);
+            
             for(Pet p: tempets){
                 p.setOwner(customer);
+                //make consultation
+                Consultation c = new Consultation();
+                //setup pet-consult, consult-pet, consult-appoint
+                c.setPet(p);
+                hiberialize(p.getConsultations());
+                p.getConsultations().add(c);
+                c.setAppointment(app);
+                session.saveOrUpdate(c);
                 session.saveOrUpdate(p);
+                session.flush();
             }
+            app.setAppointmentDate(new java.util.Date());
+            
             customer.setPets(tempets);
             session.saveOrUpdate(customer);
+            session.saveOrUpdate(app);
             tx.commit();
             refresh(); 
             putMap("currentCustomer", customer);

@@ -168,6 +168,10 @@ public class GenericAction extends ActionSupport implements SessionAware, ModelD
     public Deencrypt getD(){
         return de;
     }
+    
+    public void hiberialize(Object o){
+        Hibernate.initialize(o);
+    }
 }
 
 //GenericModel
