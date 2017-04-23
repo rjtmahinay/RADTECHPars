@@ -6,6 +6,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import org.apache.struts2.dispatcher.SessionMap;
@@ -23,6 +24,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Restrictions;
 
 public class GenericAction extends ActionSupport implements SessionAware, ModelDriven{
     SessionMap sessionmap;
@@ -78,7 +80,13 @@ public class GenericAction extends ActionSupport implements SessionAware, ModelD
         sessionmap.put("archive", session.createQuery("from Archive").list());
         sessionmap.put("customers", session.createQuery("from Customer").list());
         sessionmap.put("search", session.createQuery("from Customer").list());
-        refreshAppointments();
+        //if(((User)sessionmap.get("currentUser")).getUserType().equals("assistant")){
+            refreshAppointments();
+        //}
+            
+        //else{
+        //    refreshUnfinishedConsultations();
+        //}
         System.out.println("Refresh done");
     }
     
@@ -97,6 +105,7 @@ public class GenericAction extends ActionSupport implements SessionAware, ModelD
     public void refreshAppointments(){
         List<Appointment> apps = session.createCriteria(Appointment.class)
                 .addOrder(Order.asc("appointmentDate"))
+                .add(Restrictions.isNull("appointmentDate"))
                 .list();
         System.out.println("The size of appointments is " + apps.size());
         for(Appointment app: apps){
@@ -112,9 +121,16 @@ public class GenericAction extends ActionSupport implements SessionAware, ModelD
         sessionmap.put("appointments", apps);
     }
     
-//    public void refreshAppointmentsPending(){
-//        sessionmap.put("appointments", session.createQuery("from Appointment where adate is null order by date").list());
-//    }
+    public boolean checkAppointment(Consultation consult){
+        Appointment app = consult.getAppointment();
+        hiberialize(app.getConsultations());
+        for(Object o: app.getConsultations()){
+            Consultation c = (Consultation)o;
+            if(c.getConsultationDate()!= null) return false;
+        }
+        app.setAppointmentDate(new java.util.Date());
+        return true;
+    }
     
     public void refreshAppointmentConsultations(Appointment app){
         Hibernate.initialize(app.getConsultations());
@@ -127,17 +143,36 @@ public class GenericAction extends ActionSupport implements SessionAware, ModelD
         sessionmap.put("currentConsultations", consultations);
     }
     
-    public void refreshUnfinishedConsultations(Appointment app){
-        Hibernate.initialize(app.getConsultations());
-        ArrayList<Consultation> consultations = new ArrayList<Consultation>();
-        for(Object o : app.getConsultations()){
+    public void refreshUnfinishedConsultations(){
+        //include customer and pet updates
+        List<Consultation>  consultations = session.createCriteria(Consultation.class)
+                                .add(Restrictions.isNull("consultationDate"))
+                                .list();
+        HashSet hashed = new HashSet();
+        for(Object o: consultations){
             Consultation c = (Consultation)o;
-            if(c.getWeight()>=0 && c.getConsultationDate()==null) {
-                consultations.add(c);
+            hiberialize(c.getAppointment());
+            System.out.println("Consultation is " + c.toString());
+            Appointment app = c.getAppointment();
+            hiberialize(app.getConsultations());
+            app.setConsultations(app.getConsultations());
+            System.out.println("App is " + app.toString());
+            //check if weight <0, dont include
+            if(c.getWeight()<=0){
+                app.getConsultations().remove(c);
             }
-            System.out.println("---->" + c.toString());
+            else{
+                hiberialize(c.getPet());
+                c.setPet(c.getPet());
+                hiberialize(app.getCustomer());
+                app.setCustomer(app.getCustomer());
+                hashed.add(c);
+            }
         }
-        sessionmap.put("currentConsultations", consultations);
+        ArrayList result = new ArrayList();
+        result.addAll(hashed);
+        System.out.println("Size of hashed is " + hashed.size() + " and result is " + result.size());
+        sessionmap.put("appointments", result);
     }
     
     public void refreshMedicines(){

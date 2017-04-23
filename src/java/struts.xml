@@ -68,13 +68,15 @@
                         <result>petVitals.jsp</result>
                         <result name="input">schedule.jsp</result>
 		</action>
-                <action name="setVitals" class="com.radtech.ConsultationAction" method="setVitals">
+                
+                <action name="addDiagnosis" class="com.radtech.ConsultationAction" method="addDiagnosis">
                         <result>schedule.jsp</result>
                         <result name="input">petVitals.jsp</result>
 		</action>
-                <action name="doctorDiagnosis" class="com.radtech.ConsultationAction" method="doctorDiagnosis">
-                        <result>petVitals.jsp</result>
-                        <result name="input">schedule.jsp</result>
+                
+                <action name="setVitals" class="com.radtech.ConsultationAction" method="setVitals">
+                        <result>schedule.jsp</result>
+                        <result name="input">petVitals.jsp</result>
 		</action>
 		
 		<!--NEW BUT NOT COMPLETE _______NEW BUT NOT COMPLETE _______NEW BUT NOT COMPLETE _______NEW BUT NOT COMPLETE _______  -->

@@ -86,18 +86,36 @@ public class ConsultationAction extends GenericAction{
             if(session!= null)session.close();
         }
     }
-    public String doctorDiagnosis(){
+    
+    public String addDiagnosis(){
         session = getSession();
-        Consultation consul = (Consultation)session.get(Consultation.class, consultation.getConsultationId());
-        if(consul == null){
-            addActionError("Consultation not found");
+        tx = session.getTransaction();
+        System.out.println("Current input is " + consultation.toString());
+        System.out.println("and input3 is " + consultation.getInput3());
+        try{
+            Consultation c = (Consultation)session.get(Consultation.class, Long.parseLong(consultation.getInput3()));
+            if(c==null){
+                addActionError("Consultation not found!");
+                return INPUT;
+            }
+            else{
+                tx.begin();
+                c = (Consultation)session.load(Consultation.class, Long.parseLong(consultation.getInput3()));
+                c.setDiagnosis(consultation.getDiagnosis());
+                c.setConsultationDate(new java.util.Date());
+                checkAppointment(c);
+                refresh();
+                tx.commit();
+                return SUCCESS;
+            }
+        }
+        catch(HibernateException e){
+            e.printStackTrace();
+            tx.rollback();
             return INPUT;
         }
-        else{
-            consul = (Consultation)session.load(Consultation.class, consultation.getConsultationId());
-            refreshUnfinishedConsultations(consul.getAppointment());
-            putMap("currentConsultation",consul);
-            return SUCCESS;
+        finally{
+            if(session!=null)session.close();
         }
     }
 }

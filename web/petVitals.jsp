@@ -42,6 +42,7 @@
                                     <td><s:property value="%{#session.currentConsultation.pet.name}"/></td>
                                     <td><s:property value="%{#session.currentConsultation.appointment.customer.address}" /></td>
                                     <td><s:property value="%{#session.currentConsultation.appointment.customer.contactNumber}" /></td>
+                                    <s:actionerror/>
 				</tr>
 				</tbody>
 			</table>
@@ -115,7 +116,6 @@
 					
 
 					<s:if test="%{#session.currentUser.userType.equals('doctor')}">
-						<s:form action="doctorDiagnosis" method="POST">
 							<div class="panel panel-default">
 								<div class="panel-heading">
 									<center><s:property value="%{#session.currentConsultation.pet.name}" /></center>
@@ -170,7 +170,6 @@
 									</div>
 								</div>
 							</div>
-						</s:form>
 					</s:if>
 					
 					
@@ -184,7 +183,7 @@
 					<s:if test="%{#session.currentUser.userType.equals('doctor')}">
 					<div class="panel panel-default">
 						<s:form action="addDiagnosis" theme="bootstrap" cssClass="form" method="POST">
-                                                    <s:hidden value="#session.currentConsultation.consultationId" name="input3"/>
+                                                    <s:hidden value="%{#session.currentConsultation.consultationId}" name="input3"/>
 						<div class="panel-body">
                                                     <h4>Diagnosis/Comments</h4>
                                                     <center>

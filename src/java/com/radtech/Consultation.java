@@ -24,7 +24,7 @@ public class Consultation extends GenericModel{
     private long consultationId;
     private Date consultationDate;
     private double weight, temperature;
-    private String eyes, ears, nose, throat, derma, gums, lymphNodes;
+    private String eyes, ears, nose, throat, derma, gums, lymphNodes, diagnosis;
     private Appointment appointment;
     private Pet pet;
     private List medicines = new ArrayList<Medicine>();
@@ -157,6 +157,15 @@ public class Consultation extends GenericModel{
 
     public void setMedicines(List medicines) {
         this.medicines = medicines;
+    }
+
+    @Column(name="DIAGNOSIS")
+    public String getDiagnosis() {
+        return diagnosis;
+    }
+
+    public void setDiagnosis(String diagnosis) {
+        this.diagnosis = diagnosis;
     }
     
     
