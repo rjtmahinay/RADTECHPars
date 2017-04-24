@@ -43,9 +43,9 @@
                                                 <br/>
                                                 <div class="form-group">
                                                     <s:hidden name="username" value="%{#session.currentUser.username}"/>
-                                                    <s:password name="password" placeholder="Current Password" class="form-control" /></div>
+                                                    <s:password name="password" placeholder="Current Password" class="form-control" /><s:actionerror/></div>
                                                     <div class="form-group">  
-                                                    <s:password name="newPassword" placeholder="New Password" class="form-control" /></div>
+                                                    <s:password name="newPassword" placeholder="New Password" class="form-control" /><s:actionerror/></div>
                                                     <div class="form-group">  
                                                     <s:password name="confirmPassword" placeholder="Confirm New Password" class="form-control" /></div>
                                                 <s:submit cssClass="btn btn-primary " value="submit" />
@@ -57,22 +57,22 @@
                                                 <s:hidden name="userType" value="#session.currentUser.userType"/>
                                                 <br/>
                                                 <div class="form-group">
-                                                        <s:textfield name="name" placeholder="Firstname" />
+                                                        <s:textfield name="name" placeholder="Firstname" /><s:actionerror/>
                                                 </div>
                                                 <div class="form-group">
-                                                        <s:textfield name="username" placeholder="Username"/>
+                                                        <s:textfield name="username" placeholder="Username"/><s:actionerror/>
                                                 </div>
                                                 <div class="form-group">
-                                                        <s:password name="password" placeholder="Password"/>
+                                                        <s:password name="password" placeholder="Password"/><s:actionerror/>
                                                 </div>
                                                 <div class="form-group">
                                                         <s:password name="confirmPassword" placeholder="Confirm Password"/>
                                                 </div>
                                                 <div class="form-group">
-                                                        <s:textfield name="securityQuestion" placeholder="Security Question"/>
+                                                        <s:textfield name="securityQuestion" placeholder="Security Question"/><s:actionerror/>
                                                 </div>
                                                 <div class="form-group">
-                                                        <s:password name="securityAnswer" placeholder="Security Answer"/>
+                                                        <s:password name="securityAnswer" placeholder="Security Answer"/><s:actionerror/>
                                                 </div>
 
                                                 <s:submit cssClass="btn btn-primary btn" value="sign up" />

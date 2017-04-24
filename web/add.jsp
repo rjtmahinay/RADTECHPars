@@ -52,15 +52,15 @@
 							<table class="table table-condensed">
 								<tr>
 									<td><b>Pet Name:</b></td>
-									<td><s:textfield name="name" placeholder=""/></td>
+									<td><s:textfield name="name" placeholder=""/> <s:actionerror/></td>
 								</tr>
 								<tr>
 									<td><b>Breed:</b></td>
-									<td><s:textfield name="breed" placeholder=""/></td>
+									<td><s:textfield name="breed" placeholder=""/> <s:actionerror/></td>
 								</tr>
 								<tr>
 									<td><b>Color:</b></td>
-									<td><s:textfield name="color" placeholder=""/></td>
+									<td><s:textfield name="color" placeholder=""/> <s:actionerror/></td>
 								</tr>
 								<tr>
 									<td><b>Sex:</b></td>
@@ -69,7 +69,7 @@
 								<tr>
 									<td><b>Date of birth:</b></td>
 									<td>
-									<s:textfield name="dateInput" id="petDateOfBirth" />
+									<s:textfield name="dateInput" id="petDateOfBirth" /> <s:actionerror/>
 									</td>
 								</tr>
 
@@ -169,13 +169,13 @@
 	--%>
 			<s:form action="addCustomer" theme="bootstrap" cssClass="form" method="POST">
 				<label for="name">Customer Name</label>
-				<s:textfield name="name" placeholder=""/>
+				<s:textfield name="name" placeholder=""/><s:actionerror/>
 
 				<label for="address">Address</label>
-				<s:textfield name="address" placeholder=""/>
+				<s:textfield name="address" placeholder=""/><s:actionerror/>
 
 				<label for="contactNumber">Contact Number</label>
-				<s:textfield name="contactNumber" placeholder=""/>
+				<s:textfield name="contactNumber" placeholder=""/><s:actionerror/>
 
 				<br>
 				<div class="row">
