@@ -25,7 +25,7 @@ import javax.persistence.Transient;
 @Table(name = "Appointments")
 public class Appointment extends GenericModel{
     private long appointmentId;
-    private String comment;
+    private String status, transactionType;
     private Date appointmentDate;
     private Customer customer;
     private List consultations = new ArrayList<Consultation>();
@@ -41,15 +41,15 @@ public class Appointment extends GenericModel{
         this.appointmentId = appointmentId;
     }
 
-    @Column(name="COMMENT")
-    public String getComment() {
-        return comment;
+    @Column(name="STATUS")
+    public String getStatus() {
+        return status;
     }
 
-    public void setComment(String comment) {
-        this.comment = comment;
+    public void setStatus(String status) {
+        this.status = status;
     }
-
+    
     @Column(name="APPOINTMENT_DATE")
     public Date getAppointmentDate() {
         return appointmentDate;
@@ -59,7 +59,7 @@ public class Appointment extends GenericModel{
         this.appointmentDate = appointmentDate;
     }
 
-    @OneToMany(cascade = CascadeType.REMOVE, fetch = FetchType.LAZY, mappedBy = "appointment", targetEntity = Consultation.class)
+    @OneToMany(cascade = CascadeType.REMOVE, fetch = FetchType.EAGER, mappedBy = "appointment", targetEntity = Consultation.class)
     public List getConsultations() {
         return consultations;
     }
@@ -90,9 +90,19 @@ public class Appointment extends GenericModel{
     public void setUnfinishedConsultations(List unfinishedConsultations) {
         this.unfinishedConsultations = unfinishedConsultations;
     }
+
+    @Column(name="TRANSACTION_TYPE")
+    public String getTransactionType() {
+        return transactionType;
+    }
+
+    public void setTransactionType(String transactionType) {
+        this.transactionType = transactionType;
+    }
+
     
     @Override
     public String toString() {
-        return "Appointment{" + "appointmentId=" + appointmentId +  ", comment=" + comment  + ", appointmentDate=" + appointmentDate + '}';
+        return "Appointment{" + "appointmentId=" + appointmentId + ", status=" + status + ", appointmentDate=" + appointmentDate + ", customer=" + customer + ", consultations=" + consultations + ", unfinishedConsultations=" + unfinishedConsultations + '}';
     }
 }

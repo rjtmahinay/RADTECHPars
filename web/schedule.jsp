@@ -92,6 +92,7 @@
 			
 			
 			<s:iterator value="#session.appointments" var="record">
+                            <s:if test="!#record.status.equals('completed')">
 			<div class="panel-group" id="accordion">
 			<div class="panel panel-default">
 				<div class="panel-heading">
@@ -105,13 +106,15 @@
 								</div>	
                                                             </s:if>
                                                             
-                                                            <s:if test="%{#session.currentUser.userType.equals('doctor')}">
+                                                            <s:if test="%{#session.currentUser.userType.equals('doctor')} && !%{#record.status.equals('completed')}">
                                                                 <div class="col-md-1"><button type="button" class="btn btn-success btn-block btn-sm" data-toggle="modal" data-target="#confirmComplete" 
                                                                     data-id="<s:property value="%{#record.appointmentId}"/>">Complete</button></div>
                                                             </s:if>
+                                                            <s:if test="!%{#record.status.equals('completed')}">
 								<div class="col-md-4"><s:property value="%{#record.customer.name}"/></div>
 								<div class="col-md-3"><s:date name="#record.appointmentDate" format="MM/dd/yyyy"/></div>
 								<div class="col-md-4"><s:property value="#record.transactionType"/></div>
+                                                            </s:if>
 							</div>
 						</a>
 					</h4>
@@ -119,7 +122,7 @@
 				<div class="panel-collapse collapse">
 					<div class="panel-body">
 						<s:iterator value="#record.consultations" var="consultation">
-                                                    <s:if test="%{#session.currentUser.userType.equals('doctor') && #consultation.consultationDate == null}">
+                                                    <s:if test="%{#session.currentUser.userType.equals('doctor')}">
 						<div class="row">
 							<div class="col-md-1"> 
                                                             <s:url action="getVitals" var="vit">
@@ -154,7 +157,7 @@
 					</div>
 				</div>
 			</div>
-								
+                        </s:if>		
 			</s:iterator>
 			</div>
 			

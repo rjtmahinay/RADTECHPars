@@ -46,6 +46,7 @@ public class ConsultationAction extends GenericAction{
                 consult.setGums(consultation.getGums());
                 consult.setTemperature(Double.parseDouble(consultation.getInput1()));
                 consult.setWeight(Double.parseDouble(consultation.getInput2()));
+                hiberialize(consult.getAppointment().getConsultations());
                 tx.commit();
                 refresh();
                 return SUCCESS;
@@ -103,9 +104,13 @@ public class ConsultationAction extends GenericAction{
                 c = (Consultation)session.load(Consultation.class, Long.parseLong(consultation.getInput3()));
                 c.setDiagnosis(consultation.getDiagnosis());
                 c.setConsultationDate(new java.util.Date());
-                checkAppointment(c);
-                refresh();
+                c.setStatus("completed");
+                session.flush();
+                if(checkAppointment(c)==true){
+                    c.getAppointment().setStatus("completed");
+                }
                 tx.commit();
+                refresh();
                 return SUCCESS;
             }
         }

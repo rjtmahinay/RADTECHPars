@@ -28,11 +28,9 @@ public class CustomerAction extends GenericAction{
             session.flush();
             app.setCustomer(customer);
             customer.setAppointments(new ArrayList());
-            System.out.println("Customer appointments is null? " + customer.getAppointments()==null);
             session.persist(customer);
             customer.getAppointments().add(app);
             session.flush();
-            System.out.println("First flush done");
             for(Pet p: tempets){
                 p.setOwner(customer);
                 //make consultation
@@ -40,16 +38,16 @@ public class CustomerAction extends GenericAction{
                 //setup pet-consult, consult-pet, consult-appoint
                 c.setPet(p);
                 hiberialize(p.getConsultations());
-                System.out.println("Pet consultations is null? " + p.getConsultations()==null);
                 p.getConsultations().add(c);
                 c.setAppointment(app);
+                c.setStatus("pending");
                 session.save(p);
                 session.save(c);
                 session.flush();
-                System.out.println("second flush done");
             }
             app.setAppointmentDate(new java.util.Date());
-            
+            app.setTransactionType("walk-in");
+            app.setStatus("pending");
             customer.setPets(tempets);
             session.saveOrUpdate(app);
             session.saveOrUpdate(customer);

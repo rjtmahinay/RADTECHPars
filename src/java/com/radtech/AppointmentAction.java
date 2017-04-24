@@ -1,18 +1,7 @@
 package com.radtech;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
-import org.hibernate.Criteria;
-import org.hibernate.Hibernate;
+
 import org.hibernate.HibernateException;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
-import org.hibernate.criterion.Projections;
-import org.hibernate.criterion.Restrictions;
 
 public class AppointmentAction extends GenericAction{
 
@@ -54,6 +43,7 @@ public class AppointmentAction extends GenericAction{
                     return INPUT;
                 }
             }
+            app.setTransactionType("scheduled");
             tx.commit();
             refresh();
             return SUCCESS;
@@ -176,10 +166,12 @@ public class AppointmentAction extends GenericAction{
                     c.setDiagnosis("N/A");
                     c.setWeight(0);
                     c.setTemperature(0);
+                    c.setStatus("cancelled");
                     session.persist(c);
                     session.flush();
                 }
             }
+            appoint.setStatus("completed");
             session.persist(appoint);
             tx.commit();
             refresh();
@@ -211,7 +203,6 @@ public class AppointmentAction extends GenericAction{
             
             //consultations to pet, consultations to appointment
             appoint.getCustomer().getAppointments().remove(appoint);
-            System.out.println("Ready for merging");
             session.merge(appoint.getCustomer());
             session.merge(appoint);
             session.flush();

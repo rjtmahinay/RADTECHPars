@@ -103,18 +103,17 @@ public class GenericAction extends ActionSupport implements SessionAware, ModelD
     }
     
     public void refreshAppointments(){
+        if(session==null)session = getSession();
         List<Appointment> apps = session.createCriteria(Appointment.class)
-                .addOrder(Order.asc("appointmentDate"))
+                .addOrder(Order.asc("appointmentDate")) 
                 .list();
-        System.out.println("The size of appointments is " + apps.size());
-        for(Appointment app: apps){
-            System.out.println("Making appointment for " + app.toString());
-            //app.setCustomer(app.getCustomer());
-            for(Object o: app.getConsultations()){
-                Consultation c = (Consultation)o;
-                c.setPet(c.getPet());
-                c.setAppointment(app);
-                System.out.println("Consultation made for " + c.getAppointment().toString());
+        if(apps.size()>0){
+            for(Appointment app: apps){
+                //app.setCustomer(app.getCustomer());
+                hiberialize(app.getConsultations());
+                if(checkAppointment(app)==true){
+                    apps.remove(app);
+                }
             }
         }
         sessionmap.put("appointments", apps);
@@ -125,9 +124,19 @@ public class GenericAction extends ActionSupport implements SessionAware, ModelD
         hiberialize(app.getConsultations());
         for(Object o: app.getConsultations()){
             Consultation c = (Consultation)o;
-            if(c.getConsultationDate()!= null) return false;
+            if(c.getStatus().equals("pending")){
+                return false;
+            }
         }
         app.setAppointmentDate(new java.util.Date());
+        return true;
+    }
+    public boolean checkAppointment(Appointment appoint){
+        hiberialize(appoint.getConsultations());
+        for(Object o: appoint.getConsultations()){
+            Consultation c = (Consultation)o;
+            if(checkAppointment(c) ==false) return false;
+        }
         return true;
     }
     
