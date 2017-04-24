@@ -1,6 +1,7 @@
 package com.radtech;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Table;
@@ -18,7 +19,8 @@ import javax.persistence.OneToMany;
 public class Customer extends GenericModel{
     private long customerId, contactNumber;
     private String name, address;
-    private List appointments, pets;
+    private List appointments = new ArrayList();
+    private List pets = new ArrayList();
 
     @Id
     @Column(name="CUSTOMER_ID")

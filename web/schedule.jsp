@@ -92,7 +92,6 @@
 			
 			
 			<s:iterator value="#session.appointments" var="record">
-                            <s:if test="!#record.status.equals('completed')">
 			<div class="panel-group" id="accordion">
 			<div class="panel panel-default">
 				<div class="panel-heading">
@@ -106,7 +105,7 @@
 								</div>	
                                                             </s:if>
                                                             
-                                                            <s:if test="%{#session.currentUser.userType.equals('doctor')} && !%{#record.status.equals('completed')}">
+                                                            <s:if test="%{#session.currentUser.userType.equals('doctor')}">
                                                                 <div class="col-md-1"><button type="button" class="btn btn-success btn-block btn-sm" data-toggle="modal" data-target="#confirmComplete" 
                                                                     data-id="<s:property value="%{#record.appointmentId}"/>">Complete</button></div>
                                                             </s:if>
@@ -156,8 +155,7 @@
 						</s:iterator>						
 					</div>
 				</div>
-			</div>
-                        </s:if>		
+			</div>	
 			</s:iterator>
 			</div>
 			

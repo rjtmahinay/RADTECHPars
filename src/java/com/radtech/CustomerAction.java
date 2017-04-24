@@ -29,32 +29,30 @@ public class CustomerAction extends GenericAction{
 			session.save(app);
 			session.flush();
 			app.setCustomer(customer);
-			customer.setAppointments(new ArrayList());
-			session.persist(customer);
 			customer.getAppointments().add(app);
+                        session.merge(customer);
+                        session.merge(app);
 			session.flush();
 			for(Pet p: tempets){
-				p.setOwner(customer);
-				hiberialize(customer.getPets());
-				customer.getPets().add(p);
-				//make consultation
-				Consultation c = new Consultation();
-				//setup pet-consult, consult-pet, consult-appoint
-				c.setPet(p);
-				hiberialize(p.getConsultations());
-				p.getConsultations().add(c);
-				c.setAppointment(app);
-				c.setStatus("pending");
-				p.setOwner(customer);
-				session.save(p);
-				session.save(c);
-				session.flush();
+                            Consultation c = new Consultation();
+                            p.setOwner(customer);
+                            hiberialize(customer.getPets());
+                            customer.getPets().add(p);
+                            session.save(c);
+                            c.setPet(p);
+                            hiberialize(p.getConsultations());
+                            p.getConsultations().add(c);
+                            c.setAppointment(app);
+                            c.setStatus("pending");
+                            p.setOwner(customer);
+                            session.save(p);
+                            session.merge(c);
+                            session.flush();
 			}
 			app.setAppointmentDate(new java.util.Date());
 			app.setTransactionType("walk-in");
 			app.setStatus("pending");
-			customer.setPets(tempets);
-			session.saveOrUpdate(app);
+			session.merge(app);
 			session.merge(customer);
 			tx.commit();
 			refresh(); 

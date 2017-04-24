@@ -23,6 +23,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.CriteriaSpecification;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
@@ -80,13 +81,7 @@ public class GenericAction extends ActionSupport implements SessionAware, ModelD
         sessionmap.put("archive", session.createQuery("from Archive").list());
         sessionmap.put("customers", session.createQuery("from Customer").list());
         sessionmap.put("search", session.createQuery("from Customer").list());
-        //if(((User)sessionmap.get("currentUser")).getUserType().equals("assistant")){
-            refreshAppointments();
-        //}
-            
-        //else{
-        //    refreshUnfinishedConsultations();
-        //}
+        refreshAppointments();
         System.out.println("Refresh done");
     }
     
@@ -105,9 +100,12 @@ public class GenericAction extends ActionSupport implements SessionAware, ModelD
     public void refreshAppointments(){
         if(session==null)session = getSession();
         List<Appointment> apps = session.createCriteria(Appointment.class)
-                .addOrder(Order.asc("appointmentDate")) 
+                .addOrder(Order.asc("appointmentDate"))
+                .add(Restrictions.eq("status", "pending"))
+                .setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY)
                 .list();
         if(apps.size()>0){
+            System.out.println("Size of apps is " + apps.size());
             for(Appointment app: apps){
                 //app.setCustomer(app.getCustomer());
                 hiberialize(app.getConsultations());
@@ -122,6 +120,9 @@ public class GenericAction extends ActionSupport implements SessionAware, ModelD
     public boolean checkAppointment(Consultation consult){
         Appointment app = consult.getAppointment();
         hiberialize(app.getConsultations());
+        if(consult.getStatus().equals("completed") | consult.getStatus().equals("cancelled")){
+            app.getConsultations().remove(consult);
+        }
         for(Object o: app.getConsultations()){
             Consultation c = (Consultation)o;
             if(c.getStatus().equals("pending")){
@@ -133,9 +134,13 @@ public class GenericAction extends ActionSupport implements SessionAware, ModelD
     }
     public boolean checkAppointment(Appointment appoint){
         hiberialize(appoint.getConsultations());
+        System.out.println("->Checking for " + appoint.toString());
         for(Object o: appoint.getConsultations()){
             Consultation c = (Consultation)o;
-            if(checkAppointment(c) ==false) return false;
+            if(c.getStatus().equals("pending")) {
+                System.out.println("--->This appointment is pending, returning false");
+                return false;
+            }
         }
         return true;
     }
