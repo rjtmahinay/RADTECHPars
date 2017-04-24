@@ -24,12 +24,15 @@ public class CustomerAction extends GenericAction{
             //make appointment
             Appointment app = new Appointment();
             //set appointment-customer, customer-appointment
+            session.save(app);
+            session.flush();
             app.setCustomer(customer);
             customer.setAppointments(new ArrayList());
             System.out.println("Customer appointments is null? " + customer.getAppointments()==null);
+            session.persist(customer);
             customer.getAppointments().add(app);
-            session.persist(app);
             session.flush();
+            System.out.println("First flush done");
             for(Pet p: tempets){
                 p.setOwner(customer);
                 //make consultation
@@ -40,15 +43,16 @@ public class CustomerAction extends GenericAction{
                 System.out.println("Pet consultations is null? " + p.getConsultations()==null);
                 p.getConsultations().add(c);
                 c.setAppointment(app);
-                session.saveOrUpdate(c);
-                session.saveOrUpdate(p);
+                session.save(p);
+                session.save(c);
                 session.flush();
+                System.out.println("second flush done");
             }
             app.setAppointmentDate(new java.util.Date());
             
             customer.setPets(tempets);
-            session.saveOrUpdate(customer);
             session.saveOrUpdate(app);
+            session.saveOrUpdate(customer);
             tx.commit();
             refresh(); 
             putMap("currentCustomer", customer);

@@ -32,15 +32,21 @@ public class AppointmentAction extends GenericAction{
             tx = session.getTransaction();
             tx.begin();
             app.setAppointmentDate(toDate(app.getDateInput()));
+            session.persist(app);
+            session.flush();
             for(String s: pets){
                 if(s.length()>0){
                     Pet pet = (Pet)session.load(Pet.class, Long.parseLong(s.trim()));
                     Consultation consultation = new Consultation();
+                    session.persist(consultation);
+                    session.flush();
                     consultation.setPet(pet);
-                    consultation.setAppointment(app);
-                    consultation.setWeight(-1);
-                    app.getConsultations().add(consultation);
                     pet.getConsultations().add(consultation);
+                    
+                    consultation.setAppointment(app);
+                    app.getConsultations().add(consultation);
+                    session.flush();
+                    consultation.setWeight(-1);
                     if(app.getCustomer()==null)app.setCustomer(pet.getOwner());
                 }
                 else {
@@ -143,37 +149,6 @@ public class AppointmentAction extends GenericAction{
 //            }
 //        }
 //    }
-    public String cancelAppointment(){
-        try{
-            session = getSession();
-            tx = session.getTransaction();
-            tx.begin();
-            Appointment appointment = (Appointment)session.load(Appointment.class, Long.parseLong(app.getNumberInput()));
-            if(appointment!=null){
-                Customer currentCustomer = appointment.getCustomer();
-                currentCustomer.getAppointments().remove(appointment);
-                session.merge(currentCustomer);
-                session.delete(appointment);
-                session.flush();
-                tx.commit();
-                refreshAppointments();
-            }
-            else{
-                tx.rollback();
-                return INPUT;
-            }
-
-        }
-        catch(HibernateException e){
-            if(tx!=null) tx.rollback();
-            e.printStackTrace();
-        }
-        finally{
-            if(session!=null)session.close();
-        }
-
-        return INPUT;
-    }
     
     public String completeAppointment(){
         session=getSession();
@@ -206,8 +181,53 @@ public class AppointmentAction extends GenericAction{
                 }
             }
             session.persist(appoint);
-            refresh();
             tx.commit();
+            refresh();
+            return SUCCESS;
+        }
+        catch(HibernateException e){
+            e.printStackTrace();
+            tx.rollback();
+            return INPUT;
+        }
+        finally{
+            if(session!= null)session.close();
+        }
+    }
+    public String cancelAppointment(){
+        session=getSession();
+        tx=session.getTransaction();
+        try{
+            Appointment appoint = ((Appointment)session.get(Appointment.class, Long.parseLong(app.getInput3().trim())));
+            if(appoint == null){
+                addActionError("Appointment not found!");
+                return INPUT;
+            }
+            appoint = ((Appointment)session.load(Appointment.class, Long.parseLong(app.getInput3().trim())));
+            System.out.println("->Cancelling appointment " + appoint.toString());
+            tx.begin();
+            hiberialize(appoint.getConsultations());
+            //appointment to customer. appointment to consultations
+            
+            //consultations to pet, consultations to appointment
+            appoint.getCustomer().getAppointments().remove(appoint);
+            System.out.println("Ready for merging");
+            session.merge(appoint.getCustomer());
+            session.merge(appoint);
+            session.flush();
+            hiberialize(appoint.getConsultations());
+            for(Object o: appoint.getConsultations()){
+                Consultation c = (Consultation)o;
+                Pet p = c.getPet();
+                p.getConsultations().remove(c);
+                session.merge(p);
+                session.flush();
+            }
+            session.delete(appoint);
+            //climb back consultation pet customer
+            
+            tx.commit();
+            refresh();
             return SUCCESS;
         }
         catch(HibernateException e){

@@ -59,7 +59,7 @@ public class Appointment extends GenericModel{
         this.appointmentDate = appointmentDate;
     }
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "appointment", targetEntity = Consultation.class)
+    @OneToMany(cascade = CascadeType.REMOVE, fetch = FetchType.LAZY, mappedBy = "appointment", targetEntity = Consultation.class)
     public List getConsultations() {
         return consultations;
     }
@@ -68,7 +68,7 @@ public class Appointment extends GenericModel{
         this.consultations = consultations;
     }
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, targetEntity = Customer.class)
+    @ManyToOne(fetch = FetchType.LAZY, targetEntity = Customer.class)
     public Customer getCustomer() {
         return customer;
     }

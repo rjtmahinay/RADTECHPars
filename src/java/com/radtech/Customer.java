@@ -58,7 +58,7 @@ public class Customer extends GenericModel{
         this.address = address;
     }
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "customer", targetEntity = Appointment.class)
+    @OneToMany(cascade = CascadeType.REMOVE, fetch = FetchType.LAZY, mappedBy = "customer", targetEntity = Appointment.class)
     public List getAppointments() {
         return appointments;
     }

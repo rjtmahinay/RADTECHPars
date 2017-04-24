@@ -40,7 +40,7 @@ public class Consultation extends GenericModel{
         this.consultationId = consultationId;
     }
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, targetEntity = Pet.class)
+    @ManyToOne(fetch = FetchType.LAZY, targetEntity = Pet.class)
     @JoinColumn(name="PET_ID")
     public Pet getPet() {
         return pet;
@@ -140,7 +140,7 @@ public class Consultation extends GenericModel{
         this.lymphNodes = lymphNodes;
     }
     
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, targetEntity = Appointment.class)
+    @ManyToOne(fetch = FetchType.EAGER, targetEntity = Appointment.class)
     @JoinColumn(name="APPOINTMENT_ID")
     public Appointment getAppointment() {
         return appointment;

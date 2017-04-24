@@ -67,6 +67,10 @@
                         <result>schedule.jsp</result>
                         <result name="input">schedule.jsp</result>
 		</action>
+                <action name="cancelAppointment" class="com.radtech.AppointmentAction" method="cancelAppointment">
+                        <result>schedule.jsp</result>
+                        <result name="input">schedule.jsp</result>
+		</action>
                 
                 <action name="getVitals" class="com.radtech.ConsultationAction" method="getVitals">
                         <result>petVitals.jsp</result>
