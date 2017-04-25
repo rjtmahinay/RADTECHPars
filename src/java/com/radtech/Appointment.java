@@ -29,7 +29,6 @@ public class Appointment extends GenericModel{
     private Date appointmentDate;
     private Customer customer;
     private List consultations = new ArrayList<Consultation>();
-    private List unfinishedConsultations;
 
     @Id
     @Column(name="APPOINTMENT_ID")
@@ -59,7 +58,7 @@ public class Appointment extends GenericModel{
         this.appointmentDate = appointmentDate;
     }
 
-    @OneToMany(cascade = CascadeType.REMOVE, fetch = FetchType.EAGER, mappedBy = "appointment", targetEntity = Consultation.class)
+    @OneToMany(cascade = CascadeType.REMOVE, fetch = FetchType.EAGER, mappedBy = "appointment", targetEntity = Consultation.class, orphanRemoval = true)
     public List getConsultations() {
         return consultations;
     }
@@ -77,20 +76,6 @@ public class Appointment extends GenericModel{
         this.customer = customer;
     }
 
-    @Transient
-    public List getUnfinishedConsultations() {
-        unfinishedConsultations = new ArrayList<Consultation>();
-        for(Object o: getConsultations()){
-            Consultation c = (Consultation)o;
-            if(c.getWeight()==-1) unfinishedConsultations.add(c);
-        }
-        return unfinishedConsultations;
-    }
-
-    public void setUnfinishedConsultations(List unfinishedConsultations) {
-        this.unfinishedConsultations = unfinishedConsultations;
-    }
-
     @Column(name="TRANSACTION_TYPE")
     public String getTransactionType() {
         return transactionType;
@@ -103,6 +88,6 @@ public class Appointment extends GenericModel{
     
     @Override
     public String toString() {
-        return "Appointment{" + "appointmentId=" + appointmentId + ", status=" + status + ", appointmentDate=" + appointmentDate + ", customer=" + customer + ", consultations=" + consultations + ", unfinishedConsultations=" + unfinishedConsultations + '}';
+        return "Appointment{" + "appointmentId=" + appointmentId + ", status=" + status + ", appointmentDate=" + appointmentDate + ", customer=" + customer + ", consultations=" + consultations + '}';
     }
 }

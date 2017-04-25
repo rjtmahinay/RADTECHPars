@@ -1,53 +1,47 @@
 package com.radtech;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
 @Entity
 @Table(name = "Archives")
-public class Archive implements Serializable {
-
-    private long controlNumber;
-    private String ownerName;
-    private String address;
-    private long contactNumber;
-    private String patientName;
-    private String breed;
-    private String sex;
-    private Date dateOfBirth;
-    private String color;
-    private double weight;
-    private long id;
-    private String controlInput;
-
-    public Archive() {
-    }
+public class Archive extends GenericModel{
+    
+    private long archiveId;
+    private String name, address, reason;
+    private List pets;
 
     @Id
-    @Column(name = "CONTROL_NUMBER")
-    public long getControlNumber() {
-        return controlNumber;
+    @Column(name="ARCHIVE_ID")
+    public long getArchiveId() {
+        return archiveId;
     }
 
-    public void setControlNumber(long controlNumber) {
-        this.controlNumber = controlNumber;
+    public void setArchiveId(long archiveId) {
+        this.archiveId = archiveId;
     }
 
-    @Column(name = "OWNER_NAME")
-    public String getOwnerName() {
-        return ownerName;
+    @Column(name="NAME")
+    public String getName() {
+        return name;
     }
 
-    public void setOwnerName(String ownerName) {
-        this.ownerName = ownerName;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    @Column(name = "ADDRESS")
+    @Column(name="ADDRESS")
     public String getAddress() {
         return address;
     }
@@ -56,84 +50,28 @@ public class Archive implements Serializable {
         this.address = address;
     }
 
-    @Column(name = "CONTACT_NUMBER")
-    public long getContactNumber() {
-        return contactNumber;
+    @Column(name="REASON")
+    public String getReason() {
+        return reason;
     }
 
-    public void setContactNumber(long contactNumber) {
-        this.contactNumber = contactNumber;
+    public void setReason(String reason) {
+        this.reason = reason;
     }
 
-    @Column(name = "PATIENT_NAME")
-    public String getPatientName() {
-        return patientName;
+    @OneToMany(targetEntity = Pet.class)
+    @JoinColumn(name="PETS")
+    public List getPets() {
+        if(pets == null) return new ArrayList();
+        return pets;
     }
 
-    public void setPatientName(String patientName) {
-        this.patientName = patientName;
+    public void setPets(List pets) {
+        this.pets = pets;
     }
 
-    @Column(name = "BREED")
-    public String getBreed() {
-        return breed;
-    }
-
-    public void setBreed(String breed) {
-        this.breed = breed;
-    }
-
-    @Column(name = "SEX")
-    public String getSex() {
-        return sex;
-    }
-
-    public void setSex(String sex) {
-        this.sex = sex;
-    }
-
-    @Column(name = "DATEOFBIRTH")
-    public Date getDateOfBirth() {
-        return dateOfBirth;
-    }
-
-    public void setDateOfBirth(Date dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
-    }
-
-    @Column(name = "COLOR")
-    public String getColor() {
-        return color;
-    }
-
-    public void setColor(String color) {
-        this.color = color;
-    }
-
-    @Column(name = "WEIGHT")
-    public double getWeight() {
-        return weight;
-    }
-
-    public void setWeight(double weight) {
-        this.weight = weight;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    @Transient
-    public long getId() {
-        return id;
-    }
-
-    @Transient
-    public String getControlInput() {
-        return controlInput;
-    }
-
-    public void setControlInput(String controlInput) {
-        this.controlInput = controlInput;
+    @Override
+    public String toString() {
+        return "Archive{" + "archiveId=" + archiveId + ", name=" + name + ", address=" + address + ", reason=" + reason + ", pets=" + pets + '}';
     }
 }

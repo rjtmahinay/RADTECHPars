@@ -36,6 +36,7 @@ public class AppointmentAction extends GenericAction{
                     app.getConsultations().add(consultation);
                     session.flush();
                     consultation.setWeight(-1);
+                    consultation.setStatus("pending");
                     if(app.getCustomer()==null)app.setCustomer(pet.getOwner());
                 }
                 else {
@@ -44,6 +45,7 @@ public class AppointmentAction extends GenericAction{
                 }
             }
             app.setTransactionType("scheduled");
+            app.setStatus("pending");
             tx.commit();
             refresh();
             return SUCCESS;

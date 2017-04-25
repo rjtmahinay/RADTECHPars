@@ -38,7 +38,7 @@ public class Medicine extends GenericModel{
         this.name = name;
     }
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, targetEntity = Consultation.class)
+    @ManyToOne(fetch = FetchType.LAZY, targetEntity = Consultation.class)
     @JoinColumn(name="CONSULTATION_ID")
     public Consultation getConsultation() {
         return consultation;

@@ -100,7 +100,7 @@ public class Pet extends GenericModel{
         this.owner = owner;
     }
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, targetEntity = Consultation.class, mappedBy = "pet")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, targetEntity = Consultation.class, mappedBy = "pet", orphanRemoval = true)
     public List getConsultations() {
         return consultations;
     }
