@@ -82,7 +82,18 @@
 		<s:include value="home.jsp"/>
 		<div class="container-fluid">
 			<font face="roboto">
-				<h2>Customer Profile</h2>
+			<div class="row">
+				<div class="col-md-6">
+					<h2>Customer Profile</h2>
+				</div>
+				<div class="col-md-5"></div>
+				<div class="col-md-1">
+					<br>
+					<p align="right"><button class="btn btn-primary btn-sm btn-block" 
+								onClick="window.open('historize.action?input1=<s:property value="#session.currentConsultation.pet.petId"/>'); 
+								return false;"><span class="icon">History</span></button></p>
+				</div>
+			</div>	
 			</font>
 			<div class="table">
 			<table class="table table-bordered ">

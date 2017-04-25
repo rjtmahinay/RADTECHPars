@@ -16,8 +16,11 @@
 		<link rel="stylesheet" href="css/jquery-ui.css">
 		<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 		<link rel="icon" href="favicon.ico" type="image/x-icon">
+		
+		
 		<script src="js/jquery.min.js"></script>
 		<script src="js/bootstrap.min.js"></script>
+		
 		
 		<title>RADTECH PARS</title>
 	</head>
@@ -48,7 +51,8 @@
 					</s:if>
 					<s:if test="%{#session.currentUser.userType.equals('doctor')}">
 						<li><a href="search.jsp">Profiles <span class="glyphicon glyphicon-user"></span></a></li>
-						<li><s:a href="statistics">Statistics <span class="glyphicon glyphicon-stats"></span></s:a></li>
+						<li><s:a href="statistics.jsp">Statistics <span class="glyphicon glyphicon-stats"></span></s:a></li>
+						<!--<li><a href="#" data-toggle="modal" data-target="#stats">Statistics <span class="glyphicon glyphicon-stats"></span></a></li>-->
 						<li><a href="archives.jsp">Archives <span class="glyphicon glyphicon-trash"></span></a></li>
 					</s:if>	
 					
@@ -62,87 +66,41 @@
 			</div>
 		</nav> 
 		<div class="container-fluid">
-			<div class="modal fade" id="addRecord2">
-				<div class="modal-dialog">
+			<div class="modal fade" id="stats">
+				<div class="modal-dialog modal-sm">
 					<div class="modal-content">
 						<center>
-
 							<div class="modal-header">
 								<button type="button" class="close" data-dismiss="modal">&times;</button>
-								<h3 class="modal-title">Add Record</h3>
+								<h3 class="modal-title">Select Statistics Range and Value</h3>
 							</div>
-
-							<!-INSERT FORM ACTION HERE->
-
-
-							<s:form action="addRecord" theme="bootstrap" cssClass="form" method="POST">
+							<s:form action="viewStats" theme="bootstrap" cssClass="form">
 								<div class="modal-body">
+									<%--
+									<script src="js/jquery-1.12.4.js"></script>
+									<script src="js/jquery-ui.js"></script>
+									<script>
+										$( function() {
+										  $( "#date1" ).datepicker();
+										} );
 
+										$( function() {
+										  $( "#date2" ).datepicker();
+										} );
 
-									<div class="table">
-									<table class="table table-condensed">
-										<tr>
-											<td><b>Owner Name:</b></td>
-											<td><s:textfield name="ownerName" placeholder=""/></td>
-										</tr>
-
-										<tr>
-											<td><b>Address:</b></td>
-											<td><s:textfield name="address" placeholder=""/></td>
-										</tr>
-
-										<tr>
-											<td><b>Contact Number:</b></td>
-											<td><s:textfield name="contactNumber" placeholder=""/></td>
-										</tr>
-
-										<tr>
-											<td><b>Pet Name:</b></td>
-											<td><s:textfield name="patientName" placeholder=""/></td>
-										</tr>
-
-										<tr>
-											<td><b>Sex:</b></td>
-											<td><s:select cssClass="text text-block" name="sex" list="{'Male','Female'}" headerKey="-1"/></td>
-										</tr>
-
-										<tr>
-											<td><b>Breed:</b></td>
-											<td><s:textfield name="breed" placeholder=""/></td>
-										</tr>
-
-										<tr>
-											<td><b>Color:</b></td>
-											<td><s:textfield name="color" placeholder=""/></td>
-										</tr>
-
-										<tr>
-											<td><b>Date of birth:</b></td>
-											<td>
-																								<s:textfield name="dateinput" id="datepicker" />
-											</td>
-										</tr>
-
-
-
-										<tr>
-											<td><b>Weight:</b></td>
-											<td><s:textfield name="weight" placeholder=""/></td>
-										</tr>
-
-									</table>
-								</div>
-
-
-
-
-
-
-									<div class="modal-footer form-group" >
-										<center>
-											<s:submit cssClass="btn btn-primary btn-block" value="submit" />
-											<s:reset value="clear" cssClass="btn btn-secondary btn-block"/>
-										</center>
+									</script>
+									--%>
+									<div class="form-group">
+										<s:textfield name="dateInput1" id="date1" placeholder="From" />
+									</div>
+									<div class="form-group">
+										<s:textfield name="dateInput1" id="date2" placeholder="To" />
+									</div>
+									<div class="form-group">
+										<s:select cssClass="text text-block" name="type" list="{'Breeds','Appointments','Walk ins','Medicines','Cancels'}" headerKey="-1"/>
+									</div>
+									<div class="form-group">
+										<s:submit cssClass="btn btn-primary btn-sm" value="View" />
 									</div>
 								</div>
 							</s:form>

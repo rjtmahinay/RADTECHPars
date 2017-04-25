@@ -97,6 +97,12 @@
                         <result name="input">userProfile.jsp</result>
 		</action>
 		
+		<action name="viewStats" class="" method="viewStats">
+                        <result>statistics.jsp</result>
+                        <result name="input">home.jsp</result>
+		</action>
+		
+		
 		
 		<!--NEW BUT NOT COMPLETE _______NEW BUT NOT COMPLETE _______NEW BUT NOT COMPLETE _______NEW BUT NOT COMPLETE _______  -->
 		
