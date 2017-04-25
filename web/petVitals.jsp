@@ -249,19 +249,21 @@
 											
 											
 											<div class="control-group" id="fields">
-												<label class="control-label" for="field1">Nice Multiple Form Fields</label>
+												<label class="control-label" for="field1">Prescription</label>
 												<div class="controls"> 
 													<form role="form" autocomplete="off">
 														<div class="row">
 															<div class="col-md-2">
 															<s:textfield name="fields[]" id="meds" />
 															</div>
-															<%--<input class="form-control" name="fields[]" type="text" id="meds" placeholder="Type something" />--%>
+															<%--
+															<input class="form-control" name="fields[]" type="text" id="meds" placeholder="Type something" />
 															<div class="col-md-1">
 																<button class="btn btn-success btn-add btn-xs" type="button">
 																	<span class="glyphicon glyphicon-plus"></span>
 																</button>
 															</div>
+															--%>
 														</div>
 													</form>
 												<br>

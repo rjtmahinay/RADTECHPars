@@ -12,6 +12,8 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 		<link rel="icon" href="favicon.ico" type="image/x-icon">
+		<link rel="stylesheet" href="css/bootstrap.min.css">
+		<link rel="stylesheet" href="css/jquery-ui.css">
 		<title>JSP Page</title>
 		<script type="text/javascript" src="js/fusioncharts.js"></script>
 		<script type="text/javascript" src="js/themes/fusioncharts.theme.fint.js"></script>
@@ -88,11 +90,33 @@
   });
 revenueChart.render();
 })
+
+
 </script>
 	</head>
 	<body>
 		<s:include value="home.jsp"/>
 		<div class="container-fluid">
+			<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+			<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+			<script>
+			$( function() {
+			  $( "#date1" ).datepicker();
+			} );
+			
+			$( function() {
+			  $( "#date2" ).datepicker();
+			} );
+			</script>
+			<div class="row">
+				<s:form action="viewStat" theme="bootstrap" cssClass="form">
+					<div class="col-md-3"></div>
+					<div class="col-md-2"><s:textfield name="dateInput1" id="date1" placeholder="From" /></div>
+					<div class="col-md-2"><s:textfield name="dateInput2" id="date2" placeholder="To" /></div>
+					<div class="col-md-1"><s:select cssClass="text text-block" name="type" list="{'Breeds','Appointments','Walk ins','Medicines','Cancels'}" headerKey="-1"/></div>
+					<div class="col-md-1"><s:submit cssClass="btn btn-primary btn-xs" value="View" /></div>
+				</s:form>
+			</div>
 			<center>
 			<h1><font face="roboto">Animal Station Statistics</font></h1>
 	
