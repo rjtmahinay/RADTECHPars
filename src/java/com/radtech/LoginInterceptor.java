@@ -12,10 +12,13 @@ public class LoginInterceptor  extends AbstractInterceptor {
         Map<String, Object> session = invocation.getInvocationContext().getSession();
         
         String login;
-        if(invocation.getInvocationContext().getName().equals("login")){
+        if(invocation.getInvocationContext().getName().equals("login") || invocation.getInvocationContext().getName().equals("checkUser")){
             return invocation.invoke();
         }
-        if(session.get("currentUser")== null && session.get("tempUser")== null){
+	if(session.get("tempUser")!= null){
+		return invocation.invoke();
+	}
+        if(session.get("currentUser")==null){
             return Action.LOGIN;
         }
         else 

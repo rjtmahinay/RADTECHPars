@@ -56,36 +56,7 @@
 					
 					
 					
-				<div class="modal fade" id="confirmArchive">
-					<s:form action="toArchive">
-					<input type="hidden" name="idinput" value="" id="arcinput"/>
-					<div class="modal-dialog modal-sm">
-						<div class="modal-content">
-							<div class="modal-header">
-								<button type="button" class="close" data-dismiss="modal">&times;</button>
-								<h3 align="center" class="modal-title">Confirm Archive</h3>
-							</div>
-							<div class="modal-body">
-								<p align="center">Reason for archive:</p>
-								<center><s:textfield name="reason"/></center>
-							</div>
-							<div class="modal-footer form-group" >
-								<div class="row">
-									<div class="col-md-6 col-sm-6">
-										<center><s:submit type="button" cssClass="btn btn-danger btn-block" value="Archive" /></center>
-									</div>
-									<div class="col-md-6 col-sm-6">
-										<center><button type="button" class="btn btn-secondary btn-block" data-dismiss="modal">Cancel</button></center>
-									</div>
-
-								</div>
-							</div>
-						</div>
-
-
-					</div>
-					</s:form>
-				</div>	
+					
 					
 				<div class="row">
 					<div class="col-md-6">
@@ -98,6 +69,7 @@
 							<s:if test="%{#session.currentUser.userType.equals('assistant')}">
 								<tr>
 									<td>Customer Number:</td>
+									<s:hidden name="input3" value="%{#session.currentCustomer.customerId}"/>
 									<td><s:property value="%{#session.currentCustomer.customerId}"/></td>
 								</tr>
 
@@ -144,6 +116,36 @@
 				</div>	
 					</s:form>
 
+			<div class="modal fade" id="confirmArchive">
+					<s:form action="toArchive">
+					<input type="hidden" name="idinput" value="" id="arcinput"/>
+					<div class="modal-dialog modal-sm">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal">&times;</button>
+								<h3 align="center" class="modal-title">Confirm Archive</h3>
+							</div>
+							<div class="modal-body">
+								<p align="center">Reason for archive:</p>
+								<center><s:textfield name="reason"/></center>
+							</div>
+							<div class="modal-footer form-group" >
+								<div class="row">
+									<div class="col-md-6 col-sm-6">
+										<center><s:submit type="button" cssClass="btn btn-danger btn-block" value="Archive" /></center>
+									</div>
+									<div class="col-md-6 col-sm-6">
+										<center><button type="button" class="btn btn-secondary btn-block" data-dismiss="modal">Cancel</button></center>
+									</div>
+
+								</div>
+							</div>
+						</div>
+
+
+					</div>
+					</s:form>
+				</div>
 				<h1>
 					Pet List 
 					<s:if test="%{#session.currentUser.userType.equals('assistant')}"> 
@@ -286,12 +288,12 @@
 					<tbody>
 						<s:iterator value="%{#session.currentCustomer.pets}" var="pet">
 						<tr>
-							<td><button class="btn btn-block btn-primary btn-sm" type="submit" name="action">History</button></td>
+							<td><button class="btn btn-primary btn-block btn-sm" onClick="window.open('historize.action?input1=<s:property value="#pet.petId"/>'); return false;"><span class="icon">History</span></button></td>
 							<td><s:property value="#pet.name"/></td>
 							<td><s:property value="#pet.breed"/></td>
 							<td><s:property value="#pet.color"/></td>
 							<td><s:property value="#pet.sex"/></td>
-							<td><s:property value="#pet.dateOfBirth"/></td>
+							<td><s:date name="#pet.dateOfBirth" format="MM/dd/yyyy"/></td>
 						</tr>
 						</s:iterator>
 					</tbody>

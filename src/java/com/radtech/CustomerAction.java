@@ -71,7 +71,32 @@ public class CustomerAction extends GenericAction{
 	}
 
 	public String editCustomer(){
-		return addCustomer();
+		session = getSession();
+		tx = session.getTransaction();
+		try{
+			tx.begin();
+			System.out.println("Input is " + customer.toString());
+			Customer c = (Customer)session.load(Customer.class, Long.parseLong(customer.getInput3()));
+			c.setName(customer.getName());
+			c.setContactNumber(customer.getContactNumber());
+			c.setAddress(customer.getAddress());
+			System.out.println("Should be output " + c.toString());
+			session.merge(c);
+			tx.commit();
+			refresh();
+			putMap("currentCustomer", c);
+			
+			return SUCCESS;
+		}
+		catch(HibernateException e){
+			e.printStackTrace();
+			tx.rollback();
+			addActionError("Edit not complete");
+			return INPUT;
+		}
+		finally{
+			if(session!= null)session.close();
+		}
 	}
 
 	public String fetchCustomer(){

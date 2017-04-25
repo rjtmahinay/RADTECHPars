@@ -192,33 +192,28 @@ public class AppointmentAction extends GenericAction{
         session=getSession();
         tx=session.getTransaction();
         try{
-            Appointment appoint = ((Appointment)session.get(Appointment.class, Long.parseLong(app.getInput3().trim())));
+            tx.begin();
+			Appointment appoint = ((Appointment)session.get(Appointment.class, Long.parseLong(app.getInput3().trim())));
             if(appoint == null){
                 addActionError("Appointment not found!");
                 return INPUT;
             }
             appoint = ((Appointment)session.load(Appointment.class, Long.parseLong(app.getInput3().trim())));
             System.out.println("->Cancelling appointment " + appoint.toString());
-            tx.begin();
-            hiberialize(appoint.getConsultations());
-            //appointment to customer. appointment to consultations
             
-            //consultations to pet, consultations to appointment
-            appoint.getCustomer().getAppointments().remove(appoint);
-            session.merge(appoint.getCustomer());
-            session.merge(appoint);
-            session.flush();
             hiberialize(appoint.getConsultations());
-            for(Object o: appoint.getConsultations()){
-                Consultation c = (Consultation)o;
-                Pet p = c.getPet();
-                p.getConsultations().remove(c);
-                session.merge(p);
-                session.flush();
-            }
-            session.delete(appoint);
-            //climb back consultation pet customer
-            
+		for(Object o: appoint.getConsultations()){
+			Consultation c = (Consultation)o;
+			Pet p = c.getPet();
+			hiberialize(p.getConsultations());
+			p.getConsultations().remove(c);
+			session.merge(p);
+			session.delete(c);
+		}
+			hiberialize(appoint.getCustomer().getAppointments());
+		appoint.getCustomer().getAppointments().remove(appoint);
+		session.merge(appoint.getCustomer());
+		session.delete(appoint);
             tx.commit();
             refresh();
             return SUCCESS;

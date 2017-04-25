@@ -15,14 +15,24 @@ public class PetAction extends GenericAction{
         try{
             session = getSession();
             tx =session.getTransaction();
+		tx.begin();
+		session.saveOrUpdate(pet);
+		session.flush();
+		long l = ((Customer)getCurrentCustomer()).getCustomerId();
+		Customer c = (Customer)session.load(Customer.class, l);
             pet.setDateOfBirth(toDate(pet.getDateInput()));
-            pet.setOwner(getCurrentCustomer());
+            pet.setOwner(c);
+			hiberialize(c.getPets());
+			c.getPets().add(pet);
+			
             //if customer not found and adding pet, something wrong
             if(pet.getOwner()== null) return ERROR;
-            tx.begin();
-            session.saveOrUpdate(pet);
+            session.merge(c);
+            session.merge(pet);
             tx.commit();
-            refreshPets();
+			
+			refresh();
+			putMap("currentCustomer", c);
             return SUCCESS;
         }
         catch(HibernateException e){
@@ -48,6 +58,21 @@ public class PetAction extends GenericAction{
         sessionmap.put("tempets", tempets);
         return SUCCESS;
     }
+	public String historize(){
+		session = getSession();
+		long l = Long.parseLong(pet.getInput1());
+		if(session.get(Pet.class, l)!= null){
+			Pet p = (Pet)session.load(Pet.class, l);
+			hiberialize(p.getConsultations());
+			putMap("consultations", p.getConsultations());
+			return SUCCESS;
+		}
+		else{
+			addActionError("Pet not found!");
+			return INPUT;
+		}
+		
+	}
 }
 //pet
 //	add pet

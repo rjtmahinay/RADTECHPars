@@ -94,7 +94,7 @@ public class GenericAction extends ActionSupport implements SessionAware, ModelD
     }
     
     public void refreshPets(){
-        sessionmap.put("pets", (List) session.createQuery("from Pets").list());
+        putMap("pets", session.createCriteria(Pet.class).list());
     }
     
     public void refreshAppointments(){

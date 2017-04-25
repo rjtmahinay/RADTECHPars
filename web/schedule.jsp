@@ -138,7 +138,7 @@
                                                             <s:url action="getVitals" var="vit">
                                                                              <s:param name="consultationId"><s:property value="#consultation.consultationId"/></s:param>
                                                             </s:url>
-								<s:a href="%{vit}"><button class="btn btn-block btn-sm btn-primary" type="submit" name="action">Vitals</button></s:a>
+								<s:a href="%{vit}"><button class="btn btn-block btn-sm btn-primary" type="submit" name="action">Consult</button></s:a>
                                                                 
 							</div>
 							<div class="col-md-4"><s:property value="%{#consultation.pet.name}"/></div>
@@ -154,7 +154,7 @@
                                                                              <s:param name="consultationId"><s:property value="#consultation.consultationId"/></s:param>
                                                             </s:url>
                                                             <s:if test="%{#session.currentUser.userType.equals('assistant')}">
-								<s:a href="%{vit}"><button class="btn btn-block btn-sm btn-primary" type="submit" name="action">Consult</button></s:a>
+								<s:a href="%{vit}"><button class="btn btn-block btn-sm btn-primary" type="submit" name="action">Vitals</button></s:a>
                                                             </s:if>
                                                                 
 							</div>
@@ -176,7 +176,7 @@
 			
 
 			<div class="modal fade" id="initialDiagnosis">
-							<s:form action="initialDiagnosis">
+				<s:form action="initialDiagnosis">
 				<div class="modal-dialog modal-sm">
 					<div class="modal-content">
 						<div class="modal-header">
@@ -209,7 +209,7 @@
 			</div>
 
 			<div class="modal fade" id="confirmCancel">
-							<s:form action="cancelAppointment">
+				<s:form action="cancelAppointment">
 				<div class="modal-dialog modal-sm">
 					<div class="modal-content">
 						<div class="modal-header">
@@ -233,7 +233,7 @@
 						</div>
 					</div>
 				</div>
-							</s:form>
+				</s:form>
 			</div>
 			
 			
@@ -244,7 +244,7 @@
 			
 			
 			<div class="modal fade" id="confirmComplete">
-							<s:form action="completeAppointment" method="post">
+				<s:form action="completeAppointment" method="post">
 				<div class="modal-dialog modal-sm">
 					<div class="modal-content">
 						<div class="modal-header">

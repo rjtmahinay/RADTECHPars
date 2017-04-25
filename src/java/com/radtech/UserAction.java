@@ -165,7 +165,7 @@ public class UserAction extends GenericAction{
             addActionError("Username not found");
             return INPUT;
         }
-    }
+ }
 
     public String logout() {
 

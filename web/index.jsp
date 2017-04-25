@@ -77,8 +77,9 @@
 									<div class="form-group">
 										<label for="password"></label>
 										<s:password name="password" placeholder="Password" class="form-control" />
+										<s:actionerror/>
 									</div>
-									.
+										.
 								</div>	
 									<s:submit cssClass="btn btn-primary btn-block" value="Submit" />
 								</s:form>

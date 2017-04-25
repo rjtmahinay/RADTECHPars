@@ -87,6 +87,17 @@
                         <result name="input">petVitals.jsp</result>
 		</action>
 		
+		<action name="editCustomer" class="com.radtech.CustomerAction" method="editCustomer">
+                        <result>userProfile.jsp</result>
+                        <result name="input">userProfile.jsp</result>
+		</action>
+		
+		<action name="historize" class="com.radtech.PetAction" method="historize">
+                        <result>diagnoHistory.jsp</result>
+                        <result name="input">userProfile.jsp</result>
+		</action>
+		
+		
 		<!--NEW BUT NOT COMPLETE _______NEW BUT NOT COMPLETE _______NEW BUT NOT COMPLETE _______NEW BUT NOT COMPLETE _______  -->
 		
 		<action name="logout" class="com.radtech.UserAction" method="logout">
