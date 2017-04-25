@@ -10,7 +10,17 @@
 		<link rel="stylesheet" href="css/jquery-ui.css">
 		<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 		<link rel="icon" href="favicon.ico" type="image/x-icon">
-		
+		<style>
+			body { 
+				background: url(loginbg.jpg) no-repeat center center fixed; 
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+				height:100%;
+				width:100%;
+			}
+		</style>
 		
 		<title>User Profile</title>
 		<style>
@@ -19,11 +29,11 @@
 		
 		</style>
 	</head>
-	<body background="dog.jpg">
+	<body>
 		<s:include value="home.jsp"/>
 
 		<div class="container-fluid">
-				<s:form action="updateRecord" theme="bootstrap" cssClass="form" method="POST">
+				<s:form action="editCustomer" theme="bootstrap" cssClass="form" method="POST">
 				<div class="row">
 					<div class="col-md-3">
 						<font face="roboto">
@@ -131,16 +141,15 @@
 						</div>
 
 					</div>
-				</div>		
-
-					<center>
-					
-					<%--<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#diagnoWindow">&plus; Diagnosis</button>--%>
-					<br><br>
-					</center>
+				</div>	
 					</s:form>
 
-				<h1>Pet List  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addPet"><span class="glyphicon glyphicon-plus"></span></button></h1>
+				<h1>
+					Pet List 
+					<s:if test="%{#session.currentUser.userType.equals('assistant')}"> 
+						<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addPet"><span class="glyphicon glyphicon-plus"></span></button> 
+					</s:if>
+				</h1>
 				
 				
 				<div class="modal fade" id="addPet">
@@ -157,6 +166,7 @@
 
 
 							<s:form action="addPet" theme="bootstrap" cssClass="form" method="POST">
+								
 								<div class="modal-body">
 									<div class="table">
 									<table class="table table-condensed">
@@ -177,9 +187,16 @@
 											<td><s:select cssClass="text text-block" name="sex" list="{'Male','Female'}" headerKey="-1"/></td>
 										</tr>
 										<tr>
+										<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+										<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+										<script>
+										$( function() {
+										  $( "#date" ).datepicker();
+										} );
+										</script>	
 											<td><b>Date of birth:</b></td>
 											<td>
-											<s:textfield name="dateInput" id="datepicker" />
+											<s:textfield name="dateInput" id="date" />
 											</td>
 										</tr>
 
@@ -249,19 +266,12 @@
 			</div>
 					
 			</s:form>	
-		</s:if>
-			
+		</s:if>	
 			
 			
 <%--DOCTOR'S VERSION OF USERPROFILE , DOCTOR'S VERSION OF USERPROFILE, DOCTOR'S VERSION OF USERPROFILE--%>		
 			
-			
-			
-			
-			
-			
-			
-			
+		
 		<s:if test="%{#session.currentUser.userType.equals('doctor')}">
 			<div class="table table-responsive">
 				<table class="table table-striped table-bordered table-hover">

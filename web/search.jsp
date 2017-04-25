@@ -9,6 +9,17 @@
 		<link rel="stylesheet" href="css/jquery-ui.css">
 		<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 		<link rel="icon" href="favicon.ico" type="image/x-icon">
+		<style>
+			body { 
+				background: url(loginbg.jpg) no-repeat center center fixed; 
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+				height:100%;
+				width:100%;
+			}
+		</style>
 	</head>
 	<body>
 	   <s:include value="home.jsp" />

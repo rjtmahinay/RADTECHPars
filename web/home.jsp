@@ -54,7 +54,7 @@
 					
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
-					<li><s:a href="accounts.jsp"> <s:property value="%{#session.currentUser.userType}"/> <span class="glyphicon glyphicon-cog"></span> </s:a></li>
+					<li><s:a href="accounts.jsp"><s:property value="%{#session.currentUser.userType}"/> <s:property value="%{#session.currentUser.name}"/>  <span class="glyphicon glyphicon-cog"></span> </s:a></li>
 					<s:url action='logout' var="logout"/>
 					<li><s:a href="%{logout}"> Logout <span class="glyphicon glyphicon-log-in"/></s:a></li>
 				</ul>        

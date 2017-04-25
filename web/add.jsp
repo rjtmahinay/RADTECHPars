@@ -23,6 +23,17 @@
 	  $("#petDateOfBirth").datepicker();
 	} );
 	</script>
+	<style>
+			body { 
+				background: url(loginbg.jpg) no-repeat center center fixed; 
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+				height:100%;
+				width:100%;
+			}
+		</style>
 		<title>Add new customers here</title>
 	</head>
 
@@ -79,7 +90,7 @@
 							<div class="modal-footer form-group" >
 								<center>
 									<s:submit cssClass="btn btn-primary btn-block" value="submit" />
-									<s:reset value="clear" cssClass="btn btn-secondary btn-block"/>
+									<s:reset value="clear" cssClass="btn btn-block"/>
 								</center>
 							</div>
 						</div>

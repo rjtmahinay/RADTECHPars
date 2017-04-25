@@ -25,6 +25,17 @@
                         });
                     });    
                 </script>
+		<style>
+			body { 
+				background: url(loginbg.jpg) no-repeat center center fixed; 
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+				height:100%;
+				width:100%;
+			}
+		</style>		
 		<title>Archives</title>
 	</head>
 	<body background="dog.jpg">
@@ -34,7 +45,7 @@
 			<h1 align="center"><font face="roboto">Archives</font></h1>
 
 			<div class="table-responsive">
-				<table class="table table-bordered table-hover table-striped table-inverse" align="center">
+				<table class="table table-bordered table-hover table-inverse table-striped">
 					<thead>
 						<tr>
 							<th>Delete</th>

@@ -58,6 +58,18 @@
 			  });
 			} );
 			</script>
+			
+		<style>
+			body { 
+				background: url(loginbg.jpg) no-repeat center center fixed; 
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+				height:100%;
+				width:100%;
+			}
+		</style>	
 		
 
 		<title>Vitals and Diagnosis</title>

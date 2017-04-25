@@ -14,7 +14,8 @@
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
 	<link rel="stylesheet" href="css/jquery-ui.css">
 	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-	<link rel="icon" href="favicon.ico" type="image/x-icon">		
+	<link rel="icon" href="favicon.ico" type="image/x-icon">
+	
 	<script src="js/jquery-3.2.0.min.js"></script>
 		<script src="js/bootstrap.min.js"></script>
 		<script>
@@ -49,9 +50,21 @@
 			
 			
 		</script>
+		<style>
+			body { 
+				background: url(loginbg.jpg) no-repeat center center fixed; 
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+				height:100%;
+				width:100%;
+			}
+		</style>	
+		
 	<title>Doctor's Schedule</title>
 	</head>
-	<body background="">
+	<body>
 		<s:include value="home.jsp"/>
 		<script>
 		$('.panel-collapse').collapse({toggle: false});
@@ -81,8 +94,8 @@
 								Diagnosis
 							</s:if>	
 						</div>	
-						<div class="col-md-4">Customer Name</div>
-						<div class="col-md-3">Date</div>
+						<div class="col-md-4">Customer Name / Pet Name</div>
+						<div class="col-md-3">Date / Breed</div>
 						<div class="col-md-4">Transaction Type</div>
 					</div>
 				</div>
@@ -128,8 +141,8 @@
 								<s:a href="%{vit}"><button class="btn btn-block btn-sm btn-primary" type="submit" name="action">Vitals</button></s:a>
                                                                 
 							</div>
-							<div class="col-md-4">Pet Name: <s:property value="%{#consultation.pet.name}"/></div>
-							<div class="col-md-3">Breed: <s:property value="%{#consultation.pet.breed}"/></div>
+							<div class="col-md-4"><s:property value="%{#consultation.pet.name}"/></div>
+							<div class="col-md-3"><s:property value="%{#consultation.pet.breed}"/></div>
 						</div>
 						<br>
                                                     </s:if>
@@ -145,8 +158,8 @@
                                                             </s:if>
                                                                 
 							</div>
-							<div class="col-md-4">Pet Name: <s:property value="%{#consultation.pet.name}"/></div>
-							<div class="col-md-3">Breed: <s:property value="%{#consultation.pet.breed}"/></div>
+							<div class="col-md-4"><s:property value="%{#consultation.pet.name}"/></div>
+							<div class="col-md-3"><s:property value="%{#consultation.pet.breed}"/></div>
 						</div>
 						<br>
                                                     </s:if>

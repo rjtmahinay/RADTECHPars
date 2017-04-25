@@ -14,6 +14,17 @@
 		<link rel="icon" href="favicon.ico" type="image/x-icon">
 		<link rel="stylesheet" href="css/bootstrap.min.css">
 		<link rel="stylesheet" href="css/jquery-ui.css">
+		<style>
+			body { 
+				background: url(loginbg.jpg) no-repeat center center fixed; 
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+				height:100%;
+				width:100%;
+			}
+		</style>
 		<title>JSP Page</title>
 		<script type="text/javascript" src="js/fusioncharts.js"></script>
 		<script type="text/javascript" src="js/themes/fusioncharts.theme.fint.js"></script>

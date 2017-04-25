@@ -20,6 +20,16 @@
 		<script src="js/jquery.min.js"></script>
 		<script src="js/bootstrap.min.js"></script>
 		<title>RADTECH PARS</title>
+		<style>
+			body { 
+				background: url(loginUp.png) no-repeat center center fixed; 
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+				
+			}
+		</style>
                 <script>
                     var tempo = '${tempPass}';
                     if(tempo !== ''){
@@ -29,20 +39,22 @@
                     }
                 </script>
 	</head>
-	<body background="dog.jpg" style="width:100%;height:100%;" alt="[]">
+	<body>
 		<div class="container">
 
 
 
 			<div class="row">
 				<div class="col col-md-9">
+					<%--
 					<br><br><br><br>
-					<font face="Roboto" size="48">
-
+					<font face="Roboto" size="56" color="gold">
+						<strong>
 						<p>Animal Station And Veterinary Clinic</p>
 						<p>by RadTech</p>
-
+						</strong>
 					</font>
+					--%>
 				</div>
 				<div class="col col-md-3">
 					<br><br><br><br>
