@@ -106,6 +106,12 @@
                         <result name="input">home.jsp</result>
 		</action>
 		
+		<action name="tempMeds" class="com.radtech.ConsultationAction" method="tempMeds">
+                        <result>petVitals.jsp</result>
+                        <result name="input">petVitals.jsp</result>
+		</action>
+		
+		
 		
 		
 		<!--NEW BUT NOT COMPLETE _______NEW BUT NOT COMPLETE _______NEW BUT NOT COMPLETE _______NEW BUT NOT COMPLETE _______  -->
@@ -124,7 +130,7 @@
 			<result name="input">userProfile.jsp</result>
 		</action>
 		
-		<action name="searchDatabase" class="" method="searchDatabase">
+		<action name="searchDatabase" class="com.radtech.SearchEngine" method="searchDatabase">
 			<result>search.jsp</result>
 			<result name="input">search.jsp</result>
 		</action>
