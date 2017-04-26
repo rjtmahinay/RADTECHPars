@@ -1,7 +1,11 @@
 package com.radtech;
 
 
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
 import org.hibernate.HibernateException;
+import org.hibernate.criterion.Restrictions;
 
 public class AppointmentAction extends GenericAction{
 
@@ -60,46 +64,44 @@ public class AppointmentAction extends GenericAction{
         }
     }
 
-//    public void tallyMonths() {
-//        //where MONTH(so.date) = MONTH(:date);
-//        System.out.println("Inside tally month");
-//        SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
-//        Session session = null;
-//        try {
-//            session = ((SessionFactory) sessionmap.get("factory")).openSession();
-//            java.time.LocalDateTime now = java.time.LocalDateTime.now();
-//            int year = now.getYear();
-//            for (int i = 0; i < 12; i++) {
-//                java.util.Calendar cal = java.util.Calendar.getInstance();
-//                cal.setTime(sdf.parse(i + 1 + "/01/" + year));
-//                Date inTime = cal.getTime();
-//                System.out.println(inTime);
-//                cal.add(Calendar.MONTH, 1);
-//                cal.add(Calendar.DATE, -1);
-//                Date outTime = cal.getTime();
-//                System.out.println(outTime);
-//                Criteria crit = session.createCriteria(Appointment.class);
-//                crit.setProjection(Projections.property("date"));
-//                crit.add(Restrictions.between("date", inTime, outTime));
-//                List list = crit.list();
-//                if (list == null) {
-//                    scores[i] = 0;
-//                } else {
-//                    scores[i] = list.size();
-//                    System.out.println("Size of " + (i+1) + " is " + list.size());
-//                }
-//            }
-//            sessionmap.put("scores", scores);
-//        } catch (HibernateException | ParseException e) {
-//            System.out.println("Something happened midway...");
-//            e.printStackTrace();
-//        } finally {
-//            if (session != null) {
-//                session.close();
-//            }
-//        }
-//    }
-    
+    public String statize(){
+        session = getSession();
+        tx = session.getTransaction();
+        try{
+            Date from = toDate(app.getInput1());
+            Date to = toDate(app.getInput2());
+            if(from.compareTo(to)>=0){
+                addActionError("Invalid date inputs");
+            }
+            else{
+                String str;
+                String[] months = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
+                int[] number = new int[12];
+                List appointments = session.createCriteria(Appointment.class)
+                        .add(Restrictions.ge("appointmentDate", from))
+                        .add(Restrictions.le("appointmentDate", to))
+                        .list();
+                Calendar cal = Calendar.getInstance();
+                for(Object o: appointments){
+                    Appointment app = (Appointment)o;
+                    cal.setTime(app.getAppointmentDate());
+                    int x = cal.get(Calendar.MONTH);
+                    if(app.getStatus()!= "cancelled") number[x]+=1;
+                    else appointments.remove(app);
+                }
+                
+            }
+        }
+        catch(HibernateException e){
+            e.printStackTrace();
+            tx.rollback();
+            addActionError("Critical error on statize");
+            return INPUT;
+        }
+        finally{
+            if(session!=null) session.close();
+        }
+    }
     public String completeAppointment(){
         session=getSession();
         tx=session.getTransaction();

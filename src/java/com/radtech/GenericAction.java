@@ -57,6 +57,7 @@ public class GenericAction extends ActionSupport implements SessionAware, ModelD
             configuration.addAnnotatedClass(Medicine.class);
             configuration.addAnnotatedClass(Consultation.class);
             configuration.addAnnotatedClass(Appointment.class);
+            configuration.addAnnotatedClass(Archive.class);
             ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().applySettings(
                     configuration.getProperties()).build();
             SessionFactory sessionFactory = configuration.buildSessionFactory(serviceRegistry);

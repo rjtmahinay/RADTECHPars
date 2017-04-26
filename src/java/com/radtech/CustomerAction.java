@@ -117,50 +117,50 @@ public class CustomerAction extends GenericAction{
             return INPUT;
     }
 
-    public String toArchive(){
-        session = getSession();
-        tx=session.getTransaction();
-        try{
-            long customerId = Long.parseLong(customer.getInput3());
-            Customer c = (Customer)session.get(Customer.class, customerId);
-            if(c==null){
-                addActionError("Customer not found!");
-                return INPUT;
-            }
-            else{
-                tx.begin();
-                c = (Customer)session.load(Customer.class, customerId);
-                Archive arc = new Archive();
-                arc.setCustomerId(customerId);
-                session.save(arc);
-                session.flush();
-                arc.setName(c.getName());
-                arc.setAddress(c.getAddress());
-                arc.setReason(c.getInput1());
-		session.merge(arc);
-                hiberialize(customer.getPets());
-                List pets = customer.getPets();
-                for(Object o: pets){
-                    Pet p = (Pet) o;
-                    p.setOwner(arc);
-                    arc.getPets().add(p);
-                    customer.getPets().remove(p);
-                    session.merge(p);
-                    session.merge(customer);
-                    session.merge(arc);
-                }
-                tx.commit();
-                refresh();
-                return SUCCESS;
-            }
-        }
-        catch(HibernateException e){
-            e.printStackTrace();
-            tx.rollback();
-            return INPUT;
-        }
-        finally{
-            if(session!= null)session.close();
-        }
-    }
+//    public String toArchive(){
+//        session = getSession();
+//        tx=session.getTransaction();
+//        try{
+//            long customerId = Long.parseLong(customer.getInput3());
+//            Customer c = (Customer)session.get(Customer.class, customerId);
+//            if(c==null){
+//                addActionError("Customer not found!");
+//                return INPUT;
+//            }
+//            else{
+//                tx.begin();
+//                c = (Customer)session.load(Customer.class, customerId);
+//                Archive arc = new Archive();
+//                arc.setCustomerId(customerId);
+//                session.save(arc);
+//                session.flush();
+//                arc.setName(c.getName());
+//                arc.setAddress(c.getAddress());
+//                arc.setReason(c.getInput1());
+//		session.merge(arc);
+//                hiberialize(customer.getPets());
+//                List pets = customer.getPets();
+//                for(Object o: pets){
+//                    Pet p = (Pet) o;
+//                    p.setOwner(arc);
+//                    arc.getPets().add(p);
+//                    customer.getPets().remove(p);
+//                    session.merge(p);
+//                    session.merge(customer);
+//                    session.merge(arc);
+//                }
+//                tx.commit();
+//                refresh();
+//                return SUCCESS;
+//            }
+//        }
+//        catch(HibernateException e){
+//            e.printStackTrace();
+//            tx.rollback();
+//            return INPUT;
+//        }
+//        finally{
+//            if(session!= null)session.close();
+//        }
+//    }
 }
