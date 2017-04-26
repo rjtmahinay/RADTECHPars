@@ -1,6 +1,7 @@
 package com.radtech;
 
 import java.util.ArrayList;
+import java.util.List;
 import org.hibernate.HibernateException;
 
 
@@ -136,28 +137,18 @@ public class CustomerAction extends GenericAction{
                 arc.setName(c.getName());
                 arc.setAddress(c.getAddress());
                 arc.setReason(c.getInput1());
-		//customer has pets
-		//customer has apointments
-				hiberialize(c.getPets());
-				for(Object o: c.getPets()){
-					Pet p = (Pet)o;
-					c.getPets().remove(p);
-					arc.getPets().add(p);
-					p.setOwner(arc);
-					session.merge(p);
-					session.flush();
-				}
-				hiberialize(c.getAppointments());
-				for(Object oo: c.getAppointments()){
-					Appointment app = (Appointment)oo;
-					customer.getAppointments().remove(app);
-					app.setCustomer(arc);
-					arc.getAppointments().add(app);
-					session.merge(app);
-					session.flush();
-				}
-				session.merge(arc);
-				session.delete(customer);
+		session.merge(arc);
+                hiberialize(customer.getPets());
+                List pets = customer.getPets();
+                for(Object o: pets){
+                    Pet p = (Pet) o;
+                    p.setOwner(arc);
+                    arc.getPets().add(p);
+                    customer.getPets().remove(p);
+                    session.merge(p);
+                    session.merge(customer);
+                    session.merge(arc);
+                }
                 tx.commit();
                 refresh();
                 return SUCCESS;
