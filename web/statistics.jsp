@@ -5,6 +5,9 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="fusioncharts.FusionCharts" %>
+<%@page import="java.util.*" %>
+<%@page import="com.google.gson.*" %>
 <%@taglib prefix="s" uri="/struts-tags"%>
 <!DOCTYPE html>
 <html>
@@ -26,99 +29,35 @@
 			}
 		</style>
 		<title>JSP Page</title>
-		<script type="text/javascript" src="js/fusioncharts.js"></script>
-		<script type="text/javascript" src="js/themes/fusioncharts.theme.fint.js"></script>
+<script type="text/javascript" src="js/fusioncharts.js"></script>
+<script type="text/javascript" src="js/themes/fusioncharts.theme.fint.js"></script>
+                <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+                <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 		<script type="text/javascript">
-			var digits = [].concat(('<s:property value="%{#session.scores}"/>').trim().split(","));
-
-  FusionCharts.ready(function(){
-	var revenueChart = new FusionCharts({
-		"type": "column2d",
-		"renderAt": "chartContainer",
-		"width": "90%",
-		"height": "400",
-		"dataFormat": "json",
-		"dataSource":  {
-		  "chart": {
-			"caption": "Monthly visits",
-			"subCaption": "Animal Station",
-			"xAxisName": "Month",
-			"yAxisName": "Number of Appointments",
-			"theme": "fint"
-		 },
-		 "data": [
-			{
-			   "label": "Jan",
-			   "value": digits[0]
-			},
-			{
-			   "label": "Feb",
-			   "value": digits[1]
-			},
-			{
-			   "label": "Mar",
-			   "value": digits[2]
-			},
-			{
-			   "label": "Apr",
-			   "value": digits[3]
-			},
-			{
-			   "label": "May",
-			   "value": digits[4]
-			},
-			{
-			   "label": "Jun",
-			   "value": digits[5]
-			},
-			{
-			   "label": "Jul",
-			   "value": digits[6]
-			},
-			{
-			   "label": "Aug",
-			   "value": digits[7]
-			},
-			{
-			   "label": "Sep",
-			   "value": digits[8]
-			},
-			{
-			   "label": "Oct",
-			   "value": digits[9]
-			},
-			{
-			   "label": "Nov",
-			   "value": digits[10]
-			},
-			{
-			   "label": "Dec",
-			   "value": digits[11]
-			}
-		  ]
-	  }
-
-  });
-revenueChart.render();
-})
-
+                    FusionCharts.ready(function() {
+                        var fusioncharts = new FusionCharts({
+                            type: 'column2d',
+                            renderAt: 'chartContainer',
+                            width: '500',
+                            height: '300',
+                            dataFormat: 'jsonurl',
+                            dataSource: 'stat.json'
+                        });
+                        fusioncharts.render();
+                    });       
+//                $( function() {
+//                    $( "#date1" ).datepicker();
+//                  } );
+//
+//                  $( function() {
+//                    $( "#date2" ).datepicker();
+//                  } );
 
 </script>
 	</head>
 	<body>
 		<s:include value="home.jsp"/>
 		<div class="container-fluid">
-			<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-			<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-			<script>
-			$( function() {
-			  $( "#date1" ).datepicker();
-			} );
-			
-			$( function() {
-			  $( "#date2" ).datepicker();
-			} );
-			</script>
 			<div class="row">
 				<s:form action="viewStat" theme="bootstrap" cssClass="form">
 					<div class="col-md-3"></div>
@@ -134,7 +73,7 @@ revenueChart.render();
 	
 			<div id="chartContainer">FusionCharts XT will load here!
 				<script>
-				revenueChart.render();
+                                    fusioncharts.render();
 				</script>
 			</div>
 			</center>

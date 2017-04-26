@@ -60,48 +60,6 @@ public class AppointmentAction extends GenericAction{
         }
     }
 
-//    public String accomplishAppointment() {
-//        if(checkUser()){
-//            addFieldError("username", "Session timeout");
-//            return "error";
-//        }
-//        Session session = null;
-//        Transaction tx = null;
-//        if (app != null) {
-//            try {
-//                session = ((SessionFactory) sessionmap.get("factory")).openSession();
-//                tx = session.getTransaction();
-//                tx.begin();
-//                app = (Appointment) session.load(Appointment.class, Long.parseLong(app.getAppinput()));
-//                if (app != null) {
-//                    app.setAdate(new java.util.Date());
-//                    session.merge(app);
-//                    tx.commit();
-//                    app = null;
-//                    sessionmap.put("appointments", (List) session.createQuery("from Appointment where adate is null order by date").list());
-//                }
-//                else{
-//                    tx.rollback();
-//                }
-//                
-//            } catch (HibernateException e) {
-//                e.printStackTrace();
-//                tx.rollback();
-//            } finally {
-//                if (session != null) {
-//                    session.close();
-//                }
-//            }
-//        }
-//        return SUCCESS;
-//    }
-
-//    public String statistics() {
-//        tallyMonths();
-//
-//        return SUCCESS;
-//    }
-
 //    public void tallyMonths() {
 //        //where MONTH(so.date) = MONTH(:date);
 //        System.out.println("Inside tally month");
