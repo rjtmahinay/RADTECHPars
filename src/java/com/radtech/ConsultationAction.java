@@ -1,5 +1,7 @@
 package com.radtech;
 
+import static com.opensymphony.xwork2.Action.SUCCESS;
+import java.util.ArrayList;
 import org.hibernate.HibernateException;
 
 public class ConsultationAction extends GenericAction{
@@ -123,6 +125,13 @@ public class ConsultationAction extends GenericAction{
             if(session!=null)session.close();
         }
     }
+	public String tempMeds(){
+		ArrayList<Med> tempMeds = (ArrayList)sessionmap.get("tempMeds");
+		if(tempMeds == null) tempMeds = new ArrayList<Med>();
+		tempMeds.add(med);
+		sessionmap.put("tempMeds", tempMeds);
+		return SUCCESS;
+	}
 }
 //consultation
 //  add consultation

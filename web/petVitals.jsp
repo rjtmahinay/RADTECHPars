@@ -21,42 +21,33 @@
 		<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 		<link rel="icon" href="favicon.ico" type="image/x-icon">
 		<script>
-			var $j = jQuery.noConflict();
-			$( function() {
-			  var availableTags = [
-				"Acepromazine","Advantage","Amitriptyline","Amlodipine Besylate","Ammonium Chloride","Amoxicillin","Ampicillin","Antacids","Asprin","Atenolol","Azathioprine",
-				"Baytril","Benadryl","Benazepril","Bromides","Buspirone",
-
-			  ];
-			  $( "#meds" ).autocomplete({
-				source: availableTags
-			  });  
-			} );
 			
 			
-			$j (document).ready(function(e){
-				$j (document).on('click', '.btn-add', function(e)
-				{
-					e.preventDefault();
-
-					var controlForm = $('.controls form:first'),
-						currentEntry = $(this).parents('.entry:first'),
-						newEntry = $(currentEntry.clone()).appendTo(controlForm);
-
-					newEntry.find('input').val('');
-					controlForm.find('.entry:not(:last) .btn-add')
-						.removeClass('btn-add').addClass('btn-remove')
-						.removeClass('btn-success').addClass('btn-danger')
-						.html('<span class="glyphicon glyphicon-minus"></span>');
-				}).on('click', '.btn-remove', function(e)
-				{
-					$(this).parents('.entry:first').remove();
-
-					e.preventDefault();
-					return false;
-				});
-			});
 			
+//			
+//			$ (document).ready(function(e){
+//				$ (document).on('click', '.btn-add', function(e)
+//				{
+//					e.preventDefault();
+//
+//					var controlForm = $('.controls form:first'),
+//						currentEntry = $(this).parents('.entry:first'),
+//						newEntry = $(currentEntry.clone()).appendTo(controlForm);
+//
+//					newEntry.find('input').val('');
+//					controlForm.find('.entry:not(:last) .btn-add')
+//						.removeClass('btn-add').addClass('btn-remove')
+//						.removeClass('btn-success').addClass('btn-danger')
+//						.html('<span class="glyphicon glyphicon-minus"></span>');
+//				}).on('click', '.btn-remove', function(e)
+//				{
+//					$(this).parents('.entry:first').remove();
+//
+//					e.preventDefault();
+//					return false;
+//				});
+//			});
+//			
 
 			</script>
 			
@@ -250,9 +241,70 @@
 				<div class="col-md-6">
 					<s:if test="%{#session.currentUser.userType.equals('doctor')}">
 					<div class="panel panel-default">
+						<div class="panel-body">
+						<div class="row">
+								<div class="col-md-6">
+									
+								<h4>Prescription</h4>
+								<div class="row">
+									<div class="col-md-7">
+										<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+										<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+										<script>
+											$( function() {
+												var availableTags = [
+												  "Acepromazine","Advantage","Amitriptyline","Amlodipine Besylate","Ammonium Chloride","Amoxicillin","Ampicillin","Antacids","Asprin","Atenolol","Azathioprine",
+												  "Baytril","Benadryl","Benazepril","Bromides","Buspirone",
+
+												];
+												$( "#meds" ).autocomplete({
+												  source: availableTags
+												});  
+
+
+
+
+											  } );
+										</script>
+										<s:form action="tempMeds" method="post">
+										<s:textfield name="meds" id="meds"/>
+									</div>
+									<div class="col-md-1">
+										<s:submit cssClass="btn btn-success btn-xs" name="submit" value="+"/>
+									</div>
+										</s:form>
+								</div>
+											
+										
+									
+									
+								
+								</div>
+										
+															
+								<div class="col-md-6">
+									<div class="panel panel-default">
+										<div class="panel-heading">
+											Medicines
+										</div>
+										<div class="panel-body">
+											<s:iterator value="#session.tempMeds" var="meds">
+												<s:property value="#meds"/>
+											</s:iterator>	
+										</div>
+									</div>
+										
+
+
+								</div>					
+							</div>							
+						
+						
+						
+						
 						<s:form action="addDiagnosis" theme="bootstrap" cssClass="form" method="POST">
 						<s:hidden value="%{#session.currentConsultation.consultationId}" name="input3"/>
-						<div class="panel-body">
+						
 							<h4>Diagnosis/Comments</h4>
 							<center>
 							<s:textarea name="diagnosis"  rows="5" cols="84" value=""/>
@@ -262,27 +314,8 @@
 								<%--
 								
 								--%>
-									<div class="container">
-	<div class="row">
-        <div class="control-group" id="fields">
-            <label class="control-label" for="field1">Nice Multiple Form Fields</label>
-            <div class="controls"> 
-                <form role="form" autocomplete="off">
-                    <div class="entry input-group col-xs-3">
-                        <s:textfield name="meds"/>
-                    	<span class="input-group-btn">
-                            <button class="btn btn-success btn-add" type="button">
-                                <span class="glyphicon glyphicon-plus"></span>
-                            </button>
-                        </span>
-                    </div>
-                </form>
-            <br>
-            <small>Press <span class="glyphicon glyphicon-plus gs"></span> to add another form field :)</small>
-            </div>
-        </div>
-	</div>
-</div>
+									
+														
 										<br>
 							</div>			
 									
