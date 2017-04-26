@@ -12,41 +12,16 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<link rel="stylesheet" href="css/bootstrap.min.css">
-		<link rel="stylesheet" href="css/jquery-ui.css">
+		<script src="js/jquery.min.js"></script>
 		<script src="js/jquery-1.12.4.js"></script>
 		<script src="js/jquery-ui.js"></script>
+		<link rel="stylesheet" href="css/bootstrap.min.css">
+		<link rel="stylesheet" href="css/jquery-ui.css">
+		
 		<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 		<link rel="icon" href="favicon.ico" type="image/x-icon">
 		<script>
-			<%--											
-			<script>											
-			$(function()
-			{
-			$(document).on('click', '.btn-add', function(e)
-			{
-			e.preventDefault();
-
-			var controlForm = $(this).parents('.controls form:first'),
-			currentEntry = $(this).parents('.entry:first'),
-			newEntry = $(currentEntry.clone()).appendTo(controlForm);
-
-			newEntry.find('input').val('');
-			controlForm.find('.entry:not(:last) .btn-add')
-			.removeClass('btn-add').addClass('btn-remove')
-			.removeClass('btn-success').addClass('btn-danger')
-			.html('');
-			}).on('click', '.btn-remove', function(e)
-			{
-			$(this).parents('.entry:first').remove();
-
-			e.preventDefault();
-			return false;
-			});
-			});
-			</script>
-			--%>
-
+			var $j = jQuery.noConflict();
 			$( function() {
 			  var availableTags = [
 				"Acepromazine","Advantage","Amitriptyline","Amlodipine Besylate","Ammonium Chloride","Amoxicillin","Ampicillin","Antacids","Asprin","Atenolol","Azathioprine",
@@ -55,8 +30,34 @@
 			  ];
 			  $( "#meds" ).autocomplete({
 				source: availableTags
-			  });
+			  });  
 			} );
+			
+			
+			$j (document).ready(function(e){
+				$j (document).on('click', '.btn-add', function(e)
+				{
+					e.preventDefault();
+
+					var controlForm = $('.controls form:first'),
+						currentEntry = $(this).parents('.entry:first'),
+						newEntry = $(currentEntry.clone()).appendTo(controlForm);
+
+					newEntry.find('input').val('');
+					controlForm.find('.entry:not(:last) .btn-add')
+						.removeClass('btn-add').addClass('btn-remove')
+						.removeClass('btn-success').addClass('btn-danger')
+						.html('<span class="glyphicon glyphicon-minus"></span>');
+				}).on('click', '.btn-remove', function(e)
+				{
+					$(this).parents('.entry:first').remove();
+
+					e.preventDefault();
+					return false;
+				});
+			});
+			
+
 			</script>
 			
 		<style>
@@ -258,42 +259,30 @@
 							</center>
 							<br>
 							
-								<script src="js/jquery-1.12.4.js"></script>
-								<script src="js/jquery-ui.js"></script>
 								<%--
 								
 								--%>
 									<div class="container">
-										
-										<div class="row">
-
-											
-											
-											
-											
-											<div class="control-group" id="fields">
-												<label class="control-label" for="field1">Prescription</label>
-												<div class="controls"> 
-													<form role="form" autocomplete="off">
-														<div class="row">
-															<div class="col-md-2">
-															<s:textfield name="fields[]" id="meds" />
-															</div>
-															<%--
-															<input class="form-control" name="fields[]" type="text" id="meds" placeholder="Type something" />
-															<div class="col-md-1">
-																<button class="btn btn-success btn-add btn-xs" type="button">
-																	<span class="glyphicon glyphicon-plus"></span>
-																</button>
-															</div>
-															--%>
-														</div>
-													</form>
-												<br>
-												</div>
-											</div>
-										</div>
-									</div>
+	<div class="row">
+        <div class="control-group" id="fields">
+            <label class="control-label" for="field1">Nice Multiple Form Fields</label>
+            <div class="controls"> 
+                <form role="form" autocomplete="off">
+                    <div class="entry input-group col-xs-3">
+                        <s:textfield name="meds"/>
+                    	<span class="input-group-btn">
+                            <button class="btn btn-success btn-add" type="button">
+                                <span class="glyphicon glyphicon-plus"></span>
+                            </button>
+                        </span>
+                    </div>
+                </form>
+            <br>
+            <small>Press <span class="glyphicon glyphicon-plus gs"></span> to add another form field :)</small>
+            </div>
+        </div>
+	</div>
+</div>
 										<br>
 							</div>			
 									

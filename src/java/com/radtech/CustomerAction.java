@@ -136,22 +136,28 @@ public class CustomerAction extends GenericAction{
                 arc.setName(c.getName());
                 arc.setAddress(c.getAddress());
                 arc.setReason(c.getInput1());
-                hiberialize(c.getPets());
-                for(Object o: c.getPets()){
-                    Pet p = (Pet)o;
-                    Pet pp = new Pet();
-                    session.save(pp);
-                    session.flush();
-                    pp.setPetId(p.getPetId());
-                    pp.setColor(p.getColor());
-                    pp.setBreed(p.getBreed());
-                    pp.setDateOfBirth(p.getDateOfBirth());
-                    arc.getPets().add(pp);
-                    session.merge(arc);
-                    session.delete(p);
-                    session.flush();
-                }
-                session.delete(c);
+		//customer has pets
+		//customer has apointments
+				hiberialize(c.getPets());
+				for(Object o: c.getPets()){
+					Pet p = (Pet)o;
+					c.getPets().remove(p);
+					arc.getPets().add(p);
+					p.setOwner(arc);
+					session.merge(p);
+					session.flush();
+				}
+				hiberialize(c.getAppointments());
+				for(Object oo: c.getAppointments()){
+					Appointment app = (Appointment)oo;
+					customer.getAppointments().remove(app);
+					app.setCustomer(arc);
+					arc.getAppointments().add(app);
+					session.merge(app);
+					session.flush();
+				}
+				session.merge(arc);
+				session.delete(customer);
                 tx.commit();
                 refresh();
                 return SUCCESS;

@@ -118,7 +118,7 @@
 
 			<div class="modal fade" id="confirmArchive">
 					<s:form action="toArchive">
-					<input type="hidden" name="idinput" value="" id="arcinput"/>
+						<input type="hidden" name="input3" value="<s:property value='#session.currentCustomer.customerId'/>"/>
 					<div class="modal-dialog modal-sm">
 						<div class="modal-content">
 							<div class="modal-header">

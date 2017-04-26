@@ -12,6 +12,7 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
 		<link rel="stylesheet" href="/css/bootstrap.min.css">
 		<link rel="stylesheet" href="css/jquery-ui.css">
 		<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
@@ -19,7 +20,22 @@
 		
 		
 		<script src="js/jquery.min.js"></script>
+		<script src="js/jquery-1.12.4.js"></script>
+		<script src="js/jquery-ui.js"></script>
 		<script src="js/bootstrap.min.js"></script>
+		
+		<script>
+			$( function() {
+			  $( "#date1" ).datepicker();
+			} );
+
+			$( function() {
+			  $( "#date2" ).datepicker();
+			} );
+
+		</script>
+		
+		
 		
 		
 		<title>RADTECH PARS</title>
@@ -46,13 +62,13 @@
 				
 				<ul class="nav navbar-nav">
 					<s:if test="%{#session.currentUser.userType.equals('assistant')}">
-						<li><a href="search.jsp">Appointment <span class="glyphicon glyphicon-plus"></span></a></li>
-						<li><a href="add.jsp">New Customer <span class="glyphicon glyphicon-user"></span></a></li>
+						<li><a href="search.jsp">Profiles <span class="glyphicon glyphicon-user"></span></a></li>
+						<li><a href="add.jsp">New Customer <span class="glyphicon glyphicon-plus"></span></a></li>
 					</s:if>
 					<s:if test="%{#session.currentUser.userType.equals('doctor')}">
 						<li><a href="search.jsp">Profiles <span class="glyphicon glyphicon-user"></span></a></li>
 						<li><s:a href="statistics.jsp">Statistics <span class="glyphicon glyphicon-stats"></span></s:a></li>
-						<!--<li><a href="#" data-toggle="modal" data-target="#stats">Statistics <span class="glyphicon glyphicon-stats"></span></a></li>-->
+						<li><a href="#" data-toggle="modal" data-target="#stats">Statistics <span class="glyphicon glyphicon-stats"></span></a></li>
 						<li><a href="archives.jsp">Archives <span class="glyphicon glyphicon-trash"></span></a></li>
 					</s:if>	
 					
@@ -76,20 +92,9 @@
 							</div>
 							<s:form action="viewStats" theme="bootstrap" cssClass="form">
 								<div class="modal-body">
-									<%--
-									<script src="js/jquery-1.12.4.js"></script>
-									<script src="js/jquery-ui.js"></script>
-									<script>
-										$( function() {
-										  $( "#date1" ).datepicker();
-										} );
-
-										$( function() {
-										  $( "#date2" ).datepicker();
-										} );
-
-									</script>
-									--%>
+<!--									
+									
+									-->
 									<div class="form-group">
 										<s:textfield name="dateInput1" id="date1" placeholder="From" />
 									</div>

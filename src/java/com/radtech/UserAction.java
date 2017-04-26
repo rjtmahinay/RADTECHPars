@@ -28,11 +28,11 @@ public class UserAction extends GenericAction{
         //Insert login logic
         initialize();
         if(user.getUsername().trim().equals("admin")){
-            user.setUserType(user.getPassword());
-            sessionmap.put("currentUser", user);
-            System.out.println("User is " + user.toString());
-            refresh();
-            System.out.println(makeJson());
+//            user.setUserType(user.getPassword());
+//            sessionmap.put("currentUser", user);
+//            System.out.println("User is " + user.toString());
+//            refresh();
+//            //System.out.println(makeJson());
             return SUCCESS;
         }
         else{

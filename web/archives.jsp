@@ -38,7 +38,7 @@
 		</style>		
 		<title>Archives</title>
 	</head>
-	<body background="dog.jpg">
+	<body>
 		
 		<s:include value="home.jsp"/>
 		<div class="container-fluid">

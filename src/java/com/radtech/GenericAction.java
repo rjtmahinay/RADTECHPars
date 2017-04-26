@@ -230,22 +230,22 @@ public class GenericAction extends ActionSupport implements SessionAware, ModelD
     public void hiberialize(Object o){
         Hibernate.initialize(o);
     }
-    public String makeJson() throws IOException{
-        JsonChart chart = new JsonChart("Appointments", "Animal Station", "Month", "Number of Visitors", "pax", "fint");
-        JsonObject object = new JsonObject(chart, "Jan,420;Feb,200");
-        Gson gson = new Gson();
-        try{
-            File file = new File("C:/Users/Sphere/Documents/NetBeansProjects/RADTECHPars/web/stat.json");
-            System.err.println("Does file exist? " + file.exists());
-            System.out.println("is file edittable? " + file.canWrite());
-            Writer writer = new FileWriter(file);
-            gson.toJson(object, writer);
-            writer.close();
-        } catch (IOException e) {
-           // do something
-        }
-        return gson.toJson(object);
-    }
+//    public String makeJson() throws IOException{
+//        JsonChart chart = new JsonChart("Appointments", "Animal Station", "Month", "Number of Visitors", "pax", "fint");
+//        JsonObject object = new JsonObject(chart, "Jan,420;Feb,200");
+//        Gson gson = new Gson();
+//        try{
+//            File file = new File("C:/Users/Sphere/Documents/NetBeansProjects/RADTECHPars/web/stat.json");
+//            System.err.println("Does file exist? " + file.exists());
+//            System.out.println("is file edittable? " + file.canWrite());
+//            Writer writer = new FileWriter(file);
+//            gson.toJson(object, writer);
+//            writer.close();
+//        } catch (IOException e) {
+//           // do something
+//        }
+//        return gson.toJson(object);
+//    }
 }
 
 //GenericModel

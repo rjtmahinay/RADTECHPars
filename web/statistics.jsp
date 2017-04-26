@@ -31,8 +31,8 @@
 		<title>JSP Page</title>
 <script type="text/javascript" src="js/fusioncharts.js"></script>
 <script type="text/javascript" src="js/themes/fusioncharts.theme.fint.js"></script>
-                <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-                <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+                <script src="js/jquery-1.12.4.js"></script>
+                <script src="js/jquery-ui.js"></script>
 		<script type="text/javascript">
                     FusionCharts.ready(function() {
                         var fusioncharts = new FusionCharts({
@@ -45,13 +45,13 @@
                         });
                         fusioncharts.render();
                     });       
-//                $( function() {
-//                    $( "#date1" ).datepicker();
-//                  } );
-//
-//                  $( function() {
-//                    $( "#date2" ).datepicker();
-//                  } );
+                $( function() {
+                    $( "#date1" ).datepicker();
+                  } );
+
+                  $( function() {
+                    $( "#date2" ).datepicker();
+                  } );
 
 </script>
 	</head>

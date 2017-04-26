@@ -91,6 +91,10 @@
                         <result>userProfile.jsp</result>
                         <result name="input">userProfile.jsp</result>
 		</action>
+		<action name="toArchive" class="com.radtech.CustomerAction" method="toArchive">
+                        <result>archives.jsp</result>
+                        <result name="input">userProfile.jsp</result>
+		</action>
 		
 		<action name="historize" class="com.radtech.PetAction" method="historize">
                         <result>diagnoHistory.jsp</result>

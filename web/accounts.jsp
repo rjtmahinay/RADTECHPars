@@ -33,6 +33,15 @@
 		<div class="container">
 			<s:include value="home.jsp"/>
 			<h1>Manage Accounts</h1>
+			<div class="row">
+				<s:if test="%{#session.currentUser.userType.equals('doctor')}">
+					<div class="col-md-4">
+				</s:if>
+				<s:if test="%{#session.currentUser.userType.equals('assistant')}">
+					<div class="col-md-3">
+				</s:if>		
+			<div class="panel panel-default">
+				<br>
 
 			<div id="actionTabs" class="container-fluid">
 
@@ -60,6 +69,7 @@
                                                     <div class="form-group">  
                                                     <s:password name="confirmPassword" placeholder="Confirm New Password" class="form-control" /></div>
                                                 <s:submit cssClass="btn btn-primary " value="submit" />
+						<p> </p>						
                                             </s:form>
 
 					</div> <!end of tab 1->
@@ -86,8 +96,10 @@
                                                         <s:password name="securityAnswer" placeholder="Security Answer"/><s:actionerror/>
                                                 </div>
 
-                                                <s:submit cssClass="btn btn-primary btn" value="sign up" />
+                                                <s:submit cssClass="btn btn-primary btn" value="sign up" /><br>
+						<p> </p>						
                                             </s:form>
+												
 					</div>
 					<%--	
 					<div class="tab-pane" id="3b">
@@ -112,6 +124,9 @@
 						</s:form>
 					</div>
 					--%>
+				</div>
+			</div>
+			</div>
 				</div>
 			</div>
 		</div>			
