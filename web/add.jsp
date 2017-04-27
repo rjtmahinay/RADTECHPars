@@ -15,10 +15,37 @@
 		<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 		<link rel="icon" href="favicon.ico" type="image/x-icon">
 		<script src="js/jquery.min.js"></script>
-		<script src="js/bootstrap.min.js"></script>
+	<script src="js/jquery-ui.js"></script>	
 		<script src="js/jquery-1.12.4.js"></script>
-	<script src="js/jquery-ui.js"></script>
+	
+	<script src="js/bootstrap.min.js"></script>
+	
 	<script>
+		$( function() {
+			var availableTags = [
+			  "Labrador Retriever","German Shepherd","Bulldog","Terrier","Golden Retriever",
+			  "Chihuahua","Dachshund","Beagle","Boxer","Shih Tzu","Spitz","Pug","Rottwieler","Maltese",
+			  "Doberman",
+
+			  "Siamese","Persian","Maine Coon","Ragamuffin","Ragdoll","American Shorthair","Tonkinese",
+			  "Russian Blue","Bengal","Scottish Fold",
+
+
+
+			];
+			$( "#breeds" ).autocomplete({
+			  source: availableTags
+			});  
+
+		  } );
+	</script>
+	<style>
+		.ui-autocomplete{
+			z-index: 1050;
+		}
+	</style>		
+	<script>
+		
 	$( function() {
 	  $("#petDateOfBirth").datepicker();
 	} );
@@ -33,6 +60,7 @@
 				height:100%;
 				width:100%;
 			}
+		
 		</style>
 		<title>Add new customers here</title>
 	</head>
@@ -43,10 +71,7 @@
 		<h1>New Customer</h1>
 		<h1>Pet List  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addPet"><span class="glyphicon glyphicon-plus"></span></button></h1>
 				
-		
-		<script src="js/jquery-1.12.4.js"></script>
-		<script src="js/jquery-ui.js"></script>
-		
+			
 		<div class="modal fade" id="addPet">
 		<div class="modal-dialog">
 			<div class="modal-content">
@@ -59,6 +84,7 @@
 
 					<s:form action="tempet" theme="bootstrap" cssClass="form" method="POST">
 						<div class="modal-body">
+							<div class="panel panel-default">
 							<div class="table">
 							<table class="table table-condensed">
 								<tr>
@@ -67,7 +93,7 @@
 								</tr>
 								<tr>
 									<td><b>Breed:</b></td>
-									<td><s:textfield name="breed" placeholder=""/> <s:actionerror/></td>
+									<td><s:textfield name="breed" id="breeds" placeholder=""/> <s:actionerror/></td>
 								</tr>
 								<tr>
 									<td><b>Color:</b></td>
@@ -86,6 +112,7 @@
 
 							</table>
 						</div>
+						</div>			
 
 							<div class="modal-footer form-group" >
 								<center>

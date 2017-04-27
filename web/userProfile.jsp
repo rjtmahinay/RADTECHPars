@@ -193,7 +193,7 @@
 										<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 										<script>
 										$( function() {
-										  $( "#date" ).datepicker();
+										  $( "#date" ).datepicker({maxDate: "+0M +0D", changeMonth: true, changeYear: true});
 										} );
 										</script>	
 											<td><b>Date of birth:</b></td>
@@ -241,7 +241,7 @@
 							<td><s:property value="#pet.breed"/></td>
 							<td><s:property value="#pet.color"/></td>
 							<td><s:property value="#pet.sex"/></td>
-							<td><s:property value="#pet.dateOfBirth"/></td>
+							<td><s:date name="#pet.dateOfBirth" format="MM/dd/yyyy"/></td>
 						</tr>
 						</s:iterator>
 						
@@ -253,7 +253,7 @@
 			<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 			<script>
 			$( function() {
-			  $( "#appointmentDate" ).datepicker();
+			  $( "#appointmentDate" ).datepicker({minDate: -0, maxDate: "+3M"});
 			} );
 			</script>
 			<div class="row">

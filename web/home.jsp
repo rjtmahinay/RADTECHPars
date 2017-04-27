@@ -26,11 +26,11 @@
 		
 		<script>
 			$( function() {
-			  $( "#date1" ).datepicker();
+			  $( "#date1" ).datepicker({maxDate: "+0M +0D", changeMonth: true, changeYear: true});
 			} );
 
 			$( function() {
-			  $( "#date2" ).datepicker();
+			  $( "#date2" ).datepicker({maxDate: "+0M +0D", changeMonth: true, changeYear: true});
 			} );
 
 		</script>
