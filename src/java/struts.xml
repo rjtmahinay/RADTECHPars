@@ -106,7 +106,7 @@
                         <result name="input">home.jsp</result>
 		</action>
 		
-		<action name="tempMeds" class="com.radtech.ConsultationAction" method="tempMeds">
+		<action name="tempMeds" class="com.radtech.MedicineAction" method="tempMeds">
                         <result>petVitals.jsp</result>
                         <result name="input">petVitals.jsp</result>
 		</action>

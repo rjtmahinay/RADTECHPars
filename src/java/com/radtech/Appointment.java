@@ -58,7 +58,7 @@ public class Appointment extends GenericModel{
         this.appointmentDate = appointmentDate;
     }
 
-    @OneToMany(cascade = CascadeType.REMOVE, fetch = FetchType.EAGER, mappedBy = "appointment", targetEntity = Consultation.class, orphanRemoval = true)
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "appointment", targetEntity = Consultation.class, orphanRemoval = true)
     public List getConsultations() {
         return consultations;
     }

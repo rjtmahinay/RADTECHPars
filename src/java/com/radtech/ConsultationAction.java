@@ -2,6 +2,7 @@ package com.radtech;
 
 import static com.opensymphony.xwork2.Action.SUCCESS;
 import java.util.ArrayList;
+import java.util.List;
 import org.hibernate.HibernateException;
 
 public class ConsultationAction extends GenericAction{
@@ -106,8 +107,18 @@ public class ConsultationAction extends GenericAction{
                 c = (Consultation)session.load(Consultation.class, Long.parseLong(consultation.getInput3()));
                 c.setDiagnosis(consultation.getDiagnosis());
                 c.setConsultationDate(new java.util.Date());
+                List<Medicine> meds = (List)sessionmap.get("tempMeds");
+                System.out.println("Meds size is " + meds.size());
+                hiberialize(c.getMedicines());
+                if(meds!= null)for(Medicine med: meds){
+                    session.persist(med);
+                    med.setConsultation(c);
+                    c.getMedicines().add(med);
+                    session.saveOrUpdate(med);
+                    session.merge(c);
+                    session.flush();
+                }
                 c.setStatus("completed");
-                session.flush();
                 if(checkAppointment(c)==true){
                     c.getAppointment().setStatus("completed");
                 }
@@ -125,13 +136,7 @@ public class ConsultationAction extends GenericAction{
             if(session!=null)session.close();
         }
     }
-	public String tempMeds(){
-		ArrayList<Med> tempMeds = (ArrayList)sessionmap.get("tempMeds");
-		if(tempMeds == null) tempMeds = new ArrayList<Med>();
-		tempMeds.add(med);
-		sessionmap.put("tempMeds", tempMeds);
-		return SUCCESS;
-	}
+    
 }
 //consultation
 //  add consultation

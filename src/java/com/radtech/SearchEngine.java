@@ -69,7 +69,7 @@ public class SearchEngine extends ActionSupport implements SessionAware {
         
         Session session = null;
         if (getSearchType().equals("FAIL")) {
-            addFieldError("searchInput", "Something went wrong...");
+            addActionError("Something went wrong...");
             return INPUT;
         }
         session = ((SessionFactory) sessionmap.get("factory")).openSession();
@@ -89,7 +89,7 @@ public class SearchEngine extends ActionSupport implements SessionAware {
                 //for exact fields
                 System.out.println(getSearchType() + "Search type and " + getSearchInput() + " search input");
                 if (getSearchType().equals("contactNumber") | getSearchType().equals("controlNumber")
-                        | getSearchType().equals("sex") | getSearchType().equals("dateOfBirth") | getSearchType().equals("weight")) {
+                        | getSearchType().equals("dateOfBirth")) {
 
                     //@for getting dob
                     if (getSearchType().equals("dateOfBirth")) {
@@ -97,15 +97,6 @@ public class SearchEngine extends ActionSupport implements SessionAware {
                         System.out.println("Inside dateOfBirth " + date);
                         criteria.add(Restrictions.eq(getSearchType(), date));
                     } //@if either weight
-                    else if (getSearchType().equals("weight")) {
-                        criteria.add(Restrictions.eq(getSearchType(), Double.parseDouble(getSearchInput().trim())));
-                    } //@if controlNumber or contactNumber
-                    else if(getSearchType().equals("sex")){
-                        if(getSearchInput().toLowerCase().contains("f")){
-                            criteria.add(Restrictions.eq(getSearchType(), "Female"));
-                        }
-                        else criteria.add(Restrictions.eq(getSearchType(), "Male"));
-                    }
                     else {
                         criteria.add(Restrictions.eq(getSearchType(), Long.parseLong(getSearchInput())));
                     }
@@ -123,9 +114,8 @@ public class SearchEngine extends ActionSupport implements SessionAware {
                     Customer inf = new Customer();
                     inf.setCustomerId((Long) myResult[0]);
                     inf.setAddress((String) myResult[1]);
-                    inf.setContactNumber((Long) myResult[4]);
-                    
-                    inf.setName((String) myResult[6]);
+                    inf.setContactNumber((Long) myResult[2]);
+                    inf.setName((String) myResult[3]);
                     arl.add(inf);
                 }
                 sessionmap.put("search", arl);

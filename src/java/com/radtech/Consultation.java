@@ -159,7 +159,7 @@ public class Consultation extends GenericModel{
         this.appointment = appointment;
     }
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "consultation", targetEntity = Medicine.class)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "consultation", targetEntity = Medicine.class)
     public List getMedicines() {
         return medicines;
     }

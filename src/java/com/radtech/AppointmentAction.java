@@ -72,6 +72,7 @@ public class AppointmentAction extends GenericAction{
             Date to = toDate(app.getInput2());
             if(from.compareTo(to)>=0){
                 addActionError("Invalid date inputs");
+                return INPUT;
             }
             else{
                 String str;
@@ -89,6 +90,7 @@ public class AppointmentAction extends GenericAction{
                     if(app.getStatus()!= "cancelled") number[x]+=1;
                     else appointments.remove(app);
                 }
+                return SUCCESS;
                 
             }
         }

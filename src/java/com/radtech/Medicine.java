@@ -5,6 +5,8 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -16,11 +18,12 @@ import javax.persistence.Table;
 @Table(name="Medicines")
 public class Medicine extends GenericModel{  
     private long medicineId;
-    private String name;
+    private String medicineName;
     private Consultation consultation;
 
     @Id
     @Column(name="MEDICINE_ID")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     public long getMedicineId() {
         return medicineId;
     }
@@ -29,16 +32,16 @@ public class Medicine extends GenericModel{
         this.medicineId = medicineId;
     }
 
-    @Column(name="NAME")
-    public String getName() {
-        return name;
+    @Column(name="MEDICINE_NAME")
+    public String getMedicineName() {
+        return medicineName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setMedicineName(String medicineName) {
+        this.medicineName = medicineName;
     }
 
-    @ManyToOne(fetch = FetchType.LAZY, targetEntity = Consultation.class)
+    @ManyToOne(fetch = FetchType.EAGER, targetEntity = Consultation.class)
     @JoinColumn(name="CONSULTATION_ID")
     public Consultation getConsultation() {
         return consultation;
@@ -51,6 +54,6 @@ public class Medicine extends GenericModel{
     
     @Override
     public String toString() {
-        return "Medicine{" + "medicineId=" + medicineId + ", name=" + name + '}';
+        return "Medicine{" + "medicineId=" + medicineId + ", name=" + medicineName + '}';
     }   
 }

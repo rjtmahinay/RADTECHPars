@@ -267,7 +267,7 @@
 											  } );
 										</script>
 										<s:form action="tempMeds" method="post">
-										<s:textfield name="meds" id="meds"/>
+										<s:textfield name="medicineName"/>
 									</div>
 									<div class="col-md-1">
 										<s:submit cssClass="btn btn-success btn-xs" name="submit" value="+"/>
@@ -289,7 +289,7 @@
 										</div>
 										<div class="panel-body">
 											<s:iterator value="#session.tempMeds" var="meds">
-												<s:property value="#meds"/>
+												<s:property value="#meds.medicineName"/>
 											</s:iterator>	
 										</div>
 									</div>

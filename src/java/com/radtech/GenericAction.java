@@ -27,6 +27,7 @@ import org.hibernate.criterion.CriteriaSpecification;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import com.google.gson.Gson;
+import java.awt.image.RescaleOp;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -105,30 +106,19 @@ public class GenericAction extends ActionSupport implements SessionAware, ModelD
     
     public void refreshAppointments(){
         if(session==null)session = getSession();
-        List<Appointment> apps = session.createCriteria(Appointment.class)
+        List<Appointment> apps = session.createCriteria(Appointment.class, "appointment")
                 .addOrder(Order.asc("appointmentDate"))
+                .createAlias("appointment.consultations", "consultation")
                 .add(Restrictions.eq("status", "pending"))
+                .add(Restrictions.eq("consultation.status", "pending"))
                 .setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY)
                 .list();
-        if(apps.size()>0){
-            System.out.println("Size of apps is " + apps.size());
-            for(Appointment app: apps){
-                //app.setCustomer(app.getCustomer());
-                hiberialize(app.getConsultations());
-                if(checkAppointment(app)==true){
-                    apps.remove(app);
-                }
-            }
-        }
         sessionmap.put("appointments", apps);
     }
     
     public boolean checkAppointment(Consultation consult){
         Appointment app = consult.getAppointment();
         hiberialize(app.getConsultations());
-        if(consult.getStatus().equals("completed") | consult.getStatus().equals("cancelled")){
-            app.getConsultations().remove(consult);
-        }
         for(Object o: app.getConsultations()){
             Consultation c = (Consultation)o;
             if(c.getStatus().equals("pending")){
