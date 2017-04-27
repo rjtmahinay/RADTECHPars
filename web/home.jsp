@@ -90,16 +90,16 @@
 								<button type="button" class="close" data-dismiss="modal">&times;</button>
 								<h3 class="modal-title">Select Statistics Range and Value</h3>
 							</div>
-							<s:form action="viewStats" theme="bootstrap" cssClass="form">
+							<s:form action="statize" theme="bootstrap" cssClass="form">
 								<div class="modal-body">
 <!--									
 									
 									-->
 									<div class="form-group">
-										<s:textfield name="dateInput1" id="date1" placeholder="From" />
+										<s:textfield name="dateInput" id="date1" placeholder="From" />
 									</div>
 									<div class="form-group">
-										<s:textfield name="dateInput1" id="date2" placeholder="To" />
+										<s:textfield name="dateInput2" id="date2" placeholder="To" />
 									</div>
 									<div class="form-group">
 										<s:select cssClass="text text-block" name="type" list="{'Breeds','Appointments','Walk ins','Medicines','Cancels'}" headerKey="-1"/>
