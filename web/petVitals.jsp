@@ -248,8 +248,8 @@
 								<h4>Prescription</h4>
 								<div class="row">
 									<div class="col-md-7">
-										<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-										<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+										<script src="js/jquery-1.12.4.js"></script>
+										<script src="js/jquery-ui.js"></script>
 										<script>
 											$( function() {
 												var availableTags = [
@@ -261,13 +261,10 @@
 												  source: availableTags
 												});  
 
-
-
-
 											  } );
 										</script>
 										<s:form action="tempMeds" method="post">
-										<s:textfield name="medicineName"/>
+										<s:textfield name="medicineName" id="meds"/>
 									</div>
 									<div class="col-md-1">
 										<s:submit cssClass="btn btn-success btn-xs" name="submit" value="+"/>
@@ -289,7 +286,7 @@
 										</div>
 										<div class="panel-body">
 											<s:iterator value="#session.tempMeds" var="meds">
-												<s:property value="#meds.medicineName"/>
+												<s:property value="#meds.medicineName"/>, 
 											</s:iterator>	
 										</div>
 									</div>
