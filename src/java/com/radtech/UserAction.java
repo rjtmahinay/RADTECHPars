@@ -1,5 +1,6 @@
 package com.radtech;
 
+import java.io.IOException;
 import javax.servlet.http.HttpServletRequest;
 import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.dispatcher.SessionMap;
@@ -24,7 +25,7 @@ public class UserAction extends GenericAction{
         return user;
     }
 
-    public String login() {
+    public String login() throws IOException {
         //Insert login logic
         initialize();
         if(user.getUsername().trim().equals("admin")){
@@ -32,7 +33,7 @@ public class UserAction extends GenericAction{
             sessionmap.put("currentUser", user);
             System.out.println("User is " + user.toString());
             refresh();
-            //System.out.println(makeJson());
+            System.out.println(makeJson());
             return SUCCESS;
         }
         else{
