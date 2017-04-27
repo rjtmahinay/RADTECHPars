@@ -68,8 +68,8 @@ public class AppointmentAction extends GenericAction{
         session = getSession();
         tx = session.getTransaction();
         try{
-            Date from = toDate(app.getInput1());
-            Date to = toDate(app.getInput2());
+            Date from = toDate(app.getDateInput2());
+            Date to = toDate(app.getDateInput3());
             if(from.compareTo(to)>=0){
                 addActionError("Invalid date inputs");
                 return INPUT;
@@ -77,18 +77,45 @@ public class AppointmentAction extends GenericAction{
             else{
                 String str;
                 String[] months = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
-                int[] number = new int[12];
-                List appointments = session.createCriteria(Appointment.class)
-                        .add(Restrictions.ge("appointmentDate", from))
-                        .add(Restrictions.le("appointmentDate", to))
-                        .list();
-                Calendar cal = Calendar.getInstance();
-                for(Object o: appointments){
-                    Appointment app = (Appointment)o;
-                    cal.setTime(app.getAppointmentDate());
-                    int x = cal.get(Calendar.MONTH);
-                    if(app.getStatus()!= "cancelled") number[x]+=1;
-                    else appointments.remove(app);
+                if(app.getStatType().equals("Appointment")){
+                    int[] number = new int[12];
+                    List appointments = session.createCriteria(Appointment.class)
+                            .add(Restrictions.ge("appointmentDate", from))
+                            .add(Restrictions.le("appointmentDate", to))
+                            .list();
+                    Calendar cal = Calendar.getInstance();
+                    for(Object o: appointments){
+                        Appointment app = (Appointment)o;
+                        cal.setTime(app.getAppointmentDate());
+                        int x = cal.get(Calendar.MONTH);
+                        if(app.getStatus()!= "cancelled") number[x]+=1;
+                    }
+                    return SUCCESS;
+                }
+                else if(app.getStatType().equals("Breed")){
+                    
+                }
+                else if(app.getStatType().equals("Status")){
+                    int[] number = new int[3];
+                    //pending,cancelled,complete;
+                    List appointments = session.createCriteria(Appointment.class)
+                            .add(Restrictions.ge("appointmentDate", from))
+                            .add(Restrictions.le("appointmentDate", to))
+                            .list();
+                    for(Object o: appointments){
+                        Appointment appointment = (Appointment)o;
+                        switch(appointment.getStatus()){
+                            case "pending" : number[0]+=1; break;
+                            case "cancelled":number[1]+=1; break;
+                            case "complete":number[2]+=1; break;
+                            default: addActionError("Critical error on building statistics"); return INPUT;
+                        }
+                        
+                    }
+                }
+                else{
+                    addActionError("Statistics build fail");
+                    return INPUT;
                 }
                 return SUCCESS;
                 
@@ -164,18 +191,13 @@ public class AppointmentAction extends GenericAction{
             System.out.println("->Cancelling appointment " + appoint.toString());
             
             hiberialize(appoint.getConsultations());
-		for(Object o: appoint.getConsultations()){
-			Consultation c = (Consultation)o;
-			Pet p = c.getPet();
-			hiberialize(p.getConsultations());
-			p.getConsultations().remove(c);
-			session.merge(p);
-			session.delete(c);
-		}
-			hiberialize(appoint.getCustomer().getAppointments());
-		appoint.getCustomer().getAppointments().remove(appoint);
-		session.merge(appoint.getCustomer());
-		session.delete(appoint);
+            for(Object o: appoint.getConsultations()){
+                Consultation c = (Consultation)o;
+                c.setStatus("cancelled");
+                session.merge(c);
+            }
+            appoint.setStatus("cancelled");
+            session.merge(appoint);
             tx.commit();
             refresh();
             return SUCCESS;

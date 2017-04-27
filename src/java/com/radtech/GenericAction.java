@@ -27,6 +27,7 @@ import org.hibernate.criterion.CriteriaSpecification;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import java.awt.image.RescaleOp;
 import java.io.File;
 import java.io.FileReader;
@@ -45,10 +46,12 @@ public class GenericAction extends ActionSupport implements SessionAware, ModelD
     SessionFactory factory;
     Object model;
     Deencrypt de = new Deencrypt();
+    public static GsonBuilder gb = new GsonBuilder().setPrettyPrinting();
     @Override
     public void setSession(Map map) {
         sessionmap = (SessionMap)map;
     }
+    
     
     public void initialize(){
         if (sessionmap.get("factory") == null) {
