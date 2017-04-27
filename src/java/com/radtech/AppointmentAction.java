@@ -1,10 +1,12 @@
 package com.radtech;
 
 
+import java.io.IOException;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import org.hibernate.HibernateException;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
 public class AppointmentAction extends GenericAction{
@@ -64,23 +66,25 @@ public class AppointmentAction extends GenericAction{
         }
     }
 
-    public String statize(){
+    public String statize() throws IOException{
         session = getSession();
         tx = session.getTransaction();
         try{
-            Date from = toDate(app.getInput1());
-            Date to = toDate(app.getInput2());
+            Date from = toDate(app.getDateInput2());
+            Date to = toDate(app.getDateInput3());
             if(from.compareTo(to)>=0){
                 addActionError("Invalid date inputs");
                 return INPUT;
             }
             else{
-                String str;
+                String str = "";
                 String[] months = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
                 int[] number = new int[12];
+                
                 List appointments = session.createCriteria(Appointment.class)
                         .add(Restrictions.ge("appointmentDate", from))
                         .add(Restrictions.le("appointmentDate", to))
+                        .addOrder(Order.asc("appointmentDate"))
                         .list();
                 Calendar cal = Calendar.getInstance();
                 for(Object o: appointments){
@@ -88,8 +92,17 @@ public class AppointmentAction extends GenericAction{
                     cal.setTime(app.getAppointmentDate());
                     int x = cal.get(Calendar.MONTH);
                     if(app.getStatus()!= "cancelled") number[x]+=1;
-                    else appointments.remove(app);
                 }
+                for(int y=0;y<12;y++){
+                    if(number[y]>0){
+                        str+= months[y]+","+number[y]+";";
+                    }
+                }
+                if(!str.equals("")){
+                    str = str.substring(0, str.length()-1);
+                }
+                System.out.println(str);
+                makeJson(str);
                 return SUCCESS;
                 
             }

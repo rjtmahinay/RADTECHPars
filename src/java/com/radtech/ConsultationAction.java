@@ -1,5 +1,6 @@
 package com.radtech;
 
+
 import static com.opensymphony.xwork2.Action.SUCCESS;
 import java.util.ArrayList;
 import java.util.List;
@@ -122,6 +123,7 @@ public class ConsultationAction extends GenericAction{
                 if(checkAppointment(c)==true){
                     c.getAppointment().setStatus("completed");
                 }
+                sessionmap.remove("tempMeds");
                 tx.commit();
                 refresh();
                 return SUCCESS;
