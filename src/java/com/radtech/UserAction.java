@@ -33,7 +33,6 @@ public class UserAction extends GenericAction{
             sessionmap.put("currentUser", user);
             System.out.println("User is " + user.toString());
             refresh();
-            System.out.println(makeJson());
             return SUCCESS;
         }
         else{

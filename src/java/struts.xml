@@ -101,9 +101,9 @@
                         <result name="input">userProfile.jsp</result>
 		</action>
 		
-		<action name="viewStats" class="" method="viewStats">
+		<action name="statize" class="com.radtech.AppointmentAction" method="statize">
                         <result>statistics.jsp</result>
-                        <result name="input">home.jsp</result>
+                        <result name="input">schedule.jsp</result>
 		</action>
 		
 		<action name="tempMeds" class="com.radtech.MedicineAction" method="tempMeds">

@@ -9,12 +9,19 @@
             <file>file:/C:/Users/Carl/Documents/NetBeansProjects/RADTECHPars/web/add.jsp</file>
         </group>
         <group>
-            <file>file:/C:/Users/Sphere/Documents/NetBeansProjects/RADTECHPars/src/java/com/radtech/CustomerAction.java</file>
-            <file>file:/C:/Users/Sphere/Documents/NetBeansProjects/RADTECHPars/src/java/com/radtech/Customer.java</file>
-            <file>file:/C:/Users/Sphere/Documents/NetBeansProjects/RADTECHPars/src/java/com/radtech/UserAction.java</file>
-            <file>file:/C:/Users/Sphere/Documents/NetBeansProjects/RADTECHPars/src/java/com/radtech/GenericAction.java</file>
-            <file>file:/C:/Users/Sphere/Documents/NetBeansProjects/RADTECHPars/web/search.jsp</file>
+            <file>file:/C:/Users/Sphere/Documents/NetBeansProjects/RADTECHPars/web/stat.json</file>
+            <file>file:/C:/Users/Sphere/Documents/NetBeansProjects/RADTECHPars/src/java/com/radtech/JsonObject.java</file>
+            <file>file:/C:/Users/Sphere/Documents/NetBeansProjects/RADTECHPars/src/java/fusioncharts/FusionCharts.java</file>
+            <file>file:/C:/Users/Sphere/Documents/NetBeansProjects/RADTECHPars/src/java/com/radtech/ArchiveAction.java</file>
+            <file>file:/C:/Users/Sphere/Documents/NetBeansProjects/RADTECHPars/src/java/com/radtech/SearchEngine.java</file>
+            <file>file:/C:/Users/Sphere/Documents/NetBeansProjects/RADTECHPars/web/statistics.jsp</file>
             <file>file:/C:/Users/Sphere/Documents/NetBeansProjects/RADTECHPars/src/java/com/radtech/AppointmentAction.java</file>
+            <file>file:/C:/Users/Sphere/Documents/NetBeansProjects/RADTECHPars/src/java/com/radtech/MedicineAction.java</file>
+            <file>file:/C:/Users/Sphere/Documents/NetBeansProjects/RADTECHPars/src/java/com/radtech/CustomerAction.java</file>
+            <file>file:/C:/Users/Sphere/Documents/NetBeansProjects/RADTECHPars/src/java/com/radtech/ConsultationAction.java</file>
+            <file>file:/C:/Users/Sphere/Documents/NetBeansProjects/RADTECHPars/src/java/com/radtech/JsonData.java</file>
+            <file>file:/C:/Users/Sphere/Documents/NetBeansProjects/RADTECHPars/src/java/com/radtech/GenericAction.java</file>
+            <file>file:/C:/Users/Sphere/Documents/NetBeansProjects/RADTECHPars/src/java/com/radtech/Medicine.java</file>
         </group>
     </open-files>
 </project-private>

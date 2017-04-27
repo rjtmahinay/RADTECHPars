@@ -1,14 +1,18 @@
 package com.radtech;
 
-import com.google.gson.GsonBuilder;
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.Writer;
 import java.util.ArrayList;
 import java.util.List;
 import static org.apache.struts2.ServletActionContext.getServletContext;
 import org.hibernate.HibernateException;
+import com.fasterxml.jackson.core.JsonGenerationException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
+import java.io.FileWriter;
+import static org.apache.struts2.ServletActionContext.getServletContext;
+
 
 
 
@@ -134,23 +138,43 @@ public class CustomerAction extends GenericAction{
                 return INPUT;
             }
             else{
-                tx.begin();
                 c = (Customer)session.load(Customer.class, customerId);
+                String cname="";
+                String petsname = "";
+                String appointmentsname = "";
+                String jsonstring = "{Customer:" + c.getName() + ",Customer Id:" + c.getCustomerId() + ",Address:" + c.getAddress()+",ContactNumber:"  + c.getContactNumber()+", Pets:["+ petsname 
+                        +  "],Appointments:[" +appointmentsname+ "]}";
                 hiberialize(c.getPets());
                 hiberialize(c.getAppointments());
-                for(Object o: c.getAppointments()){
-                    Appointment app = (Appointment)o;
-                    hiberialize(app.getConsultations());
-                    for(Object oo: app.getConsultations()){
-                        hiberialize(((Consultation)oo).getMedicines());
+                for(Object o: c.getPets()){
+                    Pet p = (Pet) o;
+                    hiberialize(p.getConsultations());
+                    hiberialize(p.getOwner());
+                    for(Object oxo: p.getConsultations()){
+                        Consultation consult = (Consultation)oxo;
+                        hiberialize(consult.getMedicines());
+                        hiberialize(consult.getPet());
                     }
                 }
-            File file = new File(getServletContext().getRealPath("/") + "/" +c.getName() + ".json");
-            Writer writer = new FileWriter(file);
-            (gb.create()).toJson(c, writer);
-            writer.close(); 
+                for(Object oo: c.getAppointments()){
+                    Appointment app = (Appointment)oo;
+                    hiberialize(app.getConsultations());
+                    hiberialize(app.getCustomer());
+                    for(Object xxx: app.getConsultations()){
+                        Consultation ccx = (Consultation)xxx;
+                        hiberialize(ccx.getPet());
+                        hiberialize(ccx.getMedicines());
+                        for(Object xxy: ccx.getMedicines()){
+                            hiberialize(((Medicine)xxy).getConsultation());
+                        }
+                    }
+                    
+                }
+                Gson gson = new Gson();
+                gson.toJson(c, new FileWriter(new File(getServletContext().getRealPath("/")+ "/"+c.getCustomerId()+".json")));
+                refresh();
+                return SUCCESS;
             }
-            return SUCCESS;
         }
         catch(HibernateException e){
             e.printStackTrace();

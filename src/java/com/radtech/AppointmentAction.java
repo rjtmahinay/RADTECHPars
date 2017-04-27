@@ -1,10 +1,12 @@
 package com.radtech;
 
 
+import java.io.IOException;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import org.hibernate.HibernateException;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
 public class AppointmentAction extends GenericAction{
@@ -64,7 +66,7 @@ public class AppointmentAction extends GenericAction{
         }
     }
 
-    public String statize(){
+    public String statize() throws IOException{
         session = getSession();
         tx = session.getTransaction();
         try{
@@ -75,7 +77,7 @@ public class AppointmentAction extends GenericAction{
                 return INPUT;
             }
             else{
-                String str;
+                String str = "";
                 String[] months = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
                 if(app.getStatType().equals("Appointment")){
                     int[] number = new int[12];
@@ -117,6 +119,16 @@ public class AppointmentAction extends GenericAction{
                     addActionError("Statistics build fail");
                     return INPUT;
                 }
+                for(int y=0;y<12;y++){
+                    if(number[y]>0){
+                        str+= months[y]+","+number[y]+";";
+                    }
+                }
+                if(!str.equals("")){
+                    str = str.substring(0, str.length()-1);
+                }
+                System.out.println(str);
+                makeJson(str);
                 return SUCCESS;
                 
             }
