@@ -135,40 +135,20 @@ public class CustomerAction extends GenericAction{
                 return INPUT;
             }
             else{
+                tx.begin();
                 c = (Customer)session.load(Customer.class, customerId);
-                String cname="";
-                String petsname = "";
-                String appointmentsname = "";
-                String jsonstring = "{Customer:" + c.getName() + ",Customer Id:" + c.getCustomerId() + ",Address:" + c.getAddress()+",ContactNumber:"  + c.getContactNumber()+", Pets:["+ petsname 
-                        +  "],Appointments:[" +appointmentsname+ "]}";
+                Archive arc = new Archive();
+                session.persist(arc);
+                arc.setName(c.getName());
+                arc.setContactNumber(c.getContactNumber());
+                arc.setAddress(c.getAddress());
+                System.out.println(customer.getReasonInput());
+                arc.setReason(customer.getReasonInput());
                 hiberialize(c.getPets());
                 hiberialize(c.getAppointments());
-                for(Object o: c.getPets()){
-                    Pet p = (Pet) o;
-                    hiberialize(p.getConsultations());
-                    hiberialize(p.getOwner());
-                    for(Object oxo: p.getConsultations()){
-                        Consultation consult = (Consultation)oxo;
-                        hiberialize(consult.getMedicines());
-                        hiberialize(consult.getPet());
-                    }
-                }
-                for(Object oo: c.getAppointments()){
-                    Appointment app = (Appointment)oo;
-                    hiberialize(app.getConsultations());
-                    hiberialize(app.getCustomer());
-                    for(Object xxx: app.getConsultations()){
-                        Consultation ccx = (Consultation)xxx;
-                        hiberialize(ccx.getPet());
-                        hiberialize(ccx.getMedicines());
-                        for(Object xxy: ccx.getMedicines()){
-                            hiberialize(((Medicine)xxy).getConsultation());
-                        }
-                    }
-                    
-                }
-                Gson gson = new Gson();
-                gson.toJson(c, new FileWriter(new File(getServletContext().getRealPath("/")+ "/"+c.getCustomerId()+".json")));
+                session.save(arc);
+                session.delete(c);
+                tx.commit();
                 refresh();
                 return SUCCESS;
             }

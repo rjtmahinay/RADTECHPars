@@ -127,7 +127,7 @@
 							</div>
 							<div class="modal-body">
 								<p align="center">Reason for archive:</p>
-								<center><s:textfield name="reason"/></center>
+								<center><s:textfield name="reasonInput"/></center>
 							</div>
 							<div class="modal-footer form-group" >
 								<div class="row">

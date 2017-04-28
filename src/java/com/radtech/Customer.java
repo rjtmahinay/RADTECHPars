@@ -60,7 +60,7 @@ public class Customer extends GenericModel{
         this.address = address;
     }
 
-    @OneToMany(cascade = CascadeType.MERGE, fetch = FetchType.LAZY, mappedBy = "customer", targetEntity = Appointment.class,orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "customer", targetEntity = Appointment.class,orphanRemoval = true)
     public List getAppointments() {
         return appointments;
     }
@@ -69,7 +69,7 @@ public class Customer extends GenericModel{
         this.appointments = appointments;
     }
 
-    @OneToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER, mappedBy = "owner", targetEntity = Pet.class,orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "owner", targetEntity = Pet.class,orphanRemoval = true)
     public List getPets() {
         return pets;
     }

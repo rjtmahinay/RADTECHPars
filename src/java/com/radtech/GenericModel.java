@@ -6,7 +6,7 @@ import javax.persistence.GenerationType;
 
 
 public class GenericModel implements Serializable{
-    private String numberInput, dateInput, input1, input2, input3, dateInput2, dateInput3, statType;
+    private String numberInput, dateInput, input1, input2, input3, dateInput2, dateInput3, statType, reasonInput;
 
     public String getNumberInput() {
         return numberInput;
@@ -71,6 +71,14 @@ public class GenericModel implements Serializable{
 
     public void setStatType(String statType) {
         this.statType = statType;
+    }
+
+    public String getReasonInput() {
+        return reasonInput;
+    }
+
+    public void setReasonInput(String reasonInput) {
+        this.reasonInput = reasonInput;
     }
     
 }
