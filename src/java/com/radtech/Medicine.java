@@ -54,6 +54,6 @@ public class Medicine extends GenericModel{
     
     @Override
     public String toString() {
-        return "Medicine{" + "medicineId=" + medicineId + ", name=" + medicineName + '}';
+        return  medicineName +", ";
     }   
 }

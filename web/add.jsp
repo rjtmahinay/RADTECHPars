@@ -15,7 +15,7 @@
 		<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 		<link rel="icon" href="favicon.ico" type="image/x-icon">
 		<script src="js/jquery.min.js"></script>
-	<script src="js/jquery-ui.js"></script>	
+		<script src="js/jquery-ui.js"></script>	
 		<script src="js/jquery-1.12.4.js"></script>
 	
 	<script src="js/bootstrap.min.js"></script>
@@ -39,11 +39,9 @@
 
 		  } );
 	</script>
-<!--	<style>
-		.ui-autocomplete{
-			z-index: 1050;
-		}
-	</style>		-->
+	<style>
+		.ui-autocomplete {z-index: 1061 !important;}
+	</style>
 	<script>
 		
 	$( function() {

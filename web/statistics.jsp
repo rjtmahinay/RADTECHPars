@@ -28,7 +28,7 @@
 				width:100%;
 			}
 		</style>
-		<title>JSP Page</title>
+		<title>Animal Station Statistics</title>
 <script type="text/javascript" src="js/fusioncharts.js"></script>
 <script type="text/javascript" src="js/themes/fusioncharts.theme.fint.js"></script>
                 <script src="js/jquery-1.12.4.js"></script>
@@ -58,7 +58,7 @@
 	<body>
 		<s:include value="home.jsp"/>
 		<div class="container-fluid">
-			<div class="row">
+<!--			<div class="row">
 				<s:form action="viewStat" theme="bootstrap" cssClass="form">
 					<div class="col-md-3"></div>
 					<div class="col-md-2"><s:textfield name="dateInput1" id="date1" placeholder="From" /></div>
@@ -66,7 +66,7 @@
 					<div class="col-md-1"><s:select cssClass="text text-block" name="type" list="{'Breeds','Appointments','Walk ins','Medicines','Cancels'}" headerKey="-1"/></div>
 					<div class="col-md-1"><s:submit cssClass="btn btn-primary btn-xs" value="View" /></div>
 				</s:form>
-			</div>
+			</div>-->
 			<center>
 			<h1><font face="roboto">Animal Station Statistics</font></h1>
 	

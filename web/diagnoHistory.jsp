@@ -44,9 +44,9 @@
 				<tbody>
 				<s:iterator value="%{#session.consultations}" var="cons">	
 				<tr>
-					<td>a<s:date name="#cons.consultationDate"/></td>
-					<td>a<s:property value="#cons.diagnosis" /></td>
-					<td>a<s:property  value="#cons.status" /></td>
+					<td><s:date name="#cons.consultationDate" format="MM/dd/yyyy"/></td>
+					<td><s:property value="#cons.diagnosis" /></td>
+					<td><s:property  value="#cons.medicines" /></td>
 				</tr>
 				</s:iterator>
 				<tr>

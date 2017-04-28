@@ -21,6 +21,30 @@
 				width:100%;
 			}
 		</style>
+		<script src="js/jquery-1.12.4.js"></script>
+		<script src="js/jquery-ui.js"></script>
+			<script>
+			$( function() {
+				var availableTags = [
+				  "Labrador Retriever","German Shepherd","Bulldog","Terrier","Golden Retriever",
+				  "Chihuahua","Dachshund","Beagle","Boxer","Shih Tzu","Spitz","Pug","Rottwieler","Maltese",
+				  "Doberman",
+
+				  "Siamese","Persian","Maine Coon","Ragamuffin","Ragdoll","American Shorthair","Tonkinese",
+				  "Russian Blue","Bengal","Scottish Fold",
+
+
+
+				];
+				$( "#breeds" ).autocomplete({
+				  source: availableTags
+				});  
+
+			  } );
+		</script>
+		<style>
+			.ui-autocomplete {z-index: 1061 !important;}
+		</style>
 		
 		<title>User Profile</title>
 		<style>
@@ -176,9 +200,10 @@
 											<td><b>Pet Name:</b></td>
 											<td><s:textfield name="name" placeholder=""/></td>
 										</tr>
+										
 										<tr>
 											<td><b>Breed:</b></td>
-											<td><s:textfield name="breed" placeholder=""/></td>
+											<td><s:textfield name="breed" id="breeds" placeholder=""/></td>
 										</tr>
 										<tr>
 											<td><b>Color:</b></td>
