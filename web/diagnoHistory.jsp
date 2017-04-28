@@ -32,7 +32,7 @@
 	<body>
 		<s:include value="home.jsp"/>
 		<div class="container-fluid">
-			<h1>Diagnosis History of <s:property value="%{#session.currentCustomer.name}"/></h1>
+			<h1>Diagnosis History of <s:property value="%{#session.}"/></h1>
 			<div class="table table-responsive">
 			<table class="table table-bordered table-striped ">
 				<thead>
@@ -42,11 +42,11 @@
 					
 				</thead>
 				<tbody>
-				<s:iterator value="%{#session.currentSomething.}">	
+				<s:iterator value="%{#session.consultations}">	
 				<tr>
-					<td><s:property value="%{#session.currentSomething.date}"/></td>
-					<td><s:property value="%{#session.currentSomething.diagnosis}" /></td>
-					<td><s:property  value="%{#session.currentSomething.prescription}" /></td>
+					<td>a<s:date name="%{#session.consultations.consultationDate}"/></td>
+					<td>a<s:property value="%{#session.colsultations.diagnosis}" /></td>
+					<td>a<s:property  value="%{#session.colsultations.}" /></td>
 				</tr>
 				</s:iterator>
 				<tr>

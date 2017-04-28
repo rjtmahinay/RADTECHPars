@@ -39,15 +39,15 @@
 
 		  } );
 	</script>
-	<style>
+<!--	<style>
 		.ui-autocomplete{
 			z-index: 1050;
 		}
-	</style>		
+	</style>		-->
 	<script>
 		
 	$( function() {
-	  $("#petDateOfBirth").datepicker();
+	  $("#petDateOfBirth").datepicker( {maxDate: "+0M +0D", changeMonth: true, changeYear: true});
 	} );
 	</script>
 	<style>
