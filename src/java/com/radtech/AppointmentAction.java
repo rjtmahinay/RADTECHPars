@@ -4,7 +4,9 @@ package com.radtech;
 import java.io.IOException;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import org.hibernate.HibernateException;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
@@ -92,10 +94,17 @@ public class AppointmentAction extends GenericAction{
                         int x = cal.get(Calendar.MONTH);
                         if(app.getStatus()!= "cancelled") number[x]+=1;
                     }
+                    for(int y=0;y<12;y++){
+                    if(number[y]>0){
+                        str+= months[y]+","+number[y]+";";
+                    }
+                    }
+                    if(!str.equals("")){
+                        str = str.substring(0, str.length()-1);
+                    }
+                    System.out.println(str);
+                    makeJson(str);
                     return SUCCESS;
-                }
-                else if(app.getStatType().equals("Breed")){
-                    
                 }
                 else if(app.getStatType().equals("Status")){
                     int[] number = new int[3];
@@ -112,23 +121,76 @@ public class AppointmentAction extends GenericAction{
                             case "complete":number[2]+=1; break;
                             default: addActionError("Critical error on building statistics"); return INPUT;
                         }
-                        
+                        str = "pending," + number[0] + ";cancelled," + number[1] + ";completed," + number[2];
+                        System.out.println(str);
+                        makeJson(str);
+                    }
+                }
+                else if(app.getStatType().equals("Walk-in")){
+                    int[] number = new int[12];
+                    List appointments = session.createCriteria(Appointment.class)
+                            .add(Restrictions.ge("appointmentDate", from))
+                            .add(Restrictions.le("appointmentDate", to))
+                            .list();
+                    Calendar cal = Calendar.getInstance();
+                    for(Object o: appointments){
+                        Appointment app = (Appointment)o;
+                        cal.setTime(app.getAppointmentDate());
+                        int x = cal.get(Calendar.MONTH);
+                        if(app.getTransactionType().equals("walk-in")) number[x]+=1;
+                    }
+                    for(int y=0;y<12;y++){
+                    if(number[y]>0){
+                        str+= months[y]+","+number[y]+";";
+                    }
+                    }
+                    if(!str.equals("")){
+                        str = str.substring(0, str.length()-1);
+                    }
+                    System.out.println(str);
+                    makeJson(str);
+                    return SUCCESS;
+                }
+                else if(app.getStatType().equals("Breed")){
+                    System.out.println("I am inside breed loop");
+                    HashMap<String, Integer> breeds = new HashMap<String, Integer>();
+                    List entries = session.createCriteria(Consultation.class)
+                            .add(Restrictions.ge("consultationDate", from))
+                            .add(Restrictions.le("consultationDate", to))
+                            .list();
+                    for(Object o: entries){
+                        Consultation consult = (Consultation)o;
+                        hiberialize(consult.getPet());
+                        String petBreed = consult.getPet().getBreed();
+                        if(breeds.get(petBreed)==null){
+                            breeds.put(petBreed, 1);
+                        }
+                        else{
+                            int x = breeds.get(petBreed);
+                            breeds.put(petBreed, ++x);
+                        }
+                    }
+                    // such as
+                    for (Map.Entry<String, Integer> pair : breeds.entrySet()) {
+                        System.out.println("For key " + pair.getKey());
+                        str += pair.getKey() +","+ pair.getValue()+";";
+                    }
+                    if(str.length()>0){
+                        str = str.substring(0, str.length()-1);
+                        System.out.println("Breeds " + str);
+                        makeJson(str);
+                        return SUCCESS;
+                    }
+                    else{
+                        addActionError("Stat table cannot be built");
+                        return INPUT;
                     }
                 }
                 else{
                     addActionError("Statistics build fail");
                     return INPUT;
                 }
-                for(int y=0;y<12;y++){
-                    if(number[y]>0){
-                        str+= months[y]+","+number[y]+";";
-                    }
-                }
-                if(!str.equals("")){
-                    str = str.substring(0, str.length()-1);
-                }
-                System.out.println(str);
-                makeJson(str);
+                
                 return SUCCESS;
                 
             }

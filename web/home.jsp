@@ -30,7 +30,7 @@
 			} );
 
 			$( function() {
-			  $( "#date2" ).datepicker({maxDate: "+0M +0D", changeMonth: true, changeYear: true});
+			  $( "#date2" ).datepicker({maxDate: "+1M +0D", changeMonth: true, changeYear: true});
 			} );
 
 		</script>
@@ -102,7 +102,7 @@
 										<s:textfield name="dateInput3" id="date2" placeholder="To" />
 									</div>
 									<div class="form-group">
-										<s:select cssClass="text text-block" name="typeInput" list="{'Breeds','Appointments','Walk ins','Medicines','Cancels'}" headerKey="-1"/>
+										<s:select cssClass="text text-block" name="statType" list="{'Breed','Appointment','Walk-in','Medicines','Status'}" headerKey="-1"/>
 									</div>
 									<div class="form-group">
 										<s:submit cssClass="btn btn-primary btn-sm" value="View" />

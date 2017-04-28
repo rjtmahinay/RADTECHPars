@@ -111,7 +111,7 @@ public class ConsultationAction extends GenericAction{
                 List<Medicine> meds = (List)sessionmap.get("tempMeds");
                 System.out.println("Meds size is " + meds.size());
                 hiberialize(c.getMedicines());
-                if(meds!= null)for(Medicine med: meds){
+                if(meds!= null | meds.size()==0)for(Medicine med: meds){
                     session.persist(med);
                     med.setConsultation(c);
                     c.getMedicines().add(med);
@@ -120,9 +120,7 @@ public class ConsultationAction extends GenericAction{
                     session.flush();
                 }
                 c.setStatus("completed");
-                if(checkAppointment(c)==true){
-                    c.getAppointment().setStatus("completed");
-                }
+                checkAppointment(c);
                 sessionmap.remove("tempMeds");
                 tx.commit();
                 refresh();

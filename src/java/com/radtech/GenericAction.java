@@ -144,6 +144,7 @@ public class GenericAction extends ActionSupport implements SessionAware, ModelD
                 return false;
             }
         }
+        appoint.setStatus("completed");
         return true;
     }
     
