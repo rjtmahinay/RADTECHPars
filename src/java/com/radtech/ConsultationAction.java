@@ -120,6 +120,7 @@ public class ConsultationAction extends GenericAction{
                     session.flush();
                 }
                 c.setStatus("completed");
+                session.flush();
                 checkAppointment(c);
                 sessionmap.remove("tempMeds");
                 tx.commit();

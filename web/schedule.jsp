@@ -79,7 +79,8 @@
 				var $target = $(this).parents('.panel').find('.panel-collapse');
 				$target.collapse('toggle');
 			});
-		</script>	
+		</script>
+                <h5> <s:actionerror/> </h5>
 		<div class="container-fluid">
 			<h1 align="center"><font face="roboto">Current Schedule</font></h1>
 			<div class="panel panel-default">

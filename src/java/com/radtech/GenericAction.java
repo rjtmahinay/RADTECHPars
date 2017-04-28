@@ -133,7 +133,7 @@ public class GenericAction extends ActionSupport implements SessionAware, ModelD
                 return false;
             }
         }
-        app.setAppointmentDate(new java.util.Date());
+        app.setStatus("completed");
         return true;
     }
     public boolean checkAppointment(Appointment appoint){
@@ -234,7 +234,7 @@ public class GenericAction extends ActionSupport implements SessionAware, ModelD
         Gson gson = new Gson();
         try{
             File file = new File(getServletContext().getRealPath("/") + "/stat.json");
-            System.err.println("Does file exist? " + file.exists());
+            System.out.println("Does file exist? " + file.exists());
             System.out.println("is file edittable? " + file.canWrite());
             Writer writer = new FileWriter(file);
             gson.toJson(object, writer);

@@ -115,12 +115,14 @@ public class AppointmentAction extends GenericAction{
                             .list();
                     for(Object o: appointments){
                         Appointment appointment = (Appointment)o;
+                        System.out.println("Appointment is " + appointment.toString());
                         switch(appointment.getStatus()){
                             case "pending" : number[0]+=1; break;
                             case "cancelled":number[1]+=1; break;
-                            case "complete":number[2]+=1; break;
+                            case "completed":number[2]+=1; break;
                             default: addActionError("Critical error on building statistics"); return INPUT;
                         }
+                        System.out.println(str);
                         str = "pending," + number[0] + ";cancelled," + number[1] + ";completed," + number[2];
                         System.out.println(str);
                         makeJson(str);

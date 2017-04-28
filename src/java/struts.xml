@@ -134,11 +134,7 @@
 			<result>search.jsp</result>
 			<result name="input">search.jsp</result>
 		</action>
-		
-		<action name="statistics" class="" method="statistics">
-			<result>statistics.jsp</result>
-		</action>
-		
+
 		<action name="showHistory" class="" method="showHistory">
 			<result>diagnoHistory.jsp</result>
 			<result name="input">userProfile.jsp</result>
