@@ -34,9 +34,10 @@
                 <script src="js/jquery-1.12.4.js"></script>
                 <script src="js/jquery-ui.js"></script>
 		<script type="text/javascript">
+                    
                     FusionCharts.ready(function() {
                         var fusioncharts = new FusionCharts({
-                            type: 'column2d',
+                            type: '${type}',
                             renderAt: 'chartContainer',
                             width: '500',
                             height: '300',

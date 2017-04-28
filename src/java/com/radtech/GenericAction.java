@@ -228,8 +228,8 @@ public class GenericAction extends ActionSupport implements SessionAware, ModelD
     public void hiberialize(Object o){
         Hibernate.initialize(o);
     }
-    public String makeJson(String input) throws IOException{
-        JsonChart chart = new JsonChart("Appointments", "Animal Station", "Month", "Number of Visitors", "pax", "fint");
+    public String makeJson(String subCaption, String xAxis, String yAxis, String prefix,String input) throws IOException{
+        JsonChart chart = new JsonChart(subCaption, xAxis, yAxis, prefix);
         JsonObject object = new JsonObject(chart, input);
         Gson gson = new Gson();
         try{

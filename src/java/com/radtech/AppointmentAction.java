@@ -7,6 +7,8 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javax.servlet.http.HttpServletRequest;
+import org.apache.struts2.ServletActionContext;
 import org.hibernate.HibernateException;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
@@ -71,9 +73,13 @@ public class AppointmentAction extends GenericAction{
     public String statize() throws IOException{
         session = getSession();
         tx = session.getTransaction();
+        HttpServletRequest request = ServletActionContext.getRequest();
         try{
             Date from = toDate(app.getDateInput2());
             Date to = toDate(app.getDateInput3());
+            to.setHours(23);
+            to.setMinutes(59);
+            to.setSeconds(59);
             if(from.compareTo(to)>=0){
                 addActionError("Invalid date inputs");
                 return INPUT;
@@ -103,7 +109,8 @@ public class AppointmentAction extends GenericAction{
                         str = str.substring(0, str.length()-1);
                     }
                     System.out.println(str);
-                    makeJson(str);
+                    request.setAttribute("type", "column2d");
+                    makeJson("Appointments", "Month", "Number of appointments", "Pax",str);
                     return SUCCESS;
                 }
                 else if(app.getStatType().equals("Status")){
@@ -116,17 +123,20 @@ public class AppointmentAction extends GenericAction{
                     for(Object o: appointments){
                         Appointment appointment = (Appointment)o;
                         System.out.println("Appointment is " + appointment.toString());
-                        switch(appointment.getStatus()){
-                            case "pending" : number[0]+=1; break;
-                            case "cancelled":number[1]+=1; break;
-                            case "completed":number[2]+=1; break;
-                            default: addActionError("Critical error on building statistics"); return INPUT;
+                        String strr = appointment.getStatus();
+                        if(strr.equals("pending")) number[0]+=1;
+                        else if(strr.equals("cancelled")) number[1]+=1;
+                        else if(strr.equals("completed")) number[2]+=1;
+                        else{
+                            addActionError("Cannot build statistics table");
+                            return INPUT;
                         }
-                        System.out.println(str);
-                        str = "pending," + number[0] + ";cancelled," + number[1] + ";completed," + number[2];
-                        System.out.println(str);
-                        makeJson(str);
                     }
+                    str = "pending," + number[0] + ";cancelled," + number[1] + ";completed," + number[2];
+                    System.out.println(str);
+                    request.setAttribute("type", "pie2d");
+                    makeJson("Status of appointments", "Appointments", "Status", "appointments", str);
+                    return SUCCESS;
                 }
                 else if(app.getStatType().equals("Walk-in")){
                     int[] number = new int[12];
@@ -150,15 +160,17 @@ public class AppointmentAction extends GenericAction{
                         str = str.substring(0, str.length()-1);
                     }
                     System.out.println(str);
-                    makeJson(str);
+                    request.setAttribute("type", "column2d");
+                    makeJson("Number of New or walk-in customers", "Month", "Number of customers", "PAX", str);
                     return SUCCESS;
                 }
                 else if(app.getStatType().equals("Breed")){
                     System.out.println("I am inside breed loop");
                     HashMap<String, Integer> breeds = new HashMap<String, Integer>();
-                    List entries = session.createCriteria(Consultation.class)
-                            .add(Restrictions.ge("consultationDate", from))
-                            .add(Restrictions.le("consultationDate", to))
+                    List entries = session.createCriteria(Consultation.class, "consultation")
+                            .createAlias("consultation.appointment", "appointment")
+                            .add(Restrictions.ge("appointment.appointmentDate", from))
+                            .add(Restrictions.le("appointment.appointmentDate", to))
                             .list();
                     for(Object o: entries){
                         Consultation consult = (Consultation)o;
@@ -180,7 +192,8 @@ public class AppointmentAction extends GenericAction{
                     if(str.length()>0){
                         str = str.substring(0, str.length()-1);
                         System.out.println("Breeds " + str);
-                        makeJson(str);
+                        request.setAttribute("type", "pie2d");
+                        makeJson("Breed of consulting pets", "Breed", "Number of pets", "Breed", str);
                         return SUCCESS;
                     }
                     else{
@@ -218,7 +231,8 @@ public class AppointmentAction extends GenericAction{
                     if(str.length()>0){
                         str = str.substring(0, str.length()-1);
                         System.out.println("Meds " + str);
-                        makeJson(str);
+                        request.setAttribute("type", "column2d");
+                        makeJson("Medicine", "Medicine Name", "Number prescribed", "", str);
                         return SUCCESS;
                     }
                     else{
@@ -229,10 +243,7 @@ public class AppointmentAction extends GenericAction{
                 else{
                     addActionError("Statistics build fail");
                     return INPUT;
-                }
-                
-                return SUCCESS;
-                
+                } 
             }
         }
         catch(HibernateException e){
