@@ -44,11 +44,11 @@
 		<div class="container-fluid">
 			<h1 align="center"><font face="roboto">Archives</font></h1>
 
-			<div class="table-responsive">
+			<div class=" table table-responsive">
 				<table class="table table-bordered table-hover table-inverse table-striped">
 					<thead>
 						<tr>
-							<th>Delete</th>
+							
 							<th>#</th>
 							<th>reason</th>
 							<th>Owner Name</th>
@@ -57,18 +57,16 @@
 						</tr>
 					</thead>
 					<tbody>
-						<s:iterator value="#session.archive" var="record">
+						<s:iterator value="#session.archives" var="record">
 
 
 							<tr>
-								<td>     
-                                                                    <button type="button" data-id="<s:property value="#record.controlNumber"/>" class="btn btn-danger btn-block" data-toggle="modal" data-target="#confirmDelete">Delete</button>
-								</td>
-								<td><s:property value="#record.customerid"/></td>
-								<td><s:property value="#record.reason"/></td>
-								<td><s:property value="#record.name" /></td>
-								<td><s:property value="#record.address" /></td>
-								<td><s:property value="#record.contactNumber" /></td>
+								
+								<td>a<s:property value="#record.customerid"/></td>
+								<td>a<s:property value="#record.reason"/></td>
+								<td>a<s:property value="#record.name" /></td>
+								<td>a<s:property value="#record.address" /></td>
+								<td>a<s:property value="#record.contactNumber" /></td>
 							</tr>
 						</s:iterator>
 						<!-INSERT TABLE BODY HERE->
