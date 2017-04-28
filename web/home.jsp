@@ -102,7 +102,7 @@
 										<s:textfield name="dateInput3" id="date2" placeholder="To" />
 									</div>
 									<div class="form-group">
-										<s:select cssClass="text text-block" name="statType" list="{'Breed','Appointment','Walk-in','Medicines','Status'}" headerKey="-1"/>
+										<s:select cssClass="text text-block" name="statType" list="{'Breed','Appointment','Walk-in','Medicine','Status'}" headerKey="-1"/>
 									</div>
 									<div class="form-group">
 										<s:submit cssClass="btn btn-primary btn-sm" value="View" />

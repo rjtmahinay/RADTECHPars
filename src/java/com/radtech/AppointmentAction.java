@@ -186,6 +186,44 @@ public class AppointmentAction extends GenericAction{
                         return INPUT;
                     }
                 }
+                else if(app.getStatType().equals("Medicine")){
+                    System.out.println("I am inside Medicine");
+                    HashMap<String, Integer> meds = new HashMap<String, Integer>();
+                    List entries = session.createCriteria(Consultation.class)
+                            .add(Restrictions.ge("consultationDate", from))
+                            .add(Restrictions.le("consultationDate", to))
+                            .list();
+                    for(Object o: entries){
+                        Consultation consult = (Consultation)o;
+                        hiberialize(consult.getMedicines());
+                        for(Object oo: consult.getMedicines()){
+                            Medicine med = (Medicine)oo;
+                            String medName = med.getMedicineName();
+                            if(meds.get(medName)==null){
+                                meds.put(medName, 1);
+                            }
+                            else{
+                                int x = meds.get(medName);
+                                meds.put(medName, ++x);
+                            }
+                        }
+                    }
+                    // such as
+                    for (Map.Entry<String, Integer> pair : meds.entrySet()) {
+                        System.out.println("For key " + pair.getKey());
+                        str += pair.getKey() +","+ pair.getValue()+";";
+                    }
+                    if(str.length()>0){
+                        str = str.substring(0, str.length()-1);
+                        System.out.println("Meds " + str);
+                        makeJson(str);
+                        return SUCCESS;
+                    }
+                    else{
+                        addActionError("Stat table cannot be built");
+                        return INPUT;
+                    }
+                }
                 else{
                     addActionError("Statistics build fail");
                     return INPUT;
