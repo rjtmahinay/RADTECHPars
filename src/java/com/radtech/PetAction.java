@@ -71,7 +71,6 @@ public class PetAction extends GenericAction{
 			addActionError("Pet not found!");
 			return INPUT;
 		}
-		
 	}
 }
 //pet

@@ -42,11 +42,11 @@
 					
 				</thead>
 				<tbody>
-				<s:iterator value="%{#session.consultations}">	
+				<s:iterator value="%{#session.consultations}" var="cons">	
 				<tr>
-					<td>a<s:date name="%{#session.consultations.consultationDate}"/></td>
-					<td>a<s:property value="%{#session.colsultations.diagnosis}" /></td>
-					<td>a<s:property  value="%{#session.colsultations.}" /></td>
+					<td>a<s:date name="#cons.consultationDate"/></td>
+					<td>a<s:property value="#cons.diagnosis" /></td>
+					<td>a<s:property  value="#cons.status" /></td>
 				</tr>
 				</s:iterator>
 				<tr>
