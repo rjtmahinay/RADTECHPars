@@ -64,7 +64,11 @@ public class PetAction extends GenericAction{
 		if(session.get(Pet.class, l)!= null){
 			Pet p = (Pet)session.load(Pet.class, l);
 			hiberialize(p.getConsultations());
+			for(Object o:p.getConsultations()){
+				hiberialize(((Consultation)o).getMedicines());
+			}
 			putMap("consultations", p.getConsultations());
+			
 			return SUCCESS;
 		}
 		else{

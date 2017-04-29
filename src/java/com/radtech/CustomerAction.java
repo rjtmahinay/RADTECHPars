@@ -197,6 +197,7 @@ public class CustomerAction extends GenericAction{
                 session.delete(c);
                 tx.commit();
                 refresh();
+		putMap("archive", session.createCriteria(Archive.class).list());
                 return SUCCESS;
             }
         }

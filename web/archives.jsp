@@ -57,16 +57,16 @@
 						</tr>
 					</thead>
 					<tbody>
-						<s:iterator value="#session.archives" var="record">
+						<s:iterator value="#session.archive" var="record">
 
 
 							<tr>
 								
-								<td>a<s:property value="#record.customerid"/></td>
-								<td>a<s:property value="#record.reason"/></td>
-								<td>a<s:property value="#record.name" /></td>
-								<td>a<s:property value="#record.address" /></td>
-								<td>a<s:property value="#record.contactNumber" /></td>
+								<td><s:property value="#record.archiveId"/></td>
+								<td><s:property value="#record.reason"/></td>
+								<td><s:property value="#record.name" /></td>
+								<td><s:property value="#record.address" /></td>
+								<td><s:property value="#record.contactNumber" /></td>
 							</tr>
 						</s:iterator>
 						<!-INSERT TABLE BODY HERE->

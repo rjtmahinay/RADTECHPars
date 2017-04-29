@@ -46,7 +46,12 @@
 				<tr>
 					<td><s:date name="#cons.consultationDate" format="MM/dd/yyyy"/></td>
 					<td><s:property value="#cons.diagnosis" /></td>
-					<td><s:property  value="#cons.medicines" /></td>
+					<td>
+						<s:iterator value="%{#cons.medicines} " var="meds">
+						<s:property  value="#meds.medicineName" />
+						<p>a</p>
+						</s:iterator>
+					</td>
 				</tr>
 				</s:iterator>
 				<tr>
