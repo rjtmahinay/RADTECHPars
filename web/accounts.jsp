@@ -37,6 +37,9 @@
 				<s:if test="%{#session.currentUser.userType.equals('doctor')}">
 					<div class="col-md-4">
 				</s:if>
+				<s:if test="%{#session.currentUser.userType.equals('admin')}">
+					<div class="col-md-4">
+				</s:if>		
 				<s:if test="%{#session.currentUser.userType.equals('assistant')}">
 					<div class="col-md-3">
 				</s:if>		

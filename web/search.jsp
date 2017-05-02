@@ -76,7 +76,7 @@
 								</s:url>
 								<td>       
 									<s:if test="%{#session.currentUser.userType.equals('assistant')}">
-										<s:a href="%{rec}"><button class="btn btn-block btn-primary" type="submit" name="action">Appointment</button></s:a>
+										<s:a href="%{rec}"><button class="btn btn-block btn-primary" type="submit" name="action">View</button></s:a>
 									</s:if>
 
 									<s:if test="%{#session.currentUser.userType.equals('doctor')}">

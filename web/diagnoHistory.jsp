@@ -32,7 +32,7 @@
 	<body>
 		<s:include value="home.jsp"/>
 		<div class="container-fluid">
-			<h1>Diagnosis History of <s:property value="%{#session.}"/></h1>
+			<h1><s:property value="%{#session.consultations.name}"/></h1>
 			<div class="table table-responsive">
 			<table class="table table-bordered table-striped ">
 				<thead>
@@ -42,23 +42,20 @@
 					
 				</thead>
 				<tbody>
-				<s:iterator value="%{#session.consultations}" var="cons">	
+				<s:iterator value="%{#session.consultations}" var="cons" status="count">	
+				<%--<s:if test="#count.count==1">
+				</s:if>--%>
+				
 				<tr>
 					<td><s:date name="#cons.consultationDate" format="MM/dd/yyyy"/></td>
 					<td><s:property value="#cons.diagnosis" /></td>
-					<td>
-						<s:iterator value="%{#cons.medicines} " var="meds">
-						<s:property  value="#meds.medicineName" />
-						<p>a</p>
-						</s:iterator>
-					</td>
+					<td><s:property value="#cons.medicines"/></td>
+					
 				</tr>
+				
+				
 				</s:iterator>
-				<tr>
-					<td>03/28/1997</td>
-					<td>some diagnosis here</td>
-					<td>drug1, drug2, drug3, drugs...</td>
-				</tr>
+				
 				</tbody>
 			</table>
 			</div>

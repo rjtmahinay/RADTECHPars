@@ -81,9 +81,11 @@
 				<div class="col-md-5"></div>
 				<div class="col-md-1">
 					<br>
+					<s:if test="%{#session.currentUser.userType.equals('doctor')}">
 					<p align="right"><button class="btn btn-primary btn-sm btn-block" 
 								onClick="window.open('historize.action?input1=<s:property value="#session.currentConsultation.pet.petId"/>'); 
 								return false;"><span class="icon">History</span></button></p>
+					</s:if>
 				</div>
 			</div>	
 			</font>
@@ -123,11 +125,11 @@
 							<div class="table table-responsive">
 								<table class="table table-bordered table-condensed">
 									<tr>
-										<td>Temperature: </td>
+										<td>Temperature(°C): </td>
 										<td><center><s:textfield name="input1" placeholder=""/></center></td>
 									</tr>
 									<tr>
-										<td>Weight: </td>
+										<td>Weight(kg): </td>
 										<td><center><s:textfield name="input2" placeholder=""/></center></td>
 									</tr>
 									<tr>
@@ -176,9 +178,13 @@
 
 					<s:if test="%{#session.currentUser.userType.equals('doctor')}">
 							<div class="panel panel-default">
+								<p> </p><br>
+<!--								
+
 								<div class="panel-heading">
-									<center><s:property value="%{#session.currentConsultation.pet.name}" /></center>
-								</div>
+									
+									<%--<center><s:property value="%{#session.currentConsultation.pet.name}" /></center>--%>
+								</div>-->
 								<div class="panel-body">
 									<div class="table table-responsive">
 										<table class="table table-bordered table-condensed">
@@ -190,11 +196,11 @@
 											</thead>	
 
 											<tr>
-												<td>Temperature: </td>
+												<td>Temperature(°C): </td>
 												<td><center><s:property value="#session.currentConsultation.temperature"/></center></td>
 											</tr>
 											<tr>
-												<td>Weight: </td>
+												<td>Weight(kg): </td>
 												<td><center><s:property value="#session.currentConsultation.weight"/></center></td>
 											</tr>
 											<tr>

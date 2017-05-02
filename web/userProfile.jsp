@@ -185,7 +185,7 @@
 
 							<div class="modal-header">
 								<button type="button" class="close" data-dismiss="modal">&times;</button>
-								<h3 class="modal-title">Add Record</h3>
+								<h3 class="modal-title">Add Pet</h3>
 							</div>
 
 							<!-INSERT FORM ACTION HERE->

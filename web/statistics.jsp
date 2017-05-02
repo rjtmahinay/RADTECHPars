@@ -39,8 +39,8 @@
                         var fusioncharts = new FusionCharts({
                             type: '${type}',
                             renderAt: 'chartContainer',
-                            width: '500',
-                            height: '300',
+                            width: '750',
+                            height: '500',
                             dataFormat: 'jsonurl',
                             dataSource: 'stat.json'
                         });

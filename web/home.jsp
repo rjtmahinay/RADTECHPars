@@ -69,6 +69,7 @@
 						<li><a href="search.jsp">Profiles <span class="glyphicon glyphicon-user"></span></a></li>
 						<%--<li><s:a href="statistics.jsp">Statistics <span class="glyphicon glyphicon-stats"></span></s:a></li>--%>
 						<li><a href="#" data-toggle="modal" data-target="#stats">Statistics <span class="glyphicon glyphicon-stats"></span></a></li>
+						<s:url acrion="">
 						<li><a href="archives.jsp">Archives <span class="glyphicon glyphicon-trash"></span></a></li>
 					</s:if>	
 					

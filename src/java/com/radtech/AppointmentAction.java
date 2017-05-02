@@ -110,7 +110,7 @@ public class AppointmentAction extends GenericAction{
                     }
                     System.out.println(str);
                     request.setAttribute("type", "column2d");
-                    makeJson("Appointments", "Month", "Number of appointments", "Pax",str);
+                    makeJson("Appointments", "Month", "Number of appointments", "",str);
                     return SUCCESS;
                 }
                 else if(app.getStatType().equals("Status")){
@@ -161,7 +161,7 @@ public class AppointmentAction extends GenericAction{
                     }
                     System.out.println(str);
                     request.setAttribute("type", "column2d");
-                    makeJson("Number of New or walk-in customers", "Month", "Number of customers", "PAX", str);
+                    makeJson("Number of New or walk-in customers", "Month", "Number of customers", "", str);
                     return SUCCESS;
                 }
                 else if(app.getStatType().equals("Breed")){
@@ -193,7 +193,7 @@ public class AppointmentAction extends GenericAction{
                         str = str.substring(0, str.length()-1);
                         System.out.println("Breeds " + str);
                         request.setAttribute("type", "pie2d");
-                        makeJson("Breed of consulting pets", "Breed", "Number of pets", "Breed", str);
+                        makeJson("Breed of consulting pets", "Breed", "Number of pets", "", str);
                         return SUCCESS;
                     }
                     else{
@@ -231,7 +231,7 @@ public class AppointmentAction extends GenericAction{
                     if(str.length()>0){
                         str = str.substring(0, str.length()-1);
                         System.out.println("Meds " + str);
-                        request.setAttribute("type", "column2d");
+                        request.setAttribute("type", "pie2d");
                         makeJson("Medicine", "Medicine Name", "Number prescribed", "", str);
                         return SUCCESS;
                     }
