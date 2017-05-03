@@ -1,7 +1,10 @@
 package com.radtech;
 
+import static com.opensymphony.xwork2.Action.INPUT;
+import static com.opensymphony.xwork2.Action.SUCCESS;
 import java.util.ArrayList;
 import org.hibernate.HibernateException;
+import org.hibernate.criterion.Restrictions;
 
 public class PetAction extends GenericAction{
     Pet pet = new Pet();
@@ -44,9 +47,7 @@ public class PetAction extends GenericAction{
             if(session!=null) session.close();
         }
     }
-    public String editPet(){
-        return addPet();
-    }
+    
     
     //function processes
     public String tempet(){
@@ -67,7 +68,7 @@ public class PetAction extends GenericAction{
 			for(Object o:p.getConsultations()){
 				hiberialize(((Consultation)o).getMedicines());
 			}
-			putMap("consultations", p.getConsultations());
+			putMap("consultations", session.createCriteria(Consultation.class, "consultation").createAlias("consultation.pet", "pet").add(Restrictions.eq("pet.petId",p.getPetId())).add(Restrictions.isNotNull("diagnosis")).list());
 			
 			return SUCCESS;
 		}
@@ -76,7 +77,56 @@ public class PetAction extends GenericAction{
 			return INPUT;
 		}
 	}
+	    public String fetchPet(){
+            try{
+                    session = getSession();
+//                    Pet p = (Pet)session.load(Pet.class, );
+//                    System.out.println(p.toString());
+//                    sessionmap.put("currentPet", p);
+                    return SUCCESS;
+            }
+            catch(HibernateException e){
+                    e.printStackTrace();
+            }
+            finally{
+                    if(session != null) session.close();
+            }
+            return INPUT;
+    }
+	
+	public String editPet(){
+		session = getSession();
+		tx = session.getTransaction();
+		try{
+			tx.begin();
+			System.out.println("Input is " + pet.toString());
+			Pet p = (Pet)session.load(Pet.class, Long.parseLong(pet.getInput3()));
+			p.setName(pet.getName());
+			p.setBreed(pet.getBreed());
+			p.setColor(pet.getColor());
+			p.setSex(pet.getSex());
+			p.setDateOfBirth(pet.getDateOfBirth());
+			System.out.println("Should be output " + p.toString());
+			session.merge(p);
+			tx.commit();
+			refresh();
+			putMap("currentPet", p);
+			return SUCCESS;
+            }
+            catch(HibernateException e){
+                    e.printStackTrace();
+                    tx.rollback();
+                    addActionError("Edit not complete");
+                    return INPUT;
+            }
+            finally{
+                    if(session!= null)session.close();
+            }
+    }
 }
+
+
+
 //pet
 //	add pet
 //	edit pet

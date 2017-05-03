@@ -13,7 +13,7 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		
-		<link rel="stylesheet" href="/css/bootstrap.min.css">
+		<link rel="stylesheet" href="css/bootstrap.min.css">
 		<link rel="stylesheet" href="css/jquery-ui.css">
 		<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 		<link rel="icon" href="favicon.ico" type="image/x-icon">
@@ -69,13 +69,25 @@
 						<li><a href="search.jsp">Profiles <span class="glyphicon glyphicon-user"></span></a></li>
 						<%--<li><s:a href="statistics.jsp">Statistics <span class="glyphicon glyphicon-stats"></span></s:a></li>--%>
 						<li><a href="#" data-toggle="modal" data-target="#stats">Statistics <span class="glyphicon glyphicon-stats"></span></a></li>
-						<s:url acrion="">
+						
 						<li><a href="archives.jsp">Archives <span class="glyphicon glyphicon-trash"></span></a></li>
 					</s:if>	
 					
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
-					<li><s:a href="accounts.jsp"><s:property value="%{#session.currentUser.userType}"/> <s:property value="%{#session.currentUser.name}"/>  <span class="glyphicon glyphicon-cog"></span> </s:a></li>
+					<li><s:a href="accounts.jsp">
+							<s:if test="%{#session.currentUser.userType.equals('assistant')}">
+								Assistant
+							</s:if> 
+							<s:if test="%{#session.currentUser.userType.equals('doctor')}">
+								Doctor
+							</s:if>
+							<s:if test="%{#session.currentUser.userType.equals('admin')}">
+								Admin
+							</s:if>	
+								
+								
+								<s:property value="%{#session.currentUser.name}"/>  <span class="glyphicon glyphicon-cog"></span> </s:a></li>
 					<s:url action='logout' var="logout"/>
 					<li><s:a href="%{logout}"> Logout <span class="glyphicon glyphicon-log-in"/></s:a></li>
 				</ul>        

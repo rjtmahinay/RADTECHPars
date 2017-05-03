@@ -30,7 +30,7 @@
 		<title>Diagnosis History</title>
 	</head>
 	<body>
-		<s:include value="home.jsp"/>
+		
 		<div class="container-fluid">
 			<h1><s:property value="%{#session.consultations.name}"/></h1>
 			<div class="table table-responsive">
@@ -46,8 +46,18 @@
 				<%--<s:if test="#count.count==1">
 				</s:if>--%>
 				
+				
+				
 				<tr>
-					<td><s:date name="#cons.consultationDate" format="MM/dd/yyyy"/></td>
+					<td>	
+						<s:if test="%{#cons.medicines.equals('')}">
+							PENDING
+						</s:if>
+						<s:else>
+							<s:date name="#cons.consultationDate" format="MM/dd/yyyy"/>
+						</s:else>
+					</td>
+						
 					<td><s:property value="#cons.diagnosis" /></td>
 					<td><s:property value="#cons.medicines"/></td>
 					

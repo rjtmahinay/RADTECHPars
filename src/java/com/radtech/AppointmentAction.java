@@ -272,6 +272,7 @@ public class AppointmentAction extends GenericAction{
                 Consultation c = (Consultation)o;
                 System.out.println("->consultation is " + c.toString());
                 if(c.getConsultationDate()==null){
+		c.setConsultationDate(new java.util.Date());
                     c.setEyes("N/A");
                     c.setEars("N/A");
                     c.setNose("N/A");
@@ -279,7 +280,7 @@ public class AppointmentAction extends GenericAction{
                     c.setDerma("N/A");
                     c.setGums("N/A");
                     c.setLymphNodes("N/A");
-                    c.setDiagnosis("N/A");
+                    c.setDiagnosis("Forced completion");
                     c.setWeight(0);
                     c.setTemperature(0);
                     c.setStatus("cancelled");
@@ -318,7 +319,18 @@ public class AppointmentAction extends GenericAction{
             hiberialize(appoint.getConsultations());
             for(Object o: appoint.getConsultations()){
                 Consultation c = (Consultation)o;
-                c.setStatus("cancelled");
+		c.setConsultationDate(new java.util.Date());
+                    c.setEyes("N/A");
+                    c.setEars("N/A");
+                    c.setNose("N/A");
+                    c.setThroat("N/A");
+                    c.setDerma("N/A");
+                    c.setGums("N/A");
+                    c.setLymphNodes("N/A");
+                    c.setDiagnosis("Cancelled");
+                    c.setWeight(0);
+                    c.setTemperature(0);
+                    c.setStatus("cancelled");
                 session.merge(c);
             }
             appoint.setStatus("cancelled");

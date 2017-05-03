@@ -123,6 +123,11 @@
                                                                 <div class="col-md-1"><button type="button" class="btn btn-success btn-block btn-sm" data-toggle="modal" data-target="#confirmComplete" 
                                                                     data-id="<s:property value="%{#record.appointmentId}"/>">Complete</button></div>
                                                             </s:if>
+								
+							<s:if test="%{#session.currentUser.userType.equals('admin')}">
+								<div class="col-md-1"></div>
+							</s:if>	
+								
 								<div class="col-md-4"><s:property value="%{#record.customer.name}"/></div>
 								<div class="col-md-3"><s:date name="#record.appointmentDate" format="MM/dd/yyyy"/></div>
 								<div class="col-md-4"><s:property value="#record.transactionType"/></div>

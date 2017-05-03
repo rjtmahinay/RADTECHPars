@@ -250,6 +250,7 @@
 				<table class="table table-striped table-bordered table-hover">
 					<thead>
 						<th width="2%"></th>
+						<th width="2%">Edit</th>
 						<%--<th width="8%"></th>--%>
 						<th>Name</th>
 						<th>Breed</th>
@@ -262,6 +263,8 @@
 						<tr>
 							<td><s:checkbox fieldValue="%{#pet.petId}" name="input3"/></td>
 							<%--<td><button class="btn btn-block btn-primary btn-sm" type="submit" name="action">History</button></td>--%>
+							<s:url action="fetchPet" var="fet"/>
+							<td><s:a href="%{fet}"><button class="btn btn-primary"><span class="glyphicon glyphicon-edit"></span></button></s:a></td>
 							<td><s:property value="#pet.name"/></td>
 							<td><s:property value="#pet.breed"/></td>
 							<td><s:property value="#pet.color"/></td>

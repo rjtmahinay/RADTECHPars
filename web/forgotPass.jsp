@@ -38,19 +38,50 @@
 			<!--NO ACTION YET-->
 
 				<s:form action="forgotPassword" theme="bootstrap" cssClass="form">
+				<div class="row">
+					<div class="col-md-4"></div>
+					<div class="col-md-4">	
+						<div class="panel panel-default">
+							<center>
+								<div class="panel-heading">
+									<h4>Secret Question: </h4>
+								</div>
+								<div class="panel-body">
+								<div class="table table-responsive">
+								<s:hidden name="username" value="%{#session.tempUser.username}"/>
+								<table class="table table-hover">
+								<tr>
+									<td>Username :</td> 
+									<td><s:property value="#session.tempUser.username"/><br></td>
+								</tr>
+								<tr>
+									<td>Question :</td> 
+									<td><s:property value="#session.tempUser.securityQuestion"/></td>
+								</tr>
+								<tr>
+									<td colspan="2">
+									<center><s:password name="securityAnswer" placeholder="Enter Answer Here" /></center>
+									</td>
+								</tr>
+								<tr>
+									<td colspan="2">
+										<center><s:submit cssClass="btn btn-primary" value="Submit" /></center>
+									</td>
+								</tr>
+								</table>
+								</div>
+								
+								
+								<s:actionerror/>
+								</div>
+								
+							</center>
 
-				<!--EMPTY PA YUNG LIST-->
-				<br>
-				<center>
-                                    <h3>Secret Question: </h3>
-                                    <s:hidden name="username" value="%{#session.tempUser.username}"/>
-                                    Username : <s:property value="#session.tempUser.username"/></br>
-                                    Question : <s:property value="#session.tempUser.securityQuestion"/></br>
-                                    <s:password name="securityAnswer" placeholder="Enter Answer Here" />
-                                    <s:submit cssClass="btn btn-primary" value="Submit" />
-                                    <s:actionerror/>
-				</center>
+						</div>
+					</div>	
+					<div class="col-md-4"></div>
 				</s:form>
+				</div>	
 
 
 

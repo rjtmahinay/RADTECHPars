@@ -111,6 +111,15 @@
                         <result name="input">petVitals.jsp</result>
 		</action>
 		
+		<action name="fetchPet" class="com.radtech.PetAction" method="fetchPet">
+                        <result>editPet.jsp</result>
+                        <result name="input">userProfile.jsp</result>
+		</action>
+		
+		<action name="editPet" class="com.radtech.PetAction" method="editPet">
+                        <result>userProfile.jsp</result>
+                        <result name="input">editPet.jsp</result>
+		</action>
 		
 		
 		
