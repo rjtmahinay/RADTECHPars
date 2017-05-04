@@ -2,6 +2,7 @@ package com.radtech;
 
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -74,6 +75,7 @@ public class AppointmentAction extends GenericAction{
         session = getSession();
         tx = session.getTransaction();
         HttpServletRequest request = ServletActionContext.getRequest();
+	ArrayList<Report> al = new ArrayList<Report>();
         try{
             Date from = toDate(app.getDateInput2());
             Date to = toDate(app.getDateInput3());
@@ -93,6 +95,12 @@ public class AppointmentAction extends GenericAction{
                             .add(Restrictions.ge("appointmentDate", from))
                             .add(Restrictions.le("appointmentDate", to))
                             .list();
+					Report rep = new Report();
+			rep.setS1(app.getCustomer().getName());
+			rep.setD1(app.getAppointmentDate());
+			rep.setS2(app.getCustomer().getAddress());
+			rep.setS3("" + app.getCustomer().getContactNumber());
+			al.add(rep);
                     Calendar cal = Calendar.getInstance();
                     for(Object o: appointments){
                         Appointment app = (Appointment)o;
@@ -111,6 +119,9 @@ public class AppointmentAction extends GenericAction{
                     System.out.println(str);
                     request.setAttribute("type", "column2d");
                     makeJson("Appointments", "Month", "Number of appointments", "",str);
+					putMap("reports:",al);
+					putMap("display", "appointments");
+					
                     return SUCCESS;
                 }
                 else if(app.getStatType().equals("Status")){
@@ -122,6 +133,11 @@ public class AppointmentAction extends GenericAction{
                             .list();
                     for(Object o: appointments){
                         Appointment appointment = (Appointment)o;
+						Report rep = new Report();
+						rep.setS1(appointment.getCustomer().getName());
+						rep.setD1(appointment.getAppointmentDate());
+						rep.setS2(appointment.getStatus());
+						al.add(rep);
                         System.out.println("Appointment is " + appointment.toString());
                         String strr = appointment.getStatus();
                         if(strr.equals("pending")) number[0]+=1;
@@ -136,6 +152,8 @@ public class AppointmentAction extends GenericAction{
                     System.out.println(str);
                     request.setAttribute("type", "pie2d");
                     makeJson("Status of appointments", "Appointments", "Status", "appointments", str);
+					putMap("reports", al);
+					putMap("display", "status");
                     return SUCCESS;
                 }
                 else if(app.getStatType().equals("Walk-in")){
@@ -148,6 +166,12 @@ public class AppointmentAction extends GenericAction{
                     for(Object o: appointments){
                         Appointment app = (Appointment)o;
                         cal.setTime(app.getAppointmentDate());
+			Report rep = new Report();
+			rep.setS1(app.getCustomer().getName());
+			rep.setD1(app.getAppointmentDate());
+			rep.setS2(app.getCustomer().getAddress());
+			rep.setS3("" + app.getCustomer().getContactNumber());
+			al.add(rep);
                         int x = cal.get(Calendar.MONTH);
                         if(app.getTransactionType().equals("walk-in")) number[x]+=1;
                     }
@@ -162,11 +186,15 @@ public class AppointmentAction extends GenericAction{
                     System.out.println(str);
                     request.setAttribute("type", "column2d");
                     makeJson("Number of New or walk-in customers", "Month", "Number of customers", "", str);
+					putMap("reports", al);
+					putMap("display", "walk-in");
                     return SUCCESS;
                 }
+				//Breeds
                 else if(app.getStatType().equals("Breed")){
                     System.out.println("I am inside breed loop");
                     HashMap<String, Integer> breeds = new HashMap<String, Integer>();
+		HashMap<Long, String>listedPets = new HashMap<Long, String>();
                     List entries = session.createCriteria(Consultation.class, "consultation")
                             .createAlias("consultation.appointment", "appointment")
                             .add(Restrictions.ge("appointment.appointmentDate", from))
@@ -178,10 +206,19 @@ public class AppointmentAction extends GenericAction{
                         String petBreed = consult.getPet().getBreed();
                         if(breeds.get(petBreed)==null){
                             breeds.put(petBreed, 1);
+							Report rep = new Report();
+							rep.setS1(consult.getPet().getName());
+							rep.setS2(consult.getPet().getOwner().getName());
+							rep.setS3(consult.getPet().getBreed());
+							al.add(rep);
+			listedPets.put(consult.getPet().getPetId(), consult.getPet().getBreed());
                         }
                         else{
+			if(listedPets.get(consult.getPet().getPetId())==null){
                             int x = breeds.get(petBreed);
                             breeds.put(petBreed, ++x);
+			listedPets.put(consult.getPet().getPetId(), consult.getPet().getBreed());
+			}
                         }
                     }
                     // such as
@@ -194,6 +231,8 @@ public class AppointmentAction extends GenericAction{
                         System.out.println("Breeds " + str);
                         request.setAttribute("type", "pie2d");
                         makeJson("Breed of consulting pets", "Breed", "Number of pets", "", str);
+			putMap("reports", al);
+			putMap("display", "breed");
                         return SUCCESS;
                     }
                     else{
@@ -216,10 +255,23 @@ public class AppointmentAction extends GenericAction{
                             String medName = med.getMedicineName();
                             if(meds.get(medName)==null){
                                 meds.put(medName, 1);
+				Report rep = new Report();
+				rep.setS1(consult.getPet().getName());
+				rep.setS2(consult.getPet().getOwner().getName());
+				rep.setS3(medName);
+				rep.setD1(consult.getConsultationDate());
+				al.add(rep);
                             }
                             else{
                                 int x = meds.get(medName);
                                 meds.put(medName, ++x);
+								meds.put(medName, 1);
+				Report rep = new Report();
+				rep.setS1(consult.getPet().getName());
+				rep.setS2(consult.getPet().getOwner().getName());
+				rep.setS3(medName);
+				rep.setD1(consult.getConsultationDate());
+				al.add(rep);
                             }
                         }
                     }
@@ -233,6 +285,8 @@ public class AppointmentAction extends GenericAction{
                         System.out.println("Meds " + str);
                         request.setAttribute("type", "pie2d");
                         makeJson("Medicine", "Medicine Name", "Number prescribed", "", str);
+						putMap("reports", al);
+						putMap("display", "medicine");
                         return SUCCESS;
                     }
                     else{
