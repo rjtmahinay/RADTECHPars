@@ -86,14 +86,16 @@
 						<div class="table table-responsive">
 							<table class="table table-bordered table-striped table-hover">
 								<thead>
-									<th width="32.5%">Customer Name</th>
-									<th width="32%">Pet Name</th>
+									<th width="5%">#</th>
+									<th width="30.5%">Customer Name</th>
+									<th width="31%">Pet Name</th>
 									<th>Breed</th>
 									
 								</thead>
 								<tbody>
-									<s:iterator value="#session.reports" var="stats">
+									<s:iterator value="#session.reports" var="stats" status="count">
 									<tr>
+										<td width="5%"><s:property value="#count.count"/></td>
 										<td><s:property value="#stats.S2"/></td>
 										<td><s:property value="#stats.S1"/></td>
 										<td><s:property value="#stats.S3"/></td>
@@ -109,16 +111,18 @@
 						<div class="table table-responsive">
 							<table class="table table-bordered table-striped table-hover">
 								<thead>
-									<th width="32.5%">Date</th>
-									<th width="32%">Customer Name</th>
+									<th width="5%">#</th>
+									<th width="30.5%">Date</th>
+									<th width="31%">Customer Name</th>
 									<th>Status</th>
 									
 									
 									
 								</thead>
 								<tbody>
-									<s:iterator value="#session.reports" var="stats">
+									<s:iterator value="#session.reports" var="stats" status="count">
 									<tr>
+										<td width="5%"><s:property value="#count.count"/></td>
 										<td><s:date name="#stats.S3" format="MM/dd/yyyy"/></td>
 										<td><s:property value="#stats.S1"/></td>
 										<td><s:property value="#stats.S2"/></td>
@@ -136,14 +140,16 @@
 						<div class="table table-responsive">
 							<table class="table table-bordered table-striped table-hover">
 								<thead>
-									<th width="32.5%">Date</th>
-									<th width="32%">Customer Name</th>
+									<th width="5%">#</th>
+									<th width="30.5%">Date</th>
+									<th width="31%">Customer Name</th>
 									<th>Pet Name</th>
 									
 								</thead>
 								<tbody>
-									<s:iterator value="#session.reports" var="stats">
+									<s:iterator value="#session.reports" var="stats" status="count">
 									<tr>
+										<td width="5%"><s:property value="#count.count"/></td>
 										<td><s:property value="#stats.S2"/></td>
 										<td><s:property value="#stats.S1"/></td>
 										<td><s:property value="#stats.S3"/></td>
@@ -159,15 +165,17 @@
 						<div class="table table-responsive">
 							<table class="table table-bordered table-striped table-hover">
 								<thead>
-									<th width="32.5%">Customer Name</th>
-									<th width="32%">Address</th>
+									<th width="5%">#</th>
+									<th width="30.5%">Customer Name</th>
+									<th width="31%">Address</th>
 									<th>Contact Number</th>
 									
 									
 								</thead>
 								<tbody>
-									<s:iterator value="#session.reports" var="stats">
+									<s:iterator value="#session.reports" var="stats" status="count">
 									<tr>
+										<td width="5%"><s:property value="#count.count"/></td>
 										<td><s:property value="#stats.S1"/></td>
 										<td><s:property value="#stats.S2"/></td>
 										<td><s:property value="#stats.S3"/></td>
@@ -183,15 +191,17 @@
 						<div class="table table-responsive">
 							<table class="table table-bordered table-striped table-hover">
 								<thead>
-									<th width="32.5%">Customer Name</th>
-									<th width="32%">Pet Name</th>
+									<th width="5%">#</th>
+									<th width="30.5%">Customer Name</th>
+									<th width="31%">Pet Name</th>
 									<th>Medicine</th>
 									
 									
 								</thead>
 								<tbody>
-									<s:iterator value="#session.reports" var="stats">
+									<s:iterator value="#session.reports" var="stats" status="count">
 									<tr>
+										<td width="5%"><s:property value="#count.count"/></td>
 										<td><s:property value="#stats.S1"/></td>
 										<td><s:property value="#stats.S2"/></td>
 										<td><s:property value="#stats.S3"/></td>
