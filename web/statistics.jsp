@@ -27,6 +27,24 @@
 				height:100%;
 				width:100%;
 			}
+			tr {
+			width: 100%;
+			display: inline-table;
+			/*height:50px;*/
+			table-layout: fixed;
+
+			}
+			table{
+				height:500px;
+			}
+			
+			tbody{
+			  overflow-y: scroll;
+			  height: 460px;
+			  width: 95%;
+			  position: absolute;
+			}
+			
 		</style>
 		<title>Animal Station Statistics</title>
 <script type="text/javascript" src="js/fusioncharts.js"></script>
@@ -39,8 +57,8 @@
                         var fusioncharts = new FusionCharts({
                             type: '${type}',
                             renderAt: 'chartContainer',
-                            width: '750',
-                            height: '500',
+                            width: '650px',
+                            height: '500px',
                             dataFormat: 'jsonurl',
                             dataSource: 'stat.json'
                         });
@@ -59,25 +77,153 @@
 	<body>
 		<s:include value="home.jsp"/>
 		<div class="container-fluid">
-<!--			<div class="row">
-				<s:form action="viewStat" theme="bootstrap" cssClass="form">
-					<div class="col-md-3"></div>
-					<div class="col-md-2"><s:textfield name="dateInput1" id="date1" placeholder="From" /></div>
-					<div class="col-md-2"><s:textfield name="dateInput2" id="date2" placeholder="To" /></div>
-					<div class="col-md-1"><s:select cssClass="text text-block" name="type" list="{'Breeds','Appointments','Walk ins','Medicines','Cancels'}" headerKey="-1"/></div>
-					<div class="col-md-1"><s:submit cssClass="btn btn-primary btn-xs" value="View" /></div>
-				</s:form>
-			</div>-->
-			<center>
+
+			
 			<h1><font face="roboto">Animal Station Statistics</font></h1>
-	
-	
-			<div id="chartContainer">FusionCharts XT will load here!
-				<script>
-                                    fusioncharts.render();
-				</script>
+			<div class="row">
+				<div class="col-md-6">
+					<s:if test="%{#session.display.equals('breed')}">
+						<div class="table table-responsive">
+							<table class="table table-bordered table-striped table-hover">
+								<thead>
+									<th width="32.5%">Customer Name</th>
+									<th width="32%">Pet Name</th>
+									<th>Breed</th>
+									
+								</thead>
+								<tbody>
+									<s:iterator value="#session.reports" var="stats">
+									<tr>
+										<td><s:property value="#stats.S2"/></td>
+										<td><s:property value="#stats.S1"/></td>
+										<td><s:property value="#stats.S3"/></td>
+									</tr>
+									</s:iterator>
+								</tbody>
+								
+							</table>
+						</div>
+					</s:if>
+					
+					<s:if test="%{#session.display.equals('status')}">
+						<div class="table table-responsive">
+							<table class="table table-bordered table-striped table-hover">
+								<thead>
+									<th width="32.5%">Date</th>
+									<th width="32%">Customer Name</th>
+									<th>Status</th>
+									
+									
+									
+								</thead>
+								<tbody>
+									<s:iterator value="#session.reports" var="stats">
+									<tr>
+										<td><s:date name="#stats.S3" format="MM/dd/yyyy"/></td>
+										<td><s:property value="#stats.S1"/></td>
+										<td><s:property value="#stats.S2"/></td>
+										
+
+									</tr>
+									</s:iterator>
+								</tbody>
+								
+							</table>
+						</div>
+					</s:if>
+					
+					<s:if test="%{#session.display.equals('appointment')}">
+						<div class="table table-responsive">
+							<table class="table table-bordered table-striped table-hover">
+								<thead>
+									<th width="32.5%">Date</th>
+									<th width="32%">Customer Name</th>
+									<th>Pet Name</th>
+									
+								</thead>
+								<tbody>
+									<s:iterator value="#session.reports" var="stats">
+									<tr>
+										<td><s:property value="#stats.S2"/></td>
+										<td><s:property value="#stats.S1"/></td>
+										<td><s:property value="#stats.S3"/></td>
+									</tr>
+									</s:iterator>
+								</tbody>
+								
+							</table>
+						</div>
+					</s:if>
+					
+					<s:if test="%{#session.display.equals('walk-in')}">
+						<div class="table table-responsive">
+							<table class="table table-bordered table-striped table-hover">
+								<thead>
+									<th width="32.5%">Customer Name</th>
+									<th width="32%">Address</th>
+									<th>Contact Number</th>
+									
+									
+								</thead>
+								<tbody>
+									<s:iterator value="#session.reports" var="stats">
+									<tr>
+										<td><s:property value="#stats.S1"/></td>
+										<td><s:property value="#stats.S2"/></td>
+										<td><s:property value="#stats.S3"/></td>
+									</tr>
+									</s:iterator>
+								</tbody>
+								
+							</table>
+						</div>
+					</s:if>
+					
+					<s:if test="%{#session.display.equals('medicine')}">
+						<div class="table table-responsive">
+							<table class="table table-bordered table-striped table-hover">
+								<thead>
+									<th width="32.5%">Customer Name</th>
+									<th width="32%">Pet Name</th>
+									<th>Medicine</th>
+									
+									
+								</thead>
+								<tbody>
+									<s:iterator value="#session.reports" var="stats">
+									<tr>
+										<td><s:property value="#stats.S1"/></td>
+										<td><s:property value="#stats.S2"/></td>
+										<td><s:property value="#stats.S3"/></td>
+									</tr>
+									</s:iterator>
+								</tbody>
+								
+							</table>
+						</div>
+					</s:if>
+				
+				
+				
+				
+				
+				
+				
+				</div>
+				
+				
+<%--END OF FIRST HALF END OF FIRST HALF END OF FIRST HALF END OF FIRST HALF END OF FIRST HALF END OF FIRST HALF END OF FIRST HALF --%>					
+<%--END OF FIRST HALF END OF FIRST HALF END OF FIRST HALF END OF FIRST HALF END OF FIRST HALF END OF FIRST HALF END OF FIRST HALF --%>					
+<%--END OF FIRST HALF END OF FIRST HALF END OF FIRST HALF END OF FIRST HALF END OF FIRST HALF END OF FIRST HALF END OF FIRST HALF --%>					
+
+				<div class="col-md-6">
+					<div id="chartContainer">FusionCharts XT will load here!
+						<script>
+							fusioncharts.render();
+						</script>
+					</div>
+				</div>	
 			</div>
-			</center>
 		</div>	
 	</body>
 </html>

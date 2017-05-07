@@ -96,6 +96,8 @@ public class AppointmentAction extends GenericAction{
                             .add(Restrictions.le("appointmentDate", to))
                             .list();
 					Report rep = new Report();
+			hiberialize(app.getCustomer());
+					System.out.println(rep);
 			rep.setS1(app.getCustomer().getName());
 			rep.setD1(app.getAppointmentDate());
 			rep.setS2(app.getCustomer().getAddress());
