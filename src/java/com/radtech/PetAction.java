@@ -1,9 +1,22 @@
 package com.radtech;
 
+import com.google.gson.Gson;
 import static com.opensymphony.xwork2.Action.INPUT;
 import static com.opensymphony.xwork2.Action.SUCCESS;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.Writer;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Stack;
+import static org.apache.struts2.ServletActionContext.getServletContext;
 import org.hibernate.HibernateException;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
 public class PetAction extends GenericAction{
@@ -124,11 +137,124 @@ public class PetAction extends GenericAction{
             }
     }
     
-    public String petReport(){
-        //add visits per month
-        //meds
-        //temp
-        //weightd
+    public String petReport() throws IOException{
+        session = getSession();
+        Gson gson = new Gson();
+        if(pet != null){
+            System.out.println("Pet id is " + pet.getPetId());
+            List<Consultation> cons = session.createCriteria(Consultation.class, "cons")
+                    .createAlias("pet", "cons.pet")
+                    .add(Restrictions.eq("pet.petId", pet.getPetId()))
+                    .addOrder(Order.asc("consultationDate"))
+                    .add(Restrictions.isNotNull("consultationDate"))
+                    .add(Restrictions.eq("status", "completed"))
+                    .list();
+            System.out.println(cons.size());
+            String[] months = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
+            HashMap<String, Integer> monthVisit = new HashMap<String, Integer>();
+            HashMap<String, Integer> meds = new HashMap<String, Integer>();
+            String dates = "";
+            String temp = "";
+            String weight = "";
+            String medString="", visitString="";
+            
+            for(Consultation c: cons){
+                System.out.println(c.toString());
+                String month = months[c.getConsultationDate().getMonth()];
+                temp+= c.getTemperature() +" |";
+                weight += c.getWeight() + " |";
+                Calendar cal = Calendar.getInstance();
+                cal.setTime(c.getConsultationDate());
+                dates+= String.valueOf(cal.get(Calendar.DAY_OF_MONTH)) + "-" +month +
+                        "-"+ String.valueOf(cal.get(Calendar.YEAR)) + " |";
+                //check if month is on list
+                if(monthVisit.get(month)==null){
+                    monthVisit.put(month, 1);
+                }
+                //if its on list ,add 1
+                else{
+                    int x = monthVisit.get(month)+ 1;
+                    monthVisit.put(month, x);
+                }
+                //m,edicines
+                hiberialize(c.getMedicines());
+                for(Object oo: c.getMedicines()){
+                    Medicine m = (Medicine)oo;
+                    //check if medicine in list
+                    if(meds.get(m.getMedicineName())== null){
+                        meds.put(m.getMedicineName(), 1);
+                    }
+                    //else add1 on medicine
+                    else{
+                        int x = meds.get(m.getMedicineName()) + 1;
+                        meds.put(m.getMedicineName(), x);
+                    }
+                }   
+            }
+            if(temp.length()>0){
+                temp = temp.substring(0, temp.length()-1);
+            }
+            if(weight.length()>0){
+                weight = weight.substring(0, weight.length()-1);
+            }
+            if(dates.length()>0){
+                dates = dates.substring(0, dates.length()-1);
+            }
+
+            /*
+                *Creation of Medicine Pet Json
+                *
+                *
+                */
+                JsonChart medChart = new JsonChart("Pet's Medicines", "Medicine Name", "Number prescribed", "");
+
+                for (Map.Entry<String, Integer> pair : meds.entrySet()) {
+                    System.out.println("For key " + pair.getKey());
+                    medString += pair.getKey() +","+ pair.getValue()+";";
+                }
+                if(medString.length()>0) medString = medString.substring(0, medString.length()-1);
+                JsonObject medObject = new JsonObject(medChart, medString);
+                
+                /*
+                *Constructing Monthly visit stat
+                *
+                */
+                for (Map.Entry<String, Integer> pair : monthVisit.entrySet()) {
+                    System.out.println("For key " + pair.getKey());
+                    visitString += pair.getKey() +","+ pair.getValue()+";";
+                }
+                if(visitString.length()>0)visitString= visitString.substring(0, visitString.length()-1);
+                JsonChart visitChart = new JsonChart("Visit per Month", "Month", "Number of Visits", "");
+                JsonObject visitObject = new JsonObject(visitChart, visitString);
+                
+                /*
+                *Construct chart for weight and temp
+                */
+                JsonLineChart tempweight = new JsonLineChart(dates, "Temperature,"+ temp+";Weight,"+weight);
+                
+                //make json file for meds and visits
+                File petTempWeight = new File(getServletContext().getRealPath("/") + "/tempweight.json");
+                File medfile = new File(getServletContext().getRealPath("/") + "/petMeds.json");
+                File visfile = new File(getServletContext().getRealPath("/") + "/petVisits.json");
+                Writer writer1 = new FileWriter(medfile);
+                gson.toJson(medObject, writer1);
+                writer1.close();
+                
+                Writer writer2 = new FileWriter(visfile);
+                gson.toJson(visitObject, writer2);
+                writer2.close();
+                
+                Writer writer3 = new FileWriter(petTempWeight);
+                gson.toJson(tempweight, writer3);
+                writer3.close();
+                
+                //gson.toJson(tempweight, new FileWriter(new File(getPath()+"/tempweight.json")));
+            System.out.println("\nSize of Month visit is " + monthVisit.size() +"\n"
+                    + "Size of Meds is " + meds.size()+"\n"
+                            + dates + "\n" + temp + "\n" + weight);
+            putMap("display", "pet");
+            return SUCCESS;
+        }
         return INPUT;
     }
 }

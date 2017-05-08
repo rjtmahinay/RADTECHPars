@@ -20,4 +20,10 @@ public class JsonObject {
         Gson gson = new Gson();
         return this.toJson();
     }
+
+    @Override
+    public String toString() {
+        return "JsonObject{" + "chart=" + chart + ", data=" + data + '}';
+    }
+    
 }

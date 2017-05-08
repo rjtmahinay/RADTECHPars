@@ -3,158 +3,160 @@
 "http://struts.apache.org/dtds/struts-2.0.dtd">
 
 <struts>
-	<!-- Configuration for the default package. -->
-	<constant name="struts.devMode" value="false" />
-	<constant name="struts.ui.theme" value="bootstrap" />
-	<constant name="struts.ognl.allowStaticMethodAccess" value="true"/> 
-	<package name="default" extends="struts-default" namespace="/">
-            <interceptors>
-                <interceptor class="com.radtech.LoginInterceptor" name="loginInterceptor"/>
-                <interceptor-stack name="loginStack">
-                        <interceptor-ref name="loginInterceptor" />
-                        <interceptor-ref name="defaultStack" />
-                </interceptor-stack>
-            </interceptors>
-            <default-interceptor-ref name="loginStack"/>
-            <global-results>
-                <result name="login" type="redirect">index.jsp</result>
-            </global-results>
+    <!-- Configuration for the default package. -->
+    <constant name="struts.devMode" value="false" />
+    <constant name="struts.ui.theme" value="bootstrap" />
+    <constant name="struts.ognl.allowStaticMethodAccess" value="true"/> 
+    <package name="default" extends="struts-default" namespace="/">
+        <interceptors>
+            <interceptor class="com.radtech.LoginInterceptor" name="loginInterceptor"/>
+            <interceptor-stack name="loginStack">
+                <interceptor-ref name="loginInterceptor" />
+                <interceptor-ref name="defaultStack" />
+            </interceptor-stack>
+        </interceptors>
+        <default-interceptor-ref name="loginStack"/>
+        <global-results>
+            <result name="login" type="redirect">index.jsp</result>
+        </global-results>
 
 	
-<!--TRANSACTION NOT SUCCESSFULLY STARTED DAW PERO NAG ADD NAMAN YUNG PET PAG BUMALIK SA PAGE-->			
-		<action name="addPet" class="com.radtech.PetAction" method="addPet">
-			<result>userProfile.jsp</result>
-			<result name="input">userProfile.jsp</result>
-		</action>
+        <!--TRANSACTION NOT SUCCESSFULLY STARTED DAW PERO NAG ADD NAMAN YUNG PET PAG BUMALIK SA PAGE-->			
+        <action name="addPet" class="com.radtech.PetAction" method="addPet">
+            <result>userProfile.jsp</result>
+            <result name="input">userProfile.jsp</result>
+        </action>
 
-		<action name="login" class="com.radtech.UserAction" method="login">
-                        <result>schedule.jsp</result>
-                        <result name="input">index.jsp</result>
-		</action>
-                <action name="checkUser" class="com.radtech.UserAction" method="checkUser">
-                        <result>forgotPass.jsp</result>
-                        <result name="input">index.jsp</result>
-		</action>
-                <action name="forgotPassword" class="com.radtech.UserAction" method="forgotPassword">
-                        <result>index.jsp</result>
-                        <result name="input">forgotPass.jsp</result>
-		</action>
-                <action name="changePassword" class="com.radtech.UserAction" method="changePassword">
-                        <result>schedule.jsp</result>
-                        <result name="input">accounts.jsp</result>
-		</action>
-                <action name="signup" class="com.radtech.UserAction" method="signup">
-                        <result>schedule.jsp</result>
-                        <result name="input">accounts.jsp</result>
-		</action>
-                <action name="tempet" class="com.radtech.PetAction" method="tempet">
-                        <result>add.jsp</result>
-                        <result name="input">add.jsp</result>
-		</action>
-                <action name="addCustomer" class="com.radtech.CustomerAction" method="addCustomer">
-                        <result>schedule.jsp</result>
-                        <result name="input">add.jsp</result>
-		</action>
-                <action name="fetchCustomer" class="com.radtech.CustomerAction" method="fetchCustomer">
-                        <result>userProfile.jsp</result>
-                        <result name="input">welcome.jsp</result>
-		</action>
-                <action name="addAppointment" class="com.radtech.AppointmentAction" method="addAppointment">
-                        <result>schedule.jsp</result>
-                        <result name="input">userProfile.jsp</result>
-		</action>
-                 <action name="completeAppointment" class="com.radtech.AppointmentAction" method="completeAppointment">
-                        <result>schedule.jsp</result>
-                        <result name="input">schedule.jsp</result>
-		</action>
-                <action name="cancelAppointment" class="com.radtech.AppointmentAction" method="cancelAppointment">
-                        <result>schedule.jsp</result>
-                        <result name="input">schedule.jsp</result>
-		</action>
+        <action name="login" class="com.radtech.UserAction" method="login">
+            <result>schedule.jsp</result>
+            <result name="input">index.jsp</result>
+        </action>
+        <action name="checkUser" class="com.radtech.UserAction" method="checkUser">
+            <result>forgotPass.jsp</result>
+            <result name="input">index.jsp</result>
+        </action>
+        <action name="forgotPassword" class="com.radtech.UserAction" method="forgotPassword">
+            <result>index.jsp</result>
+            <result name="input">forgotPass.jsp</result>
+        </action>
+        <action name="changePassword" class="com.radtech.UserAction" method="changePassword">
+            <result>schedule.jsp</result>
+            <result name="input">accounts.jsp</result>
+        </action>
+        <action name="signup" class="com.radtech.UserAction" method="signup">
+            <result>schedule.jsp</result>
+            <result name="input">accounts.jsp</result>
+        </action>
+        <action name="tempet" class="com.radtech.PetAction" method="tempet">
+            <result>add.jsp</result>
+            <result name="input">add.jsp</result>
+        </action>
+        <action name="addCustomer" class="com.radtech.CustomerAction" method="addCustomer">
+            <result>schedule.jsp</result>
+            <result name="input">add.jsp</result>
+        </action>
+        <action name="fetchCustomer" class="com.radtech.CustomerAction" method="fetchCustomer">
+            <result>userProfile.jsp</result>
+            <result name="input">welcome.jsp</result>
+        </action>
+        <action name="addAppointment" class="com.radtech.AppointmentAction" method="addAppointment">
+            <result>schedule.jsp</result>
+            <result name="input">userProfile.jsp</result>
+        </action>
+        <action name="completeAppointment" class="com.radtech.AppointmentAction" method="completeAppointment">
+            <result>schedule.jsp</result>
+            <result name="input">schedule.jsp</result>
+        </action>
+        <action name="cancelAppointment" class="com.radtech.AppointmentAction" method="cancelAppointment">
+            <result>schedule.jsp</result>
+            <result name="input">schedule.jsp</result>
+        </action>
                 
-                <action name="getVitals" class="com.radtech.ConsultationAction" method="getVitals">
-                        <result>petVitals.jsp</result>
-                        <result name="input">schedule.jsp</result>
-		</action>
+        <action name="getVitals" class="com.radtech.ConsultationAction" method="getVitals">
+            <result>petVitals.jsp</result>
+            <result name="input">schedule.jsp</result>
+        </action>
                 
-                <action name="addDiagnosis" class="com.radtech.ConsultationAction" method="addDiagnosis">
-                        <result>schedule.jsp</result>
-                        <result name="input">petVitals.jsp</result>
-		</action>
+        <action name="addDiagnosis" class="com.radtech.ConsultationAction" method="addDiagnosis">
+            <result>schedule.jsp</result>
+            <result name="input">petVitals.jsp</result>
+        </action>
                 
-                <action name="setVitals" class="com.radtech.ConsultationAction" method="setVitals">
-                        <result>schedule.jsp</result>
-                        <result name="input">petVitals.jsp</result>
-		</action>
+        <action name="setVitals" class="com.radtech.ConsultationAction" method="setVitals">
+            <result>schedule.jsp</result>
+            <result name="input">petVitals.jsp</result>
+        </action>
 		
-		<action name="editCustomer" class="com.radtech.CustomerAction" method="editCustomer">
-                        <result>userProfile.jsp</result>
-                        <result name="input">userProfile.jsp</result>
-		</action>
-		<action name="toArchive" class="com.radtech.CustomerAction" method="toArchive">
-                        <result>archives.jsp</result>
-                        <result name="input">userProfile.jsp</result>
-		</action>
+        <action name="editCustomer" class="com.radtech.CustomerAction" method="editCustomer">
+            <result>userProfile.jsp</result>
+            <result name="input">userProfile.jsp</result>
+        </action>
+        <action name="toArchive" class="com.radtech.CustomerAction" method="toArchive">
+            <result>archives.jsp</result>
+            <result name="input">userProfile.jsp</result>
+        </action>
 		
-		<action name="historize" class="com.radtech.PetAction" method="historize">
-                        <result>diagnoHistory.jsp</result>
-                        <result name="input">userProfile.jsp</result>
-		</action>
+        <action name="historize" class="com.radtech.PetAction" method="historize">
+            <result>diagnoHistory.jsp</result>
+            <result name="input">userProfile.jsp</result>
+        </action>
 		
-		<action name="statize" class="com.radtech.AppointmentAction" method="statize">
-                        <result>statistics.jsp</result>
-                        <result name="input">schedule.jsp</result>
-		</action>
+        <action name="statize" class="com.radtech.AppointmentAction" method="statize">
+            <result>statistics.jsp</result>
+            <result name="input">schedule.jsp</result>
+        </action>
 		
-		<action name="tempMeds" class="com.radtech.MedicineAction" method="tempMeds">
-                        <result>petVitals.jsp</result>
-                        <result name="input">petVitals.jsp</result>
-		</action>
+        <action name="tempMeds" class="com.radtech.MedicineAction" method="tempMeds">
+            <result>petVitals.jsp</result>
+            <result name="input">petVitals.jsp</result>
+        </action>
 		
-		<action name="fetchPet" class="com.radtech.PetAction" method="fetchPet">
-                        <result>editPet.jsp</result>
-                        <result name="input">userProfile.jsp</result>
-		</action>
+        <action name="fetchPet" class="com.radtech.PetAction" method="fetchPet">
+            <result>editPet.jsp</result>
+            <result name="input">userProfile.jsp</result>
+        </action>
 		
-		<action name="editPet" class="com.radtech.PetAction" method="editPet">
-                        <result>userProfile.jsp</result>
-                        <result name="input">editPet.jsp</result>
-		</action>
+        <action name="editPet" class="com.radtech.PetAction" method="editPet">
+            <result>userProfile.jsp</result>
+            <result name="input">editPet.jsp</result>
+        </action>
 		
 		
 		
-		<!--NEW BUT NOT COMPLETE _______NEW BUT NOT COMPLETE _______NEW BUT NOT COMPLETE _______NEW BUT NOT COMPLETE _______  -->
+        <!--NEW BUT NOT COMPLETE _______NEW BUT NOT COMPLETE _______NEW BUT NOT COMPLETE _______NEW BUT NOT COMPLETE _______  -->
 		
-		<action name="logout" class="com.radtech.UserAction" method="logout">
-			<result>index.jsp</result>
-		</action>
+        <action name="logout" class="com.radtech.UserAction" method="logout">
+            <result>index.jsp</result>
+        </action>
 		
-		<action name="fetchUser" class="com.radtech.UserAction" method="fetchUser">
-			<result>accounts.jsp</result>
-			<result name="input">index.jsp</result>
-		</action>
+        <action name="fetchUser" class="com.radtech.UserAction" method="fetchUser">
+            <result>accounts.jsp</result>
+            <result name="input">index.jsp</result>
+        </action>
 		
-		<action name="updateRecord" class="" method="updateRecord">
-			<result>userProfile.jsp</result>
-			<result name="input">userProfile.jsp</result>
-		</action>
+        <action name="updateRecord" class="" method="updateRecord">
+            <result>userProfile.jsp</result>
+            <result name="input">userProfile.jsp</result>
+        </action>
 		
-		<action name="searchDatabase" class="com.radtech.SearchEngine" method="searchDatabase">
-			<result>search.jsp</result>
-			<result name="input">search.jsp</result>
-		</action>
+        <action name="searchDatabase" class="com.radtech.SearchEngine" method="searchDatabase">
+            <result>search.jsp</result>
+            <result name="input">search.jsp</result>
+        </action>
 
-		<action name="showHistory" class="" method="showHistory">
-			<result>diagnoHistory.jsp</result>
-			<result name="input">userProfile.jsp</result>
-		</action>
+        <action name="showHistory" class="" method="showHistory">
+            <result>diagnoHistory.jsp</result>
+            <result name="input">userProfile.jsp</result>
+        </action>
 		
-		<action name="completeAppointment" class="com.radtech.AppointmentAction" method="completeAppointment">
-			<result>schedule.jsp</result>
-			<result name="input">schedule.jsp</result>
-		</action>
-		
-		
-		
-	</package>
+        <action name="completeAppointment" class="com.radtech.AppointmentAction" method="completeAppointment">
+            <result>schedule.jsp</result>
+            <result name="input">schedule.jsp</result>
+        </action>
+        <action name="petReport" class="com.radtech.PetAction" method="petReport">
+            <result>statistics.jsp</result>
+            <result name="input">userProfile.jsp</result>
+        </action>
+        
+    </package>
 </struts>

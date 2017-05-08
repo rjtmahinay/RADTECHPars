@@ -62,15 +62,47 @@
                             dataFormat: 'jsonurl',
                             dataSource: 'stat.json'
                         });
+                        
+                        var tempWeight = new FusionCharts({
+                            type: 'zoomline',
+                            renderAt: 'tempWeightContainer',
+                            width: '650px',
+                            height: '500px',
+                            dataFormat: 'jsonurl',
+                            dataSource: 'tempweight.json'
+                        });
+                        
+                        var medicineChart = new FusionCharts({
+                            type: 'column2d',
+                            renderAt: 'medicineChartContainer',
+                            width: '650px',
+                            height: '500px',
+                            dataFormat: 'jsonurl',
+                            dataSource: 'petMeds.json'
+                        });
+                               
+                        var visitChart = new FusionCharts({
+                            type: 'column2d',
+                            renderAt: 'visitChartContainer',
+                            width: '650px',
+                            height: '500px',
+                            dataFormat: 'jsonurl',
+                            dataSource: 'petVisits.json'
+                        });
                         fusioncharts.render();
+                        tempWeight.render();
+                        medicineChart.render();
+                        visitChart.render();
                     });       
-                $( function() {
-                    $( "#date1" ).datepicker();
-                  } );
+                    
+                    
+                    $( function() {
+                        $( "#date1" ).datepicker();
+                      } );
 
-                  $( function() {
-                    $( "#date2" ).datepicker();
-                  } );
+                      $( function() {
+                        $( "#date2" ).datepicker();
+                      } );
 
 </script>
 	</head>
@@ -212,6 +244,25 @@
 							</table>
 						</div>
 					</s:if>
+                                    <s:if test="%{#session.display.equals('pet')}">
+                                        <div id="tempWeightContainer">
+                                            <script>
+                                                tempWeight.render();
+                                            </script>
+                                        </div>
+                                        
+                                        <div id="visitChartContainer">
+                                            <script>
+                                                visitChart.render();
+                                            </script>
+                                        </div>
+                                        
+                                        <div id="medicineChartContainer">
+                                            <script>
+                                                medicineChart.render();
+                                            </script>
+                                        </div>
+                                    </s:if>
 				
 				
 				

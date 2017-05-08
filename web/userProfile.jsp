@@ -317,7 +317,12 @@
 						<s:iterator value="%{#session.currentCustomer.pets}" var="pet">
 						<tr>
 							<td><button class="btn btn-primary btn-block btn-sm" onClick="window.open('historize.action?input1=<s:property value="#pet.petId"/>'); return false;"><span class="icon">History</span></button></td>
-							<td><s:property value="#pet.name"/></td>
+                                                        <td>
+                                                            <s:url action="petReport" var="rep">
+                                                                <s:param name="petId" value="#pet.petId"/>
+                                                            </s:url> 
+                                                            <s:a href="%{#rep}"><s:property value="#pet.name"/></s:a>
+                                                        </td>
 							<td><s:property value="#pet.breed"/></td>
 							<td><s:property value="#pet.color"/></td>
 							<td><s:property value="#pet.sex"/></td>
