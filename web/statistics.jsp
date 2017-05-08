@@ -252,6 +252,21 @@
 						</div>
 					</s:if>
                                     <s:if test="%{#session.display.equals('pet')}">
+                                        <div id="sourceTable">
+                                            <table>
+                                                <s:iterator value="#session.report" var="report">
+                                                    <tr>
+                                                        <td><s:property value="#report.S1"/></td>
+                                                        <td><s:property value="#report.S2"/></td>
+                                                        <td><s:property value="#report.S3"/></td>
+                                                        <td><s:property value="#report.Id1"/></td>
+                                                        <td><s:date name="#report.D1" format="MM/dd/yyyy"/></td>
+                                                    </tr>
+                                                </s:iterator>
+                                            </table>
+                                            
+                                        </div>
+                                        
                                         <div id="tempWeightContainer">
                                             <script>
                                                 tempWeight.render();

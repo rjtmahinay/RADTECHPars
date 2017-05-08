@@ -141,6 +141,7 @@ public class PetAction extends GenericAction{
         session = getSession();
         Gson gson = new Gson();
         if(pet != null){
+            List<Report> report = new ArrayList<Report>();
             System.out.println("Pet id is " + pet.getPetId());
             List<Consultation> cons = session.createCriteria(Consultation.class, "cons")
                     .createAlias("pet", "cons.pet")
@@ -178,6 +179,7 @@ public class PetAction extends GenericAction{
                 }
                 //m,edicines
                 hiberialize(c.getMedicines());
+                StringBuilder sb = new StringBuilder();
                 for(Object oo: c.getMedicines()){
                     Medicine m = (Medicine)oo;
                     //check if medicine in list
@@ -189,7 +191,16 @@ public class PetAction extends GenericAction{
                         int x = meds.get(m.getMedicineName()) + 1;
                         meds.put(m.getMedicineName(), x);
                     }
+                    sb.append(m.getMedicineName()+",");
                 }   
+                if(sb.length()>0)sb.deleteCharAt(sb.length()-1);
+                Report rep = new Report();
+                rep.setS1("" + c.getWeight());
+                rep.setS2("" + c.getTemperature());
+                rep.setS3(sb.toString());
+                rep.setD1(c.getConsultationDate());
+                rep.setId1("" + c.getConsultationId());
+                report.add(rep);
             }
             if(temp.length()>0){
                 temp = temp.substring(0, temp.length()-1);
@@ -253,6 +264,7 @@ public class PetAction extends GenericAction{
                     + "Size of Meds is " + meds.size()+"\n"
                             + dates + "\n" + temp + "\n" + weight);
             putMap("display", "pet");
+            putMap("report", report);
             return SUCCESS;
         }
         return INPUT;
