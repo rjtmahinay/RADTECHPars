@@ -136,7 +136,7 @@
 						</div>
 					</s:if>
 					
-					<s:if test="%{#session.display.equals('appointment')}">
+					<s:if test="%{#session.display.equals('appointments')}">
 						<div class="table table-responsive">
 							<table class="table table-bordered table-striped table-hover">
 								<thead>

@@ -89,24 +89,24 @@ public class AppointmentAction extends GenericAction{
             else{
                 String str = "";
                 String[] months = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
+                
                 if(app.getStatType().equals("Appointment")){
                     int[] number = new int[12];
                     List appointments = session.createCriteria(Appointment.class)
                             .add(Restrictions.ge("appointmentDate", from))
                             .add(Restrictions.le("appointmentDate", to))
                             .list();
-					Report rep = new Report();
-			hiberialize(app.getCustomer());
-					System.out.println(rep);
+                    Calendar cal = Calendar.getInstance();
+                    for(Object o: appointments){
+                        Appointment app = (Appointment)o;
+                        cal.setTime(app.getAppointmentDate());
+                        hiberialize(app.getCustomer());
+                        Report rep = new Report();
 			rep.setS1(app.getCustomer().getName());
 			rep.setD1(app.getAppointmentDate());
 			rep.setS2(app.getCustomer().getAddress());
 			rep.setS3("" + app.getCustomer().getContactNumber());
 			al.add(rep);
-                    Calendar cal = Calendar.getInstance();
-                    for(Object o: appointments){
-                        Appointment app = (Appointment)o;
-                        cal.setTime(app.getAppointmentDate());
                         int x = cal.get(Calendar.MONTH);
                         if(app.getStatus()!= "cancelled") number[x]+=1;
                     }
@@ -121,8 +121,9 @@ public class AppointmentAction extends GenericAction{
                     System.out.println(str);
                     request.setAttribute("type", "column2d");
                     makeJson("Appointments", "Month", "Number of appointments", "",str);
-					putMap("reports:",al);
-					putMap("display", "appointments");
+                    System.out.println("Size is " + al.size());
+                    putMap("reports",al);
+                    putMap("display", "appointments");
 					
                     return SUCCESS;
                 }
@@ -163,6 +164,7 @@ public class AppointmentAction extends GenericAction{
                     List appointments = session.createCriteria(Appointment.class)
                             .add(Restrictions.ge("appointmentDate", from))
                             .add(Restrictions.le("appointmentDate", to))
+                            .add(Restrictions.eq("transactionType", "walk-in"))
                             .list();
                     Calendar cal = Calendar.getInstance();
                     for(Object o: appointments){
@@ -267,7 +269,6 @@ public class AppointmentAction extends GenericAction{
                             else{
                                 int x = meds.get(medName);
                                 meds.put(medName, ++x);
-								meds.put(medName, 1);
 				Report rep = new Report();
 				rep.setS1(consult.getPet().getName());
 				rep.setS2(consult.getPet().getOwner().getName());

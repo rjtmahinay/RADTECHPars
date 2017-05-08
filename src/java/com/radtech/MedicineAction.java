@@ -10,11 +10,18 @@ public class MedicineAction extends GenericAction{
     }
     
     public String tempMeds(){
-		ArrayList<Medicine> tempMeds = (ArrayList)sessionmap.get("tempMeds");
-		if(tempMeds == null) tempMeds = new ArrayList<Medicine>();
-		tempMeds.add(medicine);
-		sessionmap.put("tempMeds", tempMeds);
-		return SUCCESS;
-	}
+        ArrayList<Medicine> tempMeds = (ArrayList)sessionmap.get("tempMeds");
+        if(tempMeds == null) tempMeds = new ArrayList<Medicine>();
+            if(!medicine.getMedicineName().equals("")){
+            tempMeds.add(medicine);
+            sessionmap.put("tempMeds", tempMeds);
+            return SUCCESS;
+        }
+        else{
+            addActionError("Empty medicine field");
+            return INPUT;
+        }
+                    
+    }
 }
 

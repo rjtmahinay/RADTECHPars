@@ -89,15 +89,15 @@
 								</thead>
 								<tbody>
 									<tr>
-										<td><s:property value="cons.temperature"/></td>
-										<td><s:property value="cons.weight"/></td>
-										<td><s:property value="cons.eyes"/></td>
-										<td><s:property value="cons.ears"/></td>
-										<td><s:property value="cons.nose"/></td>
-										<td><s:property value="cons.throat"/></td>
-										<td><s:property value="cons.derma"/></td>
-										<td><s:property value="cons.gums"/></td>
-										<td><s:property value="cons.lymphNodes"/></td>
+										<td><s:property value="#cons.temperature"/></td>
+										<td><s:property value="#cons.weight"/></td>
+										<td><s:property value="#cons.eyes"/></td>
+										<td><s:property value="#cons.ears"/></td>
+										<td><s:property value="#cons.nose"/></td>
+										<td><s:property value="#cons.throat"/></td>
+										<td><s:property value="#cons.derma"/></td>
+										<td><s:property value="#cons.gums"/></td>
+										<td><s:property value="#cons.lymphNodes"/></td>
 									</tr>
 								</tbody>
 							</table>

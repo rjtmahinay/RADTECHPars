@@ -123,11 +123,19 @@ public class PetAction extends GenericAction{
                     if(session!= null)session.close();
             }
     }
+    
+    public String petReport(){
+        //add visits per month
+        //meds
+        //temp
+        //weightd
+        return INPUT;
+    }
 }
 
-
-
-//pet
-//	add pet
-//	edit pet
-//	delete pet?
+/*
+*Pet stats using temp, weight, medicine, visits per month
+*temp weight use line2d
+*
+*
+*/
