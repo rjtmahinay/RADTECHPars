@@ -1,34 +1,20 @@
 package com.radtech;
 
-public class JsonLineChart{
-    JsonLineCategory[] categories;
-    JsonLineEntry[] dataset;
-    
-    public JsonLineChart(String categString, String datasetString){
-        toCategories(categString);
-        toDataSet(datasetString);
-    }
-    
-    public void toDataSet(String input){
-        String[] array = input.split(";");
-        dataset = new JsonLineEntry[array.length];
-        for(int i = 0; i<array.length; i++){
-            String[] str = array[i].split(",");
-            dataset[i] = new JsonLineEntry(str[0], str[1]);
-        }
-    }
+public class JsonLineChart {
+    String caption, subcaption, yaxisname, xaxisname, yaxisminvalue, yaxismaxvalue, pixelsPerPoint, pixelsPerLabel, lineThickness, compactdatamode, dataseparator, labelsHeight, theme;
 
-    @Override
-    public String toString() {
-        return "JsonLineChart{" + "categories=" + categories + ", dataset=" + dataset + '}';
+    public JsonLineChart(){
+        caption = "Pet Statistics";
+        subcaption = "Temperature and Weight";
+        yaxisname = "levels";
+        xaxisname = "Date";
+        yaxismaxvalue = "200";
+        yaxisminvalue = "0";
+        pixelsPerPoint = "1";
+        pixelsPerLabel = "30";
+        compactdatamode = "1";
+        dataseparator = "|";
+        labelsHeight = "30";
+        theme = "fint";
     }
-    
-    public void toCategories(String input){
-        String[] array = input.split(";");
-       categories = new JsonLineCategory[array.length];
-        for(int i = 0; i<array.length; i++){
-            categories[i] = new JsonLineCategory(array[i]);
-        }
-    }
-    
 }

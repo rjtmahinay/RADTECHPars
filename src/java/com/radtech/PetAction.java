@@ -230,7 +230,7 @@ public class PetAction extends GenericAction{
                 /*
                 *Construct chart for weight and temp
                 */
-                JsonLineChart tempweight = new JsonLineChart(dates, "Temperature,"+ temp+";Weight,"+weight);
+                JsonLineObject tempweight = new JsonLineObject(new JsonLineChart(),dates, "Temperature,"+ temp+";Weight,"+weight);
                 
                 //make json file for meds and visits
                 File petTempWeight = new File(getServletContext().getRealPath("/") + "/tempweight.json");

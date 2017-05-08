@@ -68,6 +68,13 @@
                             renderAt: 'tempWeightContainer',
                             width: '650px',
                             height: '500px',
+                            yaxisminValue: "0",
+                            yaxismaxValue: "120",
+                            pixelsPerPoint: "0",
+                            pixelsPerLabel: "30",
+                            lineThickness: "1",
+                            compactdatamode: "1",
+                            dataseparator: "|",
                             dataFormat: 'jsonurl',
                             dataSource: 'tempweight.json'
                         });
