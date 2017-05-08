@@ -312,6 +312,7 @@
 						<th>Color</th>
 						<th>Sex</th>
 						<th>Date of Birth</th>
+						<!--<th width="3%"></th>-->
 					</thead>
 					<tbody>
 						<s:iterator value="%{#session.currentCustomer.pets}" var="pet">
@@ -327,6 +328,7 @@
 							<td><s:property value="#pet.color"/></td>
 							<td><s:property value="#pet.sex"/></td>
 							<td><s:date name="#pet.dateOfBirth" format="MM/dd/yyyy"/></td>
+							<!--<td><button class="btn btn-primary btn-block btn-sm" onClick="window.open('statistics.jsp'); return false;"><span class="glyphicon glyphicon-stats"></span></button></td>-->
 						</tr>
 						</s:iterator>
 					</tbody>

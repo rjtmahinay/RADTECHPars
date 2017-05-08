@@ -196,10 +196,9 @@ public class AppointmentAction extends GenericAction{
                 }
 				//Breeds
                 else if(app.getStatType().equals("Breed")){
-                    System.out.println("I am inside breed loop");
                     HashMap<String, Integer> breeds = new HashMap<String, Integer>();
 		HashMap<Long, String>listedPets = new HashMap<Long, String>();
-                    List entries = session.createCriteria(Consultation.class, "consultation")
+                    List<Consultation> entries = session.createCriteria(Consultation.class, "consultation")
                             .createAlias("consultation.appointment", "appointment")
                             .add(Restrictions.ge("appointment.appointmentDate", from))
                             .add(Restrictions.le("appointment.appointmentDate", to))
@@ -207,21 +206,28 @@ public class AppointmentAction extends GenericAction{
                     for(Object o: entries){
                         Consultation consult = (Consultation)o;
                         hiberialize(consult.getPet());
-                        String petBreed = consult.getPet().getBreed();
-                        if(breeds.get(petBreed)==null){
+			Pet p = consult.getPet();
+                        String petBreed = p.getBreed();
+			if(breeds.get(petBreed)==null){
                             breeds.put(petBreed, 1);
 							Report rep = new Report();
 							rep.setS1(consult.getPet().getName());
 							rep.setS2(consult.getPet().getOwner().getName());
 							rep.setS3(consult.getPet().getBreed());
 							al.add(rep);
-			listedPets.put(consult.getPet().getPetId(), consult.getPet().getBreed());
+			listedPets.put(p.getPetId(), p.getBreed());
                         }
                         else{
 			if(listedPets.get(consult.getPet().getPetId())==null){
                             int x = breeds.get(petBreed);
                             breeds.put(petBreed, ++x);
+							Report rep = new Report();
+							rep.setS1(consult.getPet().getName());
+							rep.setS2(consult.getPet().getOwner().getName());
+							rep.setS3(consult.getPet().getBreed());
+							al.add(rep);
 			listedPets.put(consult.getPet().getPetId(), consult.getPet().getBreed());
+			
 			}
                         }
                     }

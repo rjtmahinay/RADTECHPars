@@ -35,13 +35,15 @@
 
 			}
 			table{
+				width:px;
 				height:500px;
 			}
 			
 			tbody{
 			  overflow-y: scroll;
+			  width:460px;
 			  height: 460px;
-			  width: 95%;
+			  width: 97.5%;
 			  position: absolute;
 			}
 			
@@ -66,8 +68,8 @@
                         var tempWeight = new FusionCharts({
                             type: 'zoomline',
                             renderAt: 'tempWeightContainer',
-                            width: '650px',
-                            height: '500px',
+                            width: '250px',
+                            height: '250px',
                             yaxisminValue: "0",
                             yaxismaxValue: "120",
                             pixelsPerPoint: "0",
@@ -82,8 +84,8 @@
                         var medicineChart = new FusionCharts({
                             type: 'column2d',
                             renderAt: 'medicineChartContainer',
-                            width: '650px',
-                            height: '500px',
+                            width: '250px',
+                            height: '250px',
                             dataFormat: 'jsonurl',
                             dataSource: 'petMeds.json'
                         });
@@ -91,8 +93,8 @@
                         var visitChart = new FusionCharts({
                             type: 'column2d',
                             renderAt: 'visitChartContainer',
-                            width: '650px',
-                            height: '500px',
+                            width: '250px',
+                            height: '250px',
                             dataFormat: 'jsonurl',
                             dataSource: 'petVisits.json'
                         });
@@ -119,173 +121,245 @@
 
 			
 			<h1><font face="roboto">Animal Station Statistics</font></h1>
-			<div class="row">
-				<div class="col-md-6">
 					<s:if test="%{#session.display.equals('breed')}">
-						<div class="table table-responsive">
-							<table class="table table-bordered table-striped table-hover">
-								<thead>
-									<th width="5%">#</th>
-									<th width="30.5%">Customer Name</th>
-									<th width="31%">Pet Name</th>
-									<th>Breed</th>
-									
-								</thead>
-								<tbody>
-									<s:iterator value="#session.reports" var="stats" status="count">
-									<tr>
-										<td width="5%"><s:property value="#count.count"/></td>
-										<td><s:property value="#stats.S2"/></td>
-										<td><s:property value="#stats.S1"/></td>
-										<td><s:property value="#stats.S3"/></td>
-									</tr>
-									</s:iterator>
-								</tbody>
-								
-							</table>
-						</div>
+						<div class="row">
+							<div class="col-md-6">
+								<div class="table table-responsive">
+									<table class="table table-bordered table-striped table-hover">
+										<thead>
+											<th width="5%">#</th>
+											<th width="30.5%">Customer Name</th>
+											<th width="31%">Pet Name</th>
+											<th>Breed</th>
+
+										</thead>
+										<tbody>
+											<s:iterator value="#session.reports" var="stats" status="count">
+											<tr>
+												<td width="5%"><s:property value="#count.count"/></td>
+												<td><s:property value="#stats.S2"/></td>
+												<td><s:property value="#stats.S1"/></td>
+												<td><s:property value="#stats.S3"/></td>
+											</tr>
+											</s:iterator>
+										</tbody>
+
+									</table>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div id="chartContainer">FusionCharts XT will load here!
+									<script>
+										fusioncharts.render();
+									</script>
+								</div>
+							</div>
+						</div>	
 					</s:if>
 					
 					<s:if test="%{#session.display.equals('status')}">
-						<div class="table table-responsive">
-							<table class="table table-bordered table-striped table-hover">
-								<thead>
-									<th width="5%">#</th>
-									<th width="30.5%">Date</th>
-									<th width="31%">Customer Name</th>
-									<th>Status</th>
-									
-									
-									
-								</thead>
-								<tbody>
-									<s:iterator value="#session.reports" var="stats" status="count">
-									<tr>
-										<td width="5%"><s:property value="#count.count"/></td>
-										<td><s:date name="#stats.S3" format="MM/dd/yyyy"/></td>
-										<td><s:property value="#stats.S1"/></td>
-										<td><s:property value="#stats.S2"/></td>
-										
+						<div class="row">
+							<div class="col-md-6">
+								<div class="table table-responsive">
+									<table class="table table-bordered table-striped table-hover">
+										<thead>
+											<th width="5%">#</th>
+											<th width="30.5%">Date</th>
+											<th width="31%">Customer Name</th>
+											<th>Status</th>
 
-									</tr>
-									</s:iterator>
-								</tbody>
-								
-							</table>
+
+
+										</thead>
+										<tbody>
+											<s:iterator value="#session.reports" var="stats" status="count">
+											<tr>
+												<td width="5%"><s:property value="#count.count"/></td>
+												<td><s:date name="#stats.D1" format="MM/dd/yyyy"/></td>
+												<td><s:property value="#stats.S1"/></td>
+												<td><s:property value="#stats.S2"/></td>
+
+
+											</tr>
+											</s:iterator>
+										</tbody>
+
+									</table>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div id="chartContainer">FusionCharts XT will load here!
+									<script>
+										fusioncharts.render();
+									</script>
+								</div>
+							</div>	
 						</div>
 					</s:if>
 					
 					<s:if test="%{#session.display.equals('appointments')}">
-						<div class="table table-responsive">
-							<table class="table table-bordered table-striped table-hover">
-								<thead>
-									<th width="5%">#</th>
-									<th width="30.5%">Date</th>
-									<th width="31%">Customer Name</th>
-									<th>Pet Name</th>
-									
-								</thead>
-								<tbody>
-									<s:iterator value="#session.reports" var="stats" status="count">
-									<tr>
-										<td width="5%"><s:property value="#count.count"/></td>
-										<td><s:property value="#stats.S2"/></td>
-										<td><s:property value="#stats.S1"/></td>
-										<td><s:property value="#stats.S3"/></td>
-									</tr>
-									</s:iterator>
-								</tbody>
-								
-							</table>
+						<div class="row">
+							<div class="col-md-6">
+								<div class="table table-responsive">
+									<table class="table table-bordered table-striped table-hover">
+										<thead>
+											<th width="5%">#</th>
+											<th width="30.5%">Date</th>
+											<th width="31%">Customer Name</th>
+											<th>Pet Name</th>
+
+										</thead>
+										<tbody>
+											<s:iterator value="#session.reports" var="stats" status="count">
+											<tr>
+												<td width="5%"><s:property value="#count.count"/></td>
+												<td><s:property value="#stats.S2"/></td>
+												<td><s:property value="#stats.S1"/></td>
+												<td><s:property value="#stats.S3"/></td>
+											</tr>
+											</s:iterator>
+										</tbody>
+									</table>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div id="chartContainer">FusionCharts XT will load here!
+									<script>
+										fusioncharts.render();
+									</script>
+								</div>
+							</div>
 						</div>
 					</s:if>
 					
 					<s:if test="%{#session.display.equals('walk-in')}">
-						<div class="table table-responsive">
-							<table class="table table-bordered table-striped table-hover">
-								<thead>
-									<th width="5%">#</th>
-									<th width="30.5%">Customer Name</th>
-									<th width="31%">Address</th>
-									<th>Contact Number</th>
-									
-									
-								</thead>
-								<tbody>
-									<s:iterator value="#session.reports" var="stats" status="count">
-									<tr>
-										<td width="5%"><s:property value="#count.count"/></td>
-										<td><s:property value="#stats.S1"/></td>
-										<td><s:property value="#stats.S2"/></td>
-										<td><s:property value="#stats.S3"/></td>
-									</tr>
-									</s:iterator>
-								</tbody>
-								
-							</table>
-						</div>
+						<div class="row">
+							<div class="col-md-6">
+								<div class="table table-responsive">
+									<table class="table table-bordered table-striped table-hover">
+										<thead>
+											<th width="5%">#</th>
+											<th width="30.5%">Customer Name</th>
+											<th width="31%">Address</th>
+											<th>Contact Number</th>
+
+
+										</thead>
+										<tbody>
+											<s:iterator value="#session.reports" var="stats" status="count">
+											<tr>
+												<td width="5%"><s:property value="#count.count"/></td>
+												<td><s:property value="#stats.S1"/></td>
+												<td><s:property value="#stats.S2"/></td>
+												<td><s:property value="#stats.S3"/></td>
+											</tr>
+											</s:iterator>
+										</tbody>
+
+									</table>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div id="chartContainer">FusionCharts XT will load here!
+									<script>
+										fusioncharts.render();
+									</script>
+								</div>
+							</div>
+						</div>	
 					</s:if>
 					
 					<s:if test="%{#session.display.equals('medicine')}">
-						<div class="table table-responsive">
-							<table class="table table-bordered table-striped table-hover">
-								<thead>
-									<th width="5%">#</th>
-									<th width="30.5%">Customer Name</th>
-									<th width="31%">Pet Name</th>
-									<th>Medicine</th>
-									
-									
-								</thead>
-								<tbody>
-									<s:iterator value="#session.reports" var="stats" status="count">
-									<tr>
-										<td width="5%"><s:property value="#count.count"/></td>
-										<td><s:property value="#stats.S1"/></td>
-										<td><s:property value="#stats.S2"/></td>
-										<td><s:property value="#stats.S3"/></td>
-									</tr>
-									</s:iterator>
-								</tbody>
-								
-							</table>
-						</div>
+						<div class="row">
+							<div class="col-md-6">
+								<div class="table table-responsive">
+									<table class="table table-bordered table-striped table-hover">
+										<thead>
+											<th width="5%">#</th>
+											<th width="30.5%">Customer Name</th>
+											<th width="31%">Pet Name</th>
+											<th>Medicine</th>
+
+
+										</thead>
+										<tbody>
+											<s:iterator value="#session.reports" var="stats" status="count">
+											<tr>
+												<td width="5%"><s:property value="#count.count"/></td>
+												<td><s:property value="#stats.S1"/></td>
+												<td><s:property value="#stats.S2"/></td>
+												<td><s:property value="#stats.S3"/></td>
+											</tr>
+											</s:iterator>
+										</tbody>
+
+									</table>
+								</div>
+							</div>	
+							<div class="col-md-6">
+								<div id="chartContainer">FusionCharts XT will load here!
+									<script>
+										fusioncharts.render();
+									</script>
+								</div>
+							</div>
+						</div>	
 					</s:if>
-                                    <s:if test="%{#session.display.equals('pet')}">
-                                        <div id="sourceTable">
-                                            <table>
-                                                <s:iterator value="#session.report" var="report">
-                                                    <tr>
-                                                        <td><s:property value="#report.S1"/></td>
-                                                        <td><s:property value="#report.S2"/></td>
-                                                        <td><s:property value="#report.S3"/></td>
-                                                        <td><s:property value="#report.Id1"/></td>
-                                                        <td><s:date name="#report.D1" format="MM/dd/yyyy"/></td>
-                                                    </tr>
-                                                </s:iterator>
-                                            </table>
-                                            
-                                        </div>
-                                        
-                                        <div id="tempWeightContainer">
-                                            <script>
-                                                tempWeight.render();
-                                            </script>
-                                        </div>
-                                        
-                                        <div id="visitChartContainer">
-                                            <script>
-                                                visitChart.render();
-                                            </script>
-                                        </div>
-                                        
-                                        <div id="medicineChartContainer">
-                                            <script>
-                                                medicineChart.render();
-                                            </script>
-                                        </div>
-                                    </s:if>
-				
+					<s:if test="%{#session.display.equals('pet')}">
+						<div class="row">
+							<div class="col-md-6">
+								<div id="sourceTable">
+									<div class="table table-responsive">
+										<table class="table table-striped table-hover table-bordered">
+											<thead>
+												<th>Appointment ID</th>
+												<th>Date</th>
+												<th>Weight</th>
+												<th>Temperature</th>
+												<th>Medicines Given</th>
+											</thead>
+											<tbody>
+												<s:iterator value="#session.report" var="report">
+													<tr>
+														<td><s:property value="#report.Id1"/></td>
+														<td><s:date name="#report.D1" format="MM/dd/yyyy"/></td>
+														<td><s:property value="#report.S1"/></td>
+														<td><s:property value="#report.S2"/></td>
+														<td><s:property value="#report.S3"/></td>
+													</tr>
+												</s:iterator>
+											</tbody>	
+										</table>
+									</div>	
+								</div>
+							</div>
+							<div class="col-md-3">
+								<div id="tempWeightContainer">
+									<script>
+										tempWeight.render();
+									</script>
+								</div>
+									<br>
+
+								<div id="visitChartContainer">
+									<script>
+										visitChart.render();
+									</script>
+								</div>
+							</div>
+							<div class="col-md-3">
+								<div id="medicineChartContainer">
+									<script>
+										medicineChart.render();
+									</script>
+								</div>
+							</div>
+							
+								
+							
+						</div>	
+					</s:if>
+
 				
 				
 				
@@ -299,14 +373,8 @@
 <%--END OF FIRST HALF END OF FIRST HALF END OF FIRST HALF END OF FIRST HALF END OF FIRST HALF END OF FIRST HALF END OF FIRST HALF --%>					
 <%--END OF FIRST HALF END OF FIRST HALF END OF FIRST HALF END OF FIRST HALF END OF FIRST HALF END OF FIRST HALF END OF FIRST HALF --%>					
 
-				<div class="col-md-6">
-					<div id="chartContainer">FusionCharts XT will load here!
-						<script>
-							fusioncharts.render();
-						</script>
-					</div>
-				</div>	
-			</div>
-		</div>	
+					
+			
+			
 	</body>
 </html>

@@ -8,7 +8,7 @@ public class JsonLineChart {
         subcaption = "Temperature and Weight";
         yaxisname = "levels";
         xaxisname = "Date";
-        yaxismaxvalue = "200";
+        yaxismaxvalue = "80";
         yaxisminvalue = "0";
         pixelsPerPoint = "1";
         pixelsPerLabel = "30";
