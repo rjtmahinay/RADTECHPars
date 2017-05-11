@@ -214,8 +214,8 @@
 											<td><s:select cssClass="text text-block" name="sex" list="{'Male','Female'}" headerKey="-1"/></td>
 										</tr>
 										<tr>
-										<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-										<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+										<script src="js/jquery-1.12.4.js"></script>
+										<script src="js/jquery-ui.js"></script>
 										<script>
 										$( function() {
 										  $( "#date" ).datepicker({maxDate: "+0M +0D", changeMonth: true, changeYear: true});
@@ -277,8 +277,8 @@
 				</table>
 			</div>
 
-			<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-			<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+			<script src="js/jquery-1.12.4.js"></script>
+			<script src="js/jquery-ui.js"></script>
 			<script>
 			$( function() {
 			  $( "#appointmentDate" ).datepicker({minDate: -0, maxDate: "+3M"});
