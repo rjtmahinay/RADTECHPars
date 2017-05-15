@@ -19,20 +19,6 @@
 	<script src="js/jquery-3.2.0.min.js"></script>
 		<script src="js/bootstrap.min.js"></script>
 		<script>
-			<%--
-			$('.panel-collapse').collapse({toggle: false});
-			$('body').on('click', '[data-toggle=collapse-next]', function (e) {
-				e.preventDefault();
-
-				// Try to close all of the collapse areas first
-				var parent_id = $(this).data('parent');
-				$(parent_id+' .panel-collapse').collapse('hide');
-
-				// ...then open just the one we want
-				var $target = $(this).parents('.panel').find('.panel-collapse');
-				$target.collapse('toggle');
-			});
-			--%>
 			$(document).ready(function() {
 				$('#confirmComplete').on('show.bs.modal', function(e) {
 				  var id = $(e.relatedTarget).data('id');
@@ -82,7 +68,31 @@
 		</script>
                 <h5> <s:actionerror/> </h5>
 		<div class="container-fluid">
-			<h1 align="center"><font face="roboto">Current Schedule</font></h1>
+			<!--<h1 align="center"><font face="roboto">Current Schedule</font></h1>-->
+			<center>
+				<script src="js/jquery-1.12.4.js"></script>
+				<script src="js/jquery-ui.js"></script>
+				<script>
+				$( function() {
+				  $( "#date" ).datepicker({changeMonth: true, changeYear: true});
+				} );
+				</script>
+				<div class="table">
+					<table>
+						<tbody>
+							<tr>
+								<s:form action="viewDate" theme="bootstrap">
+									<td><s:textfield name="dateInput" id="date" placeholder="click to set date"/> </td>
+									<td><s:submit cssClass="btn btn-primary btn-block btn-sm" value="View" /> </td>
+								</s:form>		
+								<s:form action="viewReset" theme="bootstrap">		
+									<td><s:submit cssClass="btn btn-primary btn-block btn-sm" value="Reset" /> </td>
+								</s:form>	
+							</tr>
+						</tbody>
+					</table>
+				</div>	
+			</center>
 			<div class="panel panel-default">
 				<div class="panel-body">
 					<div class="row">
@@ -274,19 +284,8 @@
 						</div>
 					</div>
 				</div>
-							</s:form>
+				</s:form>
 			</div>
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-
 		</div>        
 	</body>
 </html>

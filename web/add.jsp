@@ -151,58 +151,6 @@
 			</tbody>
 		</table>
 	</div>
-
-
-
-
-
-
-
-
-
-
-
-
-	<%--			
-			<s:form action="tempet" theme="bootstrap" cssClass="form" method="POST">
-						<div class="modal-body">
-							<div class="table">
-							<table class="table table-condensed">
-								<tr>
-									<td><b>Pet Name:</b></td>
-									<td><s:textfield name="name" placeholder=""/></td>
-								</tr>
-								<tr>
-									<td><b>Breed:</b></td>
-									<td><s:textfield name="breed" placeholder=""/></td>
-								</tr>
-								<tr>
-									<td><b>Color:</b></td>
-									<td><s:textfield name="color" placeholder=""/></td>
-								</tr>
-								<tr>
-									<td><b>Sex:</b></td>
-									<td><s:select cssClass="text text-block" name="sex" list="{'Male','Female'}" headerKey="-1"/></td>
-								</tr>
-								<tr>
-									<td><b>Date of birth:</b></td>
-									<td>
-									<s:textfield name="dateInput" id="datepicker" />
-									</td>
-								</tr>
-
-							</table>
-						</div>
-
-							<div class="modal-footer form-group" >
-								<center>
-									<s:submit cssClass="btn btn-primary btn-block" value="submit" />
-									<s:reset value="clear" cssClass="btn btn-secondary btn-block"/>
-								</center>
-							</div>
-						</div>
-					</s:form>
-	--%>
 			<s:form action="addCustomer" theme="bootstrap" cssClass="form" method="POST">
 				<label for="name">Customer Name</label>
 				<s:textfield name="name" placeholder=""/><s:actionerror/>
@@ -227,23 +175,6 @@
 			</s:form>
 						
 <!-END OF FIRST HALF OF ADD , END OF FIRST HALF OF ADD , END OF FIRST HALF OF ADD , END OF FIRST HALF OF ADD , END OF FIRST HALF OF ADD ,END OF FIRST HALF OF ADD ,->	
-							
-						
-				
-			
-		
-		
-		
-	<%--		
-	   <s:form action="home.jsp">
-		<center>
-			<s:submit value="Back" cssClass="btn btn-secondary"/>
-		</center>
-	</s:form>
-	<%--     <form action="LoginController" method="POST">
-			 <center><button class="btn btn-secondary" name="action" value="viewall" type="submit">Back</button></center>
-		 </form> 
-	--%>
 		 </div>
 	</body>
 </html>
