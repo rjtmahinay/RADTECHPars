@@ -43,7 +43,7 @@
 			  overflow-y: scroll;
 			  width:460px;
 			  height: 460px;
-			  width: 97.5%;
+			  width: 95%;
 			  position: absolute;
 			}
 			
@@ -312,11 +312,11 @@
 									<div class="table table-responsive">
 										<table class="table table-striped table-hover table-bordered">
 											<thead>
-												<th>Appointment ID</th>
-												<th>Date</th>
-												<th>Weight</th>
-												<th>Temperature</th>
-												<th>Medicines Given</th>
+												<th width="19.5%">Appointment ID</th>
+												<th width="19.5%">Date</th>
+												<th width="19.5%">Weight</th>
+												<th width="19.5%">Temperature</th>
+												<th width="">Medicines Given</th>
 											</thead>
 											<tbody>
 												<s:iterator value="#session.report" var="report">

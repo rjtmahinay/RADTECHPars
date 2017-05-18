@@ -121,12 +121,12 @@
             <result name="input">editPet.jsp</result>
         </action>
 	
-	<action name="viewDate" class="com.radtech.AppointmentAction" method="viewDate">
+	<action name="viewDate" class="com.radtech.GenericAction" method="viewDate">
             <result>schedule.jsp</result>
             <result name="input">schedule.jsp</result>
 	</action>	
 				
-	<action name="viewReset" class="com.radtech.AppointmentAction" method="viewReset">
+	<action name="viewReset" class="com.radtech.GenericAction" method="viewReset">
             <result>schedule.jsp</result>
             <result name="input">schedule.jsp</result>
 	</action>

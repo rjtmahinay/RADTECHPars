@@ -25,7 +25,7 @@ import javax.persistence.Transient;
 @Table(name = "Appointments")
 public class Appointment extends GenericModel{
     private long appointmentId;
-    private String status, transactionType;
+    private String status, transactionType, appointmentComment;
     private Date appointmentDate;
     private Customer customer;
     private List consultations = new ArrayList<Consultation>();
@@ -90,4 +90,14 @@ public class Appointment extends GenericModel{
     public String toString() {
         return "Appointment{" + "appointmentId=" + appointmentId + ", status=" + status + ", appointmentDate=" + appointmentDate + ", customer=" + customer + ", consultations=" + consultations + '}';
     }
+
+	@Column(name="APPOINTMENT_COMMENT")
+	public String getAppointmentComment() {
+		return appointmentComment;
+	}
+
+	public void setAppointmentComment(String appointmentComment) {
+		this.appointmentComment = appointmentComment;
+	}
+	
 }

@@ -35,6 +35,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.Writer;
+import java.util.Calendar;
 import javax.servlet.http.HttpServletRequest;
 import org.apache.struts2.ServletActionContext;
 import static org.apache.struts2.ServletActionContext.getServletContext;
@@ -44,7 +45,7 @@ public class GenericAction extends ActionSupport implements SessionAware, ModelD
     Session session;
     Transaction tx;
     SessionFactory factory;
-    Object model;
+    GenericModel model = new GenericModel();
     Deencrypt de = new Deencrypt();
     public static GsonBuilder gb = new GsonBuilder().setPrettyPrinting();
     @Override
@@ -84,8 +85,7 @@ public class GenericAction extends ActionSupport implements SessionAware, ModelD
         }
     }
     
-    public Object getModel(){
-        model = new Object();
+    public GenericModel getModel(){
         return model;
     }
     
@@ -248,6 +248,27 @@ public class GenericAction extends ActionSupport implements SessionAware, ModelD
     public String getPath(){
         return getServletContext().getRealPath("/");
     }
+	
+	public String viewDate(){
+		session = getSession();
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(toDate(model.getDateInput()));
+		Date from = cal.getTime();
+		Date to =cal.getTime();
+		to.setHours(23);
+		to.setMinutes(59);
+		to.setSeconds(59);
+		putMap("appointments", session.createCriteria(Appointment.class)
+							.add(Restrictions.ge("appointmentDate", from))
+							.add(Restrictions.le("appointmentDate", to)).list());
+		return INPUT;
+	}
+	
+	public String viewReset(){
+		session = getSession();
+		refreshAppointments();
+		return SUCCESS;
+	}
 }
 
 //GenericModel

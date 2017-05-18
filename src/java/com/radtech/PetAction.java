@@ -151,6 +151,10 @@ public class PetAction extends GenericAction{
                     .add(Restrictions.eq("status", "completed"))
                     .list();
             System.out.println(cons.size());
+		if(cons.size()==0)
+		{
+			return INPUT;
+		}
             String[] months = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
             HashMap<String, Integer> monthVisit = new HashMap<String, Integer>();
             HashMap<String, Integer> meds = new HashMap<String, Integer>();

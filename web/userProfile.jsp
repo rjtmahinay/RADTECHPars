@@ -284,6 +284,9 @@
 			  $( "#appointmentDate" ).datepicker({minDate: -0, maxDate: "+3M"});
 			} );
 			</script>
+			<center>
+				<s:textarea name="appointmentComment" rows="3" cols="60"  placeholder="Enter appointment information here"/>
+			</center>
 			<div class="row">
 				<div class="col-md-6">
 					
@@ -335,33 +338,6 @@
 				</table>
 			</div>
 		</s:if>	
-			
-			
-			
-			
-			
-					<%--
-					<div class="panel panel-default">
-						<div class="panel-body">
-							<center>
-							<s:form action="addPet" theme="bootstrap" cssClass="form" method="POST">
-							<s:hidden name="id" value="%{#session.currentRecord.controlNumber}"/>
-							<p><s:textfield name="dateinput" label="Date:" id="apppicker" value="" placeholder="click here to set date"/></p>
-							<p><s:textarea name="comment" label="Description:" cols="22" value=""/></p>
-							</center>
-						</div>
-						<div class="panel-footer">
-							<center>
-								<s:submit cssClass="btn btn-primary" value="+ Appointment" />
-							</center>
-						</div>											
-							</s:form>
-					</div><!-END OF ROW->
-
-			
-
-			--%>
-
 			 
 		</div>
 

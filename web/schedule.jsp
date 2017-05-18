@@ -15,7 +15,8 @@
 	<link rel="stylesheet" href="css/jquery-ui.css">
 	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 	<link rel="icon" href="favicon.ico" type="image/x-icon">
-	
+	<script src="js/jquery-1.12.4.js"></script>
+				<script src="js/jquery-ui.js"></script>
 	<script src="js/jquery-3.2.0.min.js"></script>
 		<script src="js/bootstrap.min.js"></script>
 		<script>
@@ -70,8 +71,7 @@
 		<div class="container-fluid">
 			<!--<h1 align="center"><font face="roboto">Current Schedule</font></h1>-->
 			<center>
-				<script src="js/jquery-1.12.4.js"></script>
-				<script src="js/jquery-ui.js"></script>
+				
 				<script>
 				$( function() {
 				  $( "#date" ).datepicker({changeMonth: true, changeYear: true});
@@ -107,7 +107,7 @@
 						</div>	
 						<div class="col-md-4">Customer Name / Pet Name</div>
 						<div class="col-md-3">Date / Breed</div>
-						<div class="col-md-4">Transaction Type</div>
+						<div class="col-md-4">Appointment Comment</div>
 					</div>
 				</div>
 			</div>
@@ -140,7 +140,7 @@
 								
 								<div class="col-md-4"><s:property value="%{#record.customer.name}"/></div>
 								<div class="col-md-3"><s:date name="#record.appointmentDate" format="MM/dd/yyyy"/></div>
-								<div class="col-md-4"><s:property value="#record.transactionType"/></div>
+								<div class="col-md-4"><s:property value="#record.appointmentComment"/></div>
 							</div>
 						</a>
 					</h4>
