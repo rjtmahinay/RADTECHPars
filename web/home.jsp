@@ -61,17 +61,17 @@
 			<div class="collapse navbar-collapse" id="mainNavBar">
 				
 				<ul class="nav navbar-nav">
-					<s:if test="%{#session.currentUser.userType.equals('assistant')}">
-						<li><a href="search.jsp">Profiles <span class="glyphicon glyphicon-user"></span></a></li>
+					<%--<s:if test="%{#session.currentUser.userType.equals('assistant')}">--%>
+						<li><a href="search.jsp">View Profiles <span class="glyphicon glyphicon-user"></span></a></li>
 						<li><a href="add.jsp">New Customer <span class="glyphicon glyphicon-plus"></span></a></li>
-					</s:if>
-					<s:if test="%{#session.currentUser.userType.equals('doctor')}">
-						<li><a href="search.jsp">Profiles <span class="glyphicon glyphicon-user"></span></a></li>
+					<%--</s:if>--%>
+					
+						
 						<%--<li><s:a href="statistics.jsp">Statistics <span class="glyphicon glyphicon-stats"></span></s:a></li>--%>
 						<li><a href="#" data-toggle="modal" data-target="#stats">Statistics <span class="glyphicon glyphicon-stats"></span></a></li>
 						
 						<li><a href="archives.jsp">Archives <span class="glyphicon glyphicon-trash"></span></a></li>
-					</s:if>	
+						
 					
 				</ul>
 				<ul class="nav navbar-nav navbar-right">

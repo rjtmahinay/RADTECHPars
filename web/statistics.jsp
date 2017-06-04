@@ -120,7 +120,7 @@
 		<div class="container-fluid">
 
 			
-			<h1><font face="roboto">Animal Station Statistics</font></h1>
+<!--			<h1><font face="roboto">Animal Station Statistics</font></h1>-->
 					<s:if test="%{#session.display.equals('breed')}">
 						<div class="row">
 							<div class="col-md-6">
@@ -306,6 +306,34 @@
 						</div>	
 					</s:if>
 					<s:if test="%{#session.display.equals('pet')}">
+						<div class="modal fade" id="confirmDelete">
+							<s:form action="deletePet">
+							<div class="modal-dialog modal-sm">
+								<div class="modal-content">
+									<div class="modal-header">
+										<button type="button" class="close" data-dismiss="modal">&times;</button>
+										<h3 align="center" class="modal-title">Delete Pet?</h3>
+									</div>
+									<div class="modal-body">
+										<p align="center">Delete pet from owner?</p>
+									</div>
+									<div class="modal-footer form-group" >
+										<div class="row">
+											<div class="col-md-6 col-sm-6">
+												<input type="hidden" id="delete" name="input3"/>
+												<center><s:submit type="button" cssClass="btn btn-danger btn-block" value="Delete" /></center>
+											</div>
+											<div class="col-md-6 col-sm-6">
+													<center><button type="button" class="btn btn-secondary btn-block" data-dismiss="modal">Back</button></center>
+											</div>
+
+										</div>
+									</div>
+								</div>
+							</div>
+							</s:form>
+						</div>
+						
 						<div class="row">
 							<div class="col-md-6">
 								<div id="sourceTable">
@@ -347,12 +375,18 @@
 									</script>
 								</div>
 							</div>
-							<div class="col-md-3">
+							<div class="col-md-2">
 								<div id="medicineChartContainer">
 									<script>
 										medicineChart.render();
 									</script>
 								</div>
+								
+							</div>
+							<div class="col-md-1">
+								<p align="right">
+								<button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#confirmDelete" 
+								data-id="<s:property value="%{#record.appointmentId}"/>"><span class="glyphicon glyphicon-trash"></span></button>
 							</div>
 							
 								

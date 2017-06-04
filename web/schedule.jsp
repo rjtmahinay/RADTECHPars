@@ -97,14 +97,7 @@
 				<div class="panel-body">
 					<div class="row">
 						
-						<div class="col-md-1">
-							<s:if test="%{#session.currentUser.userType.equals('assistant')}">	
-								Vitals
-							</s:if>
-							<s:if test="%{#session.currentUser.userType.equals('doctor')}">	
-								Diagnosis
-							</s:if>	
-						</div>	
+						<div class="col-md-1">Diagnosis</div>	
 						<div class="col-md-4">Customer Name / Pet Name</div>
 						<div class="col-md-3">Date / Breed</div>
 						<div class="col-md-4">Appointment Comment</div>
@@ -122,21 +115,13 @@
 					<h4 class="panel-title">
 						<a class="accordion-toggle" data-toggle="collapse-next" data-parent="#accordion">
 							<div class="row">
-                                                            <s:if test="%{#session.currentUser.userType.equals('assistant')}">
 								<div class="col-md-1">
-										<button type="button" class="btn btn-danger btn-block btn-sm" data-toggle="modal" data-target="#confirmCancel" 
-										data-id="<s:property value="%{#record.appointmentId}"/>">Cancel</button>	
-								</div>	
-                                                            </s:if>
-                                                            
-                                                            <s:if test="%{#session.currentUser.userType.equals('doctor')}">
-                                                                <div class="col-md-1"><button type="button" class="btn btn-success btn-block btn-sm" data-toggle="modal" data-target="#confirmComplete" 
-                                                                    data-id="<s:property value="%{#record.appointmentId}"/>">Complete</button></div>
-                                                            </s:if>
-								
-							<s:if test="%{#session.currentUser.userType.equals('admin')}">
-								<div class="col-md-1"></div>
-							</s:if>	
+									<button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#confirmCancel" 
+									data-id="<s:property value="%{#record.appointmentId}"/>"><span class="glyphicon glyphicon-trash"></span></button>
+									
+									<button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#confirmComplete" 
+									data-id="<s:property value="%{#record.appointmentId}"/>"><span class="glyphicon glyphicon-check"></span></button>
+								</div>		
 								
 								<div class="col-md-4"><s:property value="%{#record.customer.name}"/></div>
 								<div class="col-md-3"><s:date name="#record.appointmentDate" format="MM/dd/yyyy"/></div>
@@ -148,7 +133,7 @@
 				<div class="panel-collapse collapse">
 					<div class="panel-body">
 						<s:iterator value="#record.consultations" var="consultation">
-                                                    <s:if test="%{#session.currentUser.userType.equals('doctor')}">
+                                                    
 						<div class="row">
 							<div class="col-md-1"> 
                                                             <s:url action="getVitals" var="vit">
@@ -161,24 +146,6 @@
 							<div class="col-md-3"><s:property value="%{#consultation.pet.breed}"/></div>
 						</div>
 						<br>
-                                                    </s:if>
-                                                
-                                                <s:if test="%{#session.currentUser.userType.equals('assistant')}">
-						<div class="row">
-							<div class="col-md-1"> 
-                                                            <s:url action="getVitals" var="vit">
-                                                                             <s:param name="consultationId"><s:property value="#consultation.consultationId"/></s:param>
-                                                            </s:url>
-                                                            <s:if test="%{#session.currentUser.userType.equals('assistant')}">
-								<s:a href="%{vit}"><button class="btn btn-block btn-sm btn-primary" type="submit" name="action">Vitals</button></s:a>
-                                                            </s:if>
-                                                                
-							</div>
-							<div class="col-md-4"><s:property value="%{#consultation.pet.name}"/></div>
-							<div class="col-md-3"><s:property value="%{#consultation.pet.breed}"/></div>
-						</div>
-						<br>
-                                                    </s:if>
 						</s:iterator>						
 					</div>
 				</div>

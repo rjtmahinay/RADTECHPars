@@ -81,11 +81,11 @@
 				<div class="col-md-5"></div>
 				<div class="col-md-1">
 					<br>
-					<s:if test="%{#session.currentUser.userType.equals('doctor')}">
+					
 					<p align="right"><button class="btn btn-primary btn-sm btn-block" 
 								onClick="window.open('historize.action?input1=<s:property value="#session.currentConsultation.pet.petId"/>'); 
 								return false;"><span class="icon">History</span></button></p>
-					</s:if>
+					
 				</div>
 			</div>	
 			</font>
@@ -99,23 +99,23 @@
 				</thead>
 				<tbody>
 				<tr>
-									<td><s:property value="%{#session.currentConsultation.appointment.customer.name}" /></td>
-									<td><s:property value="%{#session.currentConsultation.pet.name}"/></td>
-									<td><s:property value="%{#session.currentConsultation.appointment.customer.address}" /></td>
-									<td><s:property value="%{#session.currentConsultation.appointment.customer.contactNumber}" /></td>
-									<s:actionerror/>
+					<td><s:property value="%{#session.currentConsultation.appointment.customer.name}" /></td>
+					<td><s:property value="%{#session.currentConsultation.pet.name}"/></td>
+					<td><s:property value="%{#session.currentConsultation.appointment.customer.address}" /></td>
+					<td><s:property value="%{#session.currentConsultation.appointment.customer.contactNumber}" /></td>
+					<s:actionerror/>
 				</tr>
 				</tbody>
 			</table>
 			</div>
 			<div class="row">
 				<div class="col-md-6">
-					<s:if test="%{#session.currentUser.userType.equals('assistant')}">
+					
 					<div class="panel panel-default">
 						<s:form action="setVitals" theme="bootstrap" cssClass="form" method="POST">
 						<div class="panel-heading">
 							<center>
-																<s:hidden name="input3" value="%{#session.currentConsultation.consultationId}"/>
+								<s:hidden name="input3" value="%{#session.currentConsultation.consultationId}"/>
 								<br>
 							</center>
 						</div>
@@ -171,174 +171,36 @@
 						</div>			
 						</s:form>		
 					</div>
-					</s:if>
-
-<!-DOCTOR'S VERSION OF FIRST HALF, DOCTOR'S VERSION OF FIRST HALF, DOCTOR'S VERSION OF FIRST HALF, DOCTOR'S VERSION OF FIRST HALF, -->					
-
-
-					<s:if test="%{#session.currentUser.userType.equals('doctor')}">
-							<div class="panel panel-default">
-								<p> </p><br>
-<!--								
-
-								<div class="panel-heading">
-									
-									<%--<center><s:property value="%{#session.currentConsultation.pet.name}" /></center>--%>
-								</div>-->
-								<div class="panel-body">
-									<div class="table table-responsive">
-										<table class="table table-bordered table-condensed">
-											<thead>
-
-												<th width="40%">Part</th>
-												<th width="60%"><center>Value / Comment</center></th>
-
-											</thead>	
-
-											<tr>
-												<td>Temperature(°C): </td>
-												<td><center><s:property value="#session.currentConsultation.temperature"/></center></td>
-											</tr>
-											<tr>
-												<td>Weight(kg): </td>
-												<td><center><s:property value="#session.currentConsultation.weight"/></center></td>
-											</tr>
-											<tr>
-												<td>Eyes: </td>
-												<td><center><s:property value="#session.currentConsultation.eyes"/></center></td>
-											</tr>
-											<tr>
-												<td>Ears: </td>
-												<td><center><s:property value="#session.currentConsultation.ears"/></center></td>
-											</tr>
-											<tr>
-												<td>Nose: </td>
-												<td><center><s:property value="#session.currentConsultation.nose"/></center></td>
-											</tr>
-											<tr>
-												<td>Throat: </td>
-												<td><center><s:property value="#session.currentConsultation.throat"/></center></td>
-											</tr>
-											<tr>
-												<td>Derma: </td>
-												<td><center><s:property value="#session.currentConsultation.derma"/></center></td>
-											</tr>
-											<tr>
-												<td>Gums: </td>
-												<td><center><s:property value="#session.currentConsultation.gums"/></center></td>
-											</tr>
-											<tr>
-												<td>Lymph Nodes: </td>
-												<td><center><s:property value="#session.currentConsultation.lymphNodes"/></center></td>
-											</tr>
-										</table>
-									</div>
-								</div>
-							</div>
-					</s:if>
-
-
-
-
 				</div>
 
-<!-END OF FIRST HALF, END OF FIRST HALF, END OF FIRST HALF, END OF FIRST HALF, END OF FIRST HALF, END OF FIRST HALF, END OF FIRST HALF, ->
+
 
 				<div class="col-md-6">
-					<s:if test="%{#session.currentUser.userType.equals('doctor')}">
+					<s:form action="addDiagnosis" theme="bootstrap" cssClass="form" method="POST">
+						<s:hidden value="%{#session.currentConsultation.consultationId}" name="input3"/>
 					<div class="panel panel-default">
 						<div class="panel-body">
-						<div class="row">
-								<div class="col-md-6">
-									
-								<h4>Prescription</h4>
-								<div class="row">
-									<div class="col-md-7">
-										<script src="js/jquery-1.12.4.js"></script>
-										<script src="js/jquery-ui.js"></script>
-										<script>
-											$( function() {
-												var availableTags = [
-												  "Acepromazine","Advantage","Amitriptyline","Amlodipine Besylate","Ammonium Chloride","Amoxicillin","Ampicillin","Antacids","Asprin","Atenolol","Azathioprine",
-												  "Baytril","Benadryl","Benazepril","Bromides","Buspirone",
 
-												];
-												$( "#meds" ).autocomplete({
-												  source: availableTags
-												});  
+							<h4>Prescription</h4>
+								<center>	
+									<s:textarea name="medicineName" rows="5" cols="84" value=""/>
+								</center>
 
-											  } );
-										</script>
-										<s:form action="tempMeds" method="post">
-										<s:textfield name="medicineName" id="meds"/>
-									</div>
-									<div class="col-md-1">
-										<s:submit cssClass="btn btn-success btn-xs" name="submit" value="+"/>
-									</div>
-										</s:form>
-								</div>
-											
-										
-									
-									
-								
-								</div>
-										
-															
-								<div class="col-md-6">
-									<div class="panel panel-default">
-										<div class="panel-heading">
-											Medicines
-										</div>
-										<div class="panel-body">
-											<s:iterator value="#session.tempMeds" var="meds">
-												<s:property value="#meds.medicineName"/>, 
-											</s:iterator>	
-										</div>
-									</div>
-										
-
-
-								</div>					
-							</div>							
-						
-						
-						
-						
-						<s:form action="addDiagnosis" theme="bootstrap" cssClass="form" method="POST">
-						<s:hidden value="%{#session.currentConsultation.consultationId}" name="input3"/>
-						
 							<h4>Diagnosis/Comments</h4>
-							<center>
-							<s:textarea name="diagnosis"  rows="5" cols="84" value=""/>
-							</center>
+								<center>
+									<s:textarea name="diagnosis"  rows="5" cols="84" value=""/>
+								</center>
 							<br>
-							
-								<%--
-								
-								--%>
-									
-														
-										<br>
-							</div>			
-									
-								<%--
-								<label for="meds">Prescription</label>
-								<s:textfield name="prescription" id="meds" />
-								--%>
-							
 
 
-
-
-
+							<br>
+						</div>			
 						
 						<div class="panel-footer">
 							<center><s:submit cssClass="btn btn-primary" name="submit" value="Save"/></center>
 						</div>			
 						</s:form>		
 					</div>
-					</s:if>
 				</div>
 
 			</div>

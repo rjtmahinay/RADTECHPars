@@ -67,30 +67,17 @@
 					<div class="col-md-3">	
 						<br>
 						<p align="right">
-							<s:if test="%{#session.currentUser.userType.equals('assistant')}">	
-								<s:submit value="Edit Record" cssClass="btn btn-primary"/> 
-							</s:if>
-							<s:if test="%{#session.currentUser.userType.equals('doctor')}">	
-								<button type="button" data-id="" class="btn btn-danger"         
-								data-toggle="modal" data-target="#confirmArchive"><span class="glyphicon glyphicon-trash"></span></button>
-							</s:if>
+							<s:submit value="Edit Record" cssClass="btn btn-primary"/> 
+							<button type="button" data-id="" class="btn btn-danger"         
+							data-toggle="modal" data-target="#confirmArchive"><span class="glyphicon glyphicon-trash"></span></button>
 						</p>	
 					</div>	
 				</div>
 					
-					
-					
-					
-					
 				<div class="row">
 					<div class="col-md-6">
-
-						
-
-
 						<div class="table">
 						<table class="table table-condensed table-">
-							<s:if test="%{#session.currentUser.userType.equals('assistant')}">
 								<tr>
 									<td>Customer Number:</td>
 									<s:hidden name="input3" value="%{#session.currentCustomer.customerId}"/>
@@ -111,28 +98,6 @@
 									<td>Contact Number:</td>
 									<td><s:textfield name="contactNumber" value="%{#session.currentCustomer.contactNumber}" /></td>
 								</tr>
-							</s:if>
-							<s:if test="%{#session.currentUser.userType.equals('doctor')}">
-								<tr>
-									<td>Customer Number:</td>
-									<td><s:property value="%{#session.currentCustomer.customerId}"/></td>
-								</tr>
-
-								<tr>
-									<td>Owner Name:</td>
-									<td><s:property value="%{#session.currentCustomer.name}" /></td>
-								</tr>
-
-								<tr>
-									<td>Address:</td>
-									<td><s:property value="%{#session.currentCustomer.address}" /></td>
-								</tr>
-
-								<tr>
-									<td>Contact Number:</td>
-									<td><s:property value="%{#session.currentCustomer.contactNumber}" /></td>
-								</tr>
-							</s:if>
 						</table>
 						</div>
 
@@ -172,9 +137,7 @@
 				</div>
 				<h1>
 					Pet List 
-					<s:if test="%{#session.currentUser.userType.equals('assistant')}"> 
-						<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addPet"><span class="glyphicon glyphicon-plus"></span></button> 
-					</s:if>
+					<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addPet"><span class="glyphicon glyphicon-plus"></span></button> 
 				</h1>
 				
 				
@@ -243,7 +206,7 @@
 				</div>
 				</div>
 				
-		<s:if test="%{#session.currentUser.userType.equals('assistant')}">
+		
 				
 			<s:form action="addAppointment" theme="bootstrap" cssClass="form" method="POST">	
 				<div class="table table-responsive">
@@ -251,7 +214,7 @@
 					<thead>
 						<th width="2%"></th>
 						<%--<th width="2%">Edit</th>--%>
-						<%--<th width="8%"></th>--%>
+						<th width="8%"></th>
 						<th>Name</th>
 						<th>Breed</th>
 						<th>Color</th>
@@ -262,16 +225,21 @@
 						<s:iterator value="%{#session.currentCustomer.pets}" var="pet">
 						<tr>
 							<td><s:checkbox fieldValue="%{#pet.petId}" name="input3"/></td>
-							<%--<td><button class="btn btn-block btn-primary btn-sm" type="submit" name="action">History</button></td>--%>
-							<s:url action="fetchPet" var="fet"/>
-							<%--<td><s:a href="%{fet}"><button class="btn btn-primary"><span class="glyphicon glyphicon-edit"></span></button></s:a></td>--%>
-							<td><s:property value="#pet.name"/></td>
+							<td><button class="btn btn-primary btn-block btn-sm" onClick="window.open('historize.action?input1=<s:property value="#pet.petId"/>'); return false;"><span class="icon">History</span></button></td>
+							<td>
+								<s:url action="petReport" var="rep">
+									<s:param name="petId" value="#pet.petId"/>
+								</s:url> 
+								<s:a href="%{#rep}"><s:property value="#pet.name"/></s:a>
+							</td>
 							<td><s:property value="#pet.breed"/></td>
 							<td><s:property value="#pet.color"/></td>
 							<td><s:property value="#pet.sex"/></td>
 							<td><s:date name="#pet.dateOfBirth" format="MM/dd/yyyy"/></td>
+							<!--<td><button class="btn btn-primary btn-block btn-sm" onClick="window.open('statistics.jsp'); return false;"><span class="glyphicon glyphicon-stats"></span></button></td>-->
 						</tr>
 						</s:iterator>
+						
 						
 					</tbody>
 				</table>
@@ -299,45 +267,13 @@
 			</div>
 					
 			</s:form>	
-		</s:if>	
+		
 			
 			
 <%--DOCTOR'S VERSION OF USERPROFILE , DOCTOR'S VERSION OF USERPROFILE, DOCTOR'S VERSION OF USERPROFILE--%>		
 			
 		
-		<s:if test="%{#session.currentUser.userType.equals('doctor')}">
-			<div class="table table-responsive">
-				<table class="table table-striped table-bordered table-hover">
-					<thead>
-						<th width="8%"></th>
-						<th>Name</th>
-						<th>Breed</th>
-						<th>Color</th>
-						<th>Sex</th>
-						<th>Date of Birth</th>
-						<!--<th width="3%"></th>-->
-					</thead>
-					<tbody>
-						<s:iterator value="%{#session.currentCustomer.pets}" var="pet">
-						<tr>
-							<td><button class="btn btn-primary btn-block btn-sm" onClick="window.open('historize.action?input1=<s:property value="#pet.petId"/>'); return false;"><span class="icon">History</span></button></td>
-                                                        <td>
-                                                            <s:url action="petReport" var="rep">
-                                                                <s:param name="petId" value="#pet.petId"/>
-                                                            </s:url> 
-                                                            <s:a href="%{#rep}"><s:property value="#pet.name"/></s:a>
-                                                        </td>
-							<td><s:property value="#pet.breed"/></td>
-							<td><s:property value="#pet.color"/></td>
-							<td><s:property value="#pet.sex"/></td>
-							<td><s:date name="#pet.dateOfBirth" format="MM/dd/yyyy"/></td>
-							<!--<td><button class="btn btn-primary btn-block btn-sm" onClick="window.open('statistics.jsp'); return false;"><span class="glyphicon glyphicon-stats"></span></button></td>-->
-						</tr>
-						</s:iterator>
-					</tbody>
-				</table>
-			</div>
-		</s:if>	
+		
 			 
 		</div>
 

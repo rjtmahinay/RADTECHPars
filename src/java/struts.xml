@@ -130,7 +130,11 @@
             <result>schedule.jsp</result>
             <result name="input">schedule.jsp</result>
 	</action>
-		
+	
+	<action name="deletePet" class="com.radtech.PetAction" method="deletePet">
+            <result>userProfile.jsp</result>
+            <result name="input">statistics.jsp</result>
+	</action>	
 			
 					
 		

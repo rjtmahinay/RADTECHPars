@@ -32,7 +32,7 @@
 					<div class="col-md-2 col-sm-4">
 						<center>
 						
-                                                    <s:select name="searchType" list="{'Customer Name', 'Customer Number', 'Address','Contact Number'}" 
+                                                    <s:select name="searchType" list="{'Customer Name', 'Customer Number', 'Contact Number'}" 
                                                               headerKey="-1"/>
 						</center>
 					</div>
