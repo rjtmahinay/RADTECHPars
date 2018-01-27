@@ -1,6 +1,6 @@
 # Patient Registry Software for Animal Station and Veterinary Clinic
 
-A management and scheduling software for Animal Station and Veterinary Clinic in White Plains, Quezon City.
+A management and scheduling software for Animal Station and Veterinary Clinic and Grooming Center in White Plains, Quezon City.
 
 ## Deployment
 
