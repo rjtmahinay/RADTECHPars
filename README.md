@@ -12,6 +12,6 @@ The system was deployed via web local host using a laptop dedicated to run the s
 * [Hibernate](http://hibernate.org/) - ORM for database.
 
 ## Authors
-**Ocean Barba** - [binaudecimal](https://github.com/binaudecimal).
-**Reynaldo John Tristan Mahinay** - [rjtmahinay](https://github.com/rjtmahinay).
-**Carl Lim**
+* **Ocean Barba** - [binaudecimal](https://github.com/binaudecimal)
+* **Reynaldo John Tristan Mahinay** - [rjtmahinay](https://github.com/rjtmahinay)
+* **Carl Lim**
