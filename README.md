@@ -11,3 +11,7 @@ The system was deployed via web local host using a laptop dedicated to run the s
 * [Struts 2 Bootstrap Plugin](http://struts.jgeppert.com/struts2-bootstrap-showcase/index.action) - Bootstrap integration for Struts 2.
 * [Hibernate](http://hibernate.org/) - ORM for database.
 
+## Authors
+[Ocean Barba](https://github.com/binaudecimal)
+[Reynaldo John Tristan Mahinay](https://github.com/rjtmahinay)
+Carl Lim
