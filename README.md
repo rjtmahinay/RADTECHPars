@@ -2,6 +2,9 @@
 
 A management and scheduling software for Animal Station and Veterinary Clinic and Grooming Center in White Plains, Quezon City.
 
+![Login Page](https://github.com/rjtmahinay/RADTECHPars/blob/Post-Revision/RADTECHPars/src/images/login.jpg)
+![Overview Page](https://github.com/rjtmahinay/RADTECHPars/blob/Post-Revision/RADTECHPars/src/images/dashboard.jpg)
+
 ## Deployment
 
 The system was deployed via web local host using a laptop dedicated to run the software.

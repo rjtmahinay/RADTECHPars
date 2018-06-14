@@ -50,7 +50,7 @@
 						<tr>
 							
 							<th>#</th>
-							<th>reason</th>
+							<th>Reason</th>
 							<th>Owner Name</th>
 							<th>Address</th>
 							<th>Contact Number</th>

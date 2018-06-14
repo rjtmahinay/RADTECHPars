@@ -114,8 +114,8 @@
 
 							<div class="modal-footer form-group" >
 								<center>
-									<s:submit cssClass="btn btn-primary btn-block" value="submit" />
-									<s:reset value="clear" cssClass="btn btn-block"/>
+									<s:submit cssClass="btn btn-primary btn-block" value="Submit" />
+									<s:reset value="Clear" cssClass="btn btn-block"/>
 								</center>
 							</div>
 						</div>

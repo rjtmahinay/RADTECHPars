@@ -31,7 +31,7 @@ public class CustomerAction extends GenericAction{
                 session.save(customer);
                 session.flush();
                 ArrayList<Pet> tempets = (ArrayList)sessionmap.get("tempets");
-                        if(tempets == null | tempets.size()<=0) return INPUT;           //no pet input
+                        if(tempets == null) return INPUT;           //no pet input
                 //make appointment
                 Appointment app = new Appointment();
                 //set appointment-customer, customer-appointment
